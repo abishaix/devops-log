@@ -105,7 +105,8 @@ That's the goal. Zero manual steps between commit and deployment.
 ## 🔗 Resources
 - Course site: https://veera.veeraopstech.online/
 - DevOps trends: https://prepare.sh/trends?category=devops
-- Pluralsight: pluralsight.com (~4K INR/year with voucher)
+- Pluralsight: https://pluralsight.com
+
 
 ---
 
