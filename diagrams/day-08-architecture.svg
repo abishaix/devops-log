@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 600" width="820" height="600" style="background:#ffffff;font-family:Arial,sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round"/>
+    </marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#A32D2D" stroke-width="1.5" stroke-linecap="round"/>
+    </marker>
+    <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/>
+    </marker>
+  </defs>
+
+  <!-- Internet -->
+  <rect x="300" y="14" width="200" height="44" rx="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+  <text x="400" y="42" text-anchor="middle" font-size="15" font-weight="bold" fill="#0C447C">Internet</text>
+
+  <!-- Hacker -->
+  <rect x="660" y="10" width="140" height="52" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+  <text x="730" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#791F1F">Hacker</text>
+  <text x="730" y="50" text-anchor="middle" font-size="12" fill="#A32D2D">192.1.3.0</text>
+  <line x1="660" y1="36" x2="556" y2="82" stroke="#A32D2D" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#ar)"/>
+  <text x="630" y="52" text-anchor="middle" font-size="11" fill="#A32D2D">blocked  X</text>
+
+  <!-- IGW -->
+  <rect x="180" y="72" width="200" height="52" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+  <text x="280" y="94" text-anchor="middle" font-size="14" font-weight="bold" fill="#085041">Internet Gateway</text>
+  <text x="280" y="112" text-anchor="middle" font-size="12" fill="#0F6E56">VPC-level</text>
+
+  <!-- NAT -->
+  <rect x="440" y="72" width="200" height="52" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+  <text x="540" y="94" text-anchor="middle" font-size="14" font-weight="bold" fill="#633806">NAT Gateway</text>
+  <text x="540" y="112" text-anchor="middle" font-size="12" fill="#854F0B">173.2.1.0 — stateful</text>
+
+  <!-- Internet to IGW -->
+  <line x1="360" y1="36" x2="316" y2="72" stroke="#185FA5" stroke-width="1.3" marker-end="url(#a)"/>
+  <!-- Internet to NAT -->
+  <line x1="440" y1="36" x2="494" y2="72" stroke="#185FA5" stroke-width="1.3" marker-end="url(#a)"/>
+
+  <!-- Route Table -->
+  <rect x="310" y="152" width="200" height="52" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="1.2"/>
+  <text x="410" y="174" text-anchor="middle" font-size="14" font-weight="bold" fill="#712B13">Route Table</text>
+  <text x="410" y="192" text-anchor="middle" font-size="12" fill="#993C1D">edit routes</text>
+
+  <line x1="310" y1="120" x2="374" y2="152" stroke="#555" stroke-width="1" marker-end="url(#a)"/>
+  <line x1="490" y1="120" x2="448" y2="152" stroke="#555" stroke-width="1" marker-end="url(#a)"/>
+
+  <!-- VPC -->
+  <rect x="20" y="228" width="780" height="340" rx="16" fill="#EEEDFE" fill-opacity="0.2" stroke="#7F77DD" stroke-width="1.5"/>
+  <text x="410" y="252" text-anchor="middle" font-size="14" font-weight="bold" fill="#3C3489">VPC  10.0.0.0/16</text>
+
+  <!-- RT to public subnet -->
+  <path d="M370 204 L210 268" fill="none" stroke="#993C1D" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+  <text x="268" y="232" text-anchor="middle" font-size="11" fill="#993C1D">assoc. public RT</text>
+  <!-- RT pvt to private subnet -->
+  <path d="M450 204 L610 268" fill="none" stroke="#854F0B" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#am)"/>
+  <text x="562" y="232" text-anchor="middle" font-size="11" fill="#854F0B">private RT</text>
+
+  <!-- Public Subnet -->
+  <rect x="40" y="268" width="340" height="272" rx="10" fill="#E1F5EE" fill-opacity="0.5" stroke="#0F6E56" stroke-width="1.2"/>
+  <text x="210" y="290" text-anchor="middle" font-size="14" font-weight="bold" fill="#085041">Public Subnet  10.0.0.0/24</text>
+
+  <!-- Private Subnet -->
+  <rect x="440" y="268" width="340" height="272" rx="10" fill="#FAECE7" fill-opacity="0.4" stroke="#993C1D" stroke-width="1.2"/>
+  <text x="610" y="290" text-anchor="middle" font-size="14" font-weight="bold" fill="#712B13">Private Subnet  10.0.1.0/24</text>
+
+  <!-- Bastion EC2 -->
+  <rect x="60" y="308" width="300" height="68" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+  <text x="210" y="330" text-anchor="middle" font-size="14" font-weight="bold" fill="#0C447C">Bastion EC2 (jump host)</text>
+  <text x="210" y="348" text-anchor="middle" font-size="12" fill="#185FA5">Public IP + Private IP</text>
+  <text x="210" y="365" text-anchor="middle" font-size="12" fill="#185FA5">upload private key here</text>
+
+  <!-- NAT in public subnet -->
+  <rect x="60" y="396" width="300" height="56" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="1"/>
+  <text x="210" y="418" text-anchor="middle" font-size="14" font-weight="bold" fill="#633806">NAT Gateway (proxy)</text>
+  <text x="210" y="436" text-anchor="middle" font-size="12" fill="#854F0B">Sits in public subnet — needs internet</text>
+
+  <!-- Load Balancer -->
+  <rect x="60" y="468" width="300" height="52" rx="8" fill="#E6F1FB" fill-opacity="0.6" stroke="#185FA5" stroke-width="1" stroke-dasharray="6 3"/>
+  <text x="210" y="490" text-anchor="middle" font-size="13" font-weight="bold" fill="#3A6EA5">Load Balancer</text>
+  <text x="210" y="508" text-anchor="middle" font-size="11" fill="#3A6EA5">Routes HTTP/S to app servers</text>
+
+  <!-- App EC2 -->
+  <rect x="460" y="308" width="300" height="68" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+  <text x="610" y="330" text-anchor="middle" font-size="14" font-weight="bold" fill="#2C2C2A">App EC2</text>
+  <text x="610" y="348" text-anchor="middle" font-size="12" fill="#5F5E5A">Private IP: 10.0.1.211</text>
+  <text x="610" y="365" text-anchor="middle" font-size="12" fill="#5F5E5A">No public IP — not reachable from outside</text>
+
+  <!-- App deployment steps -->
+  <rect x="460" y="394" width="300" height="120" rx="8" fill="#EEEDFE" fill-opacity="0.5" stroke="#7F77DD" stroke-width="1"/>
+  <text x="610" y="416" text-anchor="middle" font-size="13" font-weight="bold" fill="#3C3489">App Deployment (needs NAT)</text>
+  <text x="610" y="436" text-anchor="middle" font-size="12" fill="#534AB7">1. install runtime</text>
+  <text x="610" y="454" text-anchor="middle" font-size="12" fill="#534AB7">2. copy code to server</text>
+  <text x="610" y="472" text-anchor="middle" font-size="12" fill="#534AB7">3. install dependencies</text>
+  <text x="610" y="490" text-anchor="middle" font-size="12" fill="#534AB7">4. run application</text>
+
+  <!-- Dev outside (bottom left) -->
+  <rect x="20" y="480" width="20" height="32" rx="4" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.8"/>
+  <text x="30" y="502" text-anchor="middle" font-size="10" fill="#5F5E5A">Dev</text>
+
+  <!-- Dev SSH to bastion (green) -->
+  <path d="M40 480 Q50 380 58 376" fill="none" stroke="#0F6E56" stroke-width="1.8" stroke-dasharray="5 3" marker-end="url(#ag)"/>
+  <text x="14" y="430" font-size="11" fill="#0F6E56" font-weight="bold">SSH</text>
+
+  <!-- Bastion SSH to app EC2 (green dashed) -->
+  <line x1="360" y1="342" x2="458" y2="342" stroke="#0F6E56" stroke-width="1.8" stroke-dasharray="6 3" marker-end="url(#ag)"/>
+  <text x="410" y="332" text-anchor="middle" font-size="11" fill="#0F6E56" font-weight="bold">SSH (2nd hop)</text>
+  <text x="410" y="358" text-anchor="middle" font-size="11" fill="#0F6E56">private IP + key</text>
+
+  <!-- NAT outbound to app EC2 (amber dashed, both ways) -->
+  <line x1="360" y1="424" x2="458" y2="424" stroke="#854F0B" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#am)"/>
+  <text x="410" y="414" text-anchor="middle" font-size="11" fill="#854F0B">outbound internet</text>
+  <text x="410" y="440" text-anchor="middle" font-size="11" fill="#854F0B">for installs via NAT</text>
+
+  <!-- Load balancer to app EC2 -->
+  <line x1="360" y1="494" x2="458" y2="430" stroke="#3A6EA5" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#a)"/>
+
+  <!-- Legend -->
+  <rect x="20" y="568" width="780" height="24" rx="4" fill="#F5F5F5" stroke="#DDD" stroke-width="0.5"/>
+  <line x1="40" y1="580" x2="70" y2="580" stroke="#0F6E56" stroke-width="1.8" stroke-dasharray="5 3"/>
+  <text x="80" y="584" font-size="11" fill="#333">Admin SSH</text>
+  <line x1="180" y1="580" x2="210" y2="580" stroke="#854F0B" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="220" y="584" font-size="11" fill="#333">NAT outbound</text>
+  <line x1="340" y1="580" x2="370" y2="580" stroke="#A32D2D" stroke-width="1.2" stroke-dasharray="5 3"/>
+  <text x="380" y="584" font-size="11" fill="#333">Blocked</text>
+  <line x1="470" y1="580" x2="500" y2="580" stroke="#993C1D" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="510" y="584" font-size="11" fill="#333">RT association</text>
+  <text x="680" y="584" font-size="11" fill="#888">Day 8  DevOps Bootcamp</text>
+</svg>
