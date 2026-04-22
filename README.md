@@ -99,4 +99,4 @@ Monitoring & Observability
 ## Connect
 
 - GitHub: [abishaix](https://github.com/abishaix)
-- LinkedIn: [linkedin.com/in/abim-940252175](https://linkedin.com/in/abim-940252175)
+- LinkedIn: [linkedin.com/in/abimxai](https://linkedin.com/in/abimxai)
