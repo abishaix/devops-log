@@ -19,6 +19,8 @@ This project builds that architecture from scratch on AWS: custom VPC, public an
 
 ![Architecture Diagram](diagrams/architecture.svg)
 
+**Design process:** [View original hand-drawn draft](diagrams/architecture-draft.png)
+
 ### Traffic Flows
 
 **Inbound SSH (engineer access):**
