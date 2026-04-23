@@ -50,6 +50,7 @@ devops-log/
 | 7 | Custom VPC networking, EC2 SSH | ✅ | ✅ |
 | 8 | Bastion host, jump host, NAT Gateway | ✅ | ⬜ |
 | 9 | NAT deep dive, port allocation, egress | ✅ | ⬜ |
+| 10 | App deployment on EC2, Nginx web server | ✅ | ⬜ |
 
 ---
 
