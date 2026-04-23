@@ -1,0 +1,132 @@
+<svg width="900" height="700" viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg" font-family="monospace, sans-serif">
+
+  <!-- Background -->
+  <rect width="900" height="700" fill="#f8f9fa"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">Project #1 — Secure EC2 Access via Bastion Host</text>
+  <text x="450" y="55" text-anchor="middle" font-size="12" fill="#666">Region: ap-south-1 (Mumbai) · VPC: 10.0.0.0/16</text>
+
+  <!-- Developer/User -->
+  <rect x="340" y="70" width="220" height="60" rx="8" fill="#e8f4f8" stroke="#2196f3" stroke-width="1.5"/>
+  <text x="450" y="95" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565c0">Developer / User</text>
+  <text x="450" y="112" text-anchor="middle" font-size="11" fill="#1565c0">Local machine · mykey.pem</text>
+
+  <!-- Arrow: Developer → IGW (SSH inbound) -->
+  <line x1="450" y1="130" x2="450" y2="175" stroke="#2196f3" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="462" y="158" font-size="10" fill="#2196f3">SSH :22</text>
+
+  <!-- AWS Region box -->
+  <rect x="30" y="175" width="840" height="495" rx="12" fill="none" stroke="#ff9900" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="50" y="197" font-size="11" font-weight="bold" fill="#ff9900">AWS Region: ap-south-1</text>
+
+  <!-- VPC box -->
+  <rect x="50" y="205" width="800" height="455" rx="10" fill="none" stroke="#4caf50" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="70" y="225" font-size="11" font-weight="bold" fill="#2e7d32">VPC: 10.0.0.0/16 (proj-vpc)</text>
+
+  <!-- IGW -->
+  <rect x="330" y="230" width="240" height="55" rx="8" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="450" y="252" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7d32">Internet Gateway (IGW)</text>
+  <text x="450" y="269" text-anchor="middle" font-size="10" fill="#388e3c">attached to VPC · AWS managed</text>
+
+  <!-- Arrow: IGW → Public Route Table -->
+  <line x1="450" y1="285" x2="450" y2="325" stroke="#4caf50" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+
+  <!-- Public Route Table -->
+  <rect x="310" y="325" width="280" height="55" rx="8" fill="#f1f8e9" stroke="#8bc34a" stroke-width="1.5"/>
+  <text x="450" y="347" text-anchor="middle" font-size="12" font-weight="bold" fill="#33691e">Route Table (public)</text>
+  <text x="450" y="363" text-anchor="middle" font-size="10" fill="#558b2f">10.0.0.0/16 → local · 0.0.0.0/0 → IGW</text>
+
+  <!-- Arrow: Public RT → Public Subnet -->
+  <line x1="450" y1="380" x2="450" y2="410" stroke="#4caf50" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+
+  <!-- Public Subnet (AZ a) -->
+  <rect x="55" y="410" width="490" height="220" rx="10" fill="#e3f2fd" stroke="#2196f3" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="75" y="430" font-size="11" font-weight="bold" fill="#1565c0">Public Subnet · 10.0.0.0/24 · ap-south-1a</text>
+
+  <!-- Bastion EC2 -->
+  <rect x="70" y="445" width="210" height="110" rx="8" fill="#ffffff" stroke="#2196f3" stroke-width="1.5"/>
+  <text x="175" y="465" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">Bastion Host (EC2)</text>
+  <text x="175" y="481" text-anchor="middle" font-size="10" fill="#555">my-public-server</text>
+  <text x="175" y="496" text-anchor="middle" font-size="10" fill="#555">Public IP: 13.233.168.56</text>
+  <text x="175" y="511" text-anchor="middle" font-size="10" fill="#555">Private IP: 10.0.6.66</text>
+  <rect x="80" y="520" width="190" height="28" rx="4" fill="#fff3e0" stroke="#ff9800" stroke-width="1"/>
+  <text x="175" y="530" text-anchor="middle" font-size="9" fill="#e65100">SG: inbound SSH :22 / your IP</text>
+  <text x="175" y="542" text-anchor="middle" font-size="9" fill="#e65100">outbound: all traffic</text>
+
+  <!-- NAT Gateway -->
+  <rect x="320" y="445" width="210" height="110" rx="8" fill="#ffffff" stroke="#ff9800" stroke-width="1.5"/>
+  <text x="425" y="465" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">NAT Gateway</text>
+  <text x="425" y="481" text-anchor="middle" font-size="10" fill="#555">proj-nat-public1-ap-south-1a</text>
+  <text x="425" y="496" text-anchor="middle" font-size="10" fill="#555">AWS managed resource</text>
+  <text x="425" y="511" text-anchor="middle" font-size="10" fill="#555">Lives in public subnet</text>
+  <text x="425" y="528" text-anchor="middle" font-size="10" fill="#777">Outbound internet for</text>
+  <text x="425" y="542" text-anchor="middle" font-size="10" fill="#777">private subnet only</text>
+
+  <!-- Private Subnet (AZ a) -->
+  <rect x="575" y="410" width="265" height="220" rx="10" fill="#fce4ec" stroke="#e91e63" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="595" y="430" font-size="11" font-weight="bold" fill="#880e4f">Private Subnet · 10.0.128.0/24 · ap-south-1a</text>
+
+  <!-- Private Route Table inside private subnet area -->
+  <rect x="590" y="443" width="235" height="45" rx="6" fill="#fff" stroke="#e91e63" stroke-width="1"/>
+  <text x="707" y="461" text-anchor="middle" font-size="11" font-weight="bold" fill="#880e4f">Route Table (private)</text>
+  <text x="707" y="477" text-anchor="middle" font-size="10" fill="#ad1457">10.0.0.0/16 → local · 0.0.0.0/0 → NAT</text>
+
+  <!-- Private EC2 -->
+  <rect x="600" y="500" width="215" height="115" rx="8" fill="#ffffff" stroke="#e91e63" stroke-width="1.5"/>
+  <text x="707" y="520" text-anchor="middle" font-size="12" font-weight="bold" fill="#880e4f">Private EC2</text>
+  <text x="707" y="536" text-anchor="middle" font-size="10" fill="#555">my-private-server</text>
+  <text x="707" y="551" text-anchor="middle" font-size="10" fill="#555">Private IP: 10.0.140.167</text>
+  <text x="707" y="566" text-anchor="middle" font-size="10" fill="#c62828">No public IP</text>
+  <rect x="610" y="575" width="195" height="32" rx="4" fill="#fce4ec" stroke="#e91e63" stroke-width="1"/>
+  <text x="707" y="586" text-anchor="middle" font-size="9" fill="#880e4f">SG: inbound SSH :22</text>
+  <text x="707" y="598" text-anchor="middle" font-size="9" fill="#880e4f">from Bastion private IP only</text>
+
+  <!-- SSH arrow: Bastion → Private EC2 -->
+  <line x1="540" y1="505" x2="598" y2="555" stroke="#9c27b0" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrowPurple)"/>
+  <text x="548" y="528" font-size="10" fill="#6a1b9a">SSH jump</text>
+
+  <!-- NAT outbound arrow: NAT → IGW -->
+  <path d="M 425 445 Q 425 390 450 285" fill="none" stroke="#ff9800" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowOrange)"/>
+  <text x="472" y="370" font-size="10" fill="#e65100">outbound</text>
+
+  <!-- Private EC2 → NAT arrow -->
+  <line x1="600" y1="555" x2="532" y2="515" stroke="#ff9800" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowOrange)"/>
+  <text x="545" y="548" font-size="10" fill="#e65100">→ NAT</text>
+
+  <!-- IGW → Internet arrow (outbound return) -->
+  <line x1="570" y1="257" x2="700" y2="130" fill="none" stroke="#ff9800" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowOrange)"/>
+
+  <!-- Internet node (top right, for outbound) -->
+  <rect x="660" y="70" width="140" height="50" rx="25" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="730" y="99" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">Internet</text>
+
+  <!-- Legend -->
+  <rect x="55" y="648" width="790" height="38" rx="6" fill="#fff" stroke="#ddd" stroke-width="1"/>
+  <line x1="75" y1="667" x2="105" y2="667" stroke="#2196f3" stroke-width="2"/>
+  <text x="112" y="671" font-size="10" fill="#333">SSH inbound</text>
+  <line x1="195" y1="667" x2="225" y2="667" stroke="#9c27b0" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="232" y="671" font-size="10" fill="#333">SSH jump (Bastion→Private)</text>
+  <line x1="395" y1="667" x2="425" y2="667" stroke="#ff9800" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="432" y="671" font-size="10" fill="#333">Outbound via NAT</text>
+  <line x1="545" y1="667" x2="575" y2="667" stroke="#4caf50" stroke-width="2"/>
+  <text x="582" y="671" font-size="10" fill="#333">VPC internal routing</text>
+  <text x="730" y="671" font-size="10" fill="#888">github.com/abishaix/devops-log</text>
+
+  <!-- Arrow marker defs -->
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2196f3"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4caf50"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#ff9800"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#9c27b0"/>
+    </marker>
+  </defs>
+
+</svg>
