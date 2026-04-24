@@ -1,0 +1,88 @@
+<svg width="900" height="560" viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" font-family="monospace, sans-serif">
+
+  <rect width="900" height="560" fill="#f8f9fa"/>
+
+  <text x="450" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">Project #2 — Portfolio Website on EC2 with Nginx</text>
+  <text x="450" y="55" text-anchor="middle" font-size="12" fill="#666">Region: ap-south-1 (Mumbai) · VPC: 10.0.0.0/16</text>
+
+  <!-- Two actors -->
+  <!-- Developer -->
+  <rect x="80" y="75" width="180" height="65" rx="8" fill="#e8f4f8" stroke="#2196f3" stroke-width="1.5"/>
+  <text x="170" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565c0">Developer</text>
+  <text x="170" y="118" text-anchor="middle" font-size="10" fill="#1565c0">SSH :22 · mykey.pem</text>
+
+  <!-- Internet User -->
+  <rect x="640" y="75" width="180" height="65" rx="8" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5"/>
+  <text x="730" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#6a1b9a">Internet User</text>
+  <text x="730" y="118" text-anchor="middle" font-size="10" fill="#6a1b9a">HTTP :80 · browser</text>
+
+  <!-- Arrows from both to IGW -->
+  <line x1="200" y1="140" x2="340" y2="195" stroke="#2196f3" stroke-width="1.5" marker-end="url(#ab)"/>
+  <text x="240" y="168" font-size="10" fill="#2196f3">SSH :22</text>
+
+  <line x1="700" y1="140" x2="560" y2="195" stroke="#9c27b0" stroke-width="1.5" marker-end="url(#ap)"/>
+  <text x="618" y="168" font-size="10" fill="#6a1b9a">HTTP :80</text>
+
+  <!-- AWS Region -->
+  <rect x="30" y="170" width="840" height="360" rx="12" fill="none" stroke="#ff9900" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="50" y="192" font-size="11" font-weight="bold" fill="#ff9900">AWS Region: ap-south-1</text>
+
+  <!-- VPC -->
+  <rect x="50" y="200" width="800" height="320" rx="10" fill="none" stroke="#4caf50" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="70" y="220" font-size="11" font-weight="bold" fill="#2e7d32">VPC: 10.0.0.0/16 (my-vpc-public)</text>
+
+  <!-- IGW -->
+  <rect x="300" y="228" width="300" height="52" rx="8" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="450" y="249" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7d32">Internet Gateway (IGW)</text>
+  <text x="450" y="266" text-anchor="middle" font-size="10" fill="#388e3c">attached to VPC · AWS managed</text>
+
+  <!-- Arrow IGW → Route Table -->
+  <line x1="450" y1="280" x2="450" y2="315" stroke="#4caf50" stroke-width="1.5" marker-end="url(#ag)"/>
+
+  <!-- Route Table -->
+  <rect x="300" y="315" width="300" height="52" rx="8" fill="#f1f8e9" stroke="#8bc34a" stroke-width="1.5"/>
+  <text x="450" y="336" text-anchor="middle" font-size="12" font-weight="bold" fill="#33691e">Route Table (my-rt-public)</text>
+  <text x="450" y="353" text-anchor="middle" font-size="10" fill="#558b2f">10.0.0.0/16 → local · 0.0.0.0/0 → IGW</text>
+
+  <!-- Arrow RT → Subnet -->
+  <line x1="450" y1="367" x2="450" y2="395" stroke="#4caf50" stroke-width="1.5" marker-end="url(#ag)"/>
+  <text x="462" y="385" font-size="9" fill="#558b2f">explicit association</text>
+
+  <!-- Public Subnet -->
+  <rect x="120" y="395" width="660" height="110" rx="10" fill="#e3f2fd" stroke="#2196f3" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="140" y="415" font-size="11" font-weight="bold" fill="#1565c0">Public Subnet · ap-south-1a</text>
+
+  <!-- EC2 Nginx -->
+  <rect x="280" y="425" width="340" height="68" rx="8" fill="#ffffff" stroke="#2196f3" stroke-width="1.5"/>
+  <text x="450" y="447" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565c0">EC2 — Nginx Web Server</text>
+  <text x="450" y="463" text-anchor="middle" font-size="10" fill="#555">t3.micro · Amazon Linux 2023 · Public IP assigned</text>
+  <rect x="290" y="470" width="320" height="18" rx="3" fill="#fff3e0" stroke="#ff9800" stroke-width="1"/>
+  <text x="450" y="482" text-anchor="middle" font-size="9" fill="#e65100">SG: inbound SSH :22 (your IP) + HTTP :80 (0.0.0.0/0) · outbound: all</text>
+
+  <!-- Nginx label -->
+  <rect x="570" y="428" width="70" height="22" rx="4" fill="#e8f5e9" stroke="#4caf50" stroke-width="1"/>
+  <text x="605" y="443" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e7d32">Nginx</text>
+
+  <!-- Legend -->
+  <rect x="50" y="530" width="800" height="22" rx="4" fill="#fff" stroke="#ddd" stroke-width="1"/>
+  <line x1="70" y1="541" x2="95" y2="541" stroke="#2196f3" stroke-width="2" marker-end="url(#ab)"/>
+  <text x="102" y="545" font-size="10" fill="#333">SSH :22 (admin)</text>
+  <line x1="230" y1="541" x2="255" y2="541" stroke="#9c27b0" stroke-width="2" marker-end="url(#ap)"/>
+  <text x="262" y="545" font-size="10" fill="#333">HTTP :80 (public)</text>
+  <line x1="400" y1="541" x2="425" y2="541" stroke="#4caf50" stroke-width="2" marker-end="url(#ag)"/>
+  <text x="432" y="545" font-size="10" fill="#333">VPC routing</text>
+  <text x="700" y="545" font-size="10" fill="#888">github.com/abishaix/devops-log</text>
+
+  <defs>
+    <marker id="ab" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2196f3"/>
+    </marker>
+    <marker id="ap" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#9c27b0"/>
+    </marker>
+    <marker id="ag" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4caf50"/>
+    </marker>
+  </defs>
+
+</svg>

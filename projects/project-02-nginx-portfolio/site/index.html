@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abishai Muthyala — DevOps & Cloud Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --accent: #00ff88;
+    --accent2: #0088ff;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --mono: 'Space Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.6; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none; z-index: 0;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,15,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-logo { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 5rem; }
+  .hero-inner { width: 100%; }
+  .hero-tag { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s; }
+  .hero-tag::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent); }
+  .hero-name { font-size: clamp(3rem, 8vw, 6rem); font-weight: 800; line-height: 1; letter-spacing: -0.02em; margin-bottom: 0.5rem; opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s; }
+  .hero-name span { color: var(--accent); }
+  .hero-title { font-family: var(--mono); font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--muted); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.6s ease forwards 0.3s; }
+  .hero-desc { font-size: 1.1rem; color: #a0a0b8; max-width: 560px; margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.6s ease forwards 0.4s; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s ease forwards 0.5s; }
+
+  .btn { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .btn-primary { background: var(--accent); color: #000; font-weight: 700; }
+  .btn-primary:hover { background: #00cc6a; transform: translateY(-2px); }
+  .btn-secondary { border: 1px solid var(--border); color: var(--text); background: transparent; }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  section { padding: 5rem 0; }
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 3rem; }
+  .section-num { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; }
+  .section-title { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .stack-item { background: var(--surface); padding: 1.5rem; transition: background 0.2s; }
+  .stack-item:hover { background: #16161f; }
+  .stack-category { font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .stack-tools { font-size: 0.9rem; color: #a0a0b8; line-height: 1.8; }
+
+  .projects-grid { display: grid; gap: 1.5rem; }
+  .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent); transform: scaleY(0); transition: transform 0.2s; transform-origin: bottom; }
+  .project-card:hover { border-color: #2a2a3e; transform: translateX(4px); }
+  .project-card:hover::before { transform: scaleY(1); }
+  .project-num { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; background: rgba(0,255,136,0.08); padding: 0.25rem 0.6rem; border-radius: 3px; display: inline-block; margin-bottom: 0.4rem; }
+  .project-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .project-desc { font-size: 0.9rem; color: #a0a0b8; margin-bottom: 1.25rem; line-height: 1.7; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+  .tag { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); border: 1px solid var(--border); padding: 0.2rem 0.6rem; border-radius: 3px; letter-spacing: 0.05em; }
+  .project-link { font-family: var(--mono); font-size: 0.75rem; color: var(--accent2); text-decoration: none; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; }
+  .project-link:hover { gap: 0.7rem; }
+
+  .bg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .bg-item { background: var(--surface); padding: 1.75rem; }
+  .bg-item-title { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .bg-item-text { font-size: 0.9rem; color: #a0a0b8; line-height: 1.8; }
+
+  .roadmap { display: flex; flex-direction: column; }
+  .roadmap-item { display: flex; gap: 1.5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .roadmap-item:last-child { border-bottom: none; }
+  .roadmap-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+  .dot-done { background: var(--accent); }
+  .dot-current { background: var(--accent2); box-shadow: 0 0 8px var(--accent2); }
+  .dot-todo { background: var(--border); border: 1px solid var(--muted); }
+  .roadmap-label { font-size: 0.95rem; font-weight: 600; }
+  .roadmap-sub { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
+  .badge { font-family: var(--mono); font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 3px; letter-spacing: 0.08em; margin-left: auto; white-space: nowrap; align-self: center; }
+  .badge-done { background: rgba(0,255,136,0.1); color: var(--accent); }
+  .badge-current { background: rgba(0,136,255,0.1); color: var(--accent2); }
+
+  .connect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .connect-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.75rem; text-decoration: none; display: flex; align-items: center; gap: 1rem; transition: border-color 0.2s, transform 0.2s; }
+  .connect-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .connect-icon { font-size: 1.5rem; width: 3rem; height: 3rem; display: flex; align-items: center; justify-content: center; background: rgba(0,255,136,0.06); border-radius: 6px; flex-shrink: 0; }
+  .connect-label { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
+  .connect-value { font-size: 0.95rem; color: var(--text); font-weight: 600; }
+
+  footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
+  footer span { color: var(--accent); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 600px) { .bg-grid, .connect-grid { grid-template-columns: 1fr; } .nav-links { display: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">$ abishai@devops:~</div>
+  <ul class="nav-links">
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="container">
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-tag">DevOps &amp; Cloud Engineer</div>
+        <h1 class="hero-name">Abishai<br/><span>Muthyala</span></h1>
+        <p class="hero-title">IT Systems Engineer → DevOps &amp; Cloud</p>
+        <p class="hero-desc">
+          6+ years in cloud infrastructure, IAM, and security architecture across Azure, Microsoft 365, and MuleSoft. Shipping CI/CD pipelines in production with GitLab. Now going deep on AWS, Kubernetes, Terraform, and Docker — building in public and documenting everything.
+        </p>
+        <div class="hero-cta">
+          <a href="https://github.com/abishaix/devops-log" class="btn btn-primary" target="_blank">↗ View Projects on GitHub</a>
+          <a href="https://linkedin.com/in/abimxai" class="btn btn-secondary" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="section-header reveal">
+        <span class="section-num">01</span>
+        <h2 class="section-title">Stack</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="stack-grid reveal">
+        <div class="stack-item">
+          <div class="stack-category">Cloud</div>
+          <div class="stack-tools">AWS — VPC, EC2, IGW, NAT, Route Tables, Security Groups<br/>Azure · Microsoft 365 · Entra ID</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-category">CI/CD</div>
+          <div class="stack-tools">GitLab CI/CD (production)<br/>GitHub Actions (learning)<br/>API deployments test → production</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-category">Security &amp; IAM</div>
+          <div class="stack-tools">Zero Trust architecture<br/>Intune MDM · Microsoft Defender<br/>Security Groups · IAM</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-category">Integration</div>
+          <div class="stack-tools">MuleSoft — Certified Developer L1<br/>API design &amp; deployment<br/>Cross-system automation</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-category">Networking</div>
+          <div class="stack-tools">CIDR · subnets · TCP/UDP<br/>VPC design · DNS basics<br/>Bastion host · NAT Gateway</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-category">Learning Now</div>
+          <div class="stack-tools">Docker · Kubernetes · Terraform<br/>GitHub Actions · CloudWatch<br/>EKS · Lambda · RDS</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-header reveal">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Projects</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card reveal">
+          <span class="project-num">PROJECT #1</span>
+          <h3 class="project-title">Secure EC2 Access via Bastion Host</h3>
+          <p class="project-desc">Production-style secure SSH architecture on AWS. Custom VPC, public and private subnets, IGW, NAT Gateway, two EC2 instances. Private server has zero public IP exposure — all access flows through a hardened Bastion host.</p>
+          <div class="project-tags">
+            <span class="tag">AWS VPC</span><span class="tag">EC2</span><span class="tag">Bastion Host</span><span class="tag">NAT Gateway</span><span class="tag">Security Groups</span>
+          </div>
+          <a href="https://github.com/abishaix/devops-log/tree/main/projects/project-01-bastion-host" class="project-link" target="_blank">View on GitHub →</a>
+        </div>
+        <div class="project-card reveal">
+          <span class="project-num">PROJECT #2</span>
+          <h3 class="project-title">Portfolio Website on EC2 with Nginx</h3>
+          <p class="project-desc">Static portfolio site served via Nginx on AWS EC2. Fully manual VPC build — custom route table, explicit subnet association, IGW. You're looking at it.</p>
+          <div class="project-tags">
+            <span class="tag">AWS EC2</span><span class="tag">Nginx</span><span class="tag">VPC</span><span class="tag">Security Groups</span><span class="tag">Static Hosting</span>
+          </div>
+          <a href="https://github.com/abishaix/devops-log/tree/main/projects/project-02-nginx-portfolio" class="project-link" target="_blank">View on GitHub →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="background">
+      <div class="section-header reveal">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Background</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="bg-grid reveal">
+        <div class="bg-item">
+          <div class="bg-item-title">Current Role</div>
+          <div class="bg-item-text">IT Systems Engineer with 6+ years in cloud infrastructure, IAM, and security architecture. Managing Azure, M365, Entra ID, Intune MDM, and MuleSoft integrations across multi-country infrastructure.</div>
+        </div>
+        <div class="bg-item">
+          <div class="bg-item-title">CI/CD in Production</div>
+          <div class="bg-item-text">Already shipping API deployments through GitLab CI/CD pipelines in production — test → staging → production. Extending that knowledge to AWS and Kubernetes.</div>
+        </div>
+        <div class="bg-item">
+          <div class="bg-item-title">Security Architecture</div>
+          <div class="bg-item-text">Zero Trust architecture, device compliance automation, and identity workflows at scale. Security-first mindset applied directly to cloud infrastructure design.</div>
+        </div>
+        <div class="bg-item">
+          <div class="bg-item-title">Target</div>
+          <div class="bg-item-text">DevOps / Cloud Engineer role in the US market. Building AWS, Kubernetes, Terraform, and Docker expertise on top of 6+ years of real infrastructure experience.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="section-header reveal">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Roadmap</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="roadmap reveal">
+        <div class="roadmap-item">
+          <div class="roadmap-dot dot-done"></div>
+          <div><div class="roadmap-label">Networking Foundation</div><div class="roadmap-sub">VPC · subnets · CIDR · DNS · route tables · IGW · NAT</div></div>
+          <span class="badge badge-done">✓ Done</span>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot dot-current"></div>
+          <div><div class="roadmap-label">AWS Core</div><div class="roadmap-sub">EC2 · S3 · IAM · VPC — hands-on projects</div></div>
+          <span class="badge badge-current">In Progress</span>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot dot-todo"></div>
+          <div><div class="roadmap-label">Infrastructure as Code</div><div class="roadmap-sub">Terraform · CloudFormation</div></div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot dot-todo"></div>
+          <div><div class="roadmap-label">Containers &amp; Orchestration</div><div class="roadmap-sub">Docker · Kubernetes · EKS</div></div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot dot-todo"></div>
+          <div><div class="roadmap-label">CI/CD — GitHub Actions</div><div class="roadmap-sub">Extending existing GitLab pipelines knowledge to AWS</div></div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot dot-todo"></div>
+          <div><div class="roadmap-label">Monitoring &amp; Observability</div><div class="roadmap-sub">Prometheus · Grafana · CloudWatch · ELK Stack</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="connect">
+      <div class="section-header reveal">
+        <span class="section-num">05</span>
+        <h2 class="section-title">Connect</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="connect-grid reveal">
+        <a href="https://github.com/abishaix/devops-log" class="connect-card" target="_blank">
+          <div class="connect-icon">⌥</div>
+          <div><div class="connect-label">GitHub</div><div class="connect-value">abishaix/devops-log</div></div>
+        </a>
+        <a href="https://linkedin.com/in/abimxai" class="connect-card" target="_blank">
+          <div class="connect-icon">↗</div>
+          <div><div class="connect-label">LinkedIn</div><div class="connect-value">linkedin.com/in/abimxai</div></div>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    Hosted on <span>AWS EC2</span> · Served by <span>Nginx</span> · Built by <span>Abishai Muthyala</span>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
