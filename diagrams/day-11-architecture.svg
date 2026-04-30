@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 640" width="860" height="640" style="background:#ffffff;font-family:Arial,sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+    </marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-linecap="round"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round"/>
+    </marker>
+    <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/>
+    </marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#7F77DD" stroke-width="1.5" stroke-linecap="round"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="430" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#1A1A2E">Load Balancer, Target Group &amp; High Availability</text>
+
+  <!-- End User -->
+  <rect x="20" y="38" width="140" height="52" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+  <text x="90" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#0C447C">End User</text>
+  <text x="90" y="78" text-anchor="middle" font-size="12" fill="#185FA5">HTTP port 80</text>
+
+  <!-- Developer -->
+  <rect x="700" y="38" width="140" height="52" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+  <text x="770" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#2C2C2A">Developer</text>
+  <text x="770" y="78" text-anchor="middle" font-size="12" fill="#5F5E5A">SSH via bastion</text>
+
+  <!-- Internet -->
+  <rect x="300" y="38" width="200" height="52" rx="26" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+  <text x="400" y="70" text-anchor="middle" font-size="15" font-weight="bold" fill="#0C447C">Internet</text>
+
+  <!-- User to internet -->
+  <line x1="160" y1="64" x2="298" y2="64" stroke="#185FA5" stroke-width="1.3" marker-end="url(#ab)"/>
+  <!-- Dev to internet -->
+  <line x1="698" y1="64" x2="502" y2="64" stroke="#555" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+
+  <!-- IGW -->
+  <rect x="300" y="116" width="200" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+  <text x="400" y="138" text-anchor="middle" font-size="14" font-weight="bold" fill="#085041">Internet Gateway</text>
+  <text x="400" y="154" text-anchor="middle" font-size="11" fill="#0F6E56">VPC-level</text>
+
+  <line x1="400" y1="90" x2="400" y2="116" stroke="#555" stroke-width="1.3" marker-end="url(#a)" marker-start="url(#a)"/>
+
+  <!-- VPC -->
+  <rect x="20" y="184" width="820" height="432" rx="16" fill="#EEEDFE" fill-opacity="0.15" stroke="#7F77DD" stroke-width="1.5"/>
+  <text x="430" y="206" text-anchor="middle" font-size="13" font-weight="bold" fill="#3C3489">VPC</text>
+
+  <line x1="400" y1="164" x2="400" y2="184" stroke="#555" stroke-width="1.3" marker-end="url(#a)"/>
+
+  <!-- PUBLIC SUBNETS ROW -->
+  <!-- Public Subnet 1a (Bastion) -->
+  <rect x="40" y="216" width="220" height="120" rx="10" fill="#E1F5EE" fill-opacity="0.5" stroke="#0F6E56" stroke-width="1.2"/>
+  <text x="150" y="238" text-anchor="middle" font-size="13" font-weight="bold" fill="#085041">Public Subnet 1a</text>
+  <rect x="60" y="252" width="180" height="64" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+  <text x="150" y="276" text-anchor="middle" font-size="13" font-weight="bold" fill="#0C447C">Bastion Host</text>
+  <text x="150" y="294" text-anchor="middle" font-size="11" fill="#185FA5">Dev SSH access only</text>
+
+  <!-- Public Subnet 1b (Load Balancer) -->
+  <rect x="300" y="216" width="380" height="120" rx="10" fill="#E1F5EE" fill-opacity="0.5" stroke="#0F6E56" stroke-width="1.2"/>
+  <text x="490" y="238" text-anchor="middle" font-size="13" font-weight="bold" fill="#085041">Public Subnet 1b (+ 1a)</text>
+  <rect x="320" y="252" width="340" height="64" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.2"/>
+  <text x="490" y="272" text-anchor="middle" font-size="14" font-weight="bold" fill="#633806">Load Balancer (ALB)</text>
+  <text x="490" y="290" text-anchor="middle" font-size="11" fill="#854F0B">Internet-facing  |  Listener: HTTP:80  |  managed by AWS, auto-scales</text>
+
+  <!-- IGW → LB arrow -->
+  <line x1="400" y1="184" x2="440" y2="250" stroke="#185FA5" stroke-width="1.5" marker-end="url(#ab)"/>
+
+  <!-- Dev → Bastion -->
+  <path d="M770 90 Q770 150 150 250" fill="none" stroke="#555" stroke-width="1" stroke-dasharray="5 3" marker-end="url(#a)"/>
+
+  <!-- TARGET GROUP container -->
+  <rect x="40" y="356" width="800" height="240" rx="12" fill="#EEEDFE" fill-opacity="0.3" stroke="#7F77DD" stroke-width="1.3"/>
+  <text x="430" y="378" text-anchor="middle" font-size="14" font-weight="bold" fill="#3C3489">Target Group (TG)</text>
+  <text x="430" y="394" text-anchor="middle" font-size="11" fill="#534AB7">Registered servers the LB is allowed to route traffic to  |  Protocol: HTTP  |  Port: 80</text>
+
+  <!-- Private Subnet 1a -->
+  <rect x="60" y="406" width="330" height="172" rx="10" fill="#FAECE7" fill-opacity="0.5" stroke="#993C1D" stroke-width="1.2"/>
+  <text x="225" y="428" text-anchor="middle" font-size="13" font-weight="bold" fill="#712B13">Private Subnet 1a</text>
+  <text x="225" y="444" text-anchor="middle" font-size="11" fill="#993C1D">RT: 0.0.0.0/0 → NAT Gateway</text>
+
+  <!-- App EC2 in 1a -->
+  <rect x="80" y="460" width="290" height="100" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+  <text x="225" y="482" text-anchor="middle" font-size="13" font-weight="bold" fill="#2C2C2A">App EC2  (Server A)</text>
+  <text x="225" y="500" text-anchor="middle" font-size="12" fill="#5F5E5A">Nginx running on port 80</text>
+  <text x="225" y="518" text-anchor="middle" font-size="11" fill="#0F6E56">healthy → receives traffic</text>
+  <text x="225" y="536" text-anchor="middle" font-size="11" fill="#5F5E5A">Private IP only — not public</text>
+
+  <!-- Private Subnet 1b -->
+  <rect x="450" y="406" width="370" height="172" rx="10" fill="#FAECE7" fill-opacity="0.5" stroke="#993C1D" stroke-width="1.2"/>
+  <text x="635" y="428" text-anchor="middle" font-size="13" font-weight="bold" fill="#712B13">Private Subnet 1b</text>
+  <text x="635" y="444" text-anchor="middle" font-size="11" fill="#993C1D">RT: 0.0.0.0/0 → NAT Gateway</text>
+
+  <!-- App EC2 in 1b -->
+  <rect x="470" y="460" width="330" height="100" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+  <text x="635" y="482" text-anchor="middle" font-size="13" font-weight="bold" fill="#2C2C2A">App EC2  (Server B)</text>
+  <text x="635" y="500" text-anchor="middle" font-size="12" fill="#5F5E5A">Nginx running on port 80</text>
+  <text x="635" y="518" text-anchor="middle" font-size="11" fill="#0F6E56">healthy → receives traffic</text>
+  <text x="635" y="536" text-anchor="middle" font-size="11" fill="#5F5E5A">Private IP only — not public</text>
+
+  <!-- LB → Server A (round robin) -->
+  <path d="M400 316 Q280 380 225 458" fill="none" stroke="#854F0B" stroke-width="1.8" marker-end="url(#ao)"/>
+  <text x="282" y="386" text-anchor="middle" font-size="11" fill="#854F0B">round robin</text>
+
+  <!-- LB → Server B (round robin) -->
+  <path d="M560 316 Q620 380 635 458" fill="none" stroke="#854F0B" stroke-width="1.8" marker-end="url(#ao)"/>
+
+  <!-- Bastion → Private EC2 A -->
+  <path d="M150 316 Q150 440 80 462" fill="none" stroke="#555" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+
+  <!-- ASG note -->
+  <rect x="700" y="216" width="120" height="120" rx="8" fill="#FFFEF0" stroke="#CCA800" stroke-width="1"/>
+  <text x="760" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="#5A4800">ASG</text>
+  <text x="760" y="256" text-anchor="middle" font-size="11" fill="#854F0B">Auto Scaling</text>
+  <text x="760" y="274" text-anchor="middle" font-size="11" fill="#854F0B">Group</text>
+  <text x="760" y="296" text-anchor="middle" font-size="11" fill="#5A4800">LB + ASG =</text>
+  <text x="760" y="314" text-anchor="middle" font-size="11" fill="#0F6E56">true HA</text>
+
+  <!-- Legend -->
+  <rect x="20" y="622" width="820" height="18" rx="4" fill="#F5F5F5" stroke="#DDD" stroke-width="0.5"/>
+  <line x1="40" y1="631" x2="66" y2="631" stroke="#185FA5" stroke-width="1.5" marker-end="url(#ab)"/>
+  <text x="76" y="635" font-size="11" fill="#333">User traffic</text>
+  <line x1="180" y1="631" x2="206" y2="631" stroke="#854F0B" stroke-width="1.8" marker-end="url(#ao)"/>
+  <text x="216" y="635" font-size="11" fill="#333">LB → TG (round robin)</text>
+  <line x1="390" y1="631" x2="416" y2="631" stroke="#555" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="426" y="635" font-size="11" fill="#333">Dev SSH</text>
+  <rect x="560" y="626" width="10" height="8" rx="1" fill="#EEEDFE" stroke="#7F77DD" stroke-width="0.8"/>
+  <text x="578" y="635" font-size="11" fill="#333">Target Group</text>
+  <text x="700" y="635" font-size="11" fill="#888">Day 11  DevOps Bootcamp</text>
+</svg>
