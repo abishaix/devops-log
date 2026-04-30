@@ -51,7 +51,7 @@ devops-log/
 | 8 | Bastion host, jump host, NAT Gateway | ✅ | ⬜ |
 | 9 | NAT deep dive, port allocation, egress | ✅ | ⬜ |
 | 10 | App deployment on EC2, Nginx web server | ✅ | ⬜ |
-| 11 | Load Balancer, Target Group, high availability | ✅ | ⬜ |
+| 11 | Load Balancer, Target Group, high availability | ✅ | ✅ |
 
 ---
 
