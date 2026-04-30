@@ -1,5 +1,5 @@
 # Day 12 — Load Balancer Deep Dive: Health Checks, AZ Routing & Elastic IP
-**Date:** May 1, 2026
+**Date:** April 30, 2026
 **Course:** DevOps Bootcamp
 
 ---

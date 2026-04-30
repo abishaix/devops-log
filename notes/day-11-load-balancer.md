@@ -1,5 +1,5 @@
 # Day 11 — Load Balancer, Target Group & High Availability
-**Date:** April 24, 2026
+**Date:** April 29, 2026
 **Course:** DevOps Bootcamp
 
 ---
