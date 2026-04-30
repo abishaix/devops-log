@@ -36,6 +36,13 @@ A full production-pattern AWS architecture with a custom VPC, public and private
 
 ## 🗺️ Architecture
 
+### Hand-drawn design (before build)
+![Hand-drawn architecture](../diagrams/lab-03-architecture-hand-drawn.svg)
+
+### Final architecture (post-build)
+![Final architecture](../diagrams/lab-03-architecture.svg)
+
+
 ```
 User (internet)                      Developer
     │ HTTP:80                             │ SSH:22
