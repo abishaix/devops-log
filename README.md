@@ -52,6 +52,7 @@ devops-log/
 | 9 | NAT deep dive, port allocation, egress | ✅ | ⬜ |
 | 10 | App deployment on EC2, Nginx web server | ✅ | ⬜ |
 | 11 | Load Balancer, Target Group, high availability | ✅ | ✅ |
+| 12 | LB deep dive: health checks, AZ routing, Elastic IP | ✅ | ⬜ |
 
 ---
 
