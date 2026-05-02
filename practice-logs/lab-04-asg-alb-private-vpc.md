@@ -1,7 +1,6 @@
-# Practice Log — ASG + ALB + Private VPC
+# Lab 04 — ASG + ALB + Private VPC
 **Date:** May 2, 2026
 **Region:** us-east-1
-**Course:** DevOps Bootcamp
 
 ---
 
