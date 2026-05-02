@@ -223,24 +223,6 @@ VPC
 
 ---
 
-## ✅ What I Practiced
-- Observed ASG creation flow in AWS Console
-- Watched LT creation (name, custom AMI selection, instance type, key, SG)
-- Watched ASG creation with LT, subnet selection, TG attachment, desired/min/max config
-- Watched `stress` command spike CPU and trigger ASG scale-out
-- Verified new server registered in Target Group after scale-out
-
----
-
-## 📸 Screenshots
-- [ ] ASG creation wizard — Launch Template selection step
-- [ ] ASG subnet configuration (two private subnets selected)
-- [ ] Target Group before and after ASG scale-out (server count change)
-- [ ] CloudWatch CPU utilization graph showing spike from stress test
-- [ ] EC2 instances list showing ASG-created server name tag
-
----
-
 ## 🔗 GitHub
 Commit to `devops-log`:
 ```
