@@ -98,40 +98,40 @@ stress --cpu 8 --timeout 300
 ## Screenshots
 
 **VPC — int01-vpc, 10.0.0.0/16, resource map showing 4 subnets + IGW + NAT**
-![VPC Overview](https://github.com/abishaix/devops-log/raw/main/practice-logs/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.00.54PM.png)
+![VPC Overview](https://github.com/abishaix/devops-log/raw/main/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.00.54PM.png)
 
 **Subnets — 4 subnets across us-east-1a and us-east-1b (2 public, 2 private)**
-![Subnets](https://github.com/abishaix/devops-log/raw/main/practice-logs/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.01.09PM.png)
+![Subnets](https://github.com/abishaix/devops-log/raw/main/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.01.09PM.png)
 
 **Target Groups — TG-01 (HTTP, ALB-01) and TG-NLB01 (TCP, NLB-01, target: ALB)**
-![Target Groups](https://github.com/abishaix/devops-log/raw/main/practice-logs/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.08.27PM.png)
+![Target Groups](https://github.com/abishaix/devops-log/raw/main/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.08.27PM.png)
 
 **TG-NLB01 — ALB-01 as registered target, health status: healthy**
-![NLB Target Group](https://github.com/abishaix/devops-log/raw/main/practice-logs/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.09.25PM.png)
+![NLB Target Group](https://github.com/abishaix/devops-log/raw/main/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.09.25PM.png)
 
 **TG-01 — 4/4 healthy targets (3 ASG instances + app-server)**
-![ALB Target Group](https://github.com/abishaix/devops-log/raw/main/practice-logs/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.09.49PM.png)
+![ALB Target Group](https://github.com/abishaix/devops-log/raw/main/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.09.49PM.png)
 
 **ASG — capacity overview, desired 3, scaling limits 1-3, at desired capacity**
-![ASG Overview](https://github.com/abishaix/devops-log/raw/main/practice-logs/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.10.06PM.png)
+![ASG Overview](https://github.com/abishaix/devops-log/raw/main/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.10.06PM.png)
 
 **ASG — automatic scaling, target tracking policy, 20% CPU utilization**
-![ASG Scaling Policy](https://github.com/abishaix/devops-log/raw/main/practice-logs/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.10.37PM.png)
+![ASG Scaling Policy](https://github.com/abishaix/devops-log/raw/main/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.10.37PM.png)
 
 **Launch Template LT-01 — v3 default, user data: nginx install + start + enable**
-![Launch Template](https://github.com/abishaix/devops-log/raw/main/practice-logs/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.11.27PM.png)
+![Launch Template](https://github.com/abishaix/devops-log/raw/main/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.11.27PM.png)
 
 **Launch Template — advanced details showing user data script**
-![Launch Template User Data](https://github.com/abishaix/devops-log/raw/main/practice-logs/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.11.33PM.png)
+![Launch Template User Data](https://github.com/abishaix/devops-log/raw/main/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.11.33PM.png)
 
 **EC2 Instances — 3 ASG-managed m1.small instances + bastion + app-server, all running**
-![EC2 Instances](https://github.com/abishaix/devops-log/raw/main/practice-logs/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.11.57PM.png)
+![EC2 Instances](https://github.com/abishaix/devops-log/raw/main/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.11.57PM.png)
 
 **Browser — NLB DNS endpoint serving "Hello from EC2-1, Private Subnet | AZ: us-east-1a"**
-![Browser NLB Response](https://github.com/abishaix/devops-log/raw/main/practice-logs/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.12.11PM.png)
+![Browser NLB Response](https://github.com/abishaix/devops-log/raw/main/screenshots/nlb-alb-asg/Screenshot%202026-05-05%20at%2010.12.11PM.png)
 
 **Architecture Diagram — NLB + ALB + ASG**
-![Architecture Diagram](https://github.com/abishaix/devops-log/raw/main/practice-logs/screenshots/nlb-alb-asg/NLB+ALB%20Integration.svg)
+![Architecture Diagram](https://github.com/abishaix/devops-log/raw/main/screenshots/nlb-alb-asg/NLB+ALB%20Integration.svg)
 
 ---
 
