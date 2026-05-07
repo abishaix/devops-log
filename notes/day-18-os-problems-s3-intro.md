@@ -18,7 +18,7 @@
 
 All paths (`/`, `/burgers`, `/pizza`, `/drinks`) worked on a single server because all apps are deployed on the same EC2 at different nginx directories. LB routes by path, server serves from the matching directory.
 
-- TG is responsible for telling LB which **path and port** to health check
+- TG is responsible for telling LB which path and port to health check
 - LB performs the actual health checks and routes traffic
 - If a path has no TG, LB has no health check for it — it can still send traffic blindly, which is dangerous
 
@@ -34,7 +34,7 @@ When you deploy multiple applications on a single OS:
 | Dependency conflicts | Installing a dependency for one app may break another |
 | Version conflicts | App A needs Python 3.8, App B needs Python 3.11 — can't coexist |
 | Hardware management | One app can consume all CPU/RAM, starving others |
-| Security | One app can access another app's files/network on the same OS |
+| Security | One app can access another app's files on the same OS |
 | Compatibility | OS-level patches apply to all apps — one patch can break another |
 | Scaling | Can't scale one app independently — you scale the whole server |
 
@@ -55,7 +55,7 @@ Before Docker (Common OS):
 │  └── App 3  ┘               │
 └─────────────────────────────┘
 
-After Docker (Isolated Environments):
+After Docker (Isolated):
 ┌─────────────────────────────┐
 │  EC2 Instance               │
 │  ┌───────┐ ┌───────┐ ┌────┐ │
@@ -66,13 +66,7 @@ After Docker (Isolated Environments):
 └─────────────────────────────┘
 ```
 
-Each container gets:
-- Separate OS layer
-- Separate network
-- Separate hardware allocation
-- Isolated from other containers
-
-If one container goes down, others are not affected.
+Each container gets separate OS layer, separate network, separate hardware allocation, and is fully isolated from others.
 
 ---
 
@@ -87,19 +81,9 @@ S3 is AWS's dedicated storage service. Think of it as an unlimited cloud hard dr
 - Media files, documents, any static content
 - Data archiving (old data purged from DB but kept in S3)
 
-**Cost:** Very cheap — approximately $10-20/month per TB depending on storage class.
-
 ---
 
 ### S3 Hierarchy
-
-```
-AWS (Global)
-└── S3 Service (Global)
-    └── Bucket (Regional — unique name globally)
-        └── Folder (no uniqueness required)
-            └── Objects (any file type)
-```
 
 | Level | Scope | Notes |
 |---|---|---|
@@ -129,7 +113,7 @@ If two buckets had the same name, requests would go to the wrong bucket. Hence g
 | Property | Default | Notes |
 |---|---|---|
 | Access | Private (block all public access) | Can be made public if needed |
-| Versioning | Disabled | Enable only when needed (e.g. app artifacts) |
+| Versioning | Disabled | Enable only when needed |
 | Storage limit | Unlimited | No cap on data per bucket |
 | Bucket limit | 100 per account | Can request increase |
 | Bucket rename | Not possible | Name is permanent once created |
@@ -146,12 +130,8 @@ Developer uploads app.py v2 → S3 stores v2 (v1 still there)
 v2 has a bug → roll back to v1 instantly
 ```
 
-**When to use versioning:**
-- Application code / artifacts ✅
-- Config files ✅
-- Bulk data or media files ❌ — unnecessary, doubles storage cost
-
-**Real-world use case:** EC2 deploys app from S3. New version breaks. Ops team rolls EC2 back to pull v1 from S3. Downtime minimized.
+Use versioning for: application code, artifacts, config files.
+Do NOT use for: bulk data, media files — unnecessary, doubles storage cost.
 
 ---
 
@@ -162,7 +142,7 @@ v2 has a bug → roll back to v1 instantly
 | App artifact storage | Store build output, deploy from S3 to EC2 |
 | Log offloading | Script pushes EC2 logs to S3 daily, keeps last 3 months on EC2 |
 | Database backup | Purge old DB data, archive to S3 for compliance |
-| Static website hosting | Host HTML/CSS/JS directly from S3 (coming up) |
+| Static website hosting | Host HTML/CSS/JS directly from S3 |
 | CloudWatch + Lambda + S3 | Metrics → alert → process logs → store in S3 |
 
 ---
@@ -178,15 +158,13 @@ bucket-name/
             └── backup.sql
 ```
 
-Always use year/month/day hierarchy — makes future retrieval easy for you and your team.
+Always use year/month/day hierarchy — makes future retrieval easy.
 
 ---
 
-## 📊 Quick Reference
+## 🏗️ Architecture Diagram
 
-| Service | AWS | Azure | GCP |
-|---|---|---|---|
-| Object Storage | S3 | Azure Blob Storage | Google Cloud Storage |
+![S3 Architecture Diagram](https://github.com/abishaix/devops-log/raw/main/diagrams/day-18-s3-architecture.svg)
 
 ---
 
@@ -202,7 +180,7 @@ Always use year/month/day hierarchy — makes future retrieval easy for you and 
 
 - S3 storage classes — different cost tiers based on access frequency (coming next class)
 - How to automate log push from EC2 to S3
-- EBS (Elastic Block Storage) — will be covered with Linux
+- EBS — will be covered with Linux
 
 ---
 

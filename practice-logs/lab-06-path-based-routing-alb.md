@@ -33,6 +33,22 @@ User → ALB (HTTP:80)
 
 ---
 
+## Architecture Diagrams
+
+### Claude-Generated Diagram
+
+![Path-Based Routing Architecture](https://github.com/abishaix/devops-log/raw/main/diagrams/lab-06-path-based-routing.svg)
+
+### My Hand-Drawn Diagram (v1 — single server, all TGs pointing to same EC2)
+
+![Hand-drawn Architecture v1](https://github.com/abishaix/devops-log/raw/main/screenshots/path-based-routing-alb/architecture-diagram-v1.png)
+
+### My Hand-Drawn Diagram (v2 — multi-server architecture with separate App-1, App-2)
+
+![Hand-drawn Architecture v2](https://github.com/abishaix/devops-log/raw/main/screenshots/path-based-routing-alb/architecture-diagram-v2.png)
+
+---
+
 ## Step by Step
 
 1. Launched EC2 `app-home` in public subnet — enabled auto-assign public IPv4
@@ -44,7 +60,6 @@ sudo mkdir -p /usr/share/nginx/html/drinks
 ```
 3. Deployed DevOps Diner HTML to each path:
 ```bash
-# copied index.html to each path directory
 sudo cp /usr/share/nginx/html/pizza/index.html /usr/share/nginx/html/burgers/index.html
 sudo cp /usr/share/nginx/html/pizza/index.html /usr/share/nginx/html/drinks/index.html
 ```
@@ -73,9 +88,8 @@ sudo mkdir -p /usr/share/nginx/html/pizza
 sudo mkdir -p /usr/share/nginx/html/drinks
 
 # copy files
-sudo cp /path/to/index.html /usr/share/nginx/html/burgers/index.html
-sudo cp /path/to/index.html /usr/share/nginx/html/pizza/index.html
-sudo cp /path/to/index.html /usr/share/nginx/html/drinks/index.html
+sudo cp pizza/index.html /usr/share/nginx/html/burgers/index.html
+sudo cp pizza/index.html /usr/share/nginx/html/drinks/index.html
 ```
 
 ---
@@ -115,6 +129,12 @@ sudo cp /path/to/index.html /usr/share/nginx/html/drinks/index.html
 
 ---
 
+## 🌐 Live Demo
+
+[DevOps Diner — Live on GitHub Pages](https://abishaix.github.io/devops-log/docs/devops-diner/)
+
+---
+
 ## Cleanup Order
 
 1. ALB `alb`
@@ -123,14 +143,7 @@ sudo cp /path/to/index.html /usr/share/nginx/html/drinks/index.html
 
 ---
 
-## 🌐 Live Demo
-
-[DevOps Diner — Live on GitHub Pages](https://abishaix.github.io/devops-log/docs/devops-diner/)
-
----
-
 ## Next Steps
 
 - Repeat with multiple servers per path (one EC2 per TG)
-- Add HTTPS listener with SSL certificate
 - S3 concepts and practice
