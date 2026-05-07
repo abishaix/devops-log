@@ -164,7 +164,7 @@ Always use year/month/day hierarchy — makes future retrieval easy.
 
 ## 🏗️ Architecture Diagram
 
-![S3 Architecture Diagram](https://github.com/abishaix/devops-log/blob/main/diagrams/day-18-s3-architecture.svg?raw=true)
+![S3 Architecture Diagram](../diagrams/day-18-s3-architecture.svg)
 
 ---
 
