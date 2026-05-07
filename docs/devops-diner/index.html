@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Diner 🍔</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --red:#ff3b3b; --yellow:#ffe94a; --cream:#fff8ee; --dark:#1a1a1a; --green:#00c896; --orange:#ff7700; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Mono',monospace; min-height:100vh; }
+  .page { display:none; }
+  .page.active { display:block; }
+
+  .checker-red { height:18px; background-image:repeating-conic-gradient(var(--red) 0% 25%,var(--yellow) 0% 50%); background-size:18px 18px; }
+  .checker-orange { height:18px; background-image:repeating-conic-gradient(var(--orange) 0% 25%,#fff3 0% 50%); background-size:18px 18px; background-color:var(--dark); }
+  .checker-green { height:18px; background-image:repeating-conic-gradient(var(--green) 0% 25%,#ffffff11 0% 50%); background-size:18px 18px; }
+  .checker-default { height:18px; background-image:repeating-conic-gradient(var(--dark) 0% 25%,var(--yellow) 0% 50%); background-size:18px 18px; }
+
+  /* NAV BAR */
+  .nav { background:var(--dark); padding:0.6rem 1.5rem; display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center; border-bottom:2px solid #333; }
+  .nav span { color:#555; font-size:0.75rem; margin-right:0.5rem; }
+  .nav-btn { background:#222; color:#aaa; border:1px solid #444; padding:0.3rem 0.8rem; font-family:'DM Mono',monospace; font-size:0.75rem; cursor:pointer; border-radius:2px; transition:all 0.15s; }
+  .nav-btn:hover { background:#333; color:white; }
+  .nav-btn.active { background:var(--yellow); color:var(--dark); border-color:var(--yellow); font-weight:700; }
+
+  /* HOMEPAGE */
+  #home { background:var(--cream); }
+  #home header { background:var(--red); padding:2.5rem 2rem; text-align:center; border-bottom:4px solid var(--dark); }
+  #home header h1 { font-family:'Permanent Marker',cursive; font-size:clamp(2.5rem,7vw,4.5rem); color:var(--yellow); text-shadow:4px 4px 0 var(--dark); }
+  #home header p { color:white; margin-top:0.5rem; font-size:0.9rem; opacity:0.9; }
+  .path-badge { display:inline-block; background:var(--dark); color:var(--yellow); padding:0.2rem 0.8rem; font-size:0.8rem; margin-top:0.5rem; letter-spacing:1px; }
+  .marquee-wrap { background:var(--dark); color:var(--yellow); padding:0.6rem 0; overflow:hidden; border-top:3px solid var(--yellow); border-bottom:3px solid var(--yellow); white-space:nowrap; }
+  .marquee-inner { display:inline-block; animation:marquee 22s linear infinite; font-family:'Permanent Marker',cursive; font-size:1rem; letter-spacing:2px; }
+  @keyframes marquee { from{transform:translateX(100vw)} to{transform:translateX(-100%)} }
+  .menu-board { max-width:900px; margin:3rem auto; padding:0 1.5rem; }
+  .board-title { font-family:'Permanent Marker',cursive; font-size:2rem; color:var(--dark); text-align:center; margin-bottom:2rem; }
+  .menu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; }
+  .menu-item { background:white; border:3px solid var(--dark); padding:1.5rem; text-decoration:none; color:var(--dark); display:block; transition:transform 0.15s,box-shadow 0.15s; box-shadow:5px 5px 0 var(--dark); position:relative; cursor:pointer; }
+  .menu-item:hover { transform:translate(-3px,-3px); box-shadow:8px 8px 0 var(--dark); }
+  .menu-item .emoji { font-size:3rem; display:block; margin-bottom:0.8rem; }
+  .menu-item h2 { font-family:'Permanent Marker',cursive; font-size:1.4rem; margin-bottom:0.4rem; }
+  .menu-item p { font-size:0.8rem; opacity:0.7; line-height:1.5; }
+  .menu-item .path-tag { position:absolute; top:1rem; right:1rem; background:var(--yellow); border:2px solid var(--dark); padding:0.2rem 0.5rem; font-size:0.7rem; border-radius:2px; }
+  .item-burgers { border-color:var(--red); box-shadow:5px 5px 0 var(--red); }
+  .item-burgers:hover { box-shadow:8px 8px 0 var(--red); }
+  .item-pizza { border-color:var(--orange); box-shadow:5px 5px 0 var(--orange); }
+  .item-pizza:hover { box-shadow:8px 8px 0 var(--orange); }
+  .item-drinks { border-color:var(--green); box-shadow:5px 5px 0 var(--green); }
+  .item-drinks:hover { box-shadow:8px 8px 0 var(--green); }
+
+  /* BURGERS PAGE */
+  #burgers { background:var(--cream); }
+  #burgers header { background:var(--red); padding:2.5rem 2rem; text-align:center; border-bottom:4px solid var(--dark); }
+  #burgers header h1 { font-family:'Permanent Marker',cursive; font-size:clamp(2rem,6vw,3.5rem); color:var(--yellow); text-shadow:4px 4px 0 var(--dark); }
+  #burgers .path-badge { background:var(--dark); color:var(--yellow); }
+  .build-board { max-width:800px; margin:3rem auto; padding:0 1.5rem; }
+  .card { background:white; border:3px solid var(--dark); box-shadow:6px 6px 0 var(--dark); padding:2rem; margin-bottom:2rem; }
+  .card h2 { font-family:'Permanent Marker',cursive; font-size:1.8rem; color:var(--red); margin-bottom:1.5rem; }
+  .burger-layer { display:flex; align-items:center; gap:1rem; padding:0.8rem; border-left:4px solid var(--red); margin-bottom:0.8rem; background:#fff8ee; animation:slideIn 0.4s ease forwards; opacity:0; transform:translateX(-20px); }
+  .burger-layer:nth-child(2){animation-delay:0.1s} .burger-layer:nth-child(3){animation-delay:0.2s} .burger-layer:nth-child(4){animation-delay:0.3s} .burger-layer:nth-child(5){animation-delay:0.4s} .burger-layer:nth-child(6){animation-delay:0.5s}
+  @keyframes slideIn { to{opacity:1;transform:translateX(0)} }
+  .burger-layer .icon { font-size:1.8rem; width:2.5rem; flex-shrink:0; }
+  .burger-layer .label { font-size:0.82rem; line-height:1.5; }
+  .burger-layer .label strong { display:block; font-size:0.9rem; }
+
+  /* PIZZA PAGE */
+  #pizza { background:var(--cream); }
+  #pizza header { background:var(--orange); padding:2.5rem 2rem; text-align:center; border-bottom:4px solid var(--dark); }
+  #pizza header h1 { font-family:'Permanent Marker',cursive; font-size:clamp(2rem,6vw,3.5rem); color:white; text-shadow:4px 4px 0 var(--dark); }
+  #pizza .path-badge { background:var(--dark); color:var(--yellow); }
+  .pizza-wrap { max-width:800px; margin:3rem auto; padding:0 1.5rem; }
+  .pizza-card { background:white; border:3px solid var(--dark); box-shadow:6px 6px 0 var(--dark); padding:2rem; margin-bottom:2rem; text-align:center; }
+  .pizza-card h2 { font-family:'Permanent Marker',cursive; font-size:1.8rem; color:var(--orange); margin-bottom:1.5rem; }
+  .pizza { width:180px; height:180px; border-radius:50%; background:conic-gradient(#f5c842 0deg 60deg,#e8a020 60deg 120deg,#f5c842 120deg 180deg,#e8a020 180deg 240deg,#f5c842 240deg 300deg,#e8a020 300deg 360deg); margin:0 auto 1.5rem; border:4px solid var(--dark); box-shadow:0 0 0 8px #c0392b,0 0 0 12px var(--dark); animation:spin 12s linear infinite; }
+  @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  .slice-labels { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; text-align:left; }
+  .slice { background:#fff3e0; border:2px solid var(--orange); padding:0.8rem; font-size:0.8rem; }
+  .slice strong { display:block; color:var(--orange); margin-bottom:0.3rem; }
+  .slice.active-slice { background:var(--orange); border-color:var(--dark); }
+  .slice.active-slice strong { color:white; }
+  .slice.active-slice { color:white; }
+
+  /* DRINKS PAGE */
+  #drinks { background:var(--dark); color:white; }
+  #drinks header { background:#111; padding:2.5rem 2rem; text-align:center; border-bottom:4px solid var(--green); }
+  #drinks header h1 { font-family:'Permanent Marker',cursive; font-size:clamp(2rem,6vw,3.5rem); color:var(--green); text-shadow:4px 4px 0 #000; }
+  #drinks .path-badge { background:var(--green); color:var(--dark); font-weight:500; }
+  .drinks-wrap { max-width:800px; margin:3rem auto; padding:0 1.5rem; }
+  .hc-board { background:#1a1a1a; border:2px solid var(--green); padding:2rem; margin-bottom:2rem; box-shadow:0 0 30px #00c89622; }
+  .hc-board h2 { font-family:'Permanent Marker',cursive; font-size:1.8rem; color:var(--green); margin-bottom:1.5rem; }
+  .hc-item { display:flex; align-items:center; gap:1rem; padding:0.9rem; border-bottom:1px solid #333; animation:fadeUp 0.4s ease forwards; opacity:0; transform:translateY(10px); }
+  .hc-item:nth-child(2){animation-delay:0.1s} .hc-item:nth-child(3){animation-delay:0.2s} .hc-item:nth-child(4){animation-delay:0.3s} .hc-item:nth-child(5){animation-delay:0.4s} .hc-item:nth-child(6){animation-delay:0.5s} .hc-item:nth-child(7){animation-delay:0.6s}
+  @keyframes fadeUp { to{opacity:1;transform:translateY(0)} }
+  .status-dot { width:12px; height:12px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); flex-shrink:0; animation:glow 2s ease infinite; }
+  @keyframes glow { 0%,100%{box-shadow:0 0 8px var(--green)} 50%{box-shadow:0 0 20px var(--green)} }
+  .hc-item .lbl { font-size:0.82rem; color:#ccc; }
+  .hc-item .lbl strong { color:white; display:block; }
+  .hc-item .val { margin-left:auto; color:var(--green); font-size:0.8rem; font-weight:500; }
+
+  /* SHARED */
+  .devops-note { padding:1.5rem; font-size:0.82rem; line-height:1.8; }
+  .devops-note-dark { background:var(--dark); color:var(--yellow); }
+  .devops-note-light { background:var(--dark); color:#ccc; border:2px solid #333; }
+  .devops-note h3 { font-family:'Permanent Marker',cursive; font-size:1.2rem; margin-bottom:0.8rem; }
+  .devops-note code { color:var(--yellow); }
+  .back-btn { display:inline-block; padding:0.8rem 1.5rem; text-decoration:none; font-family:'Permanent Marker',cursive; font-size:1rem; border:3px solid var(--dark); transition:transform 0.1s,box-shadow 0.1s; margin-top:1.5rem; cursor:pointer; }
+  .back-btn:hover { transform:translate(-2px,-2px); }
+  .back-btn-red { background:var(--red); color:white; box-shadow:4px 4px 0 var(--dark); }
+  .back-btn-red:hover { box-shadow:6px 6px 0 var(--dark); }
+  .back-btn-orange { background:var(--orange); color:white; box-shadow:4px 4px 0 var(--dark); }
+  .back-btn-orange:hover { box-shadow:6px 6px 0 var(--dark); }
+  .back-btn-green { background:var(--green); color:var(--dark); border-color:var(--green); box-shadow:4px 4px 0 #00c89688; font-weight:700; }
+  .back-btn-green:hover { box-shadow:6px 6px 0 var(--green); }
+  footer { text-align:center; padding:1.2rem; font-size:0.75rem; margin-top:3rem; }
+  .footer-dark { background:var(--dark); color:var(--yellow); }
+  .footer-dim { background:#111; color:#555; border-top:1px solid #222; }
+  footer span.hl-red { color:var(--red); }
+  footer span.hl-orange { color:var(--orange); }
+  footer span.hl-green { color:var(--green); }
+</style>
+</head>
+<body>
+
+<!-- SIMULATED PATH NAV BAR -->
+<div class="nav">
+  <span>Simulate path:</span>
+  <button class="nav-btn active" onclick="goto('home', this)">/ (default)</button>
+  <button class="nav-btn" onclick="goto('burgers', this)">/burgers</button>
+  <button class="nav-btn" onclick="goto('pizza', this)">/pizza</button>
+  <button class="nav-btn" onclick="goto('drinks', this)">/drinks</button>
+</div>
+
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+  <div class="checker-default"></div>
+  <header>
+    <h1>🍔 DevOps Diner</h1>
+    <p>Where every request gets routed to the right kitchen</p>
+    <div class="path-badge">GET / → TG-1 (default)</div>
+  </header>
+  <div class="marquee-wrap">
+    <span class="marquee-inner">⚡ HOT & FRESH &nbsp;•&nbsp; PATH-BASED ROUTING IN PRODUCTION &nbsp;•&nbsp; ALB SENDING YOU TO THE RIGHT TABLE &nbsp;•&nbsp; NO HEALTH CHECK = NO SERVICE &nbsp;•&nbsp; ENI IS YOUR NIC CARD &nbsp;•&nbsp; ONE TG PER PATH &nbsp;•&nbsp; ⚡ HOT & FRESH &nbsp;•&nbsp; PATH-BASED ROUTING &nbsp;•&nbsp;</span>
+  </div>
+  <div class="menu-board">
+    <h2 class="board-title">🗂️ Today's Menu — Pick a Path</h2>
+    <div class="menu-grid">
+      <div class="menu-item item-burgers" onclick="gotoId('burgers')">
+        <span class="path-tag">/burgers → TG-2</span>
+        <span class="emoji">🍔</span>
+        <h2>Burger Station</h2>
+        <p>Classic smash burgers. ALB routes you here via <code>/burgers</code>. Separate TG, separate health check.</p>
+      </div>
+      <div class="menu-item item-pizza" onclick="gotoId('pizza')">
+        <span class="path-tag">/pizza → TG-3</span>
+        <span class="emoji">🍕</span>
+        <h2>Pizza Lab</h2>
+        <p>Wood-fired slices on their own target group. Zero cross-contamination with other paths.</p>
+      </div>
+      <div class="menu-item item-drinks" onclick="gotoId('drinks')">
+        <span class="path-tag">/drinks → TG-4</span>
+        <span class="emoji">🥤</span>
+        <h2>Drinks Bar</h2>
+        <p>Cold brew & kombucha. Dedicated microservice. Scales independently from the kitchen.</p>
+      </div>
+    </div>
+  </div>
+  <footer class="footer-dark">
+    Served by <span class="hl-red">EC2 default-app</span> &nbsp;|&nbsp; Path: <span class="hl-red">/</span> &nbsp;|&nbsp; TG-1 &nbsp;|&nbsp; Port 80
+  </footer>
+</div>
+
+<!-- BURGERS PAGE -->
+<div id="burgers" class="page">
+  <div class="checker-red"></div>
+  <header>
+    <h1>🍔 Burger Station</h1>
+    <div class="path-badge">GET /burgers → TG-2 → App-1 (port 3000)</div>
+  </header>
+  <div class="build-board">
+    <div class="card">
+      <h2>🧱 How Your Request Got Here</h2>
+      <div class="burger-layer"><span class="icon">🍞</span><div class="label"><strong>Top Bun — ALB Listener Rule</strong>Matched <code>/burgers</code> path → forwarded to TG-2</div></div>
+      <div class="burger-layer"><span class="icon">🥬</span><div class="label"><strong>Lettuce — TG-2 Health Check</strong>Port 3000, path /burgers → 200 OK confirmed ✅</div></div>
+      <div class="burger-layer"><span class="icon">🧀</span><div class="label"><strong>Cheese — Security Group</strong>Inbound port 3000 allowed from ALB SG only. No public access.</div></div>
+      <div class="burger-layer"><span class="icon">🥩</span><div class="label"><strong>Patty — EC2 App-1</strong>Running nginx on port 3000, private subnet, no public IP</div></div>
+      <div class="burger-layer"><span class="icon">🍞</span><div class="label"><strong>Bottom Bun — ENI</strong>Private IP locked in, SG attached, subnet mapped. This is your NIC card.</div></div>
+    </div>
+    <div class="devops-note devops-note-dark">
+      <h3 style="color:var(--red)">📡 DevOps Note</h3>
+      ALB read your HTTP header, matched the <code>/burgers</code> rule, and forwarded to <strong>TG-2</strong>. TG-2 ran a health check on this server at <code>port 3000</code> before ALB trusted it with live traffic. <strong>No TG = No HC = No routing.</strong> That's the rule.
+    </div>
+    <button class="back-btn back-btn-red" onclick="gotoId('home')">← Back to Menu</button>
+  </div>
+  <footer class="footer-dark">Served by <span class="hl-red">EC2 App-1</span> &nbsp;|&nbsp; Path: <span class="hl-red">/burgers</span> &nbsp;|&nbsp; TG-2 &nbsp;|&nbsp; Port 3000</footer>
+</div>
+
+<!-- PIZZA PAGE -->
+<div id="pizza" class="page">
+  <div class="checker-orange"></div>
+  <header>
+    <h1>🍕 Pizza Lab</h1>
+    <div class="path-badge">GET /pizza → TG-3 → App-2 (port 5000)</div>
+  </header>
+  <div class="pizza-wrap">
+    <div class="pizza-card">
+      <h2>🔄 The Routing Pizza</h2>
+      <div class="pizza"></div>
+      <p style="font-size:0.8rem;opacity:0.6;margin-bottom:1.5rem">Each slice = one ALB listener rule</p>
+      <div class="slice-labels">
+        <div class="slice"><strong>/ → TG-1</strong>Default path, port 80</div>
+        <div class="slice"><strong>/burgers → TG-2</strong>Port 3000</div>
+        <div class="slice active-slice"><strong>/pizza → TG-3 ← you are here</strong>Port 5000</div>
+        <div class="slice"><strong>/drinks → TG-4</strong>Port 8080</div>
+      </div>
+    </div>
+    <div class="devops-note devops-note-dark">
+      <h3 style="color:var(--orange)">📡 DevOps Note</h3>
+      ALB rules are evaluated in <strong>priority order</strong>. First match wins. If no rule matches, the default rule kicks in. This server is on <code>port 5000</code> in a private subnet — nobody can reach it directly. Only ALB can, because TG-3 confirmed it's healthy first.
+    </div>
+    <button class="back-btn back-btn-orange" onclick="gotoId('home')">← Back to Menu</button>
+  </div>
+  <footer class="footer-dark">Served by <span class="hl-orange">EC2 App-2</span> &nbsp;|&nbsp; Path: <span class="hl-orange">/pizza</span> &nbsp;|&nbsp; TG-3 &nbsp;|&nbsp; Port 5000</footer>
+</div>
+
+<!-- DRINKS PAGE -->
+<div id="drinks" class="page">
+  <div class="checker-green"></div>
+  <header>
+    <h1>🥤 Drinks Bar</h1>
+    <div class="path-badge">GET /drinks → TG-4 → App-3 (port 8080)</div>
+  </header>
+  <div class="drinks-wrap">
+    <div class="hc-board">
+      <h2>💚 Live Health Check Monitor</h2>
+      <div class="hc-item"><div class="status-dot"></div><div class="lbl"><strong>Instance</strong>i-0abc123def456</div><div class="val">HEALTHY</div></div>
+      <div class="hc-item"><div class="status-dot"></div><div class="lbl"><strong>Port</strong>8080</div><div class="val">OPEN</div></div>
+      <div class="hc-item"><div class="status-dot"></div><div class="lbl"><strong>Health Check Path</strong>/drinks/health</div><div class="val">200 OK</div></div>
+      <div class="hc-item"><div class="status-dot"></div><div class="lbl"><strong>Target Group</strong>TG-4</div><div class="val">IN SERVICE</div></div>
+      <div class="hc-item"><div class="status-dot"></div><div class="lbl"><strong>ENI</strong>eni-0987xyz private subnet</div><div class="val">ATTACHED</div></div>
+      <div class="hc-item"><div class="status-dot"></div><div class="lbl"><strong>Last Health Check</strong>2 seconds ago</div><div class="val">PASS ✓</div></div>
+    </div>
+    <div class="devops-note devops-note-light">
+      <h3 style="color:var(--green)">📡 DevOps Note</h3>
+      ALB hits <code>/drinks/health</code> on port <code>8080</code> every 30 seconds. If it gets <code>200 OK</code> — traffic flows. If not — ALB marks this instance unhealthy and stops routing here. <strong>Running ≠ Healthy.</strong> Always configure health check paths correctly in your TG. A misconfigured path = all traffic goes to unhealthy instances.
+    </div>
+    <button class="back-btn back-btn-green" onclick="gotoId('home')">← Back to Menu</button>
+  </div>
+  <footer class="footer-dim">Served by <span class="hl-green">EC2 App-3</span> &nbsp;|&nbsp; Path: <span class="hl-green">/drinks</span> &nbsp;|&nbsp; TG-4 &nbsp;|&nbsp; Port 8080</footer>
+</div>
+
+<script>
+  function goto(id, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo(0,0);
+  }
+  function gotoId(id) {
+    const map = { home:'/', burgers:'/burgers', pizza:'/pizza', drinks:'/drinks' };
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => {
+      if(b.textContent.trim() === map[id] || (id==='home' && b.textContent.includes('default'))) b.classList.add('active');
+      else b.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0,0);
+  }
+</script>
+</body>
+</html>
