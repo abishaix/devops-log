@@ -37,7 +37,7 @@ User → ALB (HTTP:80)
 
 ### Claude-Generated Diagram
 
-![Path-Based Routing Architecture](https://github.com/abishaix/devops-log/raw/main/diagrams/lab-06-path-based-routing.svg)
+![Path-Based Routing Architecture](https://github.com/abishaix/devops-log/blob/main/diagrams/lab-06-path-based-routing.svg?raw=true)
 
 ### My Hand-Drawn Diagram (v1 — single server, all TGs pointing to same EC2)
 
