@@ -123,6 +123,12 @@ sudo cp /path/to/index.html /usr/share/nginx/html/drinks/index.html
 
 ---
 
+## 🌐 Live Demo
+
+[DevOps Diner — Live on GitHub Pages](https://abishaix.github.io/devops-log/docs/devops-diner/)
+
+---
+
 ## Next Steps
 
 - Repeat with multiple servers per path (one EC2 per TG)
