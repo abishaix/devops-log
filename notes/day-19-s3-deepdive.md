@@ -173,7 +173,7 @@ Full CloudFront setup coming in later class.
 
 ## 🏗️ Architecture Diagram
 
-![S3 Static Website & Versioning Architecture](../diagrams/day-19-s3-deepdive-architecture.svg)
+![S3 Static Website & Versioning Architecture](https://raw.githubusercontent.com/abishaix/devops-log/main/diagrams/day-19-s3-deepdive-architecture.svg)
 
 ---
 
