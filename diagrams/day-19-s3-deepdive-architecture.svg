@@ -1,4 +1,4 @@
-<svg width="100%" viewBox="0 0 680 560" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="560" viewBox="0 0 680 560" style="background:#ffffff;font-family:Arial,sans-serif" role="img">
 <title>Day 19 — S3 deep dive: versioning, pre-signed URL, static website hosting, and CloudFront proxy</title>
 <desc>Three-section diagram showing S3 versioning flow, pre-signed URL temporary access, and static website hosting with CloudFront proxy pattern</desc>
 <defs>
