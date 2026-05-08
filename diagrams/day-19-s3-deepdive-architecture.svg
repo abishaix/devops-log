@@ -1,0 +1,97 @@
+<svg width="100%" viewBox="0 0 680 560" role="img">
+<title>Day 19 — S3 deep dive: versioning, pre-signed URL, static website hosting, and CloudFront proxy</title>
+<desc>Three-section diagram showing S3 versioning flow, pre-signed URL temporary access, and static website hosting with CloudFront proxy pattern</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<!-- SECTION 1: Versioning -->
+<rect x="30" y="30" width="190" height="30" rx="6" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="125" y="50" text-anchor="middle" fill="#444441">S3 Versioning</text>
+
+<rect x="30" y="75" width="190" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="125" y="93" text-anchor="middle" fill="#085041">app.py — v1</text>
+<text font-family="sans-serif" font-size="12" x="125" y="109" text-anchor="middle" fill="#0F6E56">initial upload</text>
+
+<rect x="30" y="135" width="190" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="125" y="153" text-anchor="middle" fill="#085041">app.py — v2</text>
+<text font-family="sans-serif" font-size="12" x="125" y="169" text-anchor="middle" fill="#0F6E56">code changed, re-upload</text>
+
+<rect x="30" y="195" width="190" height="44" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="125" y="213" text-anchor="middle" fill="#712B13">app.py — v3 (bug!)</text>
+<text font-family="sans-serif" font-size="12" x="125" y="229" text-anchor="middle" fill="#993C1D">broken deployment</text>
+
+<line x1="125" y1="119" x2="125" y2="133" stroke="#5F5E5A" stroke-width="0.5" marker-end="url(#arrow)"/>
+<line x1="125" y1="179" x2="125" y2="193" stroke="#5F5E5A" stroke-width="0.5" marker-end="url(#arrow)"/>
+
+<rect x="30" y="255" width="190" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="125" y="273" text-anchor="middle" fill="#085041">restore v2</text>
+<text font-family="sans-serif" font-size="12" x="125" y="289" text-anchor="middle" fill="#0F6E56">one click rollback</text>
+
+<path d="M220 217 Q260 217 260 273 L222 273" fill="none" stroke="#5F5E5A" stroke-width="0.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+<text font-family="sans-serif" font-size="12" x="264" y="248" text-anchor="start" fill="#5F5E5A">rollback</text>
+
+<!-- SECTION 2: Pre-signed URL -->
+<rect x="265" y="30" width="190" height="30" rx="6" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="360" y="50" text-anchor="middle" fill="#444441">Pre-signed URL</text>
+
+<rect x="265" y="75" width="190" height="44" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="360" y="93" text-anchor="middle" fill="#0C447C">S3 bucket (private)</text>
+<text font-family="sans-serif" font-size="12" x="360" y="109" text-anchor="middle" fill="#185FA5">object: report.pdf</text>
+
+<rect x="265" y="155" width="190" height="56" rx="6" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="360" y="175" text-anchor="middle" fill="#633806">pre-signed URL</text>
+<text font-family="sans-serif" font-size="12" x="360" y="191" text-anchor="middle" fill="#854F0B">valid for X minutes</text>
+<text font-family="sans-serif" font-size="12" x="360" y="205" text-anchor="middle" fill="#854F0B">max 12 hours</text>
+
+<line x1="360" y1="119" x2="360" y2="153" stroke="#5F5E5A" stroke-width="0.5" marker-end="url(#arrow)"/>
+
+<rect x="265" y="235" width="85" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="307" y="253" text-anchor="middle" fill="#085041">colleague</text>
+<text font-family="sans-serif" font-size="12" x="307" y="269" text-anchor="middle" fill="#0F6E56">can access</text>
+
+<rect x="370" y="235" width="85" height="44" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="412" y="253" text-anchor="middle" fill="#712B13">after expiry</text>
+<text font-family="sans-serif" font-size="12" x="412" y="269" text-anchor="middle" fill="#993C1D">access denied</text>
+
+<line x1="307" y1="211" x2="307" y2="233" stroke="#5F5E5A" stroke-width="0.5" marker-end="url(#arrow)"/>
+<line x1="412" y1="211" x2="412" y2="233" stroke="#5F5E5A" stroke-width="0.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+
+<!-- SECTION 3: Static Website + CloudFront -->
+<rect x="30" y="330" width="620" height="30" rx="6" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="340" y="350" text-anchor="middle" fill="#444441">S3 Static Website Hosting + CloudFront (production pattern)</text>
+
+<rect x="30" y="375" width="100" height="44" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="80" y="393" text-anchor="middle" fill="#27500A">user</text>
+<text font-family="sans-serif" font-size="12" x="80" y="409" text-anchor="middle" fill="#3B6D11">browser request</text>
+
+<rect x="185" y="375" width="130" height="44" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="250" y="393" text-anchor="middle" fill="#3C3489">CloudFront</text>
+<text font-family="sans-serif" font-size="12" x="250" y="409" text-anchor="middle" fill="#534AB7">public CDN proxy</text>
+
+<rect x="375" y="375" width="130" height="44" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="440" y="393" text-anchor="middle" fill="#0C447C">S3 bucket</text>
+<text font-family="sans-serif" font-size="12" x="440" y="409" text-anchor="middle" fill="#185FA5">private · static files</text>
+
+<rect x="565" y="355" width="90" height="84" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="610" y="378" text-anchor="middle" fill="#085041">contents</text>
+<text font-family="sans-serif" font-size="12" x="610" y="394" text-anchor="middle" fill="#0F6E56">index.html</text>
+<text font-family="sans-serif" font-size="12" x="610" y="410" text-anchor="middle" fill="#0F6E56">style.css</text>
+<text font-family="sans-serif" font-size="12" x="610" y="426" text-anchor="middle" fill="#0F6E56">images/</text>
+
+<line x1="130" y1="397" x2="183" y2="397" stroke="#5F5E5A" stroke-width="0.5" marker-end="url(#arrow)"/>
+<line x1="315" y1="397" x2="373" y2="397" stroke="#5F5E5A" stroke-width="0.5" marker-end="url(#arrow)"/>
+<line x1="505" y1="397" x2="563" y2="397" stroke="#5F5E5A" stroke-width="0.5" marker-end="url(#arrow)"/>
+<text font-family="sans-serif" font-size="12" x="155" y="390" text-anchor="middle" fill="#5F5E5A">HTTPS</text>
+<text font-family="sans-serif" font-size="12" x="345" y="390" text-anchor="middle" fill="#5F5E5A">allowed</text>
+
+<!-- S3 HA note -->
+<rect x="30" y="460" width="620" height="70" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="340" y="483" text-anchor="middle" fill="#444441">S3 high availability — automatic</text>
+<text font-family="sans-serif" font-size="12" x="340" y="501" text-anchor="middle" fill="#5F5E5A">region: ap-south-1</text>
+<text font-family="sans-serif" font-size="12" x="150" y="519" text-anchor="middle" fill="#5F5E5A">AZ-1a: copy ✓</text>
+<text font-family="sans-serif" font-size="12" x="340" y="519" text-anchor="middle" fill="#5F5E5A">AZ-1b: copy ✓</text>
+<text font-family="sans-serif" font-size="12" x="530" y="519" text-anchor="middle" fill="#5F5E5A">AZ-1c: copy ✓</text>
+</svg>
