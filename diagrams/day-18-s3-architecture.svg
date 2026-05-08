@@ -1,4 +1,4 @@
-<svg width="100%" viewBox="0 0 680 520" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="520" viewBox="0 0 680 520" style="background:#ffffff;font-family:Arial,sans-serif" role="img">
 <title>S3 Architecture — bucket, folder, object hierarchy with EC2 integration</title>
 <desc>Structural diagram showing S3 global service containing a regional bucket, folders, and objects, with EC2 uploading logs and a developer accessing via browser</desc>
 <defs>

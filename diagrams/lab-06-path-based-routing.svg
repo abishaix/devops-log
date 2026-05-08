@@ -1,4 +1,4 @@
-<svg width="100%" viewBox="0 0 680 480" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="480" viewBox="0 0 680 480" style="background:#ffffff;font-family:Arial,sans-serif" role="img">
 <title>Lab 06 — Path-based routing with ALB</title>
 <desc>ALB receiving HTTP traffic on port 80 and routing to 4 target groups based on URL path, all pointing to a single EC2 instance running nginx</desc>
 <defs>
