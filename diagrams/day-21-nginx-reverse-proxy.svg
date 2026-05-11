@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="450" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">Nginx Reverse Proxy — Frontend/Backend Architecture</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4a90d9"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c"/>
+    </marker>
+  </defs>
+
+  <!-- CLIENT (outside VPC) -->
+  <rect x="20" y="100" width="110" height="60" rx="8" fill="#e8f4f8" stroke="#4a90d9" stroke-width="2"/>
+  <text x="75" y="126" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a2e">Client</text>
+  <text x="75" y="146" text-anchor="middle" font-size="11" fill="#555">Browser</text>
+
+  <!-- Arrow: Client to Nginx -->
+  <line x1="130" y1="130" x2="198" y2="130" stroke="#4a90d9" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="164" y="122" text-anchor="middle" font-size="10" fill="#4a90d9">HTTP :80</text>
+
+  <!-- VPC OUTER BOX -->
+  <rect x="200" y="55" width="670" height="370" rx="12" fill="#f9f9ff" stroke="#9b59b6" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="218" y="75" font-size="12" fill="#9b59b6" font-weight="bold">VPC (10.0.0.0/16)</text>
+
+  <!-- PUBLIC SUBNET -->
+  <rect x="220" y="85" width="270" height="300" rx="8" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="355" y="105" text-anchor="middle" font-size="11" font-weight="bold" fill="#27ae60">Public Subnet</text>
+
+  <!-- Nginx EC2 box -->
+  <rect x="250" y="118" width="210" height="85" rx="8" fill="#27ae60" stroke="#1e8449" stroke-width="2"/>
+  <text x="355" y="147" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Nginx EC2</text>
+  <text x="355" y="167" text-anchor="middle" font-size="11" fill="#d5f5e3">Reverse Proxy</text>
+  <text x="355" y="184" text-anchor="middle" font-size="10" fill="#d5f5e3">Port :80</text>
+
+  <!-- IP labels under Nginx box -->
+  <text x="355" y="222" text-anchor="middle" font-size="10" fill="#444">Public IP: 13.x.x.x</text>
+  <text x="355" y="237" text-anchor="middle" font-size="10" fill="#444">Private IP: 10.0.0.x</text>
+
+  <!-- nginx.conf snippet box -->
+  <rect x="250" y="258" width="210" height="100" rx="6" fill="#f0fff4" stroke="#27ae60" stroke-width="1"/>
+  <text x="355" y="277" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e8449">nginx.conf</text>
+  <text x="262" y="295" font-size="9" fill="#555">location / {</text>
+  <text x="262" y="310" font-size="9" fill="#555">  proxy_pass</text>
+  <text x="262" y="325" font-size="9" fill="#c0392b">  http://10.0.1.x:5000;</text>
+  <text x="262" y="340" font-size="9" fill="#555">}</text>
+
+  <!-- ARROW: Nginx to Backend -->
+  <line x1="460" y1="160" x2="548" y2="160" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow-red)"/>
+  <text x="504" y="150" text-anchor="middle" font-size="10" font-weight="bold" fill="#e74c3c">proxy_pass</text>
+  <text x="504" y="174" text-anchor="middle" font-size="10" fill="#e74c3c">:5000</text>
+
+  <!-- PRIVATE SUBNET -->
+  <rect x="550" y="85" width="290" height="300" rx="8" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="695" y="105" text-anchor="middle" font-size="11" font-weight="bold" fill="#f39c12">Private Subnet</text>
+
+  <!-- Backend EC2 box -->
+  <rect x="580" y="118" width="230" height="85" rx="8" fill="#e67e22" stroke="#d35400" stroke-width="2"/>
+  <text x="695" y="147" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Backend EC2</text>
+  <text x="695" y="167" text-anchor="middle" font-size="11" fill="#fdebd0">Python Flask</text>
+  <text x="695" y="184" text-anchor="middle" font-size="10" fill="#fdebd0">Port :5000 (private only)</text>
+
+  <!-- IP labels under Backend box — same Y as Nginx labels -->
+  <text x="695" y="222" text-anchor="middle" font-size="10" fill="#444">No Public IP</text>
+  <text x="695" y="237" text-anchor="middle" font-size="10" fill="#444">Private IP: 10.0.1.x</text>
+
+  <!-- app.py snippet box — same Y as nginx.conf box -->
+  <rect x="580" y="258" width="230" height="100" rx="6" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="695" y="277" text-anchor="middle" font-size="10" font-weight="bold" fill="#d35400">app.py</text>
+  <text x="592" y="295" font-size="9" fill="#555">@app.route('/message')</text>
+  <text x="592" y="310" font-size="9" fill="#555">def hello():</text>
+  <text x="592" y="325" font-size="9" fill="#555">  return "Hello from backend"</text>
+  <text x="592" y="340" font-size="9" fill="#555">Running on port 5000</text>
+
+  <!-- CANNOT REACH dashed line — below both subnet boxes, inside VPC -->
+  <line x1="130" y1="385" x2="860" y2="385" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="490" y="400" text-anchor="middle" font-size="10" fill="#e74c3c">❌  Browser CANNOT reach private IP directly — request comes from outside VPC</text>
+
+  <!-- KEY TAKEAWAY — fully outside VPC box -->
+  <rect x="200" y="445" width="670" height="82" rx="8" fill="#f5f5f5" stroke="#cccccc" stroke-width="1.5"/>
+  <text x="535" y="464" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Key Takeaway</text>
+  <text x="215" y="482" font-size="10" fill="#27ae60">✅  Browser calls Nginx public IP → proxy_pass to backend private IP → response returned</text>
+  <text x="215" y="498" font-size="10" fill="#e74c3c">❌  Browser calls backend private IP directly → blocked, not reachable from outside VPC</text>
+  <text x="215" y="514" font-size="10" fill="#27ae60">✅  Nginx EC2 and Backend EC2 talk freely via private IPs (same VPC, local route)</text>
+
+</svg>
