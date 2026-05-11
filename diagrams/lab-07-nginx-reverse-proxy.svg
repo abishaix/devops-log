@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="560" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <defs>
+    <marker id="ab" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#4a90d9"/></marker>
+    <marker id="ar" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#c0392b"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#7f8c8d"/></marker>
+  </defs>
+
+  <!-- TITLE -->
+  <text x="460" y="34" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">Lab 07 — Nginx Reverse Proxy + Flask DevOps Status Board</text>
+  <text x="460" y="52" text-anchor="middle" font-size="11" fill="#888">ap-south-1 (Mumbai)  |  VPC: 10.0.0.0/16  |  May 11, 2026</text>
+
+  <!-- CLIENT -->
+  <rect x="18" y="120" width="115" height="70" rx="8" fill="#ddeeff" stroke="#4a90d9" stroke-width="2"/>
+  <text x="75" y="148" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a2e">Client</text>
+  <text x="75" y="165" text-anchor="middle" font-size="10" fill="#555">Browser</text>
+  <text x="75" y="180" text-anchor="middle" font-size="9" fill="#4a90d9">Your Laptop</text>
+
+  <!-- Arrow: Client to Nginx -->
+  <line x1="133" y1="155" x2="197" y2="155" stroke="#4a90d9" stroke-width="2" marker-end="url(#ab)"/>
+  <text x="165" y="146" text-anchor="middle" font-size="9" fill="#4a90d9">HTTP :80</text>
+
+  <!-- VPC box: y=65 h=430 bottom=495 -->
+  <rect x="200" y="65" width="695" height="430" rx="12" fill="#f9f9ff" stroke="#9b59b6" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="220" y="85" font-size="12" fill="#9b59b6" font-weight="bold">rp-vpc  (10.0.0.0/16)</text>
+
+  <!-- PUBLIC SUBNET: x=220 y=98 w=285 h=320 bottom=418 -->
+  <rect x="220" y="98" width="285" height="320" rx="8" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="362" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#27ae60">Public Subnet</text>
+  <text x="362" y="130" text-anchor="middle" font-size="9" fill="#27ae60">rp-subnet-public1-ap-south-1a</text>
+
+  <!-- Nginx EC2: y=142 h=85 bottom=227 -->
+  <rect x="248" y="142" width="228" height="85" rx="8" fill="#27ae60" stroke="#1e8449" stroke-width="2"/>
+  <text x="362" y="168" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">nginx-server</text>
+  <text x="362" y="185" text-anchor="middle" font-size="10" fill="#d5f5e3">Nginx Reverse Proxy  |  Port :80</text>
+  <text x="362" y="200" text-anchor="middle" font-size="9" fill="#d5f5e3">Public: 3.108.40.11  |  Private: 10.0.12.155</text>
+
+  <!-- nginx.conf box: y=245 h=115 bottom=360 -->
+  <rect x="248" y="245" width="228" height="130" rx="6" fill="#f0fff4" stroke="#27ae60" stroke-width="1"/>
+  <text x="362" y="263" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e8449">reverse-proxy.conf</text>
+  <text x="260" y="281" font-size="8.5" fill="#555">location /status {</text>
+  <text x="260" y="295" font-size="8.5" fill="#c0392b">  proxy_pass http://10.0.131.56:5000;</text>
+  <text x="260" y="309" font-size="8.5" fill="#555">}</text>
+  <text x="260" y="326" font-size="8.5" fill="#555">location / {</text>
+  <text x="260" y="340" font-size="8.5" fill="#555">  try_files $uri $uri/ =404;</text>
+  <text x="260" y="354" font-size="8.5" fill="#555">}</text>
+
+  <!-- IGW at bottom of public subnet -->
+  <rect x="280" y="388" width="164" height="22" rx="4" fill="#d5f5e3" stroke="#27ae60" stroke-width="1"/>
+  <text x="362" y="403" text-anchor="middle" font-size="9" fill="#1e8449">rp-igw (Internet Gateway)</text>
+
+  <!-- Arrow: Nginx to Backend -->
+  <line x1="476" y1="184" x2="554" y2="184" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <text x="515" y="173" text-anchor="middle" font-size="9" font-weight="bold" fill="#c0392b">proxy_pass</text>
+  <text x="515" y="198" text-anchor="middle" font-size="9" fill="#c0392b">:5000</text>
+
+  <!-- PRIVATE SUBNET: x=560 y=98 w=310 h=320 bottom=418 -->
+  <rect x="560" y="98" width="310" height="320" rx="8" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="715" y="116" text-anchor="middle" font-size="11" font-weight="bold" fill="#f39c12">Private Subnet</text>
+  <text x="715" y="130" text-anchor="middle" font-size="9" fill="#f39c12">rp-subnet-private1-ap-south-1a</text>
+
+  <!-- Flask EC2: y=142 h=85 bottom=227 -->
+  <rect x="588" y="142" width="254" height="85" rx="8" fill="#e67e22" stroke="#d35400" stroke-width="2"/>
+  <text x="715" y="168" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">flask-server</text>
+  <text x="715" y="185" text-anchor="middle" font-size="10" fill="#fdebd0">Python Flask  |  Port :5000</text>
+  <text x="715" y="200" text-anchor="middle" font-size="9" fill="#fdebd0">Private: 10.0.131.56  |  No Public IP</text>
+
+  <!-- app.py box: y=245 h=130 bottom=375 -->
+  <rect x="588" y="245" width="254" height="130" rx="6" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="715" y="263" text-anchor="middle" font-size="10" font-weight="bold" fill="#d35400">app.py — /status route</text>
+  <text x="600" y="281" font-size="8.5" fill="#555">@app.route('/status')</text>
+  <text x="600" y="295" font-size="8.5" fill="#555">def status():</text>
+  <text x="600" y="309" font-size="8.5" fill="#555">  return jsonify({</text>
+  <text x="600" y="323" font-size="8.5" fill="#555">    "hostname": socket.gethostname(),</text>
+  <text x="600" y="337" font-size="8.5" fill="#555">    "backend_status": "healthy",</text>
+  <text x="600" y="351" font-size="8.5" fill="#555">  })</text>
+
+  <!-- NAT Gateway at bottom of private subnet -->
+  <rect x="620" y="388" width="190" height="22" rx="4" fill="#fdebd0" stroke="#f39c12" stroke-width="1"/>
+  <text x="715" y="403" text-anchor="middle" font-size="9" fill="#d35400">rp-regional-nat (NAT Gateway)</text>
+
+  <!-- CANNOT REACH line: y=440 below subnets (end 418) inside VPC (ends 495) -->
+  <line x1="133" y1="440" x2="880" y2="440" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="7,4"/>
+  <text x="507" y="458" text-anchor="middle" font-size="10" fill="#e74c3c">&#10060;  Browser CANNOT reach flask-server directly — no public IP, private subnet only</text>
+
+  <!-- KEY TAKEAWAY: y=510 outside VPC (ends 495) -->
+  <rect x="200" y="510" width="695" height="38" rx="8" fill="#f5f5f5" stroke="#ccc" stroke-width="1.5"/>
+  <text x="270" y="524" font-size="10" fill="#27ae60">&#10003;  Browser &#8594; 3.108.40.11:80 &#8594; Nginx proxy_pass &#8594; 10.0.131.56:5000 &#8594; Flask &#8594; response back</text>
+  <text x="270" y="540" font-size="10" fill="#e74c3c">&#10007;  Browser &#8594; 10.0.131.56 directly &#8594; BLOCKED — private, no public IP, unreachable from internet</text>
+
+</svg>

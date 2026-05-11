@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DevOps Status Board</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #0f1117; color: #e0e0e0; display: flex; justify-content: center; padding: 60px 20px; }
+    .card { background: #1a1d27; border: 1px solid #2e3247; border-radius: 12px; padding: 40px; width: 480px; }
+    h1 { color: #4fc3f7; margin-bottom: 4px; font-size: 22px; }
+    .subtitle { color: #666; font-size: 13px; margin-bottom: 32px; }
+    .row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #2e3247; font-size: 14px; }
+    .label { color: #888; }
+    .value { color: #e0e0e0; font-weight: bold; }
+    .healthy { color: #66bb6a; }
+    .refresh { margin-top: 28px; background: #4fc3f7; color: #0f1117; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; }
+    .refresh:hover { background: #81d4fa; }
+    .last-updated { margin-top: 14px; font-size: 11px; color: #555; text-align: right; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>DevOps Status Board</h1>
+    <p class="subtitle">Private backend health via Nginx reverse proxy</p>
+    <div class="row"><span class="label">Backend Status</span><span class="value healthy" id="status">—</span></div>
+    <div class="row"><span class="label">Hostname</span><span class="value" id="hostname">—</span></div>
+    <div class="row"><span class="label">Private IP</span><span class="value" id="ip">—</span></div>
+    <div class="row"><span class="label">Server Time (UTC)</span><span class="value" id="time">—</span></div>
+    <div class="row"><span class="label">Uptime</span><span class="value" id="uptime">—</span></div>
+    <div class="row"><span class="label">Routed Through</span><span class="value" id="proxy">—</span></div>
+    <button class="refresh" onclick="fetchStatus()">Refresh</button>
+    <p class="last-updated" id="last-updated"></p>
+  </div>
+  <script>
+    function fetchStatus() {
+      fetch('/status')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('status').textContent = data.backend_status.toUpperCase();
+          document.getElementById('hostname').textContent = data.hostname;
+          document.getElementById('ip').textContent = data.private_ip;
+          document.getElementById('time').textContent = data.server_time;
+          document.getElementById('uptime').textContent = data.uptime_minutes + ' minutes';
+          document.getElementById('proxy').textContent = data.routed_through;
+          document.getElementById('last-updated').textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+        })
+        .catch(() => {
+          document.getElementById('status').textContent = 'UNREACHABLE';
+          document.getElementById('status').style.color = '#ef5350';
+        });
+    }
+    fetchStatus();
+  </script>
+</body>
+</html>

@@ -15,7 +15,17 @@ Personal documentation of AWS and DevOps hands-on practice.
 | 5 | TCP/UDP, CIDR, Subnet Math | ✅ | ✅ |
 | 6 | EC2, IGW, Route Table, SSH | ✅ | ✅ |
 | 7–20 | (in progress) | ⬜ | ⬜ |
-| 21 | Nginx Reverse Proxy, Frontend/Backend Architecture | ✅ | ⬜ |
+| 21 | Nginx Reverse Proxy, Frontend/Backend Architecture | ✅ | ✅ |
+
+---
+
+## 🔬 Practice Labs
+
+| Lab | Topic | Status |
+|-----|-------|--------|
+| lab-05 | VPC + Networking Basics | ✅ |
+| lab-06 | EC2 + IGW + Route Table + SSH | ✅ |
+| lab-07 | Nginx Reverse Proxy + Flask DevOps Status Board | ✅ |
 
 ---
 
@@ -34,11 +44,20 @@ devops-log/
 │   └── day-21-nginx-reverse-proxy.md
 ├── practice-logs/
 │   ├── lab-05-vpc-networking-basics.md
-│   └── lab-06-ec2-igw-route-table.md
+│   ├── lab-06-ec2-igw-route-table.md
+│   └── lab-07-nginx-reverse-proxy-flask.md
+├── projects/
+│   └── lab-07-nginx-reverse-proxy/
+│       ├── app.py
+│       ├── reverse-proxy.conf
+│       └── index.html
+├── diagrams/
+│   ├── day-21-nginx-reverse-proxy.svg
+│   └── lab-07-nginx-reverse-proxy.svg
 ├── screenshots/
 │   ├── lab-05/
-│   └── lab-06/
-├── projects/
+│   ├── lab-06/
+│   └── lab-07/
 └── cheatsheets/
     ├── aws-cli-commands.md
     ├── cidr-reference.md
