@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#222">Three-Tier Architecture with Reverse Proxy</text>
+  <text x="450" y="50" text-anchor="middle" font-size="12" fill="#666">Browser → Frontend → Reverse Proxy → Backend → Database</text>
+
+  <!-- ============ INTERNET / CLIENT ============ -->
+  <rect x="30" y="80" width="160" height="100" rx="8" fill="#fff8e1" stroke="#f39c12" stroke-width="2"/>
+  <text x="110" y="105" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">CLIENT BROWSER</text>
+  <text x="110" y="125" text-anchor="middle" font-size="10" fill="#555">User's laptop</text>
+  <text x="110" y="140" text-anchor="middle" font-size="10" fill="#555">(outside VPC)</text>
+  <text x="110" y="160" text-anchor="middle" font-size="10" fill="#888">Runs HTML/CSS/JS</text>
+
+  <!-- ============ VPC ============ -->
+  <rect x="220" y="80" width="650" height="500" rx="10" fill="none" stroke="#4a90d9" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="240" y="100" font-size="11" font-weight="bold" fill="#4a90d9">VPC — 10.0.0.0/16</text>
+
+  <!-- ============ PUBLIC SUBNET ============ -->
+  <rect x="240" y="115" width="280" height="380" rx="8" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1.5"/>
+  <text x="380" y="135" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a5490">PUBLIC SUBNET</text>
+  <text x="380" y="150" text-anchor="middle" font-size="10" fill="#555">10.0.1.0/24 — has IGW route</text>
+
+  <!-- Frontend Server -->
+  <rect x="260" y="170" width="240" height="120" rx="6" fill="#ffffff" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="380" y="190" text-anchor="middle" font-size="11" font-weight="bold" fill="#222">Frontend Server (EC2)</text>
+  <text x="380" y="208" text-anchor="middle" font-size="10" fill="#666">Public IP: 13.x.x.x</text>
+  <text x="380" y="222" text-anchor="middle" font-size="10" fill="#666">Private IP: 10.0.1.10</text>
+  <rect x="275" y="235" width="210" height="45" rx="4" fill="#f5f5f5"/>
+  <text x="285" y="250" font-size="9" fill="#333">Serves: index.html</text>
+  <text x="285" y="263" font-size="9" fill="#333">CSS / JS (static content)</text>
+  <text x="285" y="276" font-size="9" fill="#333">Port: 80</text>
+
+  <!-- Reverse Proxy -->
+  <rect x="260" y="310" width="240" height="160" rx="6" fill="#ffffff" stroke="#8e44ad" stroke-width="1.5"/>
+  <text x="380" y="330" text-anchor="middle" font-size="11" font-weight="bold" fill="#222">Reverse Proxy (Nginx)</text>
+  <text x="380" y="346" text-anchor="middle" font-size="10" fill="#666">Same EC2 or separate</text>
+  <rect x="275" y="358" width="210" height="100" rx="4" fill="#f5f5f5"/>
+  <text x="285" y="373" font-size="9" fill="#333">location /api/ {</text>
+  <text x="285" y="386" font-size="9" fill="#333">  proxy_pass</text>
+  <text x="285" y="399" font-size="9" fill="#333">    http://10.0.2.20:3000;</text>
+  <text x="285" y="412" font-size="9" fill="#333">}</text>
+  <text x="285" y="432" font-size="9" fill="#8e44ad">Hides backend's</text>
+  <text x="285" y="445" font-size="9" fill="#8e44ad">private IP from browser</text>
+
+  <!-- ============ PRIVATE SUBNET ============ -->
+  <rect x="540" y="115" width="310" height="380" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+  <text x="695" y="135" text-anchor="middle" font-size="12" font-weight="bold" fill="#922">PRIVATE SUBNET</text>
+  <text x="695" y="150" text-anchor="middle" font-size="10" fill="#555">10.0.2.0/24 — no IGW</text>
+
+  <!-- Backend Server -->
+  <rect x="560" y="170" width="270" height="160" rx="6" fill="#ffffff" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="695" y="190" text-anchor="middle" font-size="11" font-weight="bold" fill="#222">Backend Server (EC2)</text>
+  <text x="695" y="208" text-anchor="middle" font-size="10" fill="#666">Private IP: 10.0.2.20</text>
+  <text x="695" y="222" text-anchor="middle" font-size="10" fill="#666">No public IP</text>
+  <rect x="575" y="235" width="240" height="90" rx="4" fill="#f5f5f5"/>
+  <text x="585" y="250" font-size="9" fill="#333">app.py (Flask)</text>
+  <text x="585" y="263" font-size="9" fill="#333">from flask import Flask</text>
+  <text x="585" y="276" font-size="9" fill="#333">app = Flask(__name__)</text>
+  <text x="585" y="289" font-size="9" fill="#333">@app.route("/orders")</text>
+  <text x="585" y="302" font-size="9" fill="#333">def orders(): ...</text>
+  <text x="585" y="319" font-size="9" font-weight="bold" fill="#e67e22">Listens on port 3000</text>
+
+  <!-- Database -->
+  <rect x="560" y="350" width="270" height="120" rx="6" fill="#ffffff" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="695" y="370" text-anchor="middle" font-size="11" font-weight="bold" fill="#222">Database (RDS / EC2)</text>
+  <text x="695" y="388" text-anchor="middle" font-size="10" fill="#666">Private IP: 10.0.2.30</text>
+  <text x="695" y="402" text-anchor="middle" font-size="10" fill="#666">MySQL — port 3306</text>
+  <rect x="575" y="415" width="240" height="45" rx="4" fill="#f5f5f5"/>
+  <text x="585" y="430" font-size="9" fill="#333">SELECT * FROM orders</text>
+  <text x="585" y="443" font-size="9" fill="#333">WHERE user_id = ?</text>
+  <text x="585" y="456" font-size="9" fill="#666">Only backend can reach it</text>
+
+  <!-- ============ ARROWS ============ -->
+  <!-- Browser → Frontend (request) -->
+  <line x1="190" y1="130" x2="258" y2="200" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="200" y="160" font-size="9" fill="#27ae60">1. GET /</text>
+
+  <!-- Frontend → Browser (HTML response) -->
+  <line x1="258" y1="220" x2="190" y2="150" stroke="#27ae60" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="200" y="180" font-size="9" fill="#27ae60">2. HTML/CSS/JS</text>
+
+  <!-- Browser → Reverse proxy (API call) -->
+  <line x1="190" y1="160" x2="258" y2="390" stroke="#8e44ad" stroke-width="2" marker-end="url(#arrow2)"/>
+  <text x="195" y="280" font-size="9" fill="#8e44ad">3. /api/orders</text>
+
+  <!-- Reverse proxy → Backend -->
+  <line x1="500" y1="390" x2="558" y2="250" stroke="#e67e22" stroke-width="2" marker-end="url(#arrow3)"/>
+  <text x="510" y="320" font-size="9" fill="#e67e22">4. proxy_pass</text>
+
+  <!-- Backend → Database -->
+  <line x1="695" y1="330" x2="695" y2="350" stroke="#2980b9" stroke-width="2" marker-end="url(#arrow4)"/>
+  <text x="705" y="345" font-size="9" fill="#2980b9">5. SQL query</text>
+
+  <!-- ============ KEY TAKEAWAY ============ -->
+  <rect x="30" y="520" width="840" height="80" rx="8" fill="#f5f5f5" stroke="#ccc" stroke-width="1"/>
+  <text x="450" y="540" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">Key Takeaways</text>
+  <text x="45" y="558" font-size="10" fill="#27ae60">✓  Frontend serves static content (HTML/CSS/JS) — runs in browser</text>
+  <text x="45" y="573" font-size="10" fill="#8e44ad">✓  Reverse proxy hides backend private IP — browser never knows where Flask actually lives</text>
+  <text x="45" y="588" font-size="10" fill="#e74c3c">✗  Never put backend private IP (10.0.2.20:3000) directly in frontend JS — browser can't reach private IPs</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#27ae60"/>
+    </marker>
+    <marker id="arrow2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8e44ad"/>
+    </marker>
+    <marker id="arrow3" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e67e22"/>
+    </marker>
+    <marker id="arrow4" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2980b9"/>
+    </marker>
+  </defs>
+
+</svg>
