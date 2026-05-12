@@ -16,6 +16,7 @@ Personal documentation of AWS and DevOps hands-on practice.
 | 6 | EC2, IGW, Route Table, SSH | ✅ | ✅ |
 | 7–20 | (in progress) | ⬜ | ⬜ |
 | 21 | Nginx Reverse Proxy, Frontend/Backend Architecture | ✅ | ✅ |
+| 22 | Three-Tier Architecture, Python Backend, pip | ✅ | ✅ |
 
 ---
 
@@ -26,6 +27,7 @@ Personal documentation of AWS and DevOps hands-on practice.
 | lab-05 | VPC + Networking Basics | ✅ |
 | lab-06 | EC2 + IGW + Route Table + SSH | ✅ |
 | lab-07 | Nginx Reverse Proxy + Flask DevOps Status Board | ✅ |
+| lab-08 | Nginx Reverse Proxy + Flask Backend (Two-Tier) | ✅ |
 
 ---
 
@@ -41,11 +43,13 @@ devops-log/
 │   ├── day-04-security-groups-ports.md
 │   ├── day-05-tcp-udp-cidr.md
 │   ├── day-06-ec2-igw-route-table.md
-│   └── day-21-nginx-reverse-proxy.md
+│   ├── day-21-nginx-reverse-proxy.md
+│   └── day-22-three-tier-architecture-pip.md
 ├── practice-logs/
 │   ├── lab-05-vpc-networking-basics.md
 │   ├── lab-06-ec2-igw-route-table.md
-│   └── lab-07-nginx-reverse-proxy-flask.md
+│   ├── lab-07-nginx-reverse-proxy-flask.md
+│   └── lab-08-nginx-reverse-proxy-flask.md
 ├── projects/
 │   └── lab-07-nginx-reverse-proxy/
 │       ├── app.py
@@ -53,11 +57,13 @@ devops-log/
 │       └── index.html
 ├── diagrams/
 │   ├── day-21-nginx-reverse-proxy.svg
-│   └── lab-07-nginx-reverse-proxy.svg
+│   ├── day-22-three-tier-architecture.svg
+│   └── lab-08-nginx-reverse-proxy.svg
 ├── screenshots/
 │   ├── lab-05/
 │   ├── lab-06/
-│   └── lab-07/
+│   ├── lab-07/
+│   └── lab-08/
 └── cheatsheets/
     ├── aws-cli-commands.md
     ├── cidr-reference.md

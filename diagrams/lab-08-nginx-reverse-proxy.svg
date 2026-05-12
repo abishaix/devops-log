@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="950" height="680" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="475" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#222">Lab 08 — Nginx Reverse Proxy + Flask Backend</text>
+  <text x="475" y="50" text-anchor="middle" font-size="12" fill="#666">Two-Tier Architecture on AWS | ap-south-1 (Mumbai)</text>
+
+  <!-- ============ USER ============ -->
+  <rect x="20" y="200" width="130" height="100" rx="8" fill="#fff8e1" stroke="#f39c12" stroke-width="2"/>
+  <text x="85" y="228" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">👤 User</text>
+  <text x="85" y="245" text-anchor="middle" font-size="9" fill="#666">Browser on laptop</text>
+  <text x="85" y="260" text-anchor="middle" font-size="9" fill="#666">(outside VPC)</text>
+  <text x="85" y="280" text-anchor="middle" font-size="9" fill="#c0392b">Cannot reach</text>
+  <text x="85" y="292" text-anchor="middle" font-size="9" fill="#c0392b">private IPs</text>
+
+  <!-- ============ IGW ============ -->
+  <rect x="175" y="225" width="70" height="50" rx="6" fill="#ffeaa7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="210" y="248" text-anchor="middle" font-size="10" font-weight="bold" fill="#222">IGW</text>
+  <text x="210" y="262" text-anchor="middle" font-size="8" fill="#666">rpx-igw</text>
+
+  <!-- ============ VPC ============ -->
+  <rect x="265" y="70" width="660" height="540" rx="10" fill="none" stroke="#4a90d9" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="280" y="90" font-size="11" font-weight="bold" fill="#4a90d9">VPC — rpx-vpc — 10.0.0.0/16</text>
+
+  <!-- ============ PUBLIC SUBNET (AZ 1a) ============ -->
+  <rect x="285" y="105" width="300" height="480" rx="8" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1.5"/>
+  <text x="435" y="125" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a5490">PUBLIC SUBNET — AZ 1a</text>
+  <text x="435" y="140" text-anchor="middle" font-size="9" fill="#555">rpx-subnet-public1-ap-south-1a</text>
+
+  <!-- Route Table label -->
+  <rect x="300" y="150" width="270" height="28" rx="4" fill="#dfe6e9"/>
+  <text x="435" y="169" text-anchor="middle" font-size="9" fill="#333">Route Table: rpx-rtb-public | 0.0.0.0/0 → IGW</text>
+
+  <!-- nginx-rpx EC2 -->
+  <rect x="300" y="190" width="270" height="250" rx="6" fill="#ffffff" stroke="#27ae60" stroke-width="2"/>
+  <text x="435" y="212" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">nginx-rpx (EC2)</text>
+  <text x="435" y="228" text-anchor="middle" font-size="9" fill="#27ae60">Public: 13.126.130.73</text>
+  <text x="435" y="242" text-anchor="middle" font-size="9" fill="#666">Private: 10.0.25.213</text>
+  <text x="435" y="256" text-anchor="middle" font-size="9" fill="#888">t3.micro | Amazon Linux 2023</text>
+
+  <!-- SG label -->
+  <rect x="310" y="268" width="250" height="28" rx="4" fill="#e8f8e8"/>
+  <text x="435" y="286" text-anchor="middle" font-size="9" fill="#27ae60">SG: rpx-sg-01 | Inbound: 80 (all), 22 (all)</text>
+
+  <!-- Static content box -->
+  <rect x="310" y="304" width="250" height="50" rx="4" fill="#f5f5f5"/>
+  <text x="320" y="320" font-size="9" font-weight="bold" fill="#333">Static Content (port 80)</text>
+  <text x="320" y="334" font-size="9" fill="#666">index.html — DevOps Playground UI</text>
+  <text x="320" y="348" font-size="9" fill="#666">CSS / JS served to browser</text>
+
+  <!-- Reverse proxy box -->
+  <rect x="310" y="362" width="250" height="68" rx="4" fill="#f5eef9"/>
+  <text x="320" y="378" font-size="9" font-weight="bold" fill="#8e44ad">Reverse Proxy (nginx)</text>
+  <text x="320" y="392" font-size="9" fill="#8e44ad">location /api/ {</text>
+  <text x="320" y="406" font-size="9" fill="#8e44ad">  proxy_pass http://10.0.132.148:5000;</text>
+  <text x="320" y="420" font-size="9" fill="#8e44ad">}</text>
+
+  <!-- ============ PRIVATE SUBNET (AZ 1a) ============ -->
+  <rect x="605" y="105" width="300" height="320" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+  <text x="755" y="125" text-anchor="middle" font-size="11" font-weight="bold" fill="#922">PRIVATE SUBNET — AZ 1a</text>
+  <text x="755" y="140" text-anchor="middle" font-size="9" fill="#555">rpx-subnet-private1-ap-south-1a</text>
+
+  <!-- No IGW label -->
+  <rect x="620" y="150" width="270" height="28" rx="4" fill="#fce4e4"/>
+  <text x="755" y="169" text-anchor="middle" font-size="9" fill="#c0392b">No IGW route — no internet access</text>
+
+  <!-- backend-server EC2 -->
+  <rect x="620" y="190" width="270" height="220" rx="6" fill="#ffffff" stroke="#e67e22" stroke-width="2"/>
+  <text x="755" y="212" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">backend-server (EC2)</text>
+  <text x="755" y="228" text-anchor="middle" font-size="9" fill="#c0392b">No public IP</text>
+  <text x="755" y="242" text-anchor="middle" font-size="9" fill="#666">Private: 10.0.132.148</text>
+  <text x="755" y="256" text-anchor="middle" font-size="9" fill="#888">t3.micro | Amazon Linux 2023</text>
+
+  <!-- SG label -->
+  <rect x="630" y="268" width="250" height="28" rx="4" fill="#fef3e8"/>
+  <text x="755" y="286" text-anchor="middle" font-size="9" fill="#e67e22">SG: rpx-private-sg | 5000 from rpx-sg-01, 22 from rpx-sg-01</text>
+
+  <!-- Flask app box -->
+  <rect x="630" y="304" width="250" height="96" rx="4" fill="#f5f5f5"/>
+  <text x="640" y="320" font-size="9" font-weight="bold" fill="#333">Flask App (port 5000)</text>
+  <text x="640" y="336" font-size="9" fill="#333">app.py — 3 endpoints:</text>
+  <text x="640" y="350" font-size="9" fill="#e67e22">  /api/message  → JSON greeting</text>
+  <text x="640" y="364" font-size="9" fill="#e67e22">  /api/time     → server timestamp</text>
+  <text x="640" y="378" font-size="9" fill="#e67e22">  /api/health   → status + port</text>
+  <text x="640" y="394" font-size="9" fill="#666">requirements.txt → flask</text>
+
+  <!-- ============ DATABASE (future) ============ -->
+  <rect x="605" y="440" width="300" height="60" rx="8" fill="#f5f5f5" stroke="#bdc3c7" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="755" y="465" text-anchor="middle" font-size="10" fill="#bdc3c7">database (EC2) — 10.0.148.48</text>
+  <text x="755" y="480" text-anchor="middle" font-size="9" fill="#bdc3c7">MySQL — future lab (not used today)</text>
+
+  <!-- ============ ARROWS ============ -->
+  <!-- User → IGW -->
+  <line x1="150" y1="250" x2="175" y2="250" stroke="#27ae60" stroke-width="2" marker-end="url(#ag)"/>
+  <text x="145" y="240" font-size="8" fill="#27ae60">HTTP :80</text>
+
+  <!-- IGW → nginx -->
+  <line x1="245" y1="250" x2="300" y2="250" stroke="#27ae60" stroke-width="2" marker-end="url(#ag)"/>
+
+  <!-- nginx proxy_pass → backend -->
+  <line x1="570" y1="390" x2="620" y2="350" stroke="#8e44ad" stroke-width="2.5" marker-end="url(#ap)"/>
+  <text x="572" y="385" font-size="9" font-weight="bold" fill="#8e44ad">proxy_pass :5000</text>
+
+  <!-- BLOCKED: User direct to backend -->
+  <line x1="150" y1="290" x2="620" y2="350" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#ar)"/>
+  <text x="350" y="340" font-size="9" font-weight="bold" fill="#e74c3c">✗ BLOCKED — browser can't reach private IP</text>
+
+  <!-- ============ KEY TAKEAWAY ============ -->
+  <rect x="265" y="530" width="660" height="70" rx="8" fill="#f5f5f5" stroke="#ccc" stroke-width="1"/>
+  <text x="595" y="550" text-anchor="middle" font-size="11" font-weight="bold" fill="#222">What This Lab Proved</text>
+  <text x="280" y="567" font-size="10" fill="#27ae60">✓  Browser → nginx (public) → proxy_pass → Flask (private) → JSON response back. Full chain works.</text>
+  <text x="280" y="583" font-size="10" fill="#e74c3c">✗  Browser → Flask private IP directly → connection times out. Browser is outside VPC, can't reach 10.x.x.x.</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="ag" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#27ae60"/>
+    </marker>
+    <marker id="ap" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8e44ad"/>
+    </marker>
+    <marker id="ar" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c"/>
+    </marker>
+  </defs>
+
+</svg>
