@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#222">S3 Cross-Region Replication</text>
+  <text x="450" y="50" text-anchor="middle" font-size="12" fill="#666">Async one-way backup — region-level disaster recovery</text>
+
+  <!-- ============ REGION 1 (Source) ============ -->
+  <rect x="30" y="80" width="380" height="340" rx="10" fill="#e8f4fd" stroke="#4a90d9" stroke-width="2"/>
+  <text x="220" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a5490">US-EAST-1 (N. Virginia)</text>
+
+  <!-- Source bucket -->
+  <rect x="60" y="125" width="320" height="200" rx="8" fill="#ffffff" stroke="#e67e22" stroke-width="2"/>
+  <text x="220" y="150" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">🪣 Source Bucket</text>
+  <text x="220" y="168" text-anchor="middle" font-size="10" fill="#666">my-app-source-bucket</text>
+
+  <!-- Versioning badge -->
+  <rect x="140" y="180" width="160" height="24" rx="12" fill="#27ae60"/>
+  <text x="220" y="196" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">✓ Versioning ENABLED</text>
+
+  <!-- Objects -->
+  <rect x="80" y="215" width="280" height="96" rx="4" fill="#f5f5f5"/>
+  <text x="95" y="233" font-size="10" fill="#333">📄 terraform.tfstate     v3</text>
+  <text x="95" y="250" font-size="10" fill="#333">📄 app.py                v2</text>
+  <text x="95" y="267" font-size="10" fill="#333">📄 config.json           v1</text>
+  <text x="95" y="284" font-size="10" fill="#c0392b" text-decoration="line-through">📄 old-file.txt          (deleted)</text>
+  <text x="95" y="300" font-size="9" fill="#888">Stored across 3+ AZs automatically</text>
+
+  <!-- AZ boxes -->
+  <rect x="60" y="340" width="96" height="55" rx="4" fill="#dfe6e9" stroke="#b2bec3" stroke-width="1"/>
+  <text x="108" y="360" text-anchor="middle" font-size="9" font-weight="bold" fill="#636e72">AZ 1a</text>
+  <text x="108" y="375" text-anchor="middle" font-size="8" fill="#888">Replica</text>
+
+  <rect x="172" y="340" width="96" height="55" rx="4" fill="#dfe6e9" stroke="#b2bec3" stroke-width="1"/>
+  <text x="220" y="360" text-anchor="middle" font-size="9" font-weight="bold" fill="#636e72">AZ 1b</text>
+  <text x="220" y="375" text-anchor="middle" font-size="8" fill="#888">Replica</text>
+
+  <rect x="284" y="340" width="96" height="55" rx="4" fill="#dfe6e9" stroke="#b2bec3" stroke-width="1"/>
+  <text x="332" y="360" text-anchor="middle" font-size="9" font-weight="bold" fill="#636e72">AZ 1c</text>
+  <text x="332" y="375" text-anchor="middle" font-size="8" fill="#888">Replica</text>
+
+  <text x="220" y="410" text-anchor="middle" font-size="9" fill="#27ae60">↑ AWS handles AZ-level HA automatically</text>
+
+  <!-- ============ REGION 2 (Destination) ============ -->
+  <rect x="490" y="80" width="380" height="340" rx="10" fill="#fdecea" stroke="#c0392b" stroke-width="2"/>
+  <text x="680" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#922">US-WEST-2 (Oregon)</text>
+
+  <!-- Destination bucket -->
+  <rect x="520" y="125" width="320" height="200" rx="8" fill="#ffffff" stroke="#8e44ad" stroke-width="2"/>
+  <text x="680" y="150" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">🪣 Destination Bucket</text>
+  <text x="680" y="168" text-anchor="middle" font-size="10" fill="#666">my-app-replica-bucket</text>
+
+  <!-- Versioning badge -->
+  <rect x="600" y="180" width="160" height="24" rx="12" fill="#27ae60"/>
+  <text x="680" y="196" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">✓ Versioning ENABLED</text>
+
+  <!-- Objects (replicated) -->
+  <rect x="540" y="215" width="280" height="96" rx="4" fill="#f5f5f5"/>
+  <text x="555" y="233" font-size="10" fill="#333">📄 terraform.tfstate     v3</text>
+  <text x="555" y="250" font-size="10" fill="#333">📄 app.py                v2</text>
+  <text x="555" y="267" font-size="10" fill="#333">📄 config.json           v1</text>
+  <text x="555" y="284" font-size="10" fill="#27ae60">📄 old-file.txt          (still here!)</text>
+  <text x="555" y="300" font-size="9" fill="#888">Delete from source ≠ delete from destination</text>
+
+  <!-- Region down scenario -->
+  <rect x="520" y="340" width="320" height="55" rx="4" fill="#fff3cd" stroke="#f39c12" stroke-width="1"/>
+  <text x="680" y="360" text-anchor="middle" font-size="10" font-weight="bold" fill="#e67e22">If US-EAST-1 goes down:</text>
+  <text x="680" y="378" text-anchor="middle" font-size="10" fill="#333">All data safe here. Switch to this bucket.</text>
+
+  <!-- ============ REPLICATION ARROW ============ -->
+  <line x1="380" y1="220" x2="520" y2="220" stroke="#8e44ad" stroke-width="3" marker-end="url(#ap)"/>
+  <rect x="405" y="195" width="90" height="50" rx="6" fill="#f5eef9" stroke="#8e44ad" stroke-width="1"/>
+  <text x="450" y="213" text-anchor="middle" font-size="9" font-weight="bold" fill="#8e44ad">ASYNC</text>
+  <text x="450" y="226" text-anchor="middle" font-size="9" fill="#8e44ad">~10-30s lag</text>
+  <text x="450" y="239" text-anchor="middle" font-size="8" fill="#666">Upload only</text>
+
+  <!-- BLOCKED: delete not replicated -->
+  <line x1="380" y1="280" x2="520" y2="280" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="450" y="273" text-anchor="middle" font-size="9" font-weight="bold" fill="#e74c3c">✗ Deletes NOT</text>
+  <text x="450" y="286" text-anchor="middle" font-size="9" font-weight="bold" fill="#e74c3c">replicated</text>
+
+  <!-- ============ PREREQUISITES BOX ============ -->
+  <rect x="30" y="440" width="840" height="65" rx="8" fill="#f5f5f5" stroke="#ccc" stroke-width="1"/>
+  <text x="450" y="460" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">Replication Prerequisites</text>
+  <text x="50" y="480" font-size="10" fill="#27ae60">✓ Source bucket versioning must be ENABLED</text>
+  <text x="350" y="480" font-size="10" fill="#27ae60">✓ Destination bucket versioning must be ENABLED</text>
+  <text x="660" y="480" font-size="10" fill="#8e44ad">✓ IAM role (auto-created)</text>
+  <text x="50" y="496" font-size="10" fill="#666">One-way by default. For bidirectional: create a second rule from destination → source.</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="ap" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8e44ad"/>
+    </marker>
+  </defs>
+
+</svg>
