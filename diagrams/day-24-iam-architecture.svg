@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520" style="background:#ffffff;font-family:Arial,sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="380" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a1a">AWS IAM — Users, Groups, and Policies</text>
+
+  <!-- AWS Account outer container -->
+  <rect x="20" y="48" width="720" height="452" rx="16" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <text x="40" y="72" font-size="12" font-weight="bold" fill="#4a6fa5">AWS Account</text>
+
+  <!-- Root User box -->
+  <rect x="300" y="82" width="160" height="48" rx="8" fill="#fff0e6" stroke="#d97b3a" stroke-width="1.5"/>
+  <text x="380" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#b05a10">Root User</text>
+  <text x="380" y="116" text-anchor="middle" font-size="11" fill="#c07030">Full access — use sparingly</text>
+
+  <!-- Arrow from Root to Admin -->
+  <line x1="380" y1="130" x2="380" y2="152" stroke="#888" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="392" y="147" font-size="10" fill="#888">creates</text>
+
+  <!-- Admin box -->
+  <rect x="310" y="153" width="140" height="40" rx="8" fill="#e8f4e8" stroke="#3a8a4a" stroke-width="1.5"/>
+  <text x="380" y="169" text-anchor="middle" font-size="13" font-weight="bold" fill="#2a6a3a">Admin (IAM)</text>
+  <text x="380" y="183" text-anchor="middle" font-size="10" fill="#3a8a4a">manages users, perms, keys</text>
+
+  <!-- Arrows from Admin to 3 users and 1 group -->
+  <line x1="340" y1="193" x2="130" y2="248" stroke="#888" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="360" y1="193" x2="280" y2="248" stroke="#888" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="400" y1="193" x2="490" y2="248" stroke="#888" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="420" y1="193" x2="620" y2="248" stroke="#888" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- User A -->
+  <rect x="60" y="249" width="140" height="56" rx="8" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1.5"/>
+  <text x="130" y="267" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4a9a">Developer</text>
+  <text x="130" y="281" text-anchor="middle" font-size="10" fill="#3a6abf">console + CLI login</text>
+  <text x="130" y="295" text-anchor="middle" font-size="10" fill="#3a6abf">EC2 access (individual)</text>
+
+  <!-- User B -->
+  <rect x="220" y="249" width="140" height="56" rx="8" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1.5"/>
+  <text x="290" y="267" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4a9a">Tester</text>
+  <text x="290" y="281" text-anchor="middle" font-size="10" fill="#3a6abf">console login</text>
+  <text x="290" y="295" text-anchor="middle" font-size="10" fill="#3a6abf">S3 access (individual)</text>
+
+  <!-- Group box -->
+  <rect x="420" y="249" width="160" height="56" rx="8" fill="#f5eeff" stroke="#7a4abf" stroke-width="1.5" stroke-dasharray="4 2"/>
+  <text x="500" y="267" text-anchor="middle" font-size="12" font-weight="bold" fill="#5a2a9a">Group: DevTeam</text>
+  <text x="500" y="281" text-anchor="middle" font-size="10" fill="#7a4abf">S3 group-level access</text>
+  <text x="500" y="295" text-anchor="middle" font-size="10" fill="#7a4abf">Members: Dev + Tester</text>
+
+  <!-- Operations user -->
+  <rect x="600" y="249" width="130" height="56" rx="8" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1.5"/>
+  <text x="665" y="267" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4a9a">Operations</text>
+  <text x="665" y="281" text-anchor="middle" font-size="10" fill="#3a6abf">CLI login</text>
+  <text x="665" y="295" text-anchor="middle" font-size="10" fill="#3a6abf">VPC + infra access</text>
+
+  <!-- Policy section label -->
+  <text x="40" y="340" font-size="13" font-weight="bold" fill="#333">Policies (permissions)</text>
+
+  <!-- AWS Managed Policy -->
+  <rect x="40" y="352" width="200" height="60" rx="8" fill="#fff8e6" stroke="#c09030" stroke-width="1.5"/>
+  <text x="140" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#8a6010">AWS Managed</text>
+  <text x="140" y="385" text-anchor="middle" font-size="10" fill="#b07020">Pre-built by AWS</text>
+  <text x="140" y="399" text-anchor="middle" font-size="10" fill="#b07020">Full or read-only. Not fine-grained.</text>
+
+  <!-- Customer Managed Policy -->
+  <rect x="270" y="352" width="200" height="60" rx="8" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1.5"/>
+  <text x="370" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a6a2a">Customer Managed</text>
+  <text x="370" y="385" text-anchor="middle" font-size="10" fill="#3a8a4a">You define the policy</text>
+  <text x="370" y="399" text-anchor="middle" font-size="10" fill="#3a8a4a">Fine-grained. Reusable.</text>
+
+  <!-- Inline Policy -->
+  <rect x="500" y="352" width="200" height="60" rx="8" fill="#ffeef0" stroke="#bf3a4a" stroke-width="1.5"/>
+  <text x="600" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a1a2a">Inline</text>
+  <text x="600" y="385" text-anchor="middle" font-size="10" fill="#bf3a4a">Attached to one user only</text>
+  <text x="600" y="399" text-anchor="middle" font-size="10" fill="#bf3a4a">Fine-grained. Not reusable.</text>
+
+  <!-- Login modes section -->
+  <text x="40" y="442" font-size="13" font-weight="bold" fill="#333">Access modes</text>
+  <rect x="40" y="452" width="310" height="36" rx="8" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1"/>
+  <text x="195" y="466" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4a9a">Console</text>
+  <text x="195" y="481" text-anchor="middle" font-size="10" fill="#3a6abf">Browser — username + password (+ MFA)</text>
+
+  <rect x="370" y="452" width="350" height="36" rx="8" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1"/>
+  <text x="545" y="466" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4a9a">CLI</text>
+  <text x="545" y="481" text-anchor="middle" font-size="10" fill="#3a6abf">Terminal — Access Key ID + Secret Access Key</text>
+</svg>
