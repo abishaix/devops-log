@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="540" viewBox="0 0 760 540" style="background:#ffffff;font-family:Arial,sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#3a6abf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#3a8a4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="380" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a1a">AWS Organizations + IAM Identity Center (SSO)</text>
+
+  <!-- ===== AWS Organization outer box ===== -->
+  <rect x="20" y="38" width="720" height="310" rx="12" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <text x="38" y="58" font-size="12" font-weight="bold" fill="#4a6fa5">AWS Organization</text>
+
+  <!-- Management Account -->
+  <rect x="40" y="66" width="200" height="264" rx="10" fill="#e6f0ff" stroke="#3a6abf" stroke-width="2"/>
+  <text x="140" y="86" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4a9a">Management Account</text>
+  <text x="140" y="100" text-anchor="middle" font-size="10" fill="#3a6abf">(your account)</text>
+
+  <!-- IAM Identity Center box inside mgmt -->
+  <rect x="56" y="108" width="168" height="100" rx="8" fill="#fff" stroke="#7a4abf" stroke-width="1.5"/>
+  <text x="140" y="126" text-anchor="middle" font-size="11" font-weight="bold" fill="#5a2a9a">IAM Identity Center</text>
+  <text x="140" y="141" text-anchor="middle" font-size="10" fill="#7a4abf">Users created here</text>
+  <text x="140" y="155" text-anchor="middle" font-size="10" fill="#7a4abf">Permission sets defined</text>
+  <text x="140" y="169" text-anchor="middle" font-size="10" fill="#7a4abf">Account assignments</text>
+  <text x="140" y="183" text-anchor="middle" font-size="10" fill="#7a4abf">SSO portal URL</text>
+  <text x="140" y="197" text-anchor="middle" font-size="10" fill="#7a4abf">STS temp credentials</text>
+
+  <!-- Permission sets inside mgmt -->
+  <rect x="56" y="216" width="168" height="96" rx="8" fill="#f5eeff" stroke="#7a4abf" stroke-width="1"/>
+  <text x="140" y="232" text-anchor="middle" font-size="10" font-weight="bold" fill="#5a2a9a">Permission Sets</text>
+  <text x="68" y="248" font-size="10" fill="#7a4abf">→ PowerUserAccess (Dev)</text>
+  <text x="68" y="262" font-size="10" fill="#7a4abf">→ TestAccess (QA)</text>
+  <text x="68" y="276" font-size="10" fill="#7a4abf">→ ViewerAccess (Audit)</text>
+  <text x="68" y="290" font-size="10" fill="#7a4abf">→ Custom policies</text>
+  <text x="68" y="304" font-size="10" fill="#7a4abf">→ Inline policies</text>
+
+  <!-- Child accounts -->
+  <!-- Dev -->
+  <rect x="270" y="66" width="130" height="70" rx="8" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1.5"/>
+  <text x="335" y="86" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a6a2a">Dev Account</text>
+  <text x="335" y="101" text-anchor="middle" font-size="10" fill="#3a8a4a">PowerUserAccess</text>
+  <text x="335" y="115" text-anchor="middle" font-size="10" fill="#3a8a4a">Child account</text>
+
+  <!-- Test -->
+  <rect x="270" y="152" width="130" height="70" rx="8" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1.5"/>
+  <text x="335" y="172" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a6a2a">Test Account</text>
+  <text x="335" y="187" text-anchor="middle" font-size="10" fill="#3a8a4a">TestAccess</text>
+  <text x="335" y="201" text-anchor="middle" font-size="10" fill="#3a8a4a">Child account</text>
+
+  <!-- Prod -->
+  <rect x="270" y="238" width="130" height="70" rx="8" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1.5"/>
+  <text x="335" y="258" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a6a2a">Prod Account</text>
+  <text x="335" y="273" text-anchor="middle" font-size="10" fill="#3a8a4a">ViewerAccess</text>
+  <text x="335" y="287" text-anchor="middle" font-size="10" fill="#3a8a4a">Child account</text>
+
+  <!-- Arrows from mgmt to child accounts -->
+  <line x1="240" y1="100" x2="270" y2="100" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+  <line x1="240" y1="187" x2="270" y2="187" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+  <line x1="240" y1="273" x2="270" y2="273" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+
+  <!-- User -->
+  <rect x="430" y="66" width="140" height="264" rx="10" fill="#fff8e6" stroke="#c09030" stroke-width="1.5"/>
+  <text x="500" y="86" text-anchor="middle" font-size="12" font-weight="bold" fill="#8a6010">User (Mert)</text>
+  <text x="500" y="100" text-anchor="middle" font-size="10" fill="#b07020">Created in Identity Center</text>
+
+  <rect x="444" y="108" width="112" height="50" rx="6" fill="#fff0d0" stroke="#c09030" stroke-width="1"/>
+  <text x="500" y="124" text-anchor="middle" font-size="10" font-weight="bold" fill="#8a6010">Assignment</text>
+  <text x="500" y="138" text-anchor="middle" font-size="10" fill="#b07020">Dev → PowerUser</text>
+  <text x="500" y="150" text-anchor="middle" font-size="10" fill="#b07020">Test → TestAccess</text>
+
+  <rect x="444" y="166" width="112" height="40" rx="6" fill="#e8f4e8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="500" y="182" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a6a2a">SSO Portal URL</text>
+  <text x="500" y="196" text-anchor="middle" font-size="10" fill="#3a8a4a">One login for all</text>
+
+  <rect x="444" y="214" width="112" height="50" rx="6" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="500" y="230" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a4a9a">STS Token</text>
+  <text x="500" y="244" text-anchor="middle" font-size="10" fill="#3a6abf">Temporary creds</text>
+  <text x="500" y="258" text-anchor="middle" font-size="10" fill="#3a6abf">Rotates every 1hr</text>
+
+  <rect x="444" y="272" width="112" height="40" rx="6" fill="#ffeef0" stroke="#bf3a4a" stroke-width="1"/>
+  <text x="500" y="288" text-anchor="middle" font-size="10" font-weight="bold" fill="#9a1a2a">Never stored in</text>
+  <text x="500" y="302" text-anchor="middle" font-size="10" fill="#bf3a4a">~/.aws/credentials</text>
+
+  <!-- Arrow from user to accounts -->
+  <line x1="400" y1="155" x2="430" y2="155" stroke="#c09030" stroke-width="1.2" marker-end="url(#arr)"/>
+
+  <!-- Right side: comparison + CLI -->
+  <rect x="590" y="66" width="140" height="264" rx="10" fill="#f5f5f5" stroke="#bbb" stroke-width="1"/>
+  <text x="660" y="86" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">vs Switch Role</text>
+
+  <text x="602" y="106" font-size="10" font-weight="bold" fill="#3a8a4a">Identity Center ✅</text>
+  <text x="602" y="120" font-size="10" fill="#555">One user created once</text>
+  <text x="602" y="134" font-size="10" fill="#555">Assign to any account</text>
+  <text x="602" y="148" font-size="10" fill="#555">One SSO URL</text>
+  <text x="602" y="162" font-size="10" fill="#555">Always temporary creds</text>
+  <text x="602" y="176" font-size="10" fill="#555">Scale: 200+ accounts</text>
+
+  <line x1="598" y1="186" x2="722" y2="186" stroke="#ddd" stroke-width="1"/>
+
+  <text x="602" y="202" font-size="10" font-weight="bold" fill="#bf3a4a">Switch Role ⚠️</text>
+  <text x="602" y="216" font-size="10" fill="#555">Role per account</text>
+  <text x="602" y="230" font-size="10" fill="#555">Manual ARN policy</text>
+  <text x="602" y="244" font-size="10" fill="#555">Console only</text>
+  <text x="602" y="258" font-size="10" fill="#555">Small teams only</text>
+
+  <line x1="598" y1="268" x2="722" y2="268" stroke="#ddd" stroke-width="1"/>
+
+  <text x="602" y="284" font-size="10" font-weight="bold" fill="#1a4a9a">CLI SSO login</text>
+  <text x="602" y="298" font-size="10" fill="#555" font-family="monospace">aws configure sso</text>
+  <text x="602" y="312" font-size="10" fill="#555" font-family="monospace">aws sso login</text>
+  <text x="602" y="326" font-size="10" fill="#555" font-family="monospace">--profile dev</text>
+
+  <!-- ===== BOTTOM: Cloud comparison ===== -->
+  <rect x="20" y="362" width="720" height="60" rx="10" fill="#f9f9f9" stroke="#ddd" stroke-width="1"/>
+  <text x="380" y="382" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">SSO Across Cloud Platforms</text>
+
+  <rect x="40" y="390" width="160" height="24" rx="6" fill="#fff8e6" stroke="#c09030" stroke-width="1"/>
+  <text x="120" y="406" text-anchor="middle" font-size="11" fill="#8a6010">AWS → IAM Identity Center</text>
+
+  <rect x="220" y="390" width="160" height="24" rx="6" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="300" y="406" text-anchor="middle" font-size="11" fill="#1a4a9a">Azure → Entra ID</text>
+
+  <rect x="400" y="390" width="160" height="24" rx="6" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="480" y="406" text-anchor="middle" font-size="11" fill="#1a6a2a">GCP → Workspaces</text>
+
+  <rect x="580" y="390" width="140" height="24" rx="6" fill="#f5eeff" stroke="#7a4abf" stroke-width="1"/>
+  <text x="650" y="406" text-anchor="middle" font-size="11" fill="#5a2a9a">3rd Party → Okta</text>
+
+  <!-- ===== BOTTOM 2: Key rule ===== -->
+  <rect x="20" y="436" width="720" height="88" rx="10" fill="#fff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="38" y="456" font-size="12" font-weight="bold" fill="#1a4a9a">How it works end-to-end</text>
+
+  <text x="38" y="474" font-size="11" fill="#333">1. Create AWS Organization → management account is parent</text>
+  <text x="38" y="490" font-size="11" fill="#333">2. Add child accounts (dev/test/prod) — existing accounts need invitation + approval</text>
+  <text x="38" y="506" font-size="11" fill="#333">3. Enable Identity Center → create users, permission sets, assignments</text>
+  <text x="38" y="522" font-size="11" fill="#333">4. User logs in via SSO URL → STS generates temp token → accesses any assigned account</text>
+</svg>
