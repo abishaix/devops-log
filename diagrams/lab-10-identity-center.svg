@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500" style="background:#ffffff;font-family:Arial,sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#3a6abf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#3a8a4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="380" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a1a">IAM Identity Center — Enterprise SSO Lab</text>
+
+  <!-- AWS Organization box -->
+  <rect x="20" y="36" width="720" height="200" rx="12" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <text x="38" y="56" font-size="12" font-weight="bold" fill="#4a6fa5">AWS Organization</text>
+
+  <!-- Management account -->
+  <rect x="40" y="64" width="180" height="154" rx="8" fill="#e6f0ff" stroke="#3a6abf" stroke-width="2"/>
+  <text x="130" y="82" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a4a9a">abi-dev</text>
+  <text x="130" y="96" text-anchor="middle" font-size="10" fill="#3a6abf">Management Account</text>
+
+  <rect x="54" y="104" width="152" height="104" rx="6" fill="#f5eeff" stroke="#7a4abf" stroke-width="1.5"/>
+  <text x="130" y="120" text-anchor="middle" font-size="10" font-weight="bold" fill="#5a2a9a">IAM Identity Center</text>
+  <text x="130" y="134" text-anchor="middle" font-size="10" fill="#7a4abf">3 Permission Sets</text>
+  <text x="130" y="148" text-anchor="middle" font-size="10" fill="#7a4abf">3 Users created</text>
+  <text x="130" y="162" text-anchor="middle" font-size="10" fill="#7a4abf">SSO portal URL</text>
+  <text x="130" y="176" text-anchor="middle" font-size="10" fill="#7a4abf">STS temp credentials</text>
+  <text x="130" y="190" text-anchor="middle" font-size="10" fill="#7a4abf">Rotates every 1 hour</text>
+
+  <!-- Child account -->
+  <rect x="250" y="64" width="150" height="80" rx="8" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1.5"/>
+  <text x="325" y="82" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a6a2a">peer-a account</text>
+  <text x="325" y="97" text-anchor="middle" font-size="10" fill="#3a8a4a">Child account</text>
+  <text x="325" y="111" text-anchor="middle" font-size="10" fill="#3a8a4a">Joined via invitation</text>
+  <text x="325" y="125" text-anchor="middle" font-size="10" fill="#3a8a4a">Explicit approval required</text>
+
+  <!-- Partition error -->
+  <rect x="250" y="158" width="150" height="60" rx="8" fill="#ffeef0" stroke="#bf3a4a" stroke-width="1.5"/>
+  <text x="325" y="176" text-anchor="middle" font-size="10" font-weight="bold" fill="#9a1a2a">peer-b account</text>
+  <text x="325" y="191" text-anchor="middle" font-size="10" fill="#bf3a4a">❌ Partition mismatch</text>
+  <text x="325" y="205" text-anchor="middle" font-size="10" fill="#bf3a4a">Cannot join org</text>
+
+  <!-- Permission sets -->
+  <rect x="430" y="64" width="290" height="154" rx="8" fill="#fff8e6" stroke="#c09030" stroke-width="1.5"/>
+  <text x="575" y="82" text-anchor="middle" font-size="11" font-weight="bold" fill="#8a6010">Permission Sets</text>
+
+  <rect x="444" y="90" width="262" height="36" rx="6" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="575" y="104" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a6a2a">PowerUserAccess</text>
+  <text x="575" y="118" text-anchor="middle" font-size="10" fill="#3a8a4a">Full access except IAM → peer-c</text>
+
+  <rect x="444" y="132" width="262" height="36" rx="6" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="575" y="146" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a4a9a">TestAccess</text>
+  <text x="575" y="160" text-anchor="middle" font-size="10" fill="#3a6abf">ReadOnly — view only → peer-a, peer-b</text>
+
+  <rect x="444" y="174" width="262" height="36" rx="6" fill="#f5eeff" stroke="#7a4abf" stroke-width="1"/>
+  <text x="575" y="188" text-anchor="middle" font-size="10" font-weight="bold" fill="#5a2a9a">ViewerAccess</text>
+  <text x="575" y="202" text-anchor="middle" font-size="10" fill="#7a4abf">ViewOnly — limited → available</text>
+
+  <!-- SSO Login flow -->
+  <rect x="20" y="250" width="720" height="110" rx="10" fill="#f0fff4" stroke="#3a8a4a" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="38" y="270" font-size="11" font-weight="bold" fill="#3a8a4a">SSO Login Flow</text>
+
+  <!-- User -->
+  <circle cx="60" cy="305" r="18" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1.5"/>
+  <text x="60" y="309" text-anchor="middle" font-size="9" fill="#1a4a9a">peer-c</text>
+
+  <line x1="78" y1="305" x2="118" y2="305" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+  <text x="98" y="299" text-anchor="middle" font-size="9" fill="#888">one login</text>
+
+  <rect x="118" y="288" width="110" height="34" rx="6" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="173" y="302" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a6a2a">SSO Portal</text>
+  <text x="173" y="315" text-anchor="middle" font-size="9" fill="#3a8a4a">d-9f67529f61.awsapps</text>
+
+  <line x1="228" y1="305" x2="268" y2="305" stroke="#3a8a4a" stroke-width="1.2" marker-end="url(#arr-green)"/>
+
+  <rect x="268" y="288" width="110" height="34" rx="6" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="323" y="302" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a4a9a">STS Token</text>
+  <text x="323" y="315" text-anchor="middle" font-size="9" fill="#3a6abf">Temp creds 1hr</text>
+
+  <line x1="378" y1="305" x2="418" y2="305" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+
+  <rect x="418" y="288" width="110" height="34" rx="6" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="473" y="302" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a6a2a">abi-dev account</text>
+  <text x="473" y="315" text-anchor="middle" font-size="9" fill="#3a8a4a">PowerUserAccess</text>
+
+  <line x1="528" y1="305" x2="568" y2="305" stroke="#3a8a4a" stroke-width="1.2" marker-end="url(#arr-green)"/>
+
+  <rect x="568" y="275" width="155" height="56" rx="6" fill="#fff0d0" stroke="#c09030" stroke-width="1"/>
+  <text x="645" y="293" text-anchor="middle" font-size="10" font-weight="bold" fill="#8a6010">Result</text>
+  <text x="645" y="307" text-anchor="middle" font-size="10" fill="#3a8a4a">EC2, S3 ✅</text>
+  <text x="645" y="321" text-anchor="middle" font-size="10" fill="#bf3a4a">IAM ❌ blocked</text>
+
+  <!-- Bottom comparison -->
+  <rect x="20" y="374" width="350" height="110" rx="10" fill="#f5eeff" stroke="#7a4abf" stroke-width="1"/>
+  <text x="195" y="394" text-anchor="middle" font-size="11" font-weight="bold" fill="#5a2a9a">Identity Center vs Switch Role</text>
+  <text x="36" y="412" font-size="10" fill="#555">Identity Center: one user, central management,</text>
+  <text x="36" y="426" font-size="10" fill="#555">SSO portal, auto temp credentials, scales to 200+ accounts</text>
+  <text x="36" y="442" font-size="10" fill="#555">Switch Role: manual role per account, ARN policy,</text>
+  <text x="36" y="456" font-size="10" fill="#555">console dropdown, requires pre-existing trust policy</text>
+  <text x="36" y="472" font-size="10" font-weight="bold" fill="#5a2a9a">Identity Center replaces Switch Role at enterprise scale</text>
+
+  <!-- Cleanup order -->
+  <rect x="390" y="374" width="350" height="110" rx="10" fill="#f5f5f5" stroke="#bbb" stroke-width="1"/>
+  <text x="565" y="394" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Cleanup Order</text>
+  <text x="406" y="412" font-size="10" fill="#555">1. Remove user account assignments</text>
+  <text x="406" y="426" font-size="10" fill="#555">2. Delete users</text>
+  <text x="406" y="440" font-size="10" fill="#555">3. Delete permission sets</text>
+  <text x="406" y="454" font-size="10" fill="#555">4. Delete Identity Center instance</text>
+  <text x="406" y="468" font-size="10" fill="#555">5. Remove child accounts from org</text>
+  <text x="406" y="482" font-size="10" fill="#555">6. Terminate any EC2 launched during testing</text>
+</svg>
