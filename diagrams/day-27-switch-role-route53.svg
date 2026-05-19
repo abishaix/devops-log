@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520" style="background:#ffffff;font-family:Arial,sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#3a6abf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#3a8a4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="380" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a1a">Switch Role (Cross-Account) + Route 53 Hosted Zones</text>
+
+  <!-- ===== TOP: Switch Role ===== -->
+  <rect x="20" y="36" width="720" height="210" rx="10" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="36" y="56" font-size="12" font-weight="bold" fill="#4a6fa5">Switch Role — Cross-Account Access</text>
+
+  <!-- Management account -->
+  <rect x="40" y="64" width="150" height="72" rx="8" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1.5"/>
+  <text x="115" y="82" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a4a9a">Management Account</text>
+  <text x="115" y="97" text-anchor="middle" font-size="10" fill="#3a6abf">IAM User (one login)</text>
+  <text x="115" y="111" text-anchor="middle" font-size="10" fill="#3a6abf">Policy with Role ARNs</text>
+  <text x="115" y="125" text-anchor="middle" font-size="10" fill="#3a6abf">sts:AssumeRole</text>
+
+  <!-- Arrow to dev -->
+  <line x1="190" y1="90" x2="258" y2="90" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+  <text x="224" y="84" text-anchor="middle" font-size="9" fill="#888">switch</text>
+
+  <!-- Arrow to test -->
+  <line x1="190" y1="100" x2="258" y2="148" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+
+  <!-- Arrow to prod -->
+  <line x1="190" y1="110" x2="258" y2="206" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+
+  <!-- Dev account -->
+  <rect x="258" y="68" width="130" height="44" rx="8" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1.5"/>
+  <text x="323" y="86" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a6a2a">Dev Account</text>
+  <text x="323" y="100" text-anchor="middle" font-size="10" fill="#3a8a4a">IAM Role + permissions</text>
+
+  <!-- Test account -->
+  <rect x="258" y="126" width="130" height="44" rx="8" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1.5"/>
+  <text x="323" y="144" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a6a2a">Test Account</text>
+  <text x="323" y="158" text-anchor="middle" font-size="10" fill="#3a8a4a">IAM Role + permissions</text>
+
+  <!-- Prod account -->
+  <rect x="258" y="184" width="130" height="44" rx="8" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1.5"/>
+  <text x="323" y="202" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a6a2a">Prod Account</text>
+  <text x="323" y="216" text-anchor="middle" font-size="10" fill="#3a8a4a">IAM Role + permissions</text>
+
+  <!-- Policy snippet -->
+  <rect x="408" y="64" width="316" height="174" rx="8" fill="#f7f7f7" stroke="#ccc" stroke-width="1"/>
+  <text x="424" y="82" font-size="11" font-weight="bold" fill="#333">Policy on management account user</text>
+  <text x="424" y="99"  font-size="10" fill="#888" font-family="monospace">"Action": "sts:AssumeRole",</text>
+  <text x="424" y="114" font-size="10" fill="#888" font-family="monospace">"Resource": [</text>
+  <text x="434" y="129" font-size="10" fill="#1a4abf" font-family="monospace">"arn:aws:iam::DEV_ID:role/dev",</text>
+  <text x="434" y="144" font-size="10" fill="#1a4abf" font-family="monospace">"arn:aws:iam::TEST_ID:role/test",</text>
+  <text x="434" y="159" font-size="10" fill="#1a4abf" font-family="monospace">"arn:aws:iam::PROD_ID:role/prod"</text>
+  <text x="424" y="174" font-size="10" fill="#888" font-family="monospace">]</text>
+  <text x="424" y="196" font-size="10" fill="#777">One user. One login. Switch to any account</text>
+  <text x="424" y="210" font-size="10" fill="#777">via top-right dropdown → Switch Role.</text>
+  <text x="424" y="224" font-size="10" fill="#c03030">Switch Role = IAM users only. Not root.</text>
+
+  <!-- ===== BOTTOM: Route 53 ===== -->
+  <rect x="20" y="258" width="720" height="246" rx="10" fill="#fff8e6" stroke="#c09030" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="36" y="278" font-size="12" font-weight="bold" fill="#8a6010">Route 53 — DNS (port 53) — Hosted Zones</text>
+
+  <!-- Public hosted zone flow -->
+  <rect x="40" y="286" width="330" height="196" rx="8" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="205" y="304" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a4a9a">Public Hosted Zone — External Traffic</text>
+
+  <!-- User icon -->
+  <circle cx="70" cy="345" r="14" fill="#d0e4ff" stroke="#3a6abf" stroke-width="1.5"/>
+  <text x="70" y="349" text-anchor="middle" font-size="10" fill="#1a4a9a">User</text>
+
+  <line x1="84" y1="345" x2="118" y2="345" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+
+  <rect x="118" y="331" width="100" height="28" rx="6" fill="#f0f8ff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="168" y="349" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a4a9a">flipkart.com</text>
+
+  <line x1="218" y1="345" x2="252" y2="345" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+
+  <rect x="252" y="331" width="96" height="28" rx="6" fill="#e8f4e8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="300" y="345" text-anchor="middle" font-size="9" fill="#1a6a2a">Route 53</text>
+  <text x="300" y="356" text-anchor="middle" font-size="9" fill="#1a6a2a">translates →</text>
+
+  <line x1="348" y1="345" x2="348" y2="390" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+
+  <rect x="252" y="390" width="96" height="28" rx="6" fill="#fff0d0" stroke="#c09030" stroke-width="1"/>
+  <text x="300" y="404" text-anchor="middle" font-size="9" fill="#8a6010">ALB DNS URL</text>
+  <text x="300" y="415" text-anchor="middle" font-size="9" fill="#8a6010">→ EC2 servers</text>
+
+  <text x="205" y="450" text-anchor="middle" font-size="10" fill="#3a6abf">Request origin: internet (external)</text>
+  <text x="205" y="464" text-anchor="middle" font-size="10" fill="#888">Domain: purchased from GoDaddy / Namecheap</text>
+  <text x="205" y="478" text-anchor="middle" font-size="10" fill="#888">Pluralsight: hosted zone pre-created in sandbox</text>
+
+  <!-- Private hosted zone flow -->
+  <rect x="390" y="286" width="330" height="196" rx="8" fill="#f5eeff" stroke="#7a4abf" stroke-width="1"/>
+  <text x="555" y="304" text-anchor="middle" font-size="11" font-weight="bold" fill="#5a2a9a">Private Hosted Zone — Internal VPC Traffic</text>
+
+  <!-- VPC box -->
+  <rect x="406" y="316" width="298" height="150" rx="6" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1" stroke-dasharray="4 2"/>
+  <text x="430" y="332" font-size="10" fill="#4a6fa5">Inside VPC</text>
+
+  <!-- Frontend -->
+  <rect x="416" y="340" width="90" height="36" rx="6" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="461" y="356" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a4a9a">Frontend</text>
+  <text x="461" y="368" text-anchor="middle" font-size="9" fill="#3a6abf">EC2 server</text>
+
+  <line x1="506" y1="358" x2="534" y2="358" stroke="#7a4abf" stroke-width="1.2" marker-end="url(#arr)"/>
+  <text x="520" y="352" text-anchor="middle" font-size="9" fill="#7a4abf">backend.com</text>
+
+  <!-- Route 53 internal -->
+  <rect x="534" y="344" width="84" height="28" rx="6" fill="#e8f4e8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="576" y="357" text-anchor="middle" font-size="9" fill="#1a6a2a">Route 53</text>
+  <text x="576" y="368" text-anchor="middle" font-size="9" fill="#1a6a2a">(private zone)</text>
+
+  <line x1="618" y1="358" x2="646" y2="358" stroke="#7a4abf" stroke-width="1.2" marker-end="url(#arr)"/>
+
+  <!-- Internal ALB -->
+  <rect x="646" y="344" width="46" height="28" rx="6" fill="#fff0d0" stroke="#c09030" stroke-width="1"/>
+  <text x="669" y="357" text-anchor="middle" font-size="9" fill="#8a6010">int.</text>
+  <text x="669" y="368" text-anchor="middle" font-size="9" fill="#8a6010">ALB</text>
+
+  <!-- Backend -->
+  <rect x="534" y="400" width="84" height="36" rx="6" fill="#e8f4e8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="576" y="416" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a6a2a">Backend</text>
+  <text x="576" y="428" text-anchor="middle" font-size="9" fill="#3a8a4a">EC2 servers</text>
+
+  <line x1="669" y1="372" x2="618" y2="400" stroke="#7a4abf" stroke-width="1.2" marker-end="url(#arr)"/>
+
+  <text x="555" y="464" text-anchor="middle" font-size="10" fill="#7a4abf">Request origin: inside VPC only</text>
+  <text x="555" y="478" text-anchor="middle" font-size="10" fill="#888">No hardcoded internal ALB URLs in code</text>
+</svg>
