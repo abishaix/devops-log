@@ -151,7 +151,6 @@ Route 53 A record created:
 ![A record created](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/route53-a-record-created.png)
 
 abishaix.com live in browser:
-![abishaix.com live](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/abishaix-site-live.png)
 
 ---
 
