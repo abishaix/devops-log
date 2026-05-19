@@ -13,13 +13,13 @@ A complete end-to-end lab combining IAM permission management and DNS routing. D
 
 ## 🏗️ Architecture Diagrams
 
-**Claude-generated:**
+
 
 ![IAM Groups and Route 53 architecture](../diagrams/lab-route53-iam-groups.svg)
 
-**Hand-drawn:**
 
-![hand-drawn diagram](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/handdrawn.png)
+
+*(Hand-drawn diagram — to be added)*
 
 ---
 

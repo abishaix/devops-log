@@ -15,10 +15,10 @@ On top of the reverse proxy, I built a live DevOps Status Board — an HTML dash
 
 ## 🏗️ Architecture Diagrams
 
-**Hand-drawn:**
+
 ![Hand-drawn Architecture](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-07/nginx-reverse-proxy_drawio.png)
 
-**Claude-generated:**
+
 ![Nginx Reverse Proxy Architecture](../diagrams/lab-07-nginx-reverse-proxy.svg)
 
 ---

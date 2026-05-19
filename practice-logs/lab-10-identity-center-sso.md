@@ -13,13 +13,13 @@ A real enterprise-scale access control setup using AWS IAM Identity Center. Crea
 
 ## 🏗️ Architecture Diagrams
 
-**Claude-generated:**
+
 
 ![IAM Identity Center architecture](../diagrams/lab-10-identity-center.svg)
 
-**Hand-drawn:**
 
-![hand-drawn diagram](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-10/handdrawn.png)
+
+*(Hand-drawn diagram — to be added)*
 
 ---
 

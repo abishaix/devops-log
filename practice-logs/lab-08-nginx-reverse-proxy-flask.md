@@ -13,11 +13,11 @@ Two-tier web application proving why a reverse proxy is required to connect a pu
 
 ## 🏗️ Architecture Diagrams
 
-**Claude-generated:**
+
 
 ![Lab 08 Architecture](../diagrams/lab-08-nginx-reverse-proxy.svg)
 
-**Hand-drawn:**
+
 
 ![Hand-drawn Architecture](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-08/nginx-reverse-proxy-architecture.png)
 
