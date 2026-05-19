@@ -19,7 +19,7 @@ A complete end-to-end lab combining IAM permission management and DNS routing. D
 
 **Hand-drawn:**
 
-![hand-drawn diagram](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-route53-iam-groups/handdrawn.png)
+![hand-drawn diagram](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/handdrawn.png)
 
 ---
 
@@ -127,31 +127,31 @@ Opened `http://abishaix.com` in browser → portfolio site loaded ✅
 ## Screenshots
 
 EC2 instance connected via EC2 Instance Connect:
-![EC2 login](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-route53-iam-groups/ec2-amazon-linux-login.png)
+![EC2 login](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/ec2-amazon-linux-login.png)
 
 Apache installed and enabled:
-![httpd start enable](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-route53-iam-groups/ec2-httpd-start-enable.png)
+![httpd start enable](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/ec2-httpd-start-enable.png)
 
 IAM users created:
-![IAM users list](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-route53-iam-groups/iam-users-list.png)
+![IAM users list](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/iam-users-list.png)
 
 dev-user denied stopping instance:
-![IAM access denied](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-route53-iam-groups/ec2-iam-access-denied.png)
+![IAM access denied](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/ec2-iam-access-denied.png)
 
 ops-user successfully stopped instance:
-![EC2 stop success](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-route53-iam-groups/ec2-instance-stop-success.png)
+![EC2 stop success](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/ec2-instance-stop-success.png)
 
 Route 53 hosted zone with NS records:
-![Route 53 hosted zone](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-route53-iam-groups/route53-hosted-zone-initial.png)
+![Route 53 hosted zone](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/route53-hosted-zone-initial.png)
 
 GoDaddy nameservers updated to AWS:
-![GoDaddy nameservers](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-route53-iam-groups/godaddy-custom-nameservers.png)
+![GoDaddy nameservers](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/godaddy-custom-nameservers.png)
 
 Route 53 A record created:
-![A record created](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-route53-iam-groups/route53-a-record-created.png)
+![A record created](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/route53-a-record-created.png)
 
 abishaix.com live in browser:
-![abishaix.com live](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-route53-iam-groups/abishaix-site-live.png)
+![abishaix.com live](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-09/abishaix-site-live.png)
 
 ---
 
