@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="560" viewBox="0 0 760 560" style="background:#ffffff;font-family:Arial,sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#3a6abf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#3a8a4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#bf3a4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="380" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a1a">Route 53 — Records and Routing Policies</text>
+
+  <!-- ===== Record Types row ===== -->
+  <rect x="20" y="34" width="720" height="72" rx="8" fill="#fff8e6" stroke="#c09030" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="36" y="52" font-size="11" font-weight="bold" fill="#8a6010">DNS Record Types</text>
+
+  <rect x="36" y="58" width="155" height="38" rx="6" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="113" y="73" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a6a2a">A record</text>
+  <text x="113" y="87" text-anchor="middle" font-size="9" fill="#3a8a4a">Domain → IPv4 address</text>
+
+  <rect x="202" y="58" width="155" height="38" rx="6" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="279" y="73" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a4a9a">AAAA record</text>
+  <text x="279" y="87" text-anchor="middle" font-size="9" fill="#3a6abf">Domain → IPv6 address</text>
+
+  <rect x="368" y="58" width="155" height="38" rx="6" fill="#f5eeff" stroke="#7a4abf" stroke-width="1"/>
+  <text x="445" y="73" text-anchor="middle" font-size="10" font-weight="bold" fill="#5a2a9a">Alias record</text>
+  <text x="445" y="87" text-anchor="middle" font-size="9" fill="#7a4abf">Domain → ALB / S3 / CloudFront</text>
+
+  <rect x="534" y="58" width="196" height="38" rx="6" fill="#ffeef0" stroke="#bf3a4a" stroke-width="1"/>
+  <text x="632" y="73" text-anchor="middle" font-size="10" font-weight="bold" fill="#9a1a2a">CNAME record</text>
+  <text x="632" y="87" text-anchor="middle" font-size="9" fill="#bf3a4a">Domain → another domain/endpoint</text>
+
+  <!-- ===== 5 Policies ===== -->
+  <!-- Policy 1: Simple -->
+  <rect x="20" y="118" width="136" height="110" rx="8" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1.5"/>
+  <text x="88" y="136" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a4a9a">1. Simple</text>
+  <text x="88" y="150" text-anchor="middle" font-size="9" fill="#3a6abf">Default policy</text>
+  <text x="88" y="163" text-anchor="middle" font-size="9" fill="#3a6abf">No conditions</text>
+  <text x="88" y="176" text-anchor="middle" font-size="9" fill="#3a6abf">Direct mapping</text>
+  <text x="88" y="191" text-anchor="middle" font-size="9" fill="#3a6abf">1 server min</text>
+  <circle cx="88" cy="212" r="8" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="88" y="216" text-anchor="middle" font-size="8" fill="#1a4a9a">→</text>
+
+  <!-- Policy 2: Latency -->
+  <rect x="166" y="118" width="136" height="110" rx="8" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1.5"/>
+  <text x="234" y="136" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a6a2a">2. Latency</text>
+  <text x="234" y="150" text-anchor="middle" font-size="9" fill="#3a8a4a">Lowest latency wins</text>
+  <text x="234" y="163" text-anchor="middle" font-size="9" fill="#3a8a4a">2 regions min</text>
+  <text x="234" y="176" text-anchor="middle" font-size="9" fill="#3a8a4a">2 LBs required</text>
+  <text x="234" y="191" text-anchor="middle" font-size="9" fill="#3a8a4a">+ health checks</text>
+  <circle cx="234" cy="212" r="8" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="234" y="216" text-anchor="middle" font-size="8" fill="#1a6a2a">↙↗</text>
+
+  <!-- Policy 3: Failover -->
+  <rect x="312" y="118" width="136" height="110" rx="8" fill="#ffeef0" stroke="#bf3a4a" stroke-width="1.5"/>
+  <text x="380" y="136" text-anchor="middle" font-size="10" font-weight="bold" fill="#9a1a2a">3. Failover</text>
+  <text x="380" y="150" text-anchor="middle" font-size="9" fill="#bf3a4a">Primary → Secondary</text>
+  <text x="380" y="163" text-anchor="middle" font-size="9" fill="#bf3a4a">Health checks required</text>
+  <text x="380" y="176" text-anchor="middle" font-size="9" fill="#bf3a4a">2 regions min</text>
+  <text x="380" y="191" text-anchor="middle" font-size="9" fill="#bf3a4a">2 LBs required</text>
+  <circle cx="380" cy="212" r="8" fill="#ffeef0" stroke="#bf3a4a" stroke-width="1"/>
+  <text x="380" y="216" text-anchor="middle" font-size="8" fill="#9a1a2a">1→2</text>
+
+  <!-- Policy 4: Geolocation -->
+  <rect x="458" y="118" width="136" height="110" rx="8" fill="#fff8e6" stroke="#c09030" stroke-width="1.5"/>
+  <text x="526" y="136" text-anchor="middle" font-size="10" font-weight="bold" fill="#8a6010">4. Geolocation</text>
+  <text x="526" y="150" text-anchor="middle" font-size="9" fill="#b07020">Country-based access</text>
+  <text x="526" y="163" text-anchor="middle" font-size="9" fill="#b07020">Allow/restrict origins</text>
+  <text x="526" y="176" text-anchor="middle" font-size="9" fill="#b07020">Multiple rules ok</text>
+  <text x="526" y="191" text-anchor="middle" font-size="9" fill="#b07020">No geo = global</text>
+  <circle cx="526" cy="212" r="8" fill="#fff8e6" stroke="#c09030" stroke-width="1"/>
+  <text x="526" y="216" text-anchor="middle" font-size="8" fill="#8a6010">🌍</text>
+
+  <!-- Policy 5: Weighted -->
+  <rect x="604" y="118" width="136" height="110" rx="8" fill="#f5eeff" stroke="#7a4abf" stroke-width="1.5"/>
+  <text x="672" y="136" text-anchor="middle" font-size="10" font-weight="bold" fill="#5a2a9a">5. Weighted</text>
+  <text x="672" y="150" text-anchor="middle" font-size="9" fill="#7a4abf">Manual % split</text>
+  <text x="672" y="163" text-anchor="middle" font-size="9" fill="#7a4abf">Priority-based</text>
+  <text x="672" y="176" text-anchor="middle" font-size="9" fill="#7a4abf">70/30, 90/10 etc</text>
+  <text x="672" y="191" text-anchor="middle" font-size="9" fill="#7a4abf">A/B testing</text>
+  <circle cx="672" cy="212" r="8" fill="#f5eeff" stroke="#7a4abf" stroke-width="1"/>
+  <text x="672" y="216" text-anchor="middle" font-size="8" fill="#5a2a9a">%</text>
+
+  <!-- ===== Failover deep dive ===== -->
+  <rect x="20" y="242" width="460" height="140" rx="10" fill="#ffeef0" stroke="#bf3a4a" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="36" y="260" font-size="11" font-weight="bold" fill="#9a1a2a">Failover Routing — High Availability Architecture</text>
+
+  <!-- User -->
+  <circle cx="55" cy="320" r="14" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1.5"/>
+  <text x="55" y="316" text-anchor="middle" font-size="9" fill="#1a4a9a">User</text>
+  <text x="55" y="327" text-anchor="middle" font-size="8" fill="#3a6abf">HYD</text>
+
+  <line x1="69" y1="320" x2="105" y2="310" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+
+  <!-- Route 53 -->
+  <rect x="105" y="296" width="80" height="48" rx="6" fill="#fff8e6" stroke="#c09030" stroke-width="1.5"/>
+  <text x="145" y="314" text-anchor="middle" font-size="10" font-weight="bold" fill="#8a6010">Route 53</text>
+  <text x="145" y="327" text-anchor="middle" font-size="9" fill="#b07020">health</text>
+  <text x="145" y="337" text-anchor="middle" font-size="9" fill="#b07020">checks</text>
+
+  <!-- Primary -->
+  <line x1="185" y1="306" x2="225" y2="290" stroke="#3a8a4a" stroke-width="1.2" marker-end="url(#arr-green)"/>
+  <text x="205" y="292" text-anchor="middle" font-size="8" fill="#3a8a4a">primary</text>
+
+  <rect x="225" y="272" width="110" height="44" rx="6" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1.5"/>
+  <text x="280" y="288" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a6a2a">Mumbai LB</text>
+  <text x="280" y="301" text-anchor="middle" font-size="9" fill="#3a8a4a">Primary region</text>
+  <text x="280" y="312" text-anchor="middle" font-size="9" fill="#3a8a4a">EC2 × 2 AZs</text>
+
+  <!-- Secondary -->
+  <line x1="185" y1="328" x2="225" y2="348" stroke="#bf3a4a" stroke-width="1.2" stroke-dasharray="4 2" marker-end="url(#arr-red)"/>
+  <text x="205" y="352" text-anchor="middle" font-size="8" fill="#bf3a4a">failover</text>
+
+  <rect x="225" y="332" width="110" height="44" rx="6" fill="#ffeef0" stroke="#bf3a4a" stroke-width="1.5"/>
+  <text x="280" y="348" text-anchor="middle" font-size="10" font-weight="bold" fill="#9a1a2a">US LB</text>
+  <text x="280" y="361" text-anchor="middle" font-size="9" fill="#bf3a4a">Secondary region</text>
+  <text x="280" y="372" text-anchor="middle" font-size="9" fill="#bf3a4a">Activates on fail</text>
+
+  <!-- Key insight box -->
+  <rect x="352" y="272" width="118" height="104" rx="6" fill="#fff" stroke="#bbb" stroke-width="1"/>
+  <text x="411" y="289" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">HA Coverage</text>
+  <text x="362" y="305" font-size="9" fill="#3a8a4a">LB → AZ level ✅</text>
+  <text x="362" y="319" font-size="9" fill="#3a8a4a">Route 53 → Region ✅</text>
+  <line x1="362" y1="328" x2="460" y2="328" stroke="#ddd" stroke-width="0.8"/>
+  <text x="362" y="343" font-size="9" font-weight="bold" fill="#333">Together:</text>
+  <text x="362" y="357" font-size="9" fill="#5a2a9a">Zone + Region HA</text>
+  <text x="362" y="369" font-size="9" fill="#5a2a9a">fully covered ✅</text>
+
+  <!-- ===== Latency deep dive ===== -->
+  <rect x="494" y="242" width="246" height="140" rx="10" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="510" y="260" font-size="11" font-weight="bold" fill="#1a6a2a">Latency Routing — Nearest Region</text>
+
+  <circle cx="524" cy="320" r="14" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1.5"/>
+  <text x="524" y="316" text-anchor="middle" font-size="9" fill="#1a4a9a">User</text>
+  <text x="524" y="327" text-anchor="middle" font-size="8" fill="#3a6abf">HYD</text>
+
+  <line x1="538" y1="310" x2="570" y2="310" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+
+  <rect x="570" y="296" width="70" height="30" rx="6" fill="#fff8e6" stroke="#c09030" stroke-width="1.5"/>
+  <text x="605" y="315" text-anchor="middle" font-size="9" font-weight="bold" fill="#8a6010">Route 53</text>
+
+  <line x1="640" y1="303" x2="672" y2="280" stroke="#3a8a4a" stroke-width="1.2" marker-end="url(#arr-green)"/>
+  <text x="665" y="275" text-anchor="middle" font-size="8" fill="#3a8a4a">low latency ✅</text>
+  <rect x="672" y="264" width="58" height="24" rx="4" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="701" y="280" text-anchor="middle" font-size="9" fill="#1a6a2a">Mumbai</text>
+
+  <line x1="640" y1="317" x2="672" y2="340" stroke="#bf3a4a" stroke-width="1.2" stroke-dasharray="3 2" marker-end="url(#arr-red)"/>
+  <text x="665" y="362" text-anchor="middle" font-size="8" fill="#bf3a4a">high latency ✗</text>
+  <rect x="672" y="330" width="58" height="24" rx="4" fill="#ffeef0" stroke="#bf3a4a" stroke-width="1"/>
+  <text x="701" y="346" text-anchor="middle" font-size="9" fill="#9a1a2a">US East</text>
+
+  <!-- ===== Bottom: Geolocation + Weighted ===== -->
+  <rect x="20" y="394" width="350" height="80" rx="8" fill="#fff8e6" stroke="#c09030" stroke-width="1"/>
+  <text x="36" y="412" font-size="11" font-weight="bold" fill="#8a6010">Geolocation Policy</text>
+  <text x="36" y="428" font-size="10" fill="#555">India origin → Mumbai servers</text>
+  <text x="36" y="442" font-size="10" fill="#555">US origin → US servers</text>
+  <text x="36" y="456" font-size="10" fill="#555">No policy set → anyone can access (global default)</text>
+  <text x="36" y="468" font-size="10" fill="#bf3a4a">Based on satellite/IP geolocation — not pin code</text>
+
+  <rect x="390" y="394" width="350" height="80" rx="8" fill="#f5eeff" stroke="#7a4abf" stroke-width="1"/>
+  <text x="406" y="412" font-size="11" font-weight="bold" fill="#5a2a9a">Weighted Policy</text>
+  <text x="406" y="428" font-size="10" fill="#555">US: weight 70 → 70% of traffic</text>
+  <text x="406" y="442" font-size="10" fill="#555">Mumbai: weight 30 → 30% of traffic</text>
+  <text x="406" y="456" font-size="10" fill="#555">Use for: A/B testing, gradual rollout</text>
+  <text x="406" y="468" font-size="10" fill="#7a4abf">More weight = more priority = more requests</text>
+
+  <!-- ===== Subdomains note ===== -->
+  <rect x="20" y="486" width="720" height="56" rx="8" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1"/>
+  <text x="36" y="504" font-size="11" font-weight="bold" fill="#1a4a9a">Subdomains — Free and Unlimited</text>
+  <text x="36" y="520" font-size="10" fill="#555">Purchase root domain once →</text>
+  <text x="210" y="520" font-size="10" fill="#3a6abf" font-family="monospace">abishaix.com</text>
+  <text x="310" y="520" font-size="10" fill="#555">  then create any subdomain in Route 53 for free:</text>
+  <text x="36" y="534" font-size="10" fill="#3a6abf" font-family="monospace">api.abishaix.com   dev.abishaix.com   backend.abishaix.com   app.abishaix.com</text>
+</svg>
