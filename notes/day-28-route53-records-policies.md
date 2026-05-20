@@ -37,13 +37,27 @@ Route 53 offers two types:
 | Private Hosted Zone | Internal VPC traffic only | Inside VPC only |
 
 **Public hosted zone setup flow:**
-1. Create hosted zone in Route 53 with your domain name
-2. AWS auto-generates 4 NS (nameserver) records and 1 SOA record
-3. Copy the NS records into your domain registrar (GoDaddy, Namecheap)
-4. Registrar now forwards all DNS requests to Route 53
-5. Create records inside Route 53 to map domain → target
 
-**NS records** authenticate your domain — they tell the internet "Route 53 is responsible for this domain." SOA record handles Route 53's internal cache management. You don't touch SOA — only NS records matter for setup.
+```
+  [GoDaddy / Registrar]
+         │
+         │  1. Create hosted zone in Route 53
+         ▼
+  [Route 53 Hosted Zone]
+         │  2. AWS generates NS records + SOA
+         │
+         │  3. Copy NS records → paste into GoDaddy
+         ▼
+  [GoDaddy NS updated]
+         │  4. All DNS requests now forwarded to Route 53
+         ▼
+  [Route 53 resolves]
+         │  5. Create A / Alias / CNAME records
+         ▼
+  [Traffic reaches EC2 / ALB / S3]
+```
+
+**NS records** authenticate your domain. SOA handles Route 53's internal cache — you never touch it.
 
 ---
 
@@ -54,178 +68,187 @@ Route 53 offers two types:
 | **A** | Map domain to IPv4 address | `abishaix.com → 13.233.162.141` |
 | **AAAA** | Map domain to IPv6 address | `abishaix.com → 2001:db8::1` |
 | **Alias** | Map domain to AWS endpoint | `abishaix.com → ALB DNS URL` |
-| **CNAME** | Map domain to another domain or endpoint | `dev.abishaix.com → abishaix.com` |
+| **CNAME** | Map domain to another domain | `dev.abishaix.com → abishaix.com` |
 
-**A record** — use when pointing to a raw IP address (EC2 public IP). Issue: IP changes on EC2 restart. Fix with Elastic IP.
+```
+  Which record do I need?
+  ─────────────────────────────────────────────
+  Pointing to EC2 IP?          →  A record
+  Pointing to ALB / S3 / CF?   →  Alias record
+  Pointing to another domain?  →  CNAME record
+  Pointing to IPv6?            →  AAAA record
+  ─────────────────────────────────────────────
+  ⚠️  CNAME cannot be used at root domain apex
+      Use Alias there instead
+```
 
-**Alias record** — use when pointing to an AWS resource (Load Balancer URL, S3 static website, CloudFront). AWS manages the underlying IP — you never need to update it. Alias is preferred over A record for AWS endpoints.
+**A record** — raw IP. Issue: IP changes on EC2 restart. Fix with Elastic IP.
 
-**CNAME record** — map one domain name to another. Common use: all subdomains redirect to the root domain.
+**Alias record** — AWS manages the IP behind it. Preferred for all AWS endpoints.
+
+**CNAME** — common use: redirect all subdomains to root.
 - `dev.flipkart.com` → `flipkart.com`
-- `test.flipkart.com` → `flipkart.com`
 - `api.flipkart.com` → `flipkart.com`
-
-**Important:** CNAME cannot be used at the root domain (apex). Use Alias for that.
 
 ---
 
 ### Subdomains
 
-You only need to purchase and register the **root domain**. Subdomains are free and unlimited.
+You only need to purchase the **root domain**. Subdomains are free and unlimited.
 
 ```
-abishaix.com           ← purchased, registered
-api.abishaix.com       ← free, create a record in Route 53
-dev.abishaix.com       ← free, create a record in Route 53
-backend.abishaix.com   ← free, create a record in Route 53
+  abishaix.com              ← purchase this once
+  ├── api.abishaix.com      ← free — create record in Route 53
+  ├── dev.abishaix.com      ← free — create record in Route 53
+  ├── backend.abishaix.com  ← free — create record in Route 53
+  └── app.abishaix.com      ← free — create record in Route 53
+
+  Each subdomain can point to a different IP, LB, or endpoint.
+  No registration. No extra cost.
 ```
-
-Each subdomain can point to a different IP, load balancer, or endpoint. No registration needed — just create the record.
-
-Real-world example: Walmart
-- `walmart.com` → main site
-- `api.walmart.com` → API servers
-- `tech.walmart.com` → engineering blog
 
 ---
 
 ### Routing Policies
 
-Route 53 has 5 routing policies. Default is Simple — all others are condition-based.
+Route 53 has 5 routing policies. Default is Simple — all others add conditions.
 
 ---
 
 #### 1. Simple Routing Policy
-**Default. No conditions. Traffic goes directly to the target.**
-
-- Maps domain → one IP or one endpoint
-- No health checks, no conditions
-- If multiple values configured, Route 53 returns all and client picks randomly
-- Use for: basic single-region setups, static sites, simple APIs
+**Default. No conditions. Direct mapping.**
 
 ```
-User → abishaix.com → Route 53 → EC2 / ALB
-                     (no conditions, just maps)
+  User
+   │
+   ▼
+  abishaix.com
+   │
+   ▼
+  Route 53
+   │  no conditions — blindly forwards
+   ▼
+  EC2 / ALB
 ```
+
+- 1 server minimum
+- No health checks
+- Multiple values → client picks randomly
 
 ---
 
 #### 2. Latency-Based Routing Policy
-**Routes traffic to the region with the lowest latency for the user.**
+**Routes to the region with lowest latency for the user.**
 
-- Same application deployed in multiple regions
-- Route 53 detects which region is closest/fastest for the user's origin
-- Automatically redirects to the lowest-latency endpoint
+```
+  User (Hyderabad)
+        │
+        ▼
+     Route 53
+     latency policy
+    ╱             ╲
+   ╱ low latency   ╲ high latency
+  ▼                 ▼
+Mumbai LB          US LB
+  ✅ selected       ✗ skipped
+```
 
-Example: User in Hyderabad → Route 53 detects Mumbai is faster than US → sends to Mumbai load balancer.
-
-Requirements:
-- Minimum 2 servers in 2 different regions
-- Minimum 2 load balancers (one per region — LB is region-scoped, not global)
-- Create one latency record per region, each pointing to that region's LB
-
-**Health checks:** Optional on latency policy. Without health checks, Route 53 doesn't know if a region is down — it will still send traffic there even if the region is failing. Enable health checks if you want automatic failover on failure.
+- Minimum 2 servers, 2 regions, 2 load balancers
+- LB is region-scoped — one per region required
+- Health checks optional but recommended — without them Route 53 sends to a failed region
 
 ---
 
 #### 3. Failover Routing Policy
-**Primary/secondary setup. Secondary only activates if primary fails.**
+**Primary/secondary. Secondary only activates when primary fails.**
 
-- Designate one region as primary, another as secondary
-- All traffic goes to primary by default
-- If primary fails health checks → Route 53 automatically redirects to secondary
+```
+  User (Hyderabad)
+        │
+        ▼
+     Route 53
+     failover policy
+     + health checks
+        │
+        ├──── Primary (Mumbai LB) ◄── always first
+        │          │
+        │     health check ✅
+        │          │
+        │     [normal traffic flows here]
+        │
+        └──── Secondary (US LB) ◄── activates only on primary failure
+                   │
+              health check ❌ (primary failed)
+                   │
+              [Route 53 reroutes here automatically]
+```
 
-Example:
-- Primary: Mumbai load balancer
-- Secondary: US load balancer
-- Normal operation: 100% traffic to Mumbai
-- Mumbai fails: Route 53 detects via health check → sends all traffic to US
-
-Requirements:
-- Minimum 2 servers, 2 regions, 2 load balancers
 - Health checks **must** be enabled — this is how Route 53 knows primary failed
+- Minimum 2 servers, 2 regions, 2 load balancers
 
-**Key point:** Load balancer gives high availability across AZs within a region. Route 53 failover routing gives high availability across regions.
-
-> **The combination of Route 53 failover routing + Load Balancer gives high availability at both zone level and region level.**
->
-> - AZ failure → Load Balancer handles it
-> - Region failure → Route 53 failover handles it
+> **Key combination:**
+> - AZ failure → Load Balancer handles it (within region)
+> - Region failure → Route 53 failover handles it (cross region)
+> - Together: high availability at both zone level AND region level ✅
 
 ---
 
 #### 4. Geolocation-Based Routing Policy
-**Restricts or routes traffic based on the user's geographic origin.**
+**Routes or restricts traffic based on user's geographic origin.**
 
-- Define which countries/regions can access which endpoint
-- Users from blocked origins get an access denied or no response
-- If no geolocation policy is set, anyone can access from anywhere (global default)
+```
+  Request origin detected by Route 53 (satellite/IP based)
+          │
+          ├── India origin?    → Mumbai servers  ✅
+          ├── US origin?       → Virginia servers ✅
+          ├── Australia?       → Singapore servers ✅
+          └── No match?        → default or ❌ blocked
 
-Examples:
-- IRCTC — accessible only from India
-- A compliance-restricted app — accessible only from EU
+  ⚠️  No geolocation policy set = anyone can access (global default)
+  ⚠️  Based on IP geolocation — not pin codes
+```
 
-Multiple geolocation rules can stack:
-- India → Mumbai servers
-- US → Virginia servers
-- Australia → Singapore servers
-- Everything else → default endpoint or blocked
-
-**Geolocation is based on satellite/IP location data, not pin codes.** Same mechanism as Google Maps location detection.
+Use cases: IRCTC (India only), compliance apps (EU only), regional content.
 
 ---
 
 #### 5. Weighted Routing Policy
-**Manual, priority-based traffic splitting using percentage weights.**
+**Manual traffic split using priority numbers.**
 
-- Assign a weight (number) to each endpoint
-- Higher weight = more traffic
-- Completely manual — you control the percentages
+```
+  User
+   │
+   ▼
+  Route 53
+  weighted policy
+   │
+   ├── weight: 70  →  US servers     (70% of requests)
+   └── weight: 30  →  Mumbai servers (30% of requests)
 
-Example: Blue/green deployment or gradual traffic shift
-- US servers: weight 70 → gets 70% of traffic
-- Mumbai servers: weight 30 → gets 30% of traffic
+  Higher weight = more priority = more traffic
+  Completely manual — you control the numbers
+```
 
-Use cases:
-- Gradual rollout — send 5% to new version, 95% to old
-- A/B testing
-- Regional traffic balancing
-
----
-
-### Policy Comparison
-
-| Policy | Condition | Min servers | Use case |
-|---|---|---|---|
-| Simple | None — direct mapping | 1 | Basic setup |
-| Latency | Lowest latency wins | 2 (2 regions) | Global performance |
-| Failover | Primary/secondary + health checks | 2 (2 regions) | High availability |
-| Geolocation | User's country/region | 1+ | Compliance, regional restriction |
-| Weighted | Manual weight numbers | 2+ | Gradual rollout, A/B testing |
+Use cases: gradual rollout (5% new version, 95% old), A/B testing, regional load balancing.
 
 ---
 
 ### Health Checks
 
-Health checks are required for Failover routing and highly recommended for Latency routing.
+```
+  Route 53 health check flow:
+  ─────────────────────────────────────────────
+  Route 53 pings endpoint periodically
+        │
+        ├── Response OK?   → endpoint healthy ✅
+        │                    traffic continues
+        │
+        └── No response?   → endpoint unhealthy ❌
+                             Failover: redirect to secondary
+                             Latency: skip to next best region
 
-- Route 53 periodically pings your endpoint
-- If health check fails → Route 53 marks the endpoint unhealthy
-- Failover: unhealthy primary → traffic moves to secondary automatically
-- Latency: if health checks enabled, unhealthy low-latency region → traffic moves to next best region
-
-Without health checks, Route 53 sends traffic to a failed region blindly.
-
----
-
-### Tasks from Today's Class
-
-1. Create public hosted zone, update NS records in GoDaddy
-2. Deploy application to private server, configure load balancer
-3. Access app via load balancer URL
-4. Configure Route 53 Alias record → load balancer → access via domain
-5. Create a subdomain record (e.g. `api.yourdomain.com`)
-6. Test geolocation policy — restrict access to one country, verify block from another
+  Without health checks → Route 53 sends to failed region blindly
+```
 
 ---
 
@@ -250,6 +273,15 @@ Without health checks, Route 53 sends traffic to a failed region blindly.
 | Country-based restriction | Geolocation |
 | Traffic % split | Weighted |
 
+### Policy comparison
+| Policy | Condition | Min servers | Health checks |
+|---|---|---|---|
+| Simple | None | 1 | Not supported |
+| Latency | Lowest latency wins | 2 (2 regions) | Optional |
+| Failover | Primary/secondary | 2 (2 regions) | Required |
+| Geolocation | User country/region | 1+ | Optional |
+| Weighted | Manual weight numbers | 2+ | Optional |
+
 ---
 
 ## 🏗️ Architecture / Diagrams
@@ -262,7 +294,7 @@ Without health checks, Route 53 sends traffic to a failed region blindly.
 - Can I enable health checks on a latency-based routing policy? (yes — explore and confirm)
 - Can I combine geolocation + weighted policies on the same domain?
 - What is TTL and how does it affect record propagation speed?
-- How does WAF (Web Application Firewall) complement geolocation for blocking?
+- How does WAF complement geolocation for blocking?
 
 ---
 
