@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520" style="background:#ffffff;font-family:Arial,sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#3a6abf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#3a8a4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#bf3a4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="380" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a1a">Route 53 — Failover + Health Checks + Private Hosted Zone</text>
+
+  <!-- ===== TOP: Failover with health checks ===== -->
+  <rect x="20" y="34" width="460" height="220" rx="10" fill="#ffeef0" stroke="#bf3a4a" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="36" y="54" font-size="11" font-weight="bold" fill="#9a1a2a">Failover Routing + Health Checks</text>
+
+  <!-- User -->
+  <circle cx="55" cy="130" r="16" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1.5"/>
+  <text x="55" y="126" text-anchor="middle" font-size="9" fill="#1a4a9a">User</text>
+  <text x="55" y="138" text-anchor="middle" font-size="8" fill="#3a6abf">India</text>
+
+  <line x1="71" y1="130" x2="110" y2="130" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+
+  <!-- Route 53 -->
+  <rect x="110" y="112" width="90" height="36" rx="6" fill="#fff8e6" stroke="#c09030" stroke-width="1.5"/>
+  <text x="155" y="126" text-anchor="middle" font-size="10" font-weight="bold" fill="#8a6010">Route 53</text>
+  <text x="155" y="139" text-anchor="middle" font-size="9" fill="#b07020">+ health checks</text>
+
+  <!-- Normal flow to primary -->
+  <line x1="200" y1="122" x2="248" y2="98" stroke="#3a8a4a" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <text x="224" y="102" text-anchor="middle" font-size="8" fill="#3a8a4a">primary ✅</text>
+
+  <!-- Primary -->
+  <rect x="248" y="72" width="130" height="52" rx="8" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="2"/>
+  <text x="313" y="90" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a6a2a">Mumbai (Primary)</text>
+  <text x="313" y="104" text-anchor="middle" font-size="10" fill="#3a8a4a">Health check: ✅ OK</text>
+  <text x="313" y="116" text-anchor="middle" font-size="9" fill="#3a8a4a">All traffic goes here</text>
+
+  <!-- Failover flow to secondary -->
+  <line x1="200" y1="138" x2="248" y2="162" stroke="#bf3a4a" stroke-width="1.5" stroke-dasharray="5 2" marker-end="url(#arr-red)"/>
+  <text x="224" y="170" text-anchor="middle" font-size="8" fill="#bf3a4a">failover ❌</text>
+
+  <!-- Secondary -->
+  <rect x="248" y="152" width="130" height="52" rx="8" fill="#ffeef0" stroke="#bf3a4a" stroke-width="2"/>
+  <text x="313" y="170" text-anchor="middle" font-size="11" font-weight="bold" fill="#9a1a2a">US East (Secondary)</text>
+  <text x="313" y="184" text-anchor="middle" font-size="10" fill="#bf3a4a">Activates on failure</text>
+  <text x="313" y="196" text-anchor="middle" font-size="9" fill="#bf3a4a">No health check needed</text>
+
+  <!-- Health check flow -->
+  <rect x="36" y="200" width="200" height="44" rx="8" fill="#f5f5f5" stroke="#bbb" stroke-width="1"/>
+  <text x="136" y="216" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Health Check Threshold</text>
+  <text x="136" y="230" text-anchor="middle" font-size="9" fill="#555">3 consecutive failures → unhealthy</text>
+  <text x="136" y="242" text-anchor="middle" font-size="9" fill="#555">Route 53 redirects to secondary</text>
+
+  <!-- ===== TOP RIGHT: TTL ===== -->
+  <rect x="498" y="34" width="242" height="220" rx="10" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="514" y="54" font-size="11" font-weight="bold" fill="#1a4a9a">TTL — Time to Live</text>
+
+  <text x="514" y="74" font-size="10" fill="#333">First request:</text>
+  <rect x="514" y="80" width="210" height="22" rx="4" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="619" y="95" text-anchor="middle" font-size="9" fill="#1a4a9a">DNS query → Route 53 → returns IP + TTL</text>
+
+  <line x1="619" y1="102" x2="619" y2="116" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+
+  <rect x="514" y="116" width="210" height="22" rx="4" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="619" y="131" text-anchor="middle" font-size="9" fill="#1a6a2a">IP cached for TTL duration (e.g. 60s)</text>
+
+  <line x1="619" y1="138" x2="619" y2="152" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+
+  <rect x="514" y="152" width="210" height="22" rx="4" fill="#fff8e6" stroke="#c09030" stroke-width="1"/>
+  <text x="619" y="167" text-anchor="middle" font-size="9" fill="#8a6010">2nd request → served from cache (no DNS query)</text>
+
+  <line x1="619" y1="174" x2="619" y2="188" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+
+  <rect x="514" y="188" width="210" height="22" rx="4" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="619" y="203" text-anchor="middle" font-size="9" fill="#1a4a9a">TTL expires → fresh DNS query to Route 53</text>
+
+  <rect x="514" y="222" width="210" height="24" rx="6" fill="#f5eeff" stroke="#7a4abf" stroke-width="1"/>
+  <text x="619" y="234" text-anchor="middle" font-size="9" font-weight="bold" fill="#5a2a9a">Lab: use TTL 60s | Prod: use TTL 300s+</text>
+  <text x="619" y="246" text-anchor="middle" font-size="9" fill="#7a4abf">Low TTL = faster changes, more DNS queries</text>
+
+  <!-- ===== BOTTOM LEFT: Private Hosted Zone ===== -->
+  <rect x="20" y="268" width="460" height="232" rx="10" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="36" y="288" font-size="11" font-weight="bold" fill="#1a6a2a">Private Hosted Zone — VPC-Internal DNS</text>
+
+  <!-- VPC box -->
+  <rect x="36" y="298" width="426" height="190" rx="8" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1.5" stroke-dasharray="4 2"/>
+  <text x="56" y="316" font-size="10" font-weight="bold" fill="#4a6fa5">VPC (private network)</text>
+
+  <!-- Backend app -->
+  <rect x="56" y="324" width="110" height="44" rx="6" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1.5"/>
+  <text x="111" y="342" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a4a9a">Backend App</text>
+  <text x="111" y="356" text-anchor="middle" font-size="9" fill="#3a6abf">EC2 instance</text>
+
+  <line x1="166" y1="346" x2="206" y2="346" stroke="#3a6abf" stroke-width="1.2" marker-end="url(#arr-blue)"/>
+  <text x="186" y="340" text-anchor="middle" font-size="8" fill="#3a6abf">db.internal</text>
+
+  <!-- Private Route 53 -->
+  <rect x="206" y="330" width="100" height="32" rx="6" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1.5"/>
+  <text x="256" y="344" text-anchor="middle" font-size="9" font-weight="bold" fill="#1a6a2a">Route 53</text>
+  <text x="256" y="356" text-anchor="middle" font-size="9" fill="#3a8a4a">(private zone)</text>
+
+  <line x1="306" y1="346" x2="346" y2="346" stroke="#3a8a4a" stroke-width="1.2" marker-end="url(#arr-green)"/>
+
+  <!-- RDS -->
+  <rect x="346" y="330" width="100" height="32" rx="6" fill="#fff0d0" stroke="#c09030" stroke-width="1.5"/>
+  <text x="396" y="344" text-anchor="middle" font-size="9" font-weight="bold" fill="#8a6010">RDS Endpoint</text>
+  <text x="396" y="356" text-anchor="middle" font-size="8" fill="#b07020">mydb.xyz.rds.aws</text>
+
+  <!-- CNAME note -->
+  <rect x="56" y="384" width="390" height="40" rx="6" fill="#fff" stroke="#bbb" stroke-width="1"/>
+  <text x="76" y="399" font-size="10" font-weight="bold" fill="#333">CNAME record:</text>
+  <text x="76" y="413" font-size="9" fill="#3a6abf" font-family="monospace">db.internal.abishaix.com → mydb.abc123.ap-south-1.rds.amazonaws.com</text>
+
+  <!-- Internet user blocked -->
+  <rect x="56" y="434" width="390" height="44" rx="6" fill="#ffeef0" stroke="#bf3a4a" stroke-width="1"/>
+  <text x="76" y="450" font-size="10" font-weight="bold" fill="#9a1a2a">Internet user → db.internal.abishaix.com → ❌ cannot resolve</text>
+  <text x="76" y="464" font-size="10" fill="#bf3a4a">Private zone only works inside the associated VPC — zero public exposure</text>
+
+  <!-- ===== BOTTOM RIGHT: Use cases ===== -->
+  <rect x="498" y="268" width="242" height="232" rx="10" fill="#fff8e6" stroke="#c09030" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="514" y="288" font-size="11" font-weight="bold" fill="#8a6010">Private Zone Use Cases</text>
+
+  <rect x="514" y="298" width="210" height="28" rx="6" fill="#e8ffe8" stroke="#3a8a4a" stroke-width="1"/>
+  <text x="619" y="312" text-anchor="middle" font-size="9" font-weight="bold" fill="#1a6a2a">db.internal</text>
+  <text x="619" y="322" text-anchor="middle" font-size="9" fill="#3a8a4a">→ RDS endpoint</text>
+
+  <rect x="514" y="334" width="210" height="28" rx="6" fill="#e6f0ff" stroke="#3a6abf" stroke-width="1"/>
+  <text x="619" y="348" text-anchor="middle" font-size="9" font-weight="bold" fill="#1a4a9a">cache.internal</text>
+  <text x="619" y="358" text-anchor="middle" font-size="9" fill="#3a6abf">→ ElastiCache endpoint</text>
+
+  <rect x="514" y="370" width="210" height="28" rx="6" fill="#f5eeff" stroke="#7a4abf" stroke-width="1"/>
+  <text x="619" y="384" text-anchor="middle" font-size="9" font-weight="bold" fill="#5a2a9a">api.internal</text>
+  <text x="619" y="394" text-anchor="middle" font-size="9" fill="#7a4abf">→ Internal ALB</text>
+
+  <rect x="514" y="406" width="210" height="28" rx="6" fill="#fff0d0" stroke="#c09030" stroke-width="1"/>
+  <text x="619" y="420" text-anchor="middle" font-size="9" font-weight="bold" fill="#8a6010">backend.internal</text>
+  <text x="619" y="430" text-anchor="middle" font-size="9" fill="#b07020">→ Private EC2 IP</text>
+
+  <rect x="514" y="446" width="210" height="44" rx="6" fill="#f5f5f5" stroke="#bbb" stroke-width="1"/>
+  <text x="619" y="462" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Key benefit</text>
+  <text x="619" y="476" text-anchor="middle" font-size="9" fill="#555">Change endpoint once in Route 53</text>
+  <text x="619" y="488" text-anchor="middle" font-size="9" fill="#555">No app redeploy needed ✅</text>
+</svg>
