@@ -286,14 +286,6 @@ Check certificate details in browser: click the lock icon → Certificate → ch
 
 ---
 
-## ❌ Technical Corrections
-
-- **TLS is newer, not older.** Raw notes had this flipped: "TLS is old one, SSL is new one." Correct: SSL came first, TLS replaced it with stronger algorithms. TLS is the current standard.
-- **HSM = Hardware Security Module**, not "Hardware Store Management" (transcript artifact from voice-to-text). Full name: AWS CloudHSM / Hardware Security Module.
-- **MITM** (mentioned at end of class) = Man-In-The-Middle attack — an attacker intercepting traffic between client and server. Not "hacker code."
-
----
-
 ## ❓ Questions I Still Have
 - What's the difference between ACM Public CA and Private CA — when do you use private?
 - End-to-end HTTPS (LB → EC2 over HTTPS) — when is this required vs just terminating at LB?
