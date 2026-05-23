@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="450" y="32" text-anchor="middle" font-size="17" font-weight="bold" fill="#1a1a2e">HTTPS / SSL/TLS / ACM — End-to-End Flow</text>
+
+  <!-- ===== TOP ROW: HTTP (insecure) ===== -->
+  <text x="30" y="68" font-size="12" fill="#666">HTTP (insecure)</text>
+
+  <!-- Browser -->
+  <rect x="30" y="78" width="110" height="52" rx="8" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+  <text x="85" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#856404">Browser</text>
+  <text x="85" y="116" text-anchor="middle" font-size="10" fill="#856404">user request</text>
+
+  <!-- Arrow with label -->
+  <line x1="141" y1="104" x2="260" y2="104" stroke="#dc3545" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="200" y="96" text-anchor="middle" font-size="10" fill="#dc3545">plain text</text>
+  <polygon points="260,100 253,96 253,108" fill="#dc3545"/>
+
+  <!-- Server (insecure) -->
+  <rect x="260" y="78" width="130" height="52" rx="8" fill="#f8d7da" stroke="#dc3545" stroke-width="2"/>
+  <text x="325" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#721c24">EC2 Server</text>
+  <text x="325" y="116" text-anchor="middle" font-size="10" fill="#721c24">password visible 🔓</text>
+
+  <!-- Hacker -->
+  <rect x="175" y="126" width="100" height="40" rx="8" fill="#f8d7da" stroke="#dc3545" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="225" y="142" text-anchor="middle" font-size="11" font-weight="bold" fill="#721c24">👤 Attacker</text>
+  <text x="225" y="158" text-anchor="middle" font-size="9" fill="#721c24">reads plain text</text>
+
+  <!-- divider -->
+  <line x1="30" y1="185" x2="870" y2="185" stroke="#dee2e6" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="30" y="200" font-size="12" fill="#666">HTTPS (secure) — TLS handshake via ALB</text>
+
+  <!-- ===== MAIN FLOW ===== -->
+
+  <!-- Client Browser -->
+  <rect x="30" y="215" width="120" height="60" rx="10" fill="#d1ecf1" stroke="#17a2b8" stroke-width="2"/>
+  <text x="90" y="240" text-anchor="middle" font-size="13" font-weight="bold" fill="#0c5460">🌐 Browser</text>
+  <text x="90" y="257" text-anchor="middle" font-size="10" fill="#0c5460">HTTPS request</text>
+  <text x="90" y="270" text-anchor="middle" font-size="10" fill="#0c5460">port 443</text>
+
+  <!-- Arrow 1: Browser → Route 53 -->
+  <line x1="151" y1="245" x2="215" y2="245" stroke="#495057" stroke-width="2"/>
+  <polygon points="215,241 208,237 208,249" fill="#495057"/>
+  <text x="183" y="238" text-anchor="middle" font-size="9" fill="#495057">DNS</text>
+
+  <!-- Route 53 -->
+  <rect x="215" y="215" width="110" height="60" rx="10" fill="#e2d9f3" stroke="#6f42c1" stroke-width="2"/>
+  <text x="270" y="240" text-anchor="middle" font-size="13" font-weight="bold" fill="#432874">🔀 Route 53</text>
+  <text x="270" y="257" text-anchor="middle" font-size="10" fill="#432874">resolves domain</text>
+  <text x="270" y="270" text-anchor="middle" font-size="10" fill="#432874">→ ALB DNS</text>
+
+  <!-- Arrow 2: Route 53 → ALB -->
+  <line x1="326" y1="245" x2="390" y2="245" stroke="#495057" stroke-width="2"/>
+  <polygon points="390,241 383,237 383,249" fill="#495057"/>
+
+  <!-- ALB (central, tall box) -->
+  <rect x="390" y="205" width="150" height="130" rx="10" fill="#d4edda" stroke="#28a745" stroke-width="2.5"/>
+  <text x="465" y="230" text-anchor="middle" font-size="13" font-weight="bold" fill="#155724">⚖️ ALB</text>
+  <text x="465" y="248" text-anchor="middle" font-size="10" fill="#155724">TLS terminates here</text>
+  <text x="465" y="263" text-anchor="middle" font-size="10" fill="#155724">cert attached to listener</text>
+  <text x="465" y="278" text-anchor="middle" font-size="10" fill="#155724">port 443 → HTTPS in</text>
+  <text x="465" y="293" text-anchor="middle" font-size="10" fill="#155724">port 80  → HTTP out</text>
+  <text x="465" y="308" text-anchor="middle" font-size="10" fill="#155724">(SSL termination)</text>
+
+  <!-- Arrow: ALB → EC2 -->
+  <line x1="541" y1="270" x2="610" y2="270" stroke="#495057" stroke-width="2"/>
+  <polygon points="610,266 603,262 603,274" fill="#495057"/>
+  <text x="575" y="262" text-anchor="middle" font-size="9" fill="#495057">HTTP (internal)</text>
+
+  <!-- EC2 App Server -->
+  <rect x="610" y="235" width="130" height="70" rx="10" fill="#fff3cd" stroke="#fd7e14" stroke-width="2"/>
+  <text x="675" y="260" text-anchor="middle" font-size="13" font-weight="bold" fill="#7f3e00">🖥 EC2</text>
+  <text x="675" y="277" text-anchor="middle" font-size="10" fill="#7f3e00">app server</text>
+  <text x="675" y="292" text-anchor="middle" font-size="10" fill="#7f3e00">private subnet</text>
+
+  <!-- Response arrow: EC2 → ALB -->
+  <line x1="610" y1="285" x2="541" y2="285" stroke="#6c757d" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="541,281 548,277 548,289" fill="#6c757d"/>
+  <text x="575" y="300" text-anchor="middle" font-size="9" fill="#6c757d">response → re-encrypt</text>
+
+  <!-- Response arrow: ALB → Browser -->
+  <line x1="390" y1="255" x2="326" y2="255" stroke="#6c757d" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="326,251 333,247 333,259" fill="#6c757d"/>
+
+  <!-- ===== ACM + HSM boxes below ===== -->
+
+  <!-- ACM -->
+  <rect x="390" y="360" width="140" height="70" rx="10" fill="#cce5ff" stroke="#004085" stroke-width="2"/>
+  <text x="460" y="385" text-anchor="middle" font-size="13" font-weight="bold" fill="#004085">📋 ACM</text>
+  <text x="460" y="402" text-anchor="middle" font-size="10" fill="#004085">issues certificate</text>
+  <text x="460" y="416" text-anchor="middle" font-size="10" fill="#004085">auto-renews ✅ free ✅</text>
+
+  <line x1="460" y1="360" x2="460" y2="336" stroke="#004085" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="470" y="352" font-size="9" fill="#004085">cert attached</text>
+
+  <!-- HSM -->
+  <rect x="550" y="360" width="150" height="70" rx="10" fill="#f8d7da" stroke="#721c24" stroke-width="2"/>
+  <text x="625" y="385" text-anchor="middle" font-size="13" font-weight="bold" fill="#721c24">🔐 HSM</text>
+  <text x="625" y="402" text-anchor="middle" font-size="10" fill="#721c24">stores private key</text>
+  <text x="625" y="416" text-anchor="middle" font-size="10" fill="#721c24">never exposed 🔒</text>
+
+  <line x1="625" y1="360" x2="530" y2="336" stroke="#721c24" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- ===== CERTIFICATE TYPES ===== -->
+  <rect x="30" y="460" width="840" height="140" rx="10" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1.5"/>
+  <text x="450" y="484" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a2e">Certificate Scope</text>
+
+  <!-- Root cert -->
+  <rect x="55" y="496" width="220" height="84" rx="8" fill="#d4edda" stroke="#28a745" stroke-width="1.5"/>
+  <text x="165" y="516" text-anchor="middle" font-size="12" font-weight="bold" fill="#155724">Root Domain Cert</text>
+  <text x="165" y="534" text-anchor="middle" font-size="11" fill="#155724">example.com ✅</text>
+  <text x="165" y="551" text-anchor="middle" font-size="11" fill="#c82333">dev.example.com ❌</text>
+  <text x="165" y="568" text-anchor="middle" font-size="11" fill="#c82333">api.example.com ❌</text>
+
+  <!-- Wildcard cert -->
+  <rect x="300" y="496" width="240" height="84" rx="8" fill="#d4edda" stroke="#28a745" stroke-width="1.5"/>
+  <text x="420" y="516" text-anchor="middle" font-size="12" font-weight="bold" fill="#155724">Wildcard Cert *.example.com</text>
+  <text x="420" y="534" text-anchor="middle" font-size="11" fill="#155724">dev.example.com ✅</text>
+  <text x="420" y="551" text-anchor="middle" font-size="11" fill="#155724">api.example.com ✅</text>
+  <text x="420" y="568" text-anchor="middle" font-size="11" fill="#c82333">example.com ❌ (root not covered)</text>
+
+  <!-- Production recommendation -->
+  <rect x="565" y="496" width="280" height="84" rx="8" fill="#fff3cd" stroke="#ffc107" stroke-width="1.5"/>
+  <text x="705" y="516" text-anchor="middle" font-size="12" font-weight="bold" fill="#856404">Production Setup</text>
+  <text x="705" y="534" text-anchor="middle" font-size="11" fill="#856404">Issue 2 certificates:</text>
+  <text x="705" y="551" text-anchor="middle" font-size="11" fill="#856404">1. Root cert → example.com</text>
+  <text x="705" y="568" text-anchor="middle" font-size="11" fill="#856404">2. Wildcard → *.example.com</text>
+
+</svg>
