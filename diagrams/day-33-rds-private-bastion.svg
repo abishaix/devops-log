@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="450" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">RDS Private Access — Bastion Host Pattern + Backup Architecture</text>
+
+  <!-- ── VPC boundary ── -->
+  <rect x="40" y="45" width="820" height="430" rx="12" fill="none" stroke="#5c85d6" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="58" y="65" font-size="11" fill="#5c85d6" font-weight="bold">VPC — 10.0.0.0/16</text>
+
+  <!-- Internet -->
+  <rect x="360" y="50" width="180" height="36" rx="8" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1.5"/>
+  <text x="450" y="73" text-anchor="middle" font-size="12" fill="#1a1a2e">🌐  Internet</text>
+
+  <!-- IGW arrow down -->
+  <line x1="450" y1="86" x2="450" y2="110" stroke="#4a90d9" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ── Public Subnet (AZ-a) ── -->
+  <rect x="60" y="110" width="350" height="120" rx="8" fill="#fff9e6" stroke="#f9a825" stroke-width="1.5"/>
+  <text x="235" y="128" text-anchor="middle" font-size="10" fill="#f9a825" font-weight="bold">Public Subnet — AZ-1a</text>
+
+  <!-- Bastion -->
+  <rect x="80" y="136" width="300" height="78" rx="6" fill="#fff" stroke="#f9a825" stroke-width="1.5"/>
+  <text x="230" y="158" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a2e">Bastion Host (EC2)</text>
+  <text x="230" y="176" text-anchor="middle" font-size="10" fill="#555">Public IP assigned  |  SSH port 22 open</text>
+  <text x="230" y="192" text-anchor="middle" font-size="10" fill="#34a853">MySQL client installed (mariadb105)</text>
+  <text x="230" y="207" text-anchor="middle" font-size="10" fill="#888">mysql -h &lt;rds-endpoint&gt; -u admin -p</text>
+
+  <!-- Developer laptop -->
+  <rect x="60" y="290" width="150" height="50" rx="8" fill="#f0f4ff" stroke="#5c85d6" stroke-width="1.5"/>
+  <text x="135" y="312" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a2e">💻 Developer</text>
+  <text x="135" y="330" text-anchor="middle" font-size="10" fill="#555">SSH / MySQL Workbench</text>
+
+  <!-- Arrow laptop → bastion -->
+  <line x1="210" y1="315" x2="230" y2="230" stroke="#5c85d6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="195" y="278" font-size="9" fill="#5c85d6">SSH port 22</text>
+
+  <!-- ── Private Subnet (AZ-a) ── -->
+  <rect x="470" y="110" width="360" height="120" rx="8" fill="#f0eaff" stroke="#7c4dff" stroke-width="1.5"/>
+  <text x="650" y="128" text-anchor="middle" font-size="10" fill="#7c4dff" font-weight="bold">Private Subnet — AZ-1a</text>
+
+  <!-- RDS Instance -->
+  <rect x="490" y="136" width="320" height="78" rx="6" fill="#fff" stroke="#7c4dff" stroke-width="1.5"/>
+  <text x="650" y="158" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a2e">RDS MySQL Instance</text>
+  <text x="650" y="176" text-anchor="middle" font-size="10" fill="#555">No public IP  |  Private subnet only</text>
+  <text x="650" y="192" text-anchor="middle" font-size="10" fill="#7c4dff">Endpoint: database-1.xxxxxx.rds.amazonaws.com</text>
+  <text x="650" y="207" text-anchor="middle" font-size="10" fill="#888">Port 3306  |  SG: allow 3306 from bastion SG</text>
+
+  <!-- Arrow bastion → RDS -->
+  <line x1="380" y1="175" x2="490" y2="175" stroke="#7c4dff" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <text x="420" y="168" font-size="9" fill="#7c4dff">mysql port 3306</text>
+  <text x="420" y="182" font-size="9" fill="#7c4dff">(VPC local route)</text>
+
+  <!-- ── Private Subnet (AZ-b) ── -->
+  <rect x="470" y="250" width="360" height="80" rx="8" fill="#f0eaff" stroke="#7c4dff" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <text x="650" y="268" text-anchor="middle" font-size="10" fill="#7c4dff" font-weight="bold">Private Subnet — AZ-1b</text>
+  <rect x="490" y="276" width="320" height="40" rx="6" fill="#e8e0ff" stroke="#7c4dff" stroke-width="1"/>
+  <text x="650" y="292" text-anchor="middle" font-size="11" fill="#555">Standby / Read Replica (if Multi-AZ)</text>
+  <text x="650" y="308" text-anchor="middle" font-size="10" fill="#888">Replication sync from primary</text>
+
+  <!-- Replication arrow -->
+  <line x1="650" y1="214" x2="650" y2="276" stroke="#7c4dff" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr2)"/>
+  <text x="658" y="250" font-size="9" fill="#7c4dff">sync</text>
+
+  <!-- ── Backup section ── -->
+  <rect x="60" y="360" width="820" height="100" rx="10" fill="#f9f9f9" stroke="#ccc" stroke-width="1.2"/>
+  <text x="450" y="380" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Automated Backup + Maintenance</text>
+
+  <!-- Backup box -->
+  <rect x="80" y="390" width="230" height="58" rx="6" fill="#e8f8ee" stroke="#34a853" stroke-width="1.2"/>
+  <text x="195" y="410" text-anchor="middle" font-size="11" font-weight="bold" fill="#34a853">Automated Backup</text>
+  <text x="195" y="427" text-anchor="middle" font-size="10" fill="#555">Daily  |  Up to 35-day retention</text>
+  <text x="195" y="442" text-anchor="middle" font-size="10" fill="#888">Set backup window (e.g. 02:00 UTC)</text>
+
+  <!-- Maintenance box -->
+  <rect x="330" y="390" width="230" height="58" rx="6" fill="#fff3cd" stroke="#f9a825" stroke-width="1.2"/>
+  <text x="445" y="410" text-anchor="middle" font-size="11" font-weight="bold" fill="#f9a825">Maintenance Window</text>
+  <text x="445" y="427" text-anchor="middle" font-size="10" fill="#555">AWS applies patches/updates</text>
+  <text x="445" y="442" text-anchor="middle" font-size="10" fill="#888">Must NOT overlap with backup window</text>
+
+  <!-- Snapshot box -->
+  <rect x="580" y="390" width="275" height="58" rx="6" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1.2"/>
+  <text x="717" y="410" text-anchor="middle" font-size="11" font-weight="bold" fill="#4a90d9">Manual Snapshot</text>
+  <text x="717" y="427" text-anchor="middle" font-size="10" fill="#555">Taken before risky changes  |  No expiry</text>
+  <text x="717" y="442" text-anchor="middle" font-size="10" fill="#888">Can copy to another region for DR</text>
+
+  <!-- No overlap warning -->
+  <text x="450" y="485" text-anchor="middle" font-size="11" fill="#e53935" font-weight="bold">⚠  Backup window and maintenance window must not overlap</text>
+
+  <!-- Arrowhead defs -->
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#888"/>
+    </marker>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#7c4dff"/>
+    </marker>
+  </defs>
+
+</svg>
