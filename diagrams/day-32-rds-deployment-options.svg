@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="580" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="480" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">RDS Deployment Options — Single AZ vs Multi-AZ Instance vs Multi-AZ Cluster</text>
+
+  <!-- ── COLUMN 1: Single AZ ── -->
+  <rect x="30" y="45" width="270" height="480" rx="10" fill="#fff5f5" stroke="#e53935" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="165" y="65" text-anchor="middle" font-size="12" font-weight="bold" fill="#e53935">Single AZ DB Instance</text>
+  <text x="165" y="82" text-anchor="middle" font-size="10" fill="#888">Sandbox / Dev only</text>
+
+  <!-- AZ box -->
+  <rect x="55" y="95" width="220" height="100" rx="8" fill="#ffeaea" stroke="#e53935" stroke-width="1"/>
+  <text x="165" y="113" text-anchor="middle" font-size="10" fill="#e53935" font-weight="bold">AZ-1a</text>
+  <rect x="80" y="122" width="170" height="58" rx="6" fill="#fff" stroke="#e53935" stroke-width="1.5"/>
+  <text x="165" y="145" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a2e">Primary DB</text>
+  <text x="165" y="163" text-anchor="middle" font-size="10" fill="#555">Writer + Reader</text>
+  <text x="165" y="177" text-anchor="middle" font-size="10" fill="#555">Endpoint: ✅</text>
+
+  <!-- No standby label -->
+  <rect x="55" y="215" width="220" height="44" rx="8" fill="#eeeeee" stroke="#bbb" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="165" y="234" text-anchor="middle" font-size="11" fill="#999">No Standby</text>
+  <text x="165" y="250" text-anchor="middle" font-size="10" fill="#bbb">Single point of failure</text>
+
+  <!-- Failure note -->
+  <rect x="55" y="278" width="220" height="50" rx="6" fill="#fff0f0" stroke="#e53935" stroke-width="1"/>
+  <text x="165" y="298" text-anchor="middle" font-size="11" fill="#e53935" font-weight="bold">If DB fails →</text>
+  <text x="165" y="316" text-anchor="middle" font-size="11" fill="#e53935">App is DOWN ❌</text>
+
+  <!-- 1000 req note -->
+  <rect x="55" y="348" width="220" height="44" rx="6" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="165" y="366" text-anchor="middle" font-size="10" fill="#555">1000 requests →</text>
+  <text x="165" y="382" text-anchor="middle" font-size="10" fill="#e53935">All hit Primary only</text>
+
+  <!-- ── COLUMN 2: Multi-AZ Instance ── -->
+  <rect x="340" y="45" width="270" height="480" rx="10" fill="#fff8e1" stroke="#f9a825" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="475" y="65" text-anchor="middle" font-size="12" font-weight="bold" fill="#f9a825">Multi-AZ DB Instance</text>
+  <text x="475" y="82" text-anchor="middle" font-size="10" fill="#888">Production HA — no read scale</text>
+
+  <!-- AZ1 -->
+  <rect x="360" y="95" width="105" height="100" rx="8" fill="#fff3cd" stroke="#f9a825" stroke-width="1"/>
+  <text x="412" y="113" text-anchor="middle" font-size="10" fill="#f9a825" font-weight="bold">AZ-1a</text>
+  <rect x="370" y="120" width="85" height="58" rx="6" fill="#fff" stroke="#f9a825" stroke-width="1.5"/>
+  <text x="412" y="143" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a2e">Primary</text>
+  <text x="412" y="159" text-anchor="middle" font-size="9" fill="#555">Writer + Reader</text>
+  <text x="412" y="173" text-anchor="middle" font-size="9" fill="#555">Endpoint: ✅</text>
+
+  <!-- AZ2 standby -->
+  <rect x="475" y="95" width="115" height="100" rx="8" fill="#fff3cd" stroke="#f9a825" stroke-width="1"/>
+  <text x="532" y="113" text-anchor="middle" font-size="10" fill="#f9a825" font-weight="bold">AZ-1b</text>
+  <rect x="482" y="120" width="100" height="58" rx="6" fill="#eeeeee" stroke="#bbb" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="532" y="141" text-anchor="middle" font-size="11" font-weight="bold" fill="#999">Standby</text>
+  <text x="532" y="157" text-anchor="middle" font-size="9" fill="#aaa">No endpoint</text>
+  <text x="532" y="172" text-anchor="middle" font-size="9" fill="#aaa">No requests</text>
+
+  <!-- Sync arrow -->
+  <line x1="455" y1="149" x2="482" y2="149" stroke="#f9a825" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrY)"/>
+  <text x="468" y="143" text-anchor="middle" font-size="8" fill="#f9a825">sync</text>
+
+  <!-- Failover note -->
+  <rect x="360" y="215" width="230" height="50" rx="6" fill="#fff8e1" stroke="#f9a825" stroke-width="1"/>
+  <text x="475" y="236" text-anchor="middle" font-size="11" fill="#f9a825" font-weight="bold">If Primary fails →</text>
+  <text x="475" y="254" text-anchor="middle" font-size="11" fill="#1a1a2e">Standby → promotes to Master ✅</text>
+
+  <!-- standby label -->
+  <rect x="360" y="285" width="230" height="44" rx="6" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="475" y="303" text-anchor="middle" font-size="10" fill="#555">Standby = failover only</text>
+  <text x="475" y="319" text-anchor="middle" font-size="10" fill="#888">No read offload, no endpoint</text>
+
+  <!-- 1000 req note -->
+  <rect x="360" y="348" width="230" height="44" rx="6" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="475" y="366" text-anchor="middle" font-size="10" fill="#555">1000 requests →</text>
+  <text x="475" y="382" text-anchor="middle" font-size="10" fill="#f9a825">All hit Primary only</text>
+
+  <!-- ── COLUMN 3: Multi-AZ Cluster ── -->
+  <rect x="650" y="45" width="280" height="480" rx="10" fill="#e8f8ee" stroke="#34a853" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="790" y="65" text-anchor="middle" font-size="12" font-weight="bold" fill="#34a853">Multi-AZ DB Cluster</text>
+  <text x="790" y="82" text-anchor="middle" font-size="10" fill="#888">Production HA + Read Scale</text>
+
+  <!-- Primary -->
+  <rect x="670" y="95" width="240" height="62" rx="8" fill="#d4edda" stroke="#34a853" stroke-width="1.5"/>
+  <text x="790" y="113" text-anchor="middle" font-size="10" fill="#34a853" font-weight="bold">AZ-1a</text>
+  <text x="790" y="130" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a2e">Primary DB</text>
+  <text x="790" y="148" text-anchor="middle" font-size="10" fill="#555">Writer endpoint ✅  |  Accepts writes only</text>
+
+  <!-- Reader 1 -->
+  <rect x="670" y="175" width="115" height="70" rx="8" fill="#c8e6c9" stroke="#34a853" stroke-width="1.2"/>
+  <text x="727" y="193" text-anchor="middle" font-size="10" fill="#34a853" font-weight="bold">AZ-1b</text>
+  <text x="727" y="210" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a2e">Reader 1</text>
+  <text x="727" y="226" text-anchor="middle" font-size="9" fill="#555">Read endpoint ✅</text>
+  <text x="727" y="240" text-anchor="middle" font-size="9" fill="#34a853">Reader + Standby</text>
+
+  <!-- Reader 2 -->
+  <rect x="795" y="175" width="115" height="70" rx="8" fill="#c8e6c9" stroke="#34a853" stroke-width="1.2"/>
+  <text x="852" y="193" text-anchor="middle" font-size="10" fill="#34a853" font-weight="bold">AZ-1c</text>
+  <text x="852" y="210" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a2e">Reader 2</text>
+  <text x="852" y="226" text-anchor="middle" font-size="9" fill="#555">Read endpoint ✅</text>
+  <text x="852" y="240" text-anchor="middle" font-size="9" fill="#34a853">Reader + Standby</text>
+
+  <!-- Replication arrows from primary -->
+  <line x1="727" y1="157" x2="727" y2="175" stroke="#34a853" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrG)"/>
+  <line x1="852" y1="157" x2="852" y2="175" stroke="#34a853" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrG)"/>
+  <text x="790" y="170" text-anchor="middle" font-size="8" fill="#34a853">replicates</text>
+
+  <!-- Failover note -->
+  <rect x="670" y="263" width="240" height="50" rx="6" fill="#e8f8ee" stroke="#34a853" stroke-width="1"/>
+  <text x="790" y="284" text-anchor="middle" font-size="11" fill="#34a853" font-weight="bold">If Primary fails →</text>
+  <text x="790" y="302" text-anchor="middle" font-size="10" fill="#1a1a2e">Reader 1 or 2 → promotes to Master ✅</text>
+
+  <!-- dual role label -->
+  <rect x="670" y="332" width="240" height="44" rx="6" fill="#f1f8f4" stroke="#34a853" stroke-width="1"/>
+  <text x="790" y="350" text-anchor="middle" font-size="10" fill="#555">Readers = read offload + standby</text>
+  <text x="790" y="366" text-anchor="middle" font-size="10" fill="#34a853">Two jobs: reader AND failover</text>
+
+  <!-- 1000 req note -->
+  <rect x="670" y="395" width="240" height="56" rx="6" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="790" y="413" text-anchor="middle" font-size="10" fill="#555">1000 requests →</text>
+  <text x="790" y="429" text-anchor="middle" font-size="10" fill="#1a1a2e">200 write → Primary</text>
+  <text x="790" y="444" text-anchor="middle" font-size="10" fill="#34a853">400 read → Reader 1  |  400 read → Reader 2</text>
+
+  <!-- Arrowhead defs -->
+  <defs>
+    <marker id="arrY" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#f9a825"/>
+    </marker>
+    <marker id="arrG" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#34a853"/>
+    </marker>
+  </defs>
+
+  <!-- Bottom comparison bar -->
+  <rect x="30" y="455" width="270" height="60" rx="6" fill="#fff5f5" stroke="#e53935" stroke-width="1"/>
+  <text x="165" y="473" text-anchor="middle" font-size="10" font-weight="bold" fill="#e53935">Endpoints: 1 (writer)</text>
+  <text x="165" y="489" text-anchor="middle" font-size="10" fill="#555">No HA  |  No read scale</text>
+  <text x="165" y="505" text-anchor="middle" font-size="10" fill="#e53935">Use: sandbox only</text>
+
+  <rect x="340" y="455" width="270" height="60" rx="6" fill="#fff8e1" stroke="#f9a825" stroke-width="1"/>
+  <text x="475" y="473" text-anchor="middle" font-size="10" font-weight="bold" fill="#f9a825">Endpoints: 1 (writer)</text>
+  <text x="475" y="489" text-anchor="middle" font-size="10" fill="#555">HA via standby  |  No read scale</text>
+  <text x="475" y="505" text-anchor="middle" font-size="10" fill="#f9a825">Use: production HA</text>
+
+  <rect x="650" y="455" width="280" height="60" rx="6" fill="#e8f8ee" stroke="#34a853" stroke-width="1"/>
+  <text x="790" y="473" text-anchor="middle" font-size="10" font-weight="bold" fill="#34a853">Endpoints: 1 writer + 2 reader</text>
+  <text x="790" y="489" text-anchor="middle" font-size="10" fill="#555">HA + read scale  |  Best option</text>
+  <text x="790" y="505" text-anchor="middle" font-size="10" fill="#34a853">Use: production at scale</text>
+
+</svg>

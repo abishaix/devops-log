@@ -40,6 +40,7 @@ Personal DevOps learning log documenting AWS, Linux, networking, and infrastruct
 | 29 | Route 53 failover, health checks, TTL, private hosted zones | ✅ | ✅ |
 | 30 | HTTPS, SSL/TLS, ACM | ✅ | ⬜ |
 | 31 | AWS RDS — relational database service | ✅ | ⬜ |
+| 32 | RDS lab: deployment options, read replicas, Aurora | ✅ | ✅ |
 
 ---
 
@@ -78,7 +79,8 @@ devops-log/
 │   ├── day-28-route53-records-policies.md
 │   ├── day-29-route53-policies-private-zones.md
 │   ├── day-30-https-ssl-tls-acm.md
-│   └── day-31-rds-relational-database-service.md
+│   ├── day-31-rds-relational-database-service.md
+│   └── day-32-rds-lab-deployment-options.md
 ├── practice-logs/
 │   ├── lab-01-aws-vpc-ec2-setup.md
 │   ├── lab-02-custom-vpc-ec2.md
@@ -92,6 +94,7 @@ devops-log/
 │   ├── lab-10-identity-center-sso.md
 │   └── lab-11-route53-routing-policies.md
 ├── diagrams/
+│   ├── day-32-rds-deployment-options.svg
 └── screenshots/
 ```
 
