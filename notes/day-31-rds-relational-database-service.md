@@ -92,6 +92,21 @@ Internet
 
 ---
 
+### Read Replicas — Traffic Split
+
+Of 100 requests hitting the application, approximately 80% are reads and 20% are writes:
+
+```
+100 requests incoming
+  │
+  ├── 80 read requests (GET)  ──► Read Replicas (R, R, R...)
+  └── 20 write requests (POST/PUT/DELETE) ──► Master (M)
+```
+
+Backend code routes by API method — GET goes to replica, everything else goes to master.
+
+---
+
 ### Why There Is No Load Balancer for the Database
 
 Frontend and backend servers are **stateless** — both servers have identical code, so any request can go to either one without issue.
@@ -147,20 +162,24 @@ Solution: Create a **read replica** from the master.
 
 ---
 
-### On-Prem DB vs EC2-Hosted DB vs RDS
+### On-Prem DB vs EC2-Hosted DB vs RDS — Responsibility Breakdown
+
+The key question for each concern: who is responsible?
 
 | Concern | On-Premises | DB on EC2 | RDS (Managed) |
 |---|---|---|---|
-| Physical infra | You | AWS | AWS |
-| OS patching | You | You | AWS |
-| DB engine install | You | You | AWS |
-| Scalability | Manual | Manual | Configurable |
-| Storage auto-scale | No | No | Yes |
-| Backup | Manual | Manual | AWS (configurable) |
-| High availability | Manual (complex) | Manual | AWS (configurable) |
-| Your responsibility | Everything | OS + DB | Cluster config only |
+| Infra maintenance | You | AWS | AWS |
+| Capital cost | You | AWS | AWS |
+| Civil infra (building, power) | You | AWS | AWS |
+| Electrical & ventilation | You | AWS | AWS |
+| Dedicated manpower | You | AWS | AWS |
+| Scalability | You | You configure | AWS RDS |
+| Storage | You | You configure | AWS RDS |
+| Backup | You | You configure | AWS RDS |
+| High availability | You | You configure | AWS RDS |
+| OS patching | You | You take care | AWS RDS |
 
-> RDS reduces your responsibility to: create the cluster, configure options at creation time. AWS handles the rest.
+> Only responsibility left with RDS: **cluster creation configurations** — instance type, storage, backup settings, HA option. Everything else is AWS.
 
 ---
 
@@ -273,6 +292,10 @@ User (Browser)
 ## 🏗️ Architecture / Diagram
 
 ![Day 31 — RDS Architecture](../diagrams/day-31-rds-architecture.svg)
+
+### Class Diagram (Hand-drawn)
+
+![Day 31 — Class Architecture Diagram](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-rds/day-31-class-diagram.png)
 
 ---
 

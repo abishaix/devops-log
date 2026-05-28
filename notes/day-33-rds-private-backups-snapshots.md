@@ -297,6 +297,82 @@ This is the same pattern as EBS snapshot → copy → restore in a new region.
 
 ---
 
+## 💻 Commands — Installing MySQL Server on EC2 (Amazon Linux 2023)
+
+This installs MySQL as a full server on EC2 — making EC2 the database host instead of RDS. Used to understand the difference between DB on EC2 vs RDS.
+
+**Install MySQL 8.0 community server:**
+
+```bash
+sudo dnf update
+sudo wget https://dev.mysql.com/get/mysql80-community-release-el9-4.noarch.rpm
+sudo dnf install mysql80-community-release-el9-4.noarch.rpm
+sudo dnf install mysql-community-server
+```
+
+**Verify installation:**
+
+```bash
+mysql -V
+```
+
+**Start and enable the MySQL service:**
+
+```bash
+sudo systemctl start mysqld
+sudo systemctl enable mysqld
+systemctl status mysqld
+```
+
+**Get the auto-generated temporary root password:**
+
+```bash
+sudo grep 'temporary password' /var/log/mysqld.log
+```
+
+**Connect with temporary password:**
+
+```bash
+mysql -u root -p
+```
+
+**Set a custom root password (required before any other operations):**
+
+```sql
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'Passwd@12';
+FLUSH PRIVILEGES;
+```
+
+**Reconnect with new password:**
+
+```bash
+mysql -u root -p
+```
+
+**Create a sample database and table:**
+
+```sql
+CREATE DATABASE IF NOT EXISTS demodb;
+
+SHOW DATABASES;
+
+CREATE TABLE demodb.persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+USE demodb;
+
+SHOW TABLES;
+```
+
+> Data stored in EC2-hosted MySQL lives on the EBS volume attached to the instance — not in RDS. If the instance is terminated, data is lost unless the EBS volume is preserved separately.
+
+---
+
 ## ✅ What I Practiced
 - Created VPC with 2 public + 2 private subnets across 2 AZs
 - Created RDS MySQL in private subnet (subnet group with private subnets)
@@ -305,7 +381,8 @@ This is the same pattern as EBS snapshot → copy → restore in a new region.
 - SSH'd into bastion, installed MySQL client (`mariadb105`)
 - Connected to private RDS from bastion using `mysql -h <endpoint> -u admin -p`
 - Verified data stored in RDS, not on bastion EC2
-- Installed MySQL server on EC2 separately — confirmed EC2 as DB host vs RDS pattern
+- Installed MySQL 8.0 community server on EC2 — ran full setup: install → start → get temp password → reset password → create DB and table
+- Confirmed EC2-hosted MySQL stores data on EBS, not RDS — understanding the architectural difference
 - Took manual snapshot of RDS instance
 
 ---
