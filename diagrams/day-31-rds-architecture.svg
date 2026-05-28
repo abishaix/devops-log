@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="450" y="32" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">AWS Three-Tier Architecture with RDS Read Replica + Proxy</text>
+
+  <!-- ── VPC boundary ── -->
+  <rect x="40" y="50" width="820" height="555" rx="12" fill="none" stroke="#5c85d6" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="56" y="70" font-size="11" fill="#5c85d6" font-weight="bold">VPC — 10.0.0.0/16</text>
+
+  <!-- ─── Internet / User ─── -->
+  <rect x="370" y="60" width="160" height="38" rx="8" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1.5"/>
+  <text x="450" y="84" text-anchor="middle" font-size="12" fill="#1a1a2e">🌐  Internet / Users</text>
+
+  <!-- Arrow down to ALB public -->
+  <line x1="450" y1="98" x2="450" y2="120" stroke="#4a90d9" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="465" y="114" font-size="10" fill="#666">HTTPS</text>
+
+  <!-- ─── Public ALB ─── -->
+  <rect x="320" y="120" width="260" height="36" rx="8" fill="#fff3cd" stroke="#e6a817" stroke-width="1.5"/>
+  <text x="450" y="143" text-anchor="middle" font-size="12" fill="#1a1a2e">ALB — Public Load Balancer</text>
+
+  <!-- Arrow to frontend zone -->
+  <line x1="350" y1="156" x2="220" y2="196" stroke="#e6a817" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="550" y1="156" x2="680" y2="196" stroke="#e6a817" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ─── Frontend Subnet ─── -->
+  <rect x="60" y="195" width="220" height="70" rx="8" fill="#e8f8ee" stroke="#34a853" stroke-width="1.5"/>
+  <text x="170" y="215" text-anchor="middle" font-size="10" fill="#34a853" font-weight="bold">Public Subnet — us-east-1a</text>
+  <text x="170" y="235" text-anchor="middle" font-size="12" fill="#1a1a2e">Frontend Server 1</text>
+  <text x="170" y="252" text-anchor="middle" font-size="10" fill="#555">HTML / CSS / JS</text>
+
+  <rect x="620" y="195" width="220" height="70" rx="8" fill="#e8f8ee" stroke="#34a853" stroke-width="1.5"/>
+  <text x="730" y="215" text-anchor="middle" font-size="10" fill="#34a853" font-weight="bold">Public Subnet — us-east-1b</text>
+  <text x="730" y="235" text-anchor="middle" font-size="12" fill="#1a1a2e">Frontend Server 2</text>
+  <text x="730" y="252" text-anchor="middle" font-size="10" fill="#555">HTML / CSS / JS</text>
+
+  <!-- Arrows to internal ALB -->
+  <line x1="200" y1="265" x2="340" y2="305" stroke="#34a853" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="700" y1="265" x2="560" y2="305" stroke="#34a853" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ─── Internal ALB ─── -->
+  <rect x="300" y="305" width="300" height="36" rx="8" fill="#fff3cd" stroke="#e6a817" stroke-width="1.5"/>
+  <text x="450" y="328" text-anchor="middle" font-size="12" fill="#1a1a2e">ALB — Internal Load Balancer</text>
+
+  <!-- Arrows to backend -->
+  <line x1="330" y1="341" x2="210" y2="385" stroke="#e6a817" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="570" y1="341" x2="690" y2="385" stroke="#e6a817" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ─── Backend Subnet ─── -->
+  <rect x="60" y="384" width="220" height="70" rx="8" fill="#f0eaff" stroke="#7c4dff" stroke-width="1.5"/>
+  <text x="170" y="404" text-anchor="middle" font-size="10" fill="#7c4dff" font-weight="bold">Private Subnet — us-east-1a</text>
+  <text x="170" y="424" text-anchor="middle" font-size="12" fill="#1a1a2e">Backend Server 1</text>
+  <text x="170" y="441" text-anchor="middle" font-size="10" fill="#555">Python / Node.js / Java</text>
+
+  <rect x="620" y="384" width="220" height="70" rx="8" fill="#f0eaff" stroke="#7c4dff" stroke-width="1.5"/>
+  <text x="730" y="404" text-anchor="middle" font-size="10" fill="#7c4dff" font-weight="bold">Private Subnet — us-east-1b</text>
+  <text x="730" y="424" text-anchor="middle" font-size="12" fill="#1a1a2e">Backend Server 2</text>
+  <text x="730" y="441" text-anchor="middle" font-size="10" fill="#555">Python / Node.js / Java</text>
+
+  <!-- Arrows to RDS Proxy -->
+  <line x1="200" y1="454" x2="340" y2="490" stroke="#7c4dff" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="700" y1="454" x2="560" y2="490" stroke="#7c4dff" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ─── RDS Proxy ─── -->
+  <rect x="310" y="489" width="280" height="36" rx="8" fill="#ffeaea" stroke="#e53935" stroke-width="1.5"/>
+  <text x="450" y="512" text-anchor="middle" font-size="12" fill="#1a1a2e">RDS Proxy — Connection Pool</text>
+
+  <!-- Arrows to Master and Replica -->
+  <line x1="380" y1="525" x2="240" y2="560" stroke="#e53935" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="282" y="548" font-size="10" fill="#e53935">writes</text>
+  <line x1="520" y1="525" x2="660" y2="560" stroke="#e53935" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="565" y="548" font-size="10" fill="#e53935">reads</text>
+
+  <!-- ─── Master DB ─── -->
+  <rect x="110" y="558" width="200" height="42" rx="8" fill="#fff8e1" stroke="#f9a825" stroke-width="2"/>
+  <text x="210" y="578" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a2e">Master DB</text>
+  <text x="210" y="594" text-anchor="middle" font-size="10" fill="#555">Writer — MySQL / PostgreSQL</text>
+
+  <!-- Replication arrow -->
+  <line x1="310" y1="579" x2="590" y2="579" stroke="#f9a825" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr2)"/>
+  <text x="450" y="573" text-anchor="middle" font-size="10" fill="#f9a825">sync replication</text>
+
+  <!-- ─── Read Replica ─── -->
+  <rect x="590" y="558" width="200" height="42" rx="8" fill="#e8f8ee" stroke="#34a853" stroke-width="2"/>
+  <text x="690" y="578" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a2e">Read Replica</text>
+  <text x="690" y="594" text-anchor="middle" font-size="10" fill="#555">Reader — GET requests only</text>
+
+  <!-- ── Arrowhead defs ── -->
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#888"/>
+    </marker>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f9a825"/>
+    </marker>
+  </defs>
+
+  <!-- ── Legend ── -->
+  <rect x="56" y="92" width="130" height="92" rx="6" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="66" y="108" font-size="10" font-weight="bold" fill="#333">Legend</text>
+  <rect x="66" y="114" width="12" height="10" fill="#e8f8ee" stroke="#34a853"/>
+  <text x="82" y="123" font-size="10" fill="#333">Frontend</text>
+  <rect x="66" y="128" width="12" height="10" fill="#f0eaff" stroke="#7c4dff"/>
+  <text x="82" y="137" font-size="10" fill="#333">Backend</text>
+  <rect x="66" y="142" width="12" height="10" fill="#fff8e1" stroke="#f9a825"/>
+  <text x="82" y="151" font-size="10" fill="#333">Database (Master)</text>
+  <rect x="66" y="156" width="12" height="10" fill="#e8f8ee" stroke="#34a853"/>
+  <text x="82" y="165" font-size="10" fill="#333">Read Replica</text>
+
+</svg>
