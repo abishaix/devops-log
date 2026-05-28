@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="480" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="430" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">Lab 12 — RDS MySQL Setup + Workbench Connection (us-west-2)</text>
+
+  <!-- VPC boundary -->
+  <rect x="30" y="40" width="680" height="400" rx="12" fill="none" stroke="#5c85d6" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="48" y="60" font-size="11" fill="#5c85d6" font-weight="bold">VPC — rds-practice-vpc-vpc — 10.0.0.0/16</text>
+
+  <!-- IGW -->
+  <rect x="50" y="68" width="160" height="36" rx="6" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1.5"/>
+  <text x="130" y="91" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a2e">Internet Gateway</text>
+
+  <!-- AZ 1a -->
+  <rect x="50" y="120" width="290" height="150" rx="8" fill="#fff9e6" stroke="#f9a825" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <text x="195" y="138" text-anchor="middle" font-size="10" fill="#f9a825" font-weight="bold">us-west-2a</text>
+
+  <!-- Public subnet 1a -->
+  <rect x="65" y="145" width="260" height="60" rx="6" fill="#e8f8ee" stroke="#34a853" stroke-width="1.2"/>
+  <text x="195" y="163" text-anchor="middle" font-size="10" fill="#34a853" font-weight="bold">Public Subnet — 10.0.0.0/20</text>
+  <text x="195" y="180" text-anchor="middle" font-size="10" fill="#555">rds-practice-vpc-subnet-public1-us-west-2a</text>
+  <text x="195" y="198" text-anchor="middle" font-size="9" fill="#888">Used in RDS subnet group</text>
+
+  <!-- Private subnet 1a -->
+  <rect x="65" y="215" width="260" height="44" rx="6" fill="#f0eaff" stroke="#7c4dff" stroke-width="1.2"/>
+  <text x="195" y="233" text-anchor="middle" font-size="10" fill="#7c4dff" font-weight="bold">Private Subnet — 10.0.128.0/20</text>
+  <text x="195" y="250" text-anchor="middle" font-size="9" fill="#888">rds-practice-vpc-subnet-private1-us-west-2a</text>
+
+  <!-- AZ 1b -->
+  <rect x="370" y="120" width="320" height="260" rx="8" fill="#fff9e6" stroke="#f9a825" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <text x="530" y="138" text-anchor="middle" font-size="10" fill="#f9a825" font-weight="bold">us-west-2b</text>
+
+  <!-- Public subnet 1b -->
+  <rect x="385" y="145" width="290" height="60" rx="6" fill="#e8f8ee" stroke="#34a853" stroke-width="1.2"/>
+  <text x="530" y="163" text-anchor="middle" font-size="10" fill="#34a853" font-weight="bold">Public Subnet — 10.0.16.0/20</text>
+  <text x="530" y="180" text-anchor="middle" font-size="10" fill="#555">rds-practice-vpc-subnet-public2-us-west-2b</text>
+  <text x="530" y="198" text-anchor="middle" font-size="9" fill="#888">Used in RDS subnet group</text>
+
+  <!-- Private subnet 1b -->
+  <rect x="385" y="215" width="290" height="44" rx="6" fill="#f0eaff" stroke="#7c4dff" stroke-width="1.2"/>
+  <text x="530" y="233" text-anchor="middle" font-size="10" fill="#7c4dff" font-weight="bold">Private Subnet — 10.0.144.0/20</text>
+  <text x="530" y="250" text-anchor="middle" font-size="9" fill="#888">rds-practice-vpc-subnet-private2-us-west-2b</text>
+
+  <!-- RDS Instance -->
+  <rect x="385" y="275" width="290" height="90" rx="8" fill="#fff8e1" stroke="#f9a825" stroke-width="2"/>
+  <text x="530" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a2e">RDS MySQL — rds-practice-db</text>
+  <text x="530" y="313" text-anchor="middle" font-size="10" fill="#555">db.t4g.micro  |  MySQL 8.4.8</text>
+  <text x="530" y="329" text-anchor="middle" font-size="10" fill="#555">Public access: ON  |  Port 3306</text>
+  <text x="530" y="345" text-anchor="middle" font-size="10" fill="#34a853">Endpoint: rds-practice-db.cpumwuw0u34t</text>
+  <text x="530" y="360" text-anchor="middle" font-size="10" fill="#34a853">.us-west-2.rds.amazonaws.com</text>
+
+  <!-- SG label -->
+  <rect x="385" y="375" width="290" height="36" rx="6" fill="#ffeaea" stroke="#e53935" stroke-width="1.2"/>
+  <text x="530" y="393" text-anchor="middle" font-size="11" font-weight="bold" fill="#e53935">SG: rds-practice-sg</text>
+  <text x="530" y="406" text-anchor="middle" font-size="10" fill="#555">Inbound: 3306 from 31.223.91.115/32 (My IP)</text>
+
+  <!-- Route table note -->
+  <rect x="50" y="295" width="290" height="36" rx="6" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="195" y="313" text-anchor="middle" font-size="10" fill="#555">Route Table: 0.0.0.0/0 → IGW</text>
+  <text x="195" y="328" text-anchor="middle" font-size="9" fill="#888">public subnets associated</text>
+
+  <!-- Arrow IGW → public subnets -->
+  <line x1="130" y1="104" x2="130" y2="145" stroke="#4a90d9" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Arrow laptop → RDS -->
+  <line x1="790" y1="320" x2="675" y2="320" stroke="#34a853" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="800" y="315" font-size="10" fill="#34a853">port 3306</text>
+
+  <!-- Laptop box -->
+  <rect x="740" y="270" width="110" height="100" rx="8" fill="#f0f4ff" stroke="#5c85d6" stroke-width="1.5"/>
+  <text x="795" y="295" text-anchor="middle" font-size="20">💻</text>
+  <text x="795" y="318" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a2e">Laptop</text>
+  <text x="795" y="334" text-anchor="middle" font-size="10" fill="#555">MySQL</text>
+  <text x="795" y="348" text-anchor="middle" font-size="10" fill="#555">Workbench</text>
+  <text x="795" y="362" text-anchor="middle" font-size="9" fill="#888">Izmir, TR</text>
+
+  <!-- DB hierarchy -->
+  <rect x="50" y="350" width="290" height="76" rx="8" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="195" y="368" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">RDS Hierarchy</text>
+  <text x="195" y="385" text-anchor="middle" font-size="10" fill="#555">Instance (rds-practice-db)</text>
+  <text x="195" y="400" text-anchor="middle" font-size="10" fill="#555">└── Database (testdb)</text>
+  <text x="195" y="415" text-anchor="middle" font-size="10" fill="#555">    └── Table (orders) — 4 records</text>
+
+  <!-- Arrowhead defs -->
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4a90d9"/>
+    </marker>
+    <marker id="arrG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#34a853"/>
+    </marker>
+  </defs>
+
+</svg>
