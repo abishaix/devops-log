@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="500" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="440" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">Lab 13 — RDS Read Replica: Three Tests</text>
+
+  <!-- VPC boundary -->
+  <rect x="30" y="40" width="820" height="310" rx="12" fill="none" stroke="#5c85d6" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="48" y="60" font-size="11" fill="#5c85d6" font-weight="bold">VPC — rds-practice-vpc-vpc — 10.0.0.0/16  |  us-west-2</text>
+
+  <!-- Master DB -->
+  <rect x="80" y="75" width="280" height="110" rx="8" fill="#fff8e1" stroke="#f9a825" stroke-width="2"/>
+  <text x="220" y="97" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a2e">Master DB — rds-practice-db</text>
+  <text x="220" y="115" text-anchor="middle" font-size="10" fill="#555">db.t4g.micro  |  MySQL 8.4.8  |  us-west-2b</text>
+  <text x="220" y="131" text-anchor="middle" font-size="10" fill="#34a853">Writer endpoint  |  Accepts all writes</text>
+  <text x="220" y="147" text-anchor="middle" font-size="10" fill="#555">testdb → orders (5 records)</text>
+  <text x="220" y="163" text-anchor="middle" font-size="10" fill="#e53935">→ Deleted in Test 3</text>
+
+  <!-- Replication arrow -->
+  <line x1="360" y1="130" x2="490" y2="130" stroke="#f9a825" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrY)"/>
+  <text x="425" y="122" text-anchor="middle" font-size="10" fill="#f9a825">auto sync</text>
+  <text x="425" y="136" text-anchor="middle" font-size="9" fill="#888">0s lag</text>
+
+  <!-- Read Replica -->
+  <rect x="490" y="75" width="320" height="110" rx="8" fill="#e8f8ee" stroke="#34a853" stroke-width="2"/>
+  <text x="650" y="97" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a2e">Read Replica — rds-practice-replica</text>
+  <text x="650" y="115" text-anchor="middle" font-size="10" fill="#555">db.t4g.micro  |  MySQL 8.4.8  |  us-west-2b</text>
+  <text x="650" y="131" text-anchor="middle" font-size="10" fill="#34a853">Reader endpoint  |  GET requests only</text>
+  <text x="650" y="147" text-anchor="middle" font-size="10" fill="#e53935">INSERT → Error 1290 (read-only)</text>
+  <text x="650" y="163" text-anchor="middle" font-size="10" fill="#7c4dff">→ Promotes to standalone master in Test 3</text>
+
+  <!-- Test boxes -->
+  <!-- Test 1 -->
+  <rect x="50" y="210" width="240" height="120" rx="8" fill="#f0f4ff" stroke="#5c85d6" stroke-width="1.5"/>
+  <text x="170" y="230" text-anchor="middle" font-size="11" font-weight="bold" fill="#5c85d6">Test 1 — Replication</text>
+  <text x="170" y="248" text-anchor="middle" font-size="10" fill="#555">INSERT into master</text>
+  <text x="170" y="264" text-anchor="middle" font-size="10" fill="#555">→ SELECT on replica</text>
+  <text x="170" y="282" text-anchor="middle" font-size="11" fill="#34a853">✅ All 5 rows appear on replica</text>
+  <text x="170" y="298" text-anchor="middle" font-size="10" fill="#888">Automatic — no manual sync</text>
+  <text x="170" y="318" text-anchor="middle" font-size="9" fill="#888">SELECT * FROM testdb.orders → 5 rows</text>
+
+  <!-- Test 2 -->
+  <rect x="320" y="210" width="240" height="120" rx="8" fill="#fff5f5" stroke="#e53935" stroke-width="1.5"/>
+  <text x="440" y="230" text-anchor="middle" font-size="11" font-weight="bold" fill="#e53935">Test 2 — Read-only</text>
+  <text x="440" y="248" text-anchor="middle" font-size="10" fill="#555">INSERT into replica</text>
+  <text x="440" y="264" text-anchor="middle" font-size="10" fill="#555">while master is running</text>
+  <text x="440" y="282" text-anchor="middle" font-size="11" fill="#e53935">❌ Error 1290 — read-only</text>
+  <text x="440" y="298" text-anchor="middle" font-size="10" fill="#888">Replica rejects all writes</text>
+  <text x="440" y="318" text-anchor="middle" font-size="9" fill="#888">MySQL --read-only flag set by RDS</text>
+
+  <!-- Test 3 -->
+  <rect x="590" y="210" width="240" height="120" rx="8" fill="#f0eaff" stroke="#7c4dff" stroke-width="1.5"/>
+  <text x="710" y="230" text-anchor="middle" font-size="11" font-weight="bold" fill="#7c4dff">Test 3 — Promotion</text>
+  <text x="710" y="248" text-anchor="middle" font-size="10" fill="#555">Delete master</text>
+  <text x="710" y="264" text-anchor="middle" font-size="10" fill="#555">→ INSERT into replica</text>
+  <text x="710" y="282" text-anchor="middle" font-size="11" fill="#34a853">✅ 1 row affected</text>
+  <text x="710" y="298" text-anchor="middle" font-size="10" fill="#888">Replica → standalone master</text>
+  <text x="710" y="318" text-anchor="middle" font-size="9" fill="#888">Cannot create new replicas from it</text>
+
+  <!-- Laptop -->
+  <rect x="350" y="370" width="180" height="60" rx="8" fill="#f0f4ff" stroke="#5c85d6" stroke-width="1.5"/>
+  <text x="440" y="393" text-anchor="middle" font-size="20">💻</text>
+  <text x="440" y="415" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a2e">MySQL Workbench</text>
+  <text x="440" y="428" text-anchor="middle" font-size="9" fill="#888">Two connections: master + replica</text>
+
+  <!-- Arrows laptop to DBs -->
+  <line x1="380" y1="370" x2="250" y2="185" stroke="#5c85d6" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrB)"/>
+  <line x1="500" y1="370" x2="600" y2="185" stroke="#5c85d6" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrB)"/>
+
+  <!-- Summary box -->
+  <rect x="30" y="450" width="820" height="38" rx="6" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="440" y="467" text-anchor="middle" font-size="10" fill="#555">Replication: master → replica (one-way, automatic)  |  Replica: read-only while master exists  |  Promotion: auto on master delete → standalone (writes ✅, new replicas ❌)</text>
+
+  <!-- Arrowhead defs -->
+  <defs>
+    <marker id="arrY" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f9a825"/>
+    </marker>
+    <marker id="arrB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5c85d6"/>
+    </marker>
+  </defs>
+
+</svg>
