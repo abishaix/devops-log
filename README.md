@@ -1,4 +1,4 @@
-# DevOps Log — Abishai Muthyala
+# DevOps Log — abishaix
 
 Hands-on DevOps learning log — AWS notes, labs, diagrams, and projects.
 
