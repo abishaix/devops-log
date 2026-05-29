@@ -40,6 +40,9 @@ No NAT gateway — this lab only connects servers, it doesn't install packages, 
 ## 🏗️ Architecture Diagram
 ![lab-15 VPC peering architecture](../diagrams/lab-15-vpc-peering.svg)
 
+**Hand-drawn:**
+![hand-drawn VPC peering architecture](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-15/vpc-peering-architecture.png)
+
 ---
 
 ## Step by Step
@@ -78,11 +81,13 @@ VPC-B private subnet route table — added the mirror route:
 ```
 
 **6. Secure the backend security group**
-Backend SG inbound: SSH (22) only, source scoped to the front-end side — NOT `0.0.0.0/0`.
+Backend SG inbound: SSH (22) only, source scoped to the front-end's security group — NOT `0.0.0.0/0`, not even a hardcoded IP.
 
 ```
-Type: SSH   Port: 22   Source: sg-09dda85a363093e2c (vpcA-pri-sub)
+Type: SSH   Port: 22   Source: sg-09dda85a363093e2c (front-end SG, vpcA-pri-sub)
 ```
+
+Used **SG-referencing** rather than an IP or CIDR: the rule allows SSH only from instances wearing the front-end's security group. This is the production-correct choice — it survives the front-end being replaced (e.g. by an Auto Scaling group) with a new IP, because the SG membership is what's matched, not the address.
 
 **7. Test across the peering**
 From the front-end (`10.0.0.150`), SSH to the backend's private IP:
@@ -128,7 +133,7 @@ Prompt changed from `ip-10-0-0-150` to `ip-10-0-1-153` — peering working end t
 *Front-end SG inbound — SSH 22 from bastion.*
 
 ![backend instance security group](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-15/vpcB-instance-security-groups.png)
-*Backend SG inbound — SSH 22 scoped to the front-end side.*
+*Backend SG (vpcB-pri-sub) inbound — SSH 22 from source sg-09dda85a363093e2c, the front-end's SG.*
 
 ![SSH across peering](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-15/ec2-ssh-peering-test.png)
 *Prompt changes from ip-10-0-0-150 to ip-10-0-1-153 — peering proven.*
