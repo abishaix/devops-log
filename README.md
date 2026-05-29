@@ -1,6 +1,26 @@
 # DevOps Log — Abishai Muthyala
 
-Personal DevOps learning log documenting AWS, Linux, networking, and infrastructure concepts from bootcamp and hands-on labs.
+Hands-on DevOps learning log — AWS notes, labs, diagrams, and projects.
+
+---
+
+## How to Use This Repo
+
+- Start from the **Progress Tracker** below — each ✅ links directly to the note or lab
+- Read the **day note** first for theory and architecture diagrams
+- Open the **matching lab** to see the hands-on build, commands, and troubleshooting
+
+---
+
+## Featured Builds
+
+| Project | What It Is |
+|---------|------------|
+| [Two-Tier Nginx + Flask](practice-logs/lab-08-two-tier-nginx-flask.md) | Public frontend (nginx reverse proxy) + private Flask API on EC2, SG-to-SG security |
+| [VPC Peering](practice-logs/lab-15-vpc-peering.md) | Two isolated VPCs connected via peering, private routing across CIDR boundaries |
+| [RDS Private + Bastion](practice-logs/lab-14-rds-private-bastion.md) | MySQL RDS in private subnet, access via bastion host, snapshots and restore |
+| [IAM Identity Center + SSO](practice-logs/lab-10-identity-center-sso.md) | AWS Organizations, permission sets, SSO login across accounts |
+| [Route 53 Routing Policies](practice-logs/lab-11-route53-routing-policies.md) | Weighted, failover, latency, and geolocation routing with health checks |
 
 ---
 
@@ -52,12 +72,10 @@ Personal DevOps learning log documenting AWS, Linux, networking, and infrastruct
 ```
 devops-log/
 ├── README.md
-├── notes/
-│   ├── day-01 through day-35 (Days 15 and 20 not held)
-├── practice-logs/
-│   ├── lab-01 through lab-15
-├── diagrams/
-└── screenshots/
+├── notes/          # Day-by-day theory notes with architecture diagrams
+├── practice-logs/  # Hands-on lab write-ups with commands and screenshots
+├── diagrams/       # SVG architecture diagrams
+└── screenshots/    # AWS console and terminal screenshots per lab
 ```
 
 ---
