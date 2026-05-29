@@ -81,7 +81,7 @@ VPC-B private subnet route table — added the mirror route:
 Backend SG inbound: SSH (22) only, source scoped to the front-end side — NOT `0.0.0.0/0`.
 
 ```
-Type: SSH   Port: 22   Source: <!-- FILL IN: front-end IP /32, VPC-A private subnet CIDR 10.0.0.144/28, or front-end SG ID -->
+Type: SSH   Port: 22   Source: sg-09dda85a363093e2c (vpcA-pri-sub)
 ```
 
 **7. Test across the peering**
