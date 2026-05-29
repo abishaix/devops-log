@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="620" style="background:#ffffff;font-family:Arial,sans-serif">
+  <style>
+    .title{font-size:20px;font-weight:bold;fill:#232f3e}
+    .vpclbl{font-size:14px;font-weight:bold;fill:#1a73e8}
+    .subnetlbl{font-size:12px;font-weight:bold;fill:#3f6212}
+    .node{font-size:12px;font-weight:bold;fill:#ffffff}
+    .nodesub{font-size:10px;fill:#ffffff}
+    .small{font-size:11px;fill:#444}
+    .rt{font-size:10px;fill:#7c2d12;font-weight:bold}
+    .pcx{font-size:13px;font-weight:bold;fill:#ffffff}
+    .flow{font-size:10px;fill:#b91c1c;font-weight:bold}
+  </style>
+
+  <text x="30" y="34" class="title">Day 35 — VPC Peering: 3-Server Test Topology (private-to-private, no internet)</text>
+
+  <!-- Laptop -->
+  <rect x="20" y="250" width="90" height="50" rx="6" fill="#475569"/>
+  <text x="65" y="272" text-anchor="middle" class="node">YOU</text>
+  <text x="65" y="288" text-anchor="middle" class="nodesub">laptop</text>
+  <text x="65" y="320" text-anchor="middle" class="small">SSH key</text>
+
+  <!-- VPC A box -->
+  <rect x="140" y="80" width="430" height="470" rx="10" fill="none" stroke="#1a73e8" stroke-width="2"/>
+  <text x="155" y="104" class="vpclbl">VPC-A  10.0.0.0/16  (project-a)</text>
+
+  <!-- Public subnet A -->
+  <rect x="160" y="120" width="390" height="150" rx="8" fill="#eef6ff" stroke="#3b82f6" stroke-dasharray="4"/>
+  <text x="175" y="140" class="subnetlbl">Public Subnet  10.0.0.0/24  (IGW route present)</text>
+  <rect x="200" y="155" width="160" height="70" rx="6" fill="#dd6b20"/>
+  <text x="280" y="183" text-anchor="middle" class="node">Bastion Host</text>
+  <text x="280" y="200" text-anchor="middle" class="nodesub">public server</text>
+  <text x="280" y="214" text-anchor="middle" class="nodesub">has public IP</text>
+
+  <!-- Private subnet A -->
+  <rect x="160" y="290" width="390" height="240" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-dasharray="4"/>
+  <text x="175" y="310" class="subnetlbl">Private Subnet  10.0.1.0/24</text>
+  <rect x="200" y="325" width="160" height="70" rx="6" fill="#16a34a"/>
+  <text x="280" y="353" text-anchor="middle" class="node">Front-end</text>
+  <text x="280" y="369" text-anchor="middle" class="nodesub">private server</text>
+  <text x="280" y="383" text-anchor="middle" class="nodesub">10.0.1.x</text>
+  <text x="175" y="430" class="rt">Route table (private-a):</text>
+  <text x="175" y="446" class="rt">10.0.0.0/16 → local</text>
+  <text x="175" y="462" class="rt">10.1.0.0/16 → pcx ◄── required</text>
+
+  <!-- VPC B box -->
+  <rect x="700" y="80" width="220" height="470" rx="10" fill="none" stroke="#1a73e8" stroke-width="2"/>
+  <text x="715" y="104" class="vpclbl">VPC-B  10.1.0.0/16</text>
+
+  <!-- Private subnet B -->
+  <rect x="715" y="290" width="190" height="240" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-dasharray="4"/>
+  <text x="725" y="310" class="subnetlbl">Private Subnet 10.1.0.0/24</text>
+  <rect x="735" y="325" width="150" height="70" rx="6" fill="#16a34a"/>
+  <text x="810" y="353" text-anchor="middle" class="node">Backend</text>
+  <text x="810" y="369" text-anchor="middle" class="nodesub">server / RDS</text>
+  <text x="810" y="383" text-anchor="middle" class="nodesub">10.1.0.x</text>
+  <text x="725" y="430" class="rt">Route table (private-b):</text>
+  <text x="725" y="446" class="rt">10.1.0.0/16 → local</text>
+  <text x="725" y="462" class="rt">10.0.0.0/16 → pcx ◄── required</text>
+
+  <!-- Peering connection -->
+  <rect x="592" y="295" width="84" height="84" rx="42" fill="#7c3aed"/>
+  <text x="634" y="333" text-anchor="middle" class="pcx">pcx</text>
+  <text x="634" y="350" text-anchor="middle" class="nodesub">peering</text>
+  <text x="634" y="400" text-anchor="middle" class="small">private link</text>
+  <text x="634" y="415" text-anchor="middle" class="small">AWS backbone</text>
+  <text x="634" y="430" text-anchor="middle" class="small">NO internet</text>
+
+  <!-- Arrows: laptop -> bastion -->
+  <line x1="110" y1="270" x2="198" y2="195" stroke="#b91c1c" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="120" y="225" class="flow">1. SSH</text>
+
+  <!-- bastion -> frontend (same VPC, direct) -->
+  <line x1="280" y1="225" x2="280" y2="323" stroke="#b91c1c" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="288" y="280" class="flow">2. hop (same VPC, local route)</text>
+
+  <!-- frontend -> pcx -->
+  <line x1="360" y1="360" x2="590" y2="345" stroke="#b91c1c" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="400" y="340" class="flow">3. via route table → pcx</text>
+
+  <!-- pcx -> backend -->
+  <line x1="676" y1="345" x2="733" y2="360" stroke="#b91c1c" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="600" y="290" class="flow">4. → backend (private IP)</text>
+
+  <!-- SG note -->
+  <rect x="715" y="120" width="190" height="150" rx="8" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="725" y="140" class="subnetlbl" fill="#9a3412">Backend SG inbound</text>
+  <text x="725" y="160" class="small">SSH 22 from — NOT 0.0.0.0/0</text>
+  <text x="725" y="180" class="small">Source options:</text>
+  <text x="725" y="198" class="small">• front-end IP /32</text>
+  <text x="725" y="216" class="small">• VPC-A subnet CIDR</text>
+  <text x="725" y="234" class="small">  (10.0.1.0/24)</text>
+  <text x="725" y="252" class="small">• front-end SG ID</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#b91c1c"/>
+    </marker>
+  </defs>
+</svg>
