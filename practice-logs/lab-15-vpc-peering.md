@@ -40,9 +40,6 @@ No NAT gateway — this lab only connects servers, it doesn't install packages, 
 ## 🏗️ Architecture Diagram
 ![lab-15 VPC peering architecture](../diagrams/lab-15-vpc-peering.svg)
 
-**Hand-drawn:**
-![hand-drawn VPC peering architecture](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-15/vpc-peering-handdrawn.png)
-
 ---
 
 ## Step by Step
@@ -123,6 +120,9 @@ Prompt changed from `ip-10-0-0-150` to `ip-10-0-1-153` — peering working end t
 
 ![VPC-B private subnet routes](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-15/vpcB-private2-subnet-routes.png)
 *VPC-B private subnet route table — 10.0.0.0/24 → pcx.*
+
+![VPC-A public subnet routes](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-15/vpcA-public-subnet-routes.png)
+*VPC-A public subnet route table — IGW route (bastion path, not part of peering).*
 
 ![front-end instance security group](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-15/vpcA-instance-security-groups.png)
 *Front-end SG inbound — SSH 22 from bastion.*
