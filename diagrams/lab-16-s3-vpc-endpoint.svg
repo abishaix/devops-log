@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="480" style="background:#ffffff;font-family:Arial,sans-serif">
+  <style>
+    .title{font-size:18px;font-weight:bold;fill:#232f3e}
+    .vpclbl{font-size:13px;font-weight:bold;fill:#1a73e8}
+    .sublbl{font-size:11px;font-weight:bold;fill:#3f6212}
+    .node{font-size:12px;font-weight:bold;fill:#ffffff}
+    .nodesub{font-size:10px;fill:#ffffff}
+    .rt{font-size:10px;fill:#7c2d12;font-weight:bold}
+    .flow{font-size:10px;fill:#b91c1c;font-weight:bold}
+    .free{font-size:10px;fill:#15803d;font-weight:bold}
+    .small{font-size:11px;fill:#444}
+  </style>
+
+  <text x="30" y="32" class="title">lab-16 Part 2a — S3 via VPC Gateway Endpoint (private path, no internet)</text>
+
+  <!-- User -->
+  <rect x="20" y="170" width="80" height="50" rx="6" fill="#475569"/>
+  <text x="60" y="192" text-anchor="middle" class="node">User</text>
+  <text x="60" y="208" text-anchor="middle" class="nodesub">console</text>
+
+  <!-- AWS Cloud boundary -->
+  <rect x="115" y="50" width="660" height="400" rx="12" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6"/>
+  <text x="130" y="70" style="font-size:11px;font-weight:bold;fill:#b45309">AWS Cloud</text>
+
+  <!-- Region -->
+  <rect x="128" y="78" width="630" height="358" rx="10" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="142" y="96" style="font-size:11px;font-weight:bold;fill:#0891b2">us-west-2 / Oregon</text>
+
+  <!-- VPC -->
+  <rect x="142" y="105" width="400" height="310" rx="10" fill="none" stroke="#1a73e8" stroke-width="2"/>
+  <text x="158" y="124" class="vpclbl">VPC  10.0.0.0/24  (mod1-vpc)</text>
+
+  <!-- Public subnet -->
+  <rect x="158" y="133" width="170" height="90" rx="8" fill="#eef6ff" stroke="#3b82f6" stroke-dasharray="4"/>
+  <text x="170" y="150" class="sublbl">Public Subnet</text>
+  <rect x="178" y="158" width="130" height="52" rx="6" fill="#dd6b20"/>
+  <text x="243" y="180" text-anchor="middle" class="node">Bastion</text>
+  <text x="243" y="196" text-anchor="middle" class="nodesub">35.93.224.251</text>
+
+  <!-- IGW (outside VPC, inside region) -->
+  <rect x="350" y="133" width="120" height="52" rx="8" fill="#0369a1"/>
+  <text x="410" y="156" text-anchor="middle" class="node">IGW</text>
+  <text x="410" y="170" text-anchor="middle" class="nodesub">user access only</text>
+
+  <!-- Private subnet -->
+  <rect x="158" y="243" width="365" height="155" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-dasharray="4"/>
+  <text x="170" y="261" class="sublbl">Private Subnet  10.0.0.144/28</text>
+  <rect x="175" y="272" width="130" height="58" rx="6" fill="#16a34a"/>
+  <text x="240" y="297" text-anchor="middle" class="node">ec2-private</text>
+  <text x="240" y="313" text-anchor="middle" class="nodesub">10.0.140.142</text>
+
+  <!-- Route table -->
+  <rect x="320" y="272" width="190" height="75" rx="6" fill="#fefce8" stroke="#ca8a04"/>
+  <text x="330" y="290" class="rt">Route table (private):</text>
+  <text x="330" y="306" class="rt">10.0.0.0/24   → local</text>
+  <text x="330" y="322" class="rt">pl-xxxxxxxx   → vpce  ◄ auto-added</text>
+  <text x="330" y="338" class="free">no 0.0.0.0/0 route — no internet</text>
+
+  <!-- Gateway Endpoint (on VPC boundary) -->
+  <rect x="560" y="243" width="140" height="80" rx="10" fill="#7c3aed"/>
+  <text x="630" y="275" text-anchor="middle" class="node">Gateway</text>
+  <text x="630" y="291" text-anchor="middle" class="node">Endpoint</text>
+  <text x="630" y="310" text-anchor="middle" class="free">FREE</text>
+
+  <!-- S3 (inside AWS cloud, outside VPC) -->
+  <rect x="580" y="355" width="140" height="70" rx="10" fill="#dd6b20"/>
+  <text x="650" y="385" text-anchor="middle" class="node">Amazon S3</text>
+  <text x="650" y="401" text-anchor="middle" class="nodesub">s3-nat-access-bucket</text>
+  <text x="650" y="415" text-anchor="middle" class="nodesub">AWS backbone only</text>
+
+  <!-- Internet (crossed out) -->
+  <rect x="760" y="133" width="100" height="60" rx="30" fill="#e5e7eb" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="810" y="160" text-anchor="middle" style="font-size:11px;fill:#6b7280">Internet</text>
+  <text x="810" y="176" text-anchor="middle" style="font-size:11px;fill:#6b7280">❌ no path</text>
+
+  <!-- Arrows -->
+  <line x1="100" y1="192" x2="140" y2="175" stroke="#b91c1c" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="88" y="182" class="flow">SSH</text>
+  <line x1="243" y1="210" x2="243" y2="270" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr)"/>
+  <line x1="305" y1="301" x2="318" y2="301" stroke="#b91c1c" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="510" y1="301" x2="558" y2="283" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#parr)"/>
+  <text x="490" y="295" style="font-size:10px;font-weight:bold;fill:#7c3aed">pl-xxx→vpce</text>
+  <line x1="630" y1="323" x2="650" y2="353" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#parr)"/>
+  <text x="560" y="348" style="font-size:10px;font-weight:bold;fill:#15803d">AWS backbone</text>
+  <line x1="470" y1="159" x2="540" y2="159" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="3"/>
+  <text x="476" y="153" style="font-size:9px;fill:#9ca3af">no S3 traffic</text>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#b91c1c"/>
+    </marker>
+    <marker id="parr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+</svg>

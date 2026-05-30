@@ -147,16 +147,140 @@ IAM role       → STS temporary credentials, rotate every 1-12 hours
 
 ---
 
-## Part 2 — S3 Access via VPC Gateway Endpoint
+## Part 2a — S3 Access via VPC Gateway Endpoint
 
-*To be completed after gateway endpoint and interface endpoint practicals.*
+### What this proves
+Same private EC2, same IAM role, same S3 bucket — but NAT route deleted. S3 is reachable via the gateway endpoint (private AWS backbone). Internet is completely unreachable. Proven by `aws s3 ls` working while `curl ifconfig.me` hangs.
+
+### 🏗️ Architecture Diagram
+![lab-16 VPC endpoint to S3 architecture](../diagrams/lab-16-s3-vpc-endpoint.svg)
+
+**Hand-drawn:**
+![hand-drawn VPC endpoint to S3 architecture](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-16/model2-vpc-endpoint-s3.png)
+
+### How it works
+
+```
+ec2-private (10.0.140.142, no public IP)
+    │
+    ▼
+private subnet route table
+    pl-xxxxxxxx (S3 prefix list) → vpce-xxxxxxxx (gateway endpoint)
+    │
+    ▼
+VPC Gateway Endpoint
+    │  stays on AWS backbone, never touches internet
+    ▼
+S3 bucket (s3-nat-access-bucket) ✓
+
+curl ifconfig.me → hangs (no internet path at all)
+```
+
+### Step by Step
+
+**1. Delete the NAT route from private subnet route table**
+
+VPC → Route Tables → private subnet RT → Routes → Edit routes → delete `0.0.0.0/0 → NAT` → Save.
+
+Note: the route showed **Blackhole** status because the NAT Gateway had already been removed. Either way the internet path was dead.
+
+**2. Confirm S3 is broken without NAT or endpoint**
+
+```bash
+aws s3 ls
+```
+
+Hangs — no path to S3. Ctrl+C.
+
+**3. Create the Gateway Endpoint**
+
+VPC → Endpoints → Create endpoint:
+- Name: `mod1-s3-gateway-endpoint`
+- Type: AWS services
+- Service: `com.amazonaws.us-west-2.s3` (type: **Gateway**)
+- VPC: `mod1-vpc`
+- Route table: private subnet RT (`rtb-047c5dd51e8b28c19`)
+- Create
+
+AWS automatically adds `pl-xxxxxxxx → vpce-xxxxxxxx` to the selected route table. No manual route entry needed.
+
+**4. Verify route appeared automatically**
+
+VPC → Route Tables → private subnet RT → Routes tab:
+
+```
+pl-xxxxxxxx (com.amazonaws.us-west-2.s3)  →  vpce-xxxxxxxx   Active
+```
+
+**5. Test S3 — works via endpoint**
+
+```bash
+aws s3 ls
+```
+
+Result: `2026-05-30 08:51:09 s3-nat-access-bucket` ✓
+
+**6. Test internet — proves no internet path**
+
+```bash
+curl ifconfig.me
+```
+
+Result: hangs, Ctrl+C — no response. No internet access at all. NAT route is gone, and the gateway endpoint only handles S3 traffic, not general internet.
+
+### Key lesson — the contrast with Model-1
+
+```
+Model-1 (NAT):
+  aws s3 ls      → works ✓   (via NAT → internet → S3)
+  curl ifconfig  → 54.190.220.171 ✓  (internet works)
+
+Model-2a (Gateway Endpoint):
+  aws s3 ls      → works ✓   (via endpoint → AWS backbone)
+  curl ifconfig  → hangs ✗   (no internet at all)
+
+Same result for S3. Completely different path. Endpoint is free, private, faster.
+```
+
+### Gateway endpoint key facts
+
+```
+Cost:     FREE
+Services: S3 and DynamoDB only
+How:      route table entry (pl-xxxxx → vpce-xxxxx), added automatically
+ENI:      none created — it's just a route, not a network interface
+Scope:    only subnets whose route tables include the endpoint route can use it
+```
+
+### Screenshots
+
+![create VPC endpoint S3](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-16/create-vpc-endpoint-s3.png)
+*Creating the S3 Gateway Endpoint — AWS services type, Gateway selected.*
+
+![S3 gateway endpoint details](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-16/s3-gateway-endpoint-details.png)
+*Gateway endpoint details showing mod1-s3-gateway-endpoint, Available status.*
+
+![private route table with S3 endpoint](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-16/private-rtb-with-s3-endpoint.png)
+*Private subnet route table — pl-xxxxx → vpce-xxxxx route added automatically.*
+
+![curl timeout S3 via endpoint](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-16/curl-timeout-s3-via-endpoint.png)
+*curl ifconfig.me hanging (no internet) while aws s3 ls works — endpoint proven.*
+
+![EC2 Instance Connect private IP](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-16/ec2-instance-connect-private-ip.png)
+*EC2 Instance Connect Endpoint — connecting to private server directly without bastion.*
+
+---
+
+## Part 2b — Interface Endpoint (Secrets Manager)
+
+*To be completed after Secrets Manager interface endpoint practical.*
 
 ---
 
 ## Cleanup
 
-*(To be completed after Part 2 — delete in dependency order)*
+*(To be completed after Part 2b — delete in dependency order)*
 
 ## Cost
 
-NAT Gateway: ~$0.045/hour + $0.045/GB data processed. Terminate promptly after lab. S3 bucket: free tier. EC2 instances: free tier (t2.micro).
+NAT Gateway: ~$0.045/hour + $0.045/GB data processed. Gateway endpoint: free. EC2 instances: free tier (t2.micro). S3 bucket: free tier. Interface endpoint (Part 2b): ~$0.01/hour per AZ.
