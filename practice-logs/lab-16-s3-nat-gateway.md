@@ -282,14 +282,170 @@ Scope:    only subnets whose route tables include the endpoint route can use it
 
 ## Part 2b — Interface Endpoint (Secrets Manager)
 
-*To be completed after Secrets Manager interface endpoint practical.*
+### What this proves
+Private EC2 reaches Secrets Manager privately via an ENI inside the subnet. No internet, no NAT, no route table entry — DNS resolves the Secrets Manager hostname to the ENI's private IP automatically.
+
+### 🏗️ Architecture Diagram
+![lab-16 interface endpoint Secrets Manager](../diagrams/lab-16-secretsmanager-interface-endpoint.svg)
+
+**Hand-drawn:**
+![hand-drawn interface endpoint architecture](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-16/model3-interface-endpoint-architecture.png)
+
+### How it works
+
+```
+ec2-private calls secretsmanager.us-west-2.amazonaws.com
+    │
+    ▼
+DNS resolves to 10.0.136.123 (ENI private IP inside subnet)
+    │  no route table entry — DNS handles routing automatically
+    ▼
+ENI (elastic network interface, lives in private subnet)
+    │  AWS PrivateLink, stays on AWS backbone
+    ▼
+Secrets Manager ✓
+```
+
+Key difference from gateway endpoint:
+
+```
+Gateway endpoint:   route table entry  pl-xxxxx → vpce   (no ENI, no IP)
+Interface endpoint: ENI with private IP in subnet         (no route table entry)
+```
+
+### Step by Step
+
+**1. Add SecretsManagerReadWrite to IAM role**
+
+IAM → Roles → `ec2-s3-access` → Add permissions → attach `SecretsManagerReadWrite`.
+
+**2. Create the Interface Endpoint**
+
+VPC → Endpoints → Create endpoint:
+- Name: `mod1-secretsmanager-interface-endpoint`
+- Type: AWS services
+- Service: `com.amazonaws.us-west-2.secretsmanager` (type: **Interface**)
+- VPC: `mod1-vpc`
+- Subnet: `mod1-subnet-private1-us-west-2a`
+- Security group: `nat-sec-grp`
+- Private DNS: enabled
+- Create → status: Available
+
+Endpoint ID: `vpce-0c7ceeb5555866fe6`
+
+**3. Verify DNS resolves to ENI private IP**
+
+```bash
+nslookup secretsmanager.us-west-2.amazonaws.com
+```
+
+Result:
+```
+Server:   10.0.0.2
+Address:  10.0.0.2#53
+Name:     secretsmanager.us-west-2.amazonaws.com
+Address:  10.0.136.123
+```
+
+`10.0.136.123` is the ENI's private IP inside the subnet. DNS is routing the request to the endpoint transparently — no code change, no config change on the server.
+
+**4. Fix security group source CIDR**
+
+Initial HTTPS 443 rule used `10.0.0.0/24` as source — but the EC2 is `10.0.140.142` in a `/20` subnet, outside that range. TCP connection timed out. Fixed by changing source to `10.0.140.142/32`.
+
+Lesson: always match the SG source CIDR to the **actual subnet your EC2 lives in**, not an assumed /24.
+
+**5. Test Secrets Manager access**
+
+```bash
+aws secretsmanager list-secrets --region us-west-2
+```
+
+Result: `{"SecretList": []}` ✓ — empty list but connection completed privately. Before the fix: connection timed out. After: instant response.
+
+**6. Prove private path with curl**
+
+```bash
+curl -v https://secretsmanager.us-west-2.amazonaws.com --max-time 5
+```
+
+Shows: `IPv4: 10.0.136.123` — connecting to private ENI IP, not a public endpoint.
+
+### Key lesson — interface vs gateway
+
+```
+Gateway (S3/DynamoDB):
+  mechanism  = route table entry added automatically
+  ENI        = none
+  DNS change = no
+  cost       = FREE
+
+Interface (everything else):
+  mechanism  = ENI created in your subnet with private IP
+  DNS change = yes (private DNS resolves hostname to ENI IP)
+  route table = no change needed
+  cost       = ~$0.01/hour per AZ
+```
+
+### Troubleshooting — SG source CIDR mismatch
+
+```
+Symptom:  curl times out at TCP handshake
+          DNS resolves correctly to ENI IP
+          SG outbound allows all traffic
+          SG inbound HTTPS 443 exists but wrong source
+
+Root cause: source CIDR 10.0.0.0/24 doesn't cover EC2 at 10.0.140.142/20
+Fix:        change source to 10.0.140.142/32 (or correct subnet CIDR 10.0.128.0/20)
+
+Diagnostic command:
+curl -v https://secretsmanager.us-west-2.amazonaws.com --max-time 5
+  → "Trying 10.0.136.123:443... Connection timed out" = SG blocking TCP
+  → TLS handshake completes = SG correct, check IAM
+```
+
+### Screenshots
+
+![IAM role Secrets Manager attached](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-16/iam-role-secretsmanager-attached.png)
+*IAM role ec2-s3-access with SecretsManagerReadWrite attached.*
+
+![Secrets Manager interface endpoint](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-16/secretsmanager-interface-endpoint.png)
+*Interface endpoint vpce-0c7ceeb5555866fe6 — Available, private DNS enabled.*
+
+![SG HTTPS 443 from EC2](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-16/sg-https-443-from-ec2.png)
+*nat-sec-grp inbound HTTPS 443 from 10.0.140.142/32 — fixed source CIDR.*
+
+![Secrets Manager DNS ENI resolution](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-16/secretsmanager-dns-eni-resolution.png)
+*nslookup returning 10.0.136.123 — ENI private IP, DNS routing confirmed.*
+
+![Secrets Manager list empty](https://github.com/abishaix/devops-log/raw/main/screenshots/lab-16/secretsmanager-list-empty.png)
+*aws secretsmanager list-secrets returning empty list — private connection works.*
 
 ---
 
 ## Cleanup
 
-*(To be completed after Part 2b — delete in dependency order)*
+Delete in dependency order:
+
+1. Terminate EC2 instances (bastion + ec2-private) — wait for Terminated state
+2. Delete interface endpoint (`mod1-secretsmanager-interface-endpoint`)
+3. Delete gateway endpoint (`mod1-s3-gateway-endpoint`)
+4. Delete EC2 Instance Connect endpoint (`vpc-ep-s3`)
+5. Delete NAT Gateway — wait for Deleted state
+6. Release Elastic IP (`eipalloc-091239b3a4656f5f7`)
+7. Delete security groups
+8. Delete subnets
+9. Detach and delete IGW
+10. Delete VPC (`mod1-vpc`)
+11. Empty and delete S3 bucket (`s3-nat-access-bucket`)
+
+---
 
 ## Cost
 
-NAT Gateway: ~$0.045/hour + $0.045/GB data processed. Gateway endpoint: free. EC2 instances: free tier (t2.micro). S3 bucket: free tier. Interface endpoint (Part 2b): ~$0.01/hour per AZ.
+NAT Gateway: ~$0.045/hour + $0.045/GB data processed — delete promptly.
+Gateway endpoint: free.
+Interface endpoint: ~$0.01/hour per AZ — delete after lab.
+EC2 instances: free tier (t2.micro).
+S3 bucket: free tier.
+Elastic IP: free while attached to running instance, $0.005/hour if unattached.
