@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="580" style="background:#ffffff;font-family:Arial,sans-serif">
+  <style>
+    .title{font-size:19px;font-weight:bold;fill:#232f3e}
+    .lbl{font-size:13px;font-weight:bold;fill:#232f3e}
+    .sublbl{font-size:11px;fill:#444}
+    .node{font-size:12px;font-weight:bold;fill:#ffffff}
+    .nodesub{font-size:10px;fill:#ffffff}
+    .tag{font-size:11px;font-weight:bold;fill:#ffffff}
+    .rule{font-size:10px;fill:#7c2d12;font-weight:bold}
+    .free{font-size:10px;fill:#15803d;font-weight:bold}
+  </style>
+
+  <text x="30" y="32" class="title">Day 36 — The Three-Connection Model: Peering vs Endpoint vs NAT</text>
+
+  <!-- AWS Cloud boundary -->
+  <rect x="20" y="55" width="780" height="500" rx="12" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6"/>
+  <text x="36" y="76" style="font-size:12px;font-weight:bold;fill:#b45309">AWS Cloud</text>
+
+  <!-- VPC box -->
+  <rect x="40" y="90" width="360" height="440" rx="10" fill="none" stroke="#1a73e8" stroke-width="2"/>
+  <text x="56" y="112" style="font-size:13px;font-weight:bold;fill:#1a73e8">VPC  10.0.0.0/16</text>
+
+  <!-- Public subnet -->
+  <rect x="58" y="122" width="320" height="90" rx="8" fill="#eef6ff" stroke="#3b82f6" stroke-dasharray="4"/>
+  <text x="70" y="140" style="font-size:11px;font-weight:bold;fill:#1d4ed8">Public Subnet</text>
+  <rect x="80" y="150" width="120" height="50" rx="6" fill="#dd6b20"/>
+  <text x="140" y="172" text-anchor="middle" class="node">Bastion</text>
+  <text x="140" y="186" text-anchor="middle" class="nodesub">public IP</text>
+  <rect x="220" y="150" width="130" height="50" rx="6" fill="#0369a1"/>
+  <text x="285" y="172" text-anchor="middle" class="node">NAT Gateway</text>
+  <text x="285" y="186" text-anchor="middle" class="nodesub">for internet egress</text>
+
+  <!-- Private subnet -->
+  <rect x="58" y="230" width="320" height="280" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-dasharray="4"/>
+  <text x="70" y="250" style="font-size:11px;font-weight:bold;fill:#15803d">Private Subnet</text>
+  <rect x="80" y="262" width="140" height="60" rx="6" fill="#16a34a"/>
+  <text x="150" y="287" text-anchor="middle" class="node">Private EC2</text>
+  <text x="150" y="303" text-anchor="middle" class="nodesub">10.0.1.x</text>
+
+  <!-- Gateway endpoint label in subnet -->
+  <rect x="240" y="262" width="120" height="60" rx="6" fill="#7c3aed"/>
+  <text x="300" y="287" text-anchor="middle" class="node">Gateway</text>
+  <text x="300" y="303" text-anchor="middle" class="nodesub">Endpoint (RT)</text>
+  <text x="300" y="318" text-anchor="middle" class="free">FREE</text>
+
+  <!-- Interface endpoint ENI -->
+  <rect x="80" y="350" width="140" height="60" rx="6" fill="#be185d"/>
+  <text x="150" y="375" text-anchor="middle" class="node">Interface</text>
+  <text x="150" y="391" text-anchor="middle" class="nodesub">Endpoint (ENI)</text>
+
+  <!-- EC2 Connect Endpoint -->
+  <rect x="240" y="350" width="120" height="60" rx="6" fill="#0f766e"/>
+  <text x="300" y="375" text-anchor="middle" class="node">EC2 Connect</text>
+  <text x="300" y="391" text-anchor="middle" class="nodesub">Endpoint</text>
+
+  <!-- Route table note -->
+  <rect x="68" y="430" width="300" height="68" rx="6" fill="#fefce8" stroke="#ca8a04"/>
+  <text x="78" y="450" class="rule">Route table (private subnet):</text>
+  <text x="78" y="466" class="rule">10.0.0.0/16  → local</text>
+  <text x="78" y="482" class="rule">pl-S3prefix  → gateway endpoint</text>
+  <text x="78" y="494" class="rule">0.0.0.0/0    → NAT (internet only)</text>
+
+  <!-- VPC B (peering target) -->
+  <rect x="430" y="90" width="180" height="160" rx="10" fill="none" stroke="#1a73e8" stroke-width="2"/>
+  <text x="446" y="112" style="font-size:13px;font-weight:bold;fill:#1a73e8">VPC-B</text>
+  <rect x="448" y="122" width="145" height="110" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-dasharray="4"/>
+  <text x="460" y="140" style="font-size:11px;font-weight:bold;fill:#15803d">Private Subnet</text>
+  <rect x="460" y="152" width="120" height="66" rx="6" fill="#16a34a"/>
+  <text x="520" y="178" text-anchor="middle" class="node">Backend EC2</text>
+  <text x="520" y="194" text-anchor="middle" class="nodesub">10.1.0.x</text>
+  <text x="520" y="208" text-anchor="middle" class="nodesub">VPC peering target</text>
+
+  <!-- S3 -->
+  <rect x="430" y="280" width="160" height="80" rx="10" fill="#dd6b20"/>
+  <text x="510" y="315" text-anchor="middle" class="node">Amazon S3</text>
+  <text x="510" y="333" text-anchor="middle" class="nodesub">outside VPC</text>
+  <text x="510" y="348" text-anchor="middle" class="nodesub">inside AWS cloud</text>
+
+  <!-- Secrets Manager -->
+  <rect x="430" y="390" width="160" height="80" rx="10" fill="#9333ea"/>
+  <text x="510" y="425" text-anchor="middle" class="node">Secrets Manager</text>
+  <text x="510" y="443" text-anchor="middle" class="nodesub">outside VPC</text>
+  <text x="510" y="458" text-anchor="middle" class="nodesub">inside AWS cloud</text>
+
+  <!-- Internet / outside AWS -->
+  <rect x="820" y="200" width="100" height="80" rx="10" fill="#475569"/>
+  <text x="870" y="235" text-anchor="middle" class="node">Internet</text>
+  <text x="870" y="253" text-anchor="middle" class="nodesub">outside AWS</text>
+  <text x="870" y="268" text-anchor="middle" class="nodesub">npm/apt/APIs</text>
+
+  <!-- Arrows -->
+  <!-- Peering -->
+  <line x1="378" y1="185" x2="428" y2="185" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#barrow)"/>
+  <text x="383" y="178" style="font-size:10px;font-weight:bold;fill:#1a73e8">VPC Peering (pcx)</text>
+
+  <!-- Gateway endpoint to S3 -->
+  <line x1="378" y1="292" x2="428" y2="315" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#parrow)"/>
+  <text x="330" y="310" style="font-size:10px;font-weight:bold;fill:#7c3aed">Gateway Endpoint</text>
+  <text x="330" y="324" style="font-size:10px;font-weight:bold;fill:#15803d">(FREE, no internet)</text>
+
+  <!-- Interface endpoint to Secrets Manager -->
+  <line x1="220" y1="380" x2="428" y2="428" stroke="#be185d" stroke-width="2.5" marker-end="url(#iarrow)"/>
+  <text x="225" y="415" style="font-size:10px;font-weight:bold;fill:#be185d">Interface Endpoint (ENI)</text>
+
+  <!-- NAT to internet -->
+  <line x1="800" y1="175" x2="818" y2="230" stroke="#0369a1" stroke-width="2.5" marker-end="url(#narrow)"/>
+  <text x="758" y="200" style="font-size:10px;font-weight:bold;fill:#0369a1">NAT → IGW → Internet</text>
+
+  <defs>
+    <marker id="barrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#1a73e8"/>
+    </marker>
+    <marker id="parrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#7c3aed"/>
+    </marker>
+    <marker id="iarrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#be185d"/>
+    </marker>
+    <marker id="narrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#0369a1"/>
+    </marker>
+  </defs>
+</svg>
