@@ -5,6 +5,15 @@
 
 ---
 
+## Contents
+- [Part 1 — S3 via NAT Gateway](#part-1--s3-access-via-nat-gateway)
+- [Part 2a — S3 via VPC Gateway Endpoint](#part-2a--s3-access-via-vpc-gateway-endpoint)
+- [Part 2b — Secrets Manager via Interface Endpoint](#part-2b--interface-endpoint-secrets-manager)
+- [Cleanup](#cleanup)
+- [Cost](#cost)
+
+---
+
 ## What I Built
 
 Two-part lab proving the difference between reaching S3 via NAT (internet path) vs VPC Gateway Endpoint (private path). Both use the same VPC and private EC2 — only the routing changes.
