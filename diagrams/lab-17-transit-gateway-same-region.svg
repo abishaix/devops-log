@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="560" style="background:#ffffff;font-family:Arial,sans-serif">
+  <style>
+    .title{font-size:18px;font-weight:bold;fill:#232f3e}
+    .vpclbl{font-size:13px;font-weight:bold;fill:#1a73e8}
+    .sublbl{font-size:11px;font-weight:bold;fill:#3f6212}
+    .node{font-size:12px;font-weight:bold;fill:#ffffff}
+    .nodesub{font-size:10px;fill:#ffffff}
+    .rt{font-size:10px;fill:#7c2d12;font-weight:bold}
+    .flow{font-size:10px;fill:#b91c1c;font-weight:bold}
+    .tgwrt{font-size:10px;fill:#ffffff;font-weight:bold}
+  </style>
+
+  <text x="30" y="32" class="title">lab-17 — Transit Gateway: Same-Region VPC-to-VPC (us-west-2)</text>
+
+  <!-- User -->
+  <rect x="20" y="200" width="80" height="50" rx="6" fill="#475569"/>
+  <text x="60" y="222" text-anchor="middle" class="node">User</text>
+  <text x="60" y="238" text-anchor="middle" class="nodesub">console</text>
+
+  <!-- IGW -->
+  <rect x="130" y="200" width="100" height="50" rx="8" fill="#0369a1"/>
+  <text x="180" y="222" text-anchor="middle" class="node">IGW</text>
+  <text x="180" y="238" text-anchor="middle" class="nodesub">VPC-A only</text>
+
+  <!-- VPC-A -->
+  <rect x="255" y="60" width="200" height="430" rx="10" fill="none" stroke="#1a73e8" stroke-width="2"/>
+  <text x="270" y="80" class="vpclbl">VPC-A  10.0.0.0/16</text>
+
+  <!-- Public subnet A -->
+  <rect x="270" y="90" width="170" height="120" rx="8" fill="#eef6ff" stroke="#3b82f6" stroke-dasharray="4"/>
+  <text x="282" y="108" class="sublbl">Public Subnet 10.0.0.0/24</text>
+  <rect x="290" y="118" width="130" height="60" rx="6" fill="#dd6b20"/>
+  <text x="355" y="144" text-anchor="middle" class="node">Bastion</text>
+  <text x="355" y="160" text-anchor="middle" class="nodesub">10.0.0.211</text>
+
+  <!-- VPC-A route table -->
+  <rect x="270" y="230" width="170" height="60" rx="6" fill="#fefce8" stroke="#ca8a04"/>
+  <text x="280" y="249" class="rt">VPC-A Public RT:</text>
+  <text x="280" y="265" class="rt">0.0.0.0/0  → IGW</text>
+  <text x="280" y="279" class="rt">10.1.0.0/16 → TGW</text>
+
+  <!-- TGW attachment A -->
+  <rect x="290" y="315" width="130" height="50" rx="6" fill="#7c3aed"/>
+  <text x="355" y="337" text-anchor="middle" class="node">TGW Attach-A</text>
+  <text x="355" y="351" text-anchor="middle" class="nodesub">tgw-attach-025...</text>
+
+  <!-- TGW -->
+  <rect x="490" y="200" width="180" height="180" rx="10" fill="#4c1d95"/>
+  <text x="580" y="228" text-anchor="middle" class="node">Transit Gateway</text>
+  <text x="580" y="244" text-anchor="middle" class="nodesub">tgw-077c48f27...</text>
+  <text x="580" y="268" text-anchor="middle" class="tgwrt">TGW Route Table:</text>
+  <text x="580" y="286" text-anchor="middle" class="tgwrt">10.0.0.0/16 →</text>
+  <text x="580" y="300" text-anchor="middle" class="tgwrt">  VPC-A attach</text>
+  <text x="580" y="318" text-anchor="middle" class="tgwrt">10.1.0.0/16 →</text>
+  <text x="580" y="332" text-anchor="middle" class="tgwrt">  VPC-B attach</text>
+  <text x="580" y="352" text-anchor="middle" style="font-size:9px;fill:#c4b5fd">Propagated — auto-populated</text>
+
+  <!-- VPC-B -->
+  <rect x="710" y="60" width="200" height="430" rx="10" fill="none" stroke="#1a73e8" stroke-width="2"/>
+  <text x="725" y="80" class="vpclbl">VPC-B  10.1.0.0/16</text>
+
+  <!-- Private subnet B -->
+  <rect x="725" y="90" width="170" height="120" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-dasharray="4"/>
+  <text x="737" y="108" class="sublbl">Private Subnet 10.1.0.0/24</text>
+  <rect x="745" y="118" width="130" height="60" rx="6" fill="#16a34a"/>
+  <text x="810" y="144" text-anchor="middle" class="node">ec2-private</text>
+  <text x="810" y="160" text-anchor="middle" class="nodesub">10.1.0.196 (no public IP)</text>
+
+  <!-- VPC-B route table -->
+  <rect x="725" y="230" width="170" height="50" rx="6" fill="#fefce8" stroke="#ca8a04"/>
+  <text x="735" y="249" class="rt">VPC-B Private RT:</text>
+  <text x="735" y="265" class="rt">10.0.0.0/16 → TGW</text>
+
+  <!-- TGW attachment B -->
+  <rect x="745" y="315" width="130" height="50" rx="6" fill="#7c3aed"/>
+  <text x="810" y="337" text-anchor="middle" class="node">TGW Attach-B</text>
+  <text x="810" y="351" text-anchor="middle" class="nodesub">tgw-attach-01b...</text>
+
+  <!-- EC2-B SG note -->
+  <rect x="725" y="385" width="170" height="80" rx="6" fill="#fdf4ff" stroke="#9333ea"/>
+  <text x="735" y="403" style="font-size:10px;font-weight:bold;fill:#7e22ce">EC2-B SG inbound:</text>
+  <text x="735" y="419" style="font-size:10px;fill:#444">SSH 22 from</text>
+  <text x="735" y="435" style="font-size:10px;fill:#444">10.0.0.0/16</text>
+  <text x="735" y="451" style="font-size:10px;fill:#444">(entire VPC-A CIDR)</text>
+
+  <!-- Arrows -->
+  <line x1="100" y1="222" x2="128" y2="222" stroke="#b91c1c" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="230" y1="222" x2="253" y2="165" stroke="#b91c1c" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="148" y="215" class="flow">SSH 22</text>
+  <line x1="355" y1="178" x2="355" y2="228" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr)"/>
+  <line x1="355" y1="290" x2="355" y2="313" stroke="#7c3aed" stroke-width="2" marker-end="url(#parr)"/>
+  <line x1="420" y1="340" x2="488" y2="300" stroke="#7c3aed" stroke-width="2" marker-end="url(#parr)"/>
+  <text x="415" y="328" class="flow">via TGW</text>
+  <line x1="670" y1="300" x2="743" y2="340" stroke="#7c3aed" stroke-width="2" marker-end="url(#parr)"/>
+  <line x1="810" y1="315" x2="810" y2="290" stroke="#7c3aed" stroke-width="2" marker-end="url(#parr)"/>
+  <line x1="810" y1="230" x2="810" y2="180" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr)"/>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#b91c1c"/>
+    </marker>
+    <marker id="parr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+</svg>
