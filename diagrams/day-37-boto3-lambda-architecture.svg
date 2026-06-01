@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="540" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="430" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">Boto3 Request Flow &amp; EC2 vs Lambda</text>
+
+  <!-- ── LEFT PANEL: Boto3 flow ── -->
+  <rect x="20" y="50" width="390" height="460" rx="10" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1.5"/>
+  <text x="215" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#4a6fa5">Boto3 Request Flow</text>
+
+  <!-- Python Script box -->
+  <rect x="60" y="90" width="140" height="50" rx="6" fill="#4a6fa5" stroke="#2c3e7a" stroke-width="1.5"/>
+  <text x="130" y="111" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">Python Script</text>
+  <text x="130" y="128" text-anchor="middle" font-size="10" fill="#dce8ff">import boto3</text>
+
+  <!-- Arrow down -->
+  <line x1="130" y1="140" x2="130" y2="168" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="145" y="158" font-size="9" fill="#555">aws configure</text>
+
+  <!-- Auth box -->
+  <rect x="60" y="168" width="140" height="44" rx="6" fill="#e67e22" stroke="#b85c0a" stroke-width="1.5"/>
+  <text x="130" y="187" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">Authenticate</text>
+  <text x="130" y="203" text-anchor="middle" font-size="9" fill="#ffe8cc">Access Key / IAM Role</text>
+
+  <!-- Arrow -->
+  <line x1="130" y1="212" x2="130" y2="240" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Client box -->
+  <rect x="60" y="240" width="140" height="44" rx="6" fill="#27ae60" stroke="#1a7a40" stroke-width="1.5"/>
+  <text x="130" y="259" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">Client</text>
+  <text x="130" y="275" text-anchor="middle" font-size="9" fill="#d4fce4">boto3.client('ec2')</text>
+
+  <!-- Arrow -->
+  <line x1="130" y1="284" x2="130" y2="312" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Response box -->
+  <rect x="60" y="312" width="140" height="44" rx="6" fill="#8e44ad" stroke="#5e2d73" stroke-width="1.5"/>
+  <text x="130" y="331" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">Response</text>
+  <text x="130" y="347" text-anchor="middle" font-size="9" fill="#ead6ff">run / describe / terminate</text>
+
+  <!-- Arrow to AWS -->
+  <line x1="200" y1="334" x2="270" y2="334" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- AWS API box -->
+  <rect x="270" y="312" width="110" height="44" rx="6" fill="#e74c3c" stroke="#a93226" stroke-width="1.5"/>
+  <text x="325" y="331" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">AWS API</text>
+  <text x="325" y="347" text-anchor="middle" font-size="9" fill="#ffd6d6">EC2 / S3 / Lambda</text>
+
+  <!-- Credential chain note -->
+  <rect x="40" y="380" width="330" height="110" rx="6" fill="#fff9e6" stroke="#f0c040" stroke-width="1"/>
+  <text x="205" y="398" text-anchor="middle" font-size="11" font-weight="bold" fill="#b7860b">Credential Chain (checked in order)</text>
+  <text x="60" y="416" font-size="10" fill="#333">1. Hardcoded in code         ← never do this</text>
+  <text x="60" y="432" font-size="10" fill="#333">2. Environment variables</text>
+  <text x="60" y="448" font-size="10" fill="#333">3. ~/.aws/credentials        ← aws configure</text>
+  <text x="60" y="464" font-size="10" fill="#333">4. IAM Role on EC2/Lambda    ← production best practice</text>
+  <text x="60" y="480" font-size="10" fill="#888">Boto3 stops at first match</text>
+
+  <!-- ── RIGHT PANEL: EC2 vs Lambda ── -->
+  <rect x="430" y="50" width="410" height="460" rx="10" fill="#f5fff5" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="635" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#27ae60">EC2 vs Lambda</text>
+
+  <!-- EC2 column -->
+  <rect x="445" y="88" width="175" height="34" rx="5" fill="#4a6fa5" stroke="#2c3e7a" stroke-width="1.5"/>
+  <text x="532" y="110" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">EC2 — IaaS</text>
+
+  <!-- Lambda column -->
+  <rect x="628" y="88" width="195" height="34" rx="5" fill="#e67e22" stroke="#b85c0a" stroke-width="1.5"/>
+  <text x="725" y="110" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Lambda — PaaS</text>
+
+  <!-- Row labels and values -->
+  <!-- OS -->
+  <text x="445" y="145" font-size="10" font-weight="bold" fill="#555">OS Management</text>
+  <rect x="445" y="150" width="175" height="28" rx="3" fill="#dce8ff"/>
+  <text x="532" y="169" text-anchor="middle" font-size="10" fill="#1a1a2e">You manage</text>
+  <rect x="628" y="150" width="195" height="28" rx="3" fill="#d4fce4"/>
+  <text x="725" y="169" text-anchor="middle" font-size="10" fill="#1a1a2e">AWS manages</text>
+
+  <!-- Dependencies -->
+  <text x="445" y="198" font-size="10" font-weight="bold" fill="#555">Dependencies</text>
+  <rect x="445" y="203" width="175" height="28" rx="3" fill="#dce8ff"/>
+  <text x="532" y="222" text-anchor="middle" font-size="10" fill="#1a1a2e">Install manually</text>
+  <rect x="628" y="203" width="195" height="28" rx="3" fill="#d4fce4"/>
+  <text x="725" y="222" text-anchor="middle" font-size="10" fill="#1a1a2e">Bundle as Lambda Layer</text>
+
+  <!-- Runtime -->
+  <text x="445" y="251" font-size="10" font-weight="bold" fill="#555">Runtime</text>
+  <rect x="445" y="256" width="175" height="28" rx="3" fill="#dce8ff"/>
+  <text x="532" y="275" text-anchor="middle" font-size="10" fill="#1a1a2e">Continuous 24/7</text>
+  <rect x="628" y="256" width="195" height="28" rx="3" fill="#d4fce4"/>
+  <text x="725" y="275" text-anchor="middle" font-size="10" fill="#1a1a2e">Trigger / Schedule</text>
+
+  <!-- Max runtime -->
+  <text x="445" y="304" font-size="10" font-weight="bold" fill="#555">Max Runtime</text>
+  <rect x="445" y="309" width="175" height="28" rx="3" fill="#dce8ff"/>
+  <text x="532" y="328" text-anchor="middle" font-size="10" fill="#1a1a2e">Unlimited</text>
+  <rect x="628" y="309" width="195" height="28" rx="3" fill="#d4fce4"/>
+  <text x="725" y="328" text-anchor="middle" font-size="10" fill="#1a1a2e">15 minutes max</text>
+
+  <!-- Billing -->
+  <text x="445" y="357" font-size="10" font-weight="bold" fill="#555">Billing</text>
+  <rect x="445" y="362" width="175" height="28" rx="3" fill="#dce8ff"/>
+  <text x="532" y="381" text-anchor="middle" font-size="10" fill="#1a1a2e">Per hour (always on)</text>
+  <rect x="628" y="362" width="195" height="28" rx="3" fill="#d4fce4"/>
+  <text x="725" y="381" text-anchor="middle" font-size="10" fill="#1a1a2e">Per invocation only</text>
+
+  <!-- VPC note -->
+  <rect x="445" y="405" width="378" height="85" rx="6" fill="#fff0f0" stroke="#e74c3c" stroke-width="1"/>
+  <text x="634" y="423" text-anchor="middle" font-size="11" font-weight="bold" fill="#c0392b">Lambda is Outside Your VPC</text>
+  <text x="455" y="441" font-size="10" fill="#333">Lambda runs in AWS-managed network by default.</text>
+  <text x="455" y="457" font-size="10" fill="#333">To access VPC resources (RDS, private EC2) → configure</text>
+  <text x="455" y="473" font-size="10" fill="#333">Lambda inside a VPC subnet + attach a security group.</text>
+
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#666"/>
+    </marker>
+  </defs>
+
+</svg>
