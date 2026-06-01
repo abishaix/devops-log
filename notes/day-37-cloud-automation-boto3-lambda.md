@@ -4,6 +4,22 @@
 
 ---
 
+## Contents
+
+- [Concepts Covered](#-concepts-covered)
+- [What is Boto3](#what-is-boto3)
+- [Boto3 Core Structure](#boto3-core-structure)
+- [Creating an EC2 Instance via Boto3](#creating-an-ec2-instance-via-boto3)
+- [Creating an S3 Bucket via Boto3](#creating-an-s3-bucket-via-boto3)
+- [AWS Lambda](#aws-lambda)
+- [EC2 vs Lambda](#ec2-vs-lambda)
+- [Lambda is Outside the VPC](#lambda-is-outside-the-vpc)
+- [Architecture Diagram](#️-architecture--diagrams)
+- [Task Assigned](#-task-assigned)
+- [Next Steps](#️-next-steps)
+
+---
+
 ## 📚 Concepts Covered
 
 - What is Boto3 and how it works
@@ -83,7 +99,7 @@ response = client.run_instances(
 print(response)
 ```
 
-Key parameters — `MinCount` and `MaxCount` are mandatory. Check the official docs for what's required vs optional for each API call.
+`MinCount` and `MaxCount` are mandatory. Check the official docs for required vs optional parameters for each API call.
 
 To terminate:
 
@@ -160,18 +176,18 @@ def lambda_handler(event, context):
 | | EC2 | Lambda |
 |---|---|---|
 | Service type | IaaS — Infrastructure as a Service | PaaS — Platform as a Service |
-| OS management | You handle it | AWS handles it |
-| Dependencies | You install manually | You bundle them (Lambda Layer) |
-| Runtime | Runs continuously 24/7 | Runs on trigger or schedule |
+| OS management | You handle it | AWS manages it |
+| Dependencies | Install manually | Bundle as Lambda Layer |
+| Runtime | Continuous 24/7 | Trigger or schedule |
 | Entry point | Top of script | `lambda_handler(event, context)` |
 | Credentials | `~/.aws/credentials` or IAM role | IAM role attached to function |
-| Billing | Per hour/second (always on) | Per invocation (only when it runs) |
+| Billing | Per hour/second (always on) | Per invocation only |
 | Max runtime | Unlimited | 15 minutes |
-| Best for | Web apps, databases, long-running processes | Automation scripts, event-driven tasks, scheduled jobs |
+| Best for | Web apps, databases, long-running processes | Automation scripts, event-driven tasks |
 
 **When to use Lambda over EC2:**
 
-If your script runs temporarily — daily backups, fetching logs, triggering alerts — Lambda is the right choice. No point running an EC2 24/7 and paying for idle time when the script takes 4 seconds.
+If your script runs temporarily — daily backups, fetching logs, triggering alerts — Lambda is the right choice. No point running an EC2 24/7 and paying for idle time when the script finishes in 4 seconds.
 
 **Example use case:**
 
@@ -197,7 +213,7 @@ If your Lambda needs to access resources **inside** your VPC (RDS, private EC2),
 
 If your Lambda needs to access AWS services (S3, DynamoDB, EC2 API) — it connects via **VPC Endpoints** without entering your VPC.
 
-More on VPC endpoints, layers, environment variables in upcoming classes.
+More on VPC endpoints, layers, and environment variables in upcoming classes.
 
 ---
 
