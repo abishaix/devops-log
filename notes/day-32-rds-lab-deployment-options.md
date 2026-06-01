@@ -18,6 +18,30 @@
 - Aurora MySQL vs standard MySQL — key differences
 - Query editor — Aurora only
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [RDS Deployment Options](#rds-deployment-options)
+  - [ASCII Flow — Multi-AZ DB Cluster](#ascii-flow-multi-az-db-cluster)
+  - [Subnet Group](#subnet-group)
+  - [Public Access on RDS — What It Actually Means](#public-access-on-rds-what-it-actually-means)
+  - [ASCII Flow — RDS Connection Path](#ascii-flow-rds-connection-path)
+  - [RDS Hierarchy](#rds-hierarchy)
+  - [SQL Commands Used in Lab](#sql-commands-used-in-lab)
+  - [Read Replica Behavior — Three Tests](#read-replica-behavior-three-tests)
+  - [Aurora MySQL vs Standard MySQL on RDS](#aurora-mysql-vs-standard-mysql-on-rds)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [Deployment Option Summary](#deployment-option-summary)
+  - [MySQL Workbench Connection Fields](#mysql-workbench-connection-fields)
+- [🏗️ Architecture / Diagram](#architecture-diagram)
+- [✅ What I Practiced](#what-i-practiced)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

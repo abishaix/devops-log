@@ -13,6 +13,31 @@
 - Why you never expose backend IP/port to the frontend
 - Reverse proxy and load balancer (internal vs external) recap
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Three-Tier Architecture](#three-tier-architecture)
+  - [Why a Backend?](#why-a-backend)
+  - [What is an API?](#what-is-an-api)
+  - [Deploying Python Code on AWS — The Setup Process](#deploying-python-code-on-aws-the-setup-process)
+  - [pip — Python's Package Manager](#pip-pythons-package-manager)
+  - [Backend Deployment — Commands](#backend-deployment-commands)
+  - [Static vs Dynamic Code Execution](#static-vs-dynamic-code-execution)
+  - [Why You Never Expose Backend IP/Port to the Frontend](#why-you-never-expose-backend-ipport-to-the-frontend)
+  - [Request Flow With Reverse Proxy](#request-flow-with-reverse-proxy)
+  - [Reverse Proxy vs Load Balancer](#reverse-proxy-vs-load-balancer)
+  - [Interview Question — "I Don't Want to Use NAT or Internet Gateway. How Do You Deploy Code to a Private Server?"](#interview-question-i-dont-want-to-use-nat-or-internet-gateway-how-do-you-deploy-code-to-a-private-server)
+- [🏗️ Architecture / Diagrams](#architecture-diagrams)
+- [💻 Commands & Code](#commands-code)
+  - [Install pip and run a Flask app](#install-pip-and-run-a-flask-app)
+- [✅ Task List (for next practice session)](#task-list-for-next-practice-session)
+- [🔗 Related Notes](#related-notes)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

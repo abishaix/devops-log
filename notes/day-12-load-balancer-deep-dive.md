@@ -15,6 +15,28 @@
 - Elastic IP — static IP for EC2 instances
 - How to assign, verify, and delete Elastic IPs
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Architecture First — Always](#architecture-first-always)
+  - [Nginx Default Content Path](#nginx-default-content-path)
+  - [Health Check Configuration](#health-check-configuration)
+  - [Health Check — Port vs Application](#health-check-port-vs-application)
+  - [LB Only Routes to Selected Availability Zones](#lb-only-routes-to-selected-availability-zones)
+  - [Adding a New AZ to an Existing Load Balancer](#adding-a-new-az-to-an-existing-load-balancer)
+  - [Listener — End User to LB](#listener-end-user-to-lb)
+  - [Elastic IP — Static IP for EC2](#elastic-ip-static-ip-for-ec2)
+  - [What Happens When You Add a Server to the Wrong AZ](#what-happens-when-you-add-a-server-to-the-wrong-az)
+- [📊 Quick Reference — Health Check Sequence](#quick-reference-health-check-sequence)
+- [💻 Commands](#commands)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [✅ Tasks for Today](#tasks-for-today)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

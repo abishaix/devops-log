@@ -11,6 +11,30 @@
 - STS — how temporary credentials work with Identity Center
 - CLI SSO login flow — `aws configure sso`
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [SSO Across Cloud Providers](#sso-across-cloud-providers)
+  - [Why SSO? The Problem It Solves](#why-sso-the-problem-it-solves)
+  - [AWS Organizations](#aws-organizations)
+  - [IAM Identity Center — Setup Flow](#iam-identity-center-setup-flow)
+  - [STS — How Temporary Credentials Work Here](#sts-how-temporary-credentials-work-here)
+  - [CLI SSO Login Flow](#cli-sso-login-flow)
+  - [IAM Identity Center vs Switch Role](#iam-identity-center-vs-switch-role)
+  - [Entra ID ↔ IAM Identity Center Mapping](#entra-id-iam-identity-center-mapping)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [Identity Center setup checklist](#identity-center-setup-checklist)
+  - [STS credential comparison](#sts-credential-comparison)
+- [💻 Commands & Code](#commands-code)
+- [🏗️ Architecture / Diagrams](#architecture-diagrams)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 GitHub](#github)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

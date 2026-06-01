@@ -13,6 +13,32 @@
 - Root domain vs wildcard certificates
 - Why ACM doesn't issue certs at server/IP level — only via Load Balancer
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [HTTP vs HTTPS](#http-vs-https)
+  - [SSL vs TLS](#ssl-vs-tls)
+  - [AWS ACM — Amazon Certificate Manager](#aws-acm-amazon-certificate-manager)
+  - [AWS HSM — Hardware Security Module](#aws-hsm-hardware-security-module)
+  - [TLS Handshake Flow](#tls-handshake-flow)
+  - [Certificate Validation — Domain Authentication](#certificate-validation-domain-authentication)
+  - [Root Domain vs Subdomain Certificates](#root-domain-vs-subdomain-certificates)
+  - [Attaching the Right Certificate to the Load Balancer](#attaching-the-right-certificate-to-the-load-balancer)
+  - [Why You Can't Use HTTPS Directly on an EC2 IP](#why-you-cant-use-https-directly-on-an-ec2-ip)
+  - [Third-Party Certificates](#third-party-certificates)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [HTTP vs HTTPS](#http-vs-https)
+  - [ACM Certificate Types](#acm-certificate-types)
+  - [Key Storage Summary](#key-storage-summary)
+- [💻 Commands & Code](#commands-code)
+- [🏗️ Architecture / Diagrams](#architecture-diagrams)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

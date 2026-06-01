@@ -14,6 +14,27 @@
 - CloudFront — proxy for private S3 buckets (intro)
 - S3 high availability — data stored across minimum 3 AZs by default
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Bucket Naming — Why Globally Unique](#bucket-naming-why-globally-unique)
+  - [Pre-signed URL](#pre-signed-url)
+  - [S3 Select — Query Data in S3](#s3-select-query-data-in-s3)
+  - [S3 Versioning — Deep Dive](#s3-versioning-deep-dive)
+  - [S3 Static Website Hosting](#s3-static-website-hosting)
+  - [S3 vs EC2 for Hosting](#s3-vs-ec2-for-hosting)
+  - [S3 High Availability](#s3-high-availability)
+  - [CloudFront — S3 Proxy (Intro)](#cloudfront-s3-proxy-intro)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [✅ Tasks From Today](#tasks-from-today)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 GitHub](#github)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

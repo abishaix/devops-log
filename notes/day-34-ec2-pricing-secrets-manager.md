@@ -16,6 +16,34 @@
 - Performance Insights: query-level CPU/memory analysis
 - RDS snapshots: export to S3, difference from automated backups
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [EC2 Purchasing Options Overview](#ec2-purchasing-options-overview)
+  - [On-Demand Instances](#on-demand-instances)
+  - [Reserved Instances](#reserved-instances)
+  - [Spot Instances](#spot-instances)
+  - [Dedicated Host](#dedicated-host)
+  - [AWS Secrets Manager](#aws-secrets-manager)
+  - [Secrets Manager — Automatic Rotation](#secrets-manager-automatic-rotation)
+  - [RDS + Secrets Manager Integration](#rds-secrets-manager-integration)
+  - [Architecture Challenge: Private RDS + Secret Manager](#architecture-challenge-private-rds-secret-manager)
+  - [ASCII Flow — Backend → Secrets Manager → RDS (Full Path)](#ascii-flow-backend-secrets-manager-rds-full-path)
+  - [Upcoming Networking Concepts (Preview)](#upcoming-networking-concepts-preview)
+  - [Performance Insights](#performance-insights)
+  - [RDS Snapshot vs Automated Backup (Reinforced)](#rds-snapshot-vs-automated-backup-reinforced)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [EC2 Purchasing Options Summary](#ec2-purchasing-options-summary)
+  - [Reserved Instance Payment Options](#reserved-instance-payment-options)
+- [🏗️ Architecture / Diagram](#architecture-diagram)
+- [✅ What I Practiced](#what-i-practiced)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

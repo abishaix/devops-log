@@ -10,6 +10,21 @@
 - Public vs Private Cloud
 - Full picture: Region → AZ → VPC → Subnet
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [VPC — Virtual Private Cloud](#vpc-virtual-private-cloud)
+  - [Subnets](#subnets)
+  - [Public Cloud vs Private Cloud](#public-cloud-vs-private-cloud)
+- [📊 How Everything Fits Together](#how-everything-fits-together)
+  - [The Analogy](#the-analogy)
+- [❓ Questions to Follow Up](#questions-to-follow-up)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

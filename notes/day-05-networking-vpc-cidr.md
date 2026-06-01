@@ -14,6 +14,27 @@
 - AWS reserved IPs per subnet
 - VPC limits per region
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Client → Server Connection](#client-server-connection)
+  - [TCP vs UDP](#tcp-vs-udp)
+  - [VPC — Virtual Private Cloud](#vpc-virtual-private-cloud)
+  - [Private IP Series (always use for VPC)](#private-ip-series-always-use-for-vpc)
+  - [CIDR — Classless Inter-Domain Routing](#cidr-classless-inter-domain-routing)
+  - [AWS Reserved IPs — Every Subnet Loses 5](#aws-reserved-ips-every-subnet-loses-5)
+  - [Subnet Sizing](#subnet-sizing)
+- [📊 Best Practice VPC Design](#best-practice-vpc-design)
+- [✅ What I Practiced](#what-i-practiced)
+- [📸 Screenshots](#screenshots)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 Tool](#tool)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

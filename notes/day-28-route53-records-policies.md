@@ -12,6 +12,28 @@
 - Health checks — role in Failover and Latency policies
 - High availability across AZ and region with Route 53 + Load Balancer
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Route 53 — Three Core Concepts](#route-53-three-core-concepts)
+  - [Hosted Zones](#hosted-zones)
+  - [DNS Record Types](#dns-record-types)
+  - [Subdomains](#subdomains)
+  - [Routing Policies](#routing-policies)
+  - [Health Checks](#health-checks)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [Record type selection guide](#record-type-selection-guide)
+  - [Routing policy selection guide](#routing-policy-selection-guide)
+  - [Policy comparison](#policy-comparison)
+- [🏗️ Architecture / Diagrams](#architecture-diagrams)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 GitHub](#github)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

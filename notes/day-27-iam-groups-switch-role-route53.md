@@ -12,6 +12,29 @@
 - Domain registration overview
 - Records and routing policies (intro)
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [IAM Groups](#iam-groups)
+  - [Switch Role — Cross-Account Access](#switch-role-cross-account-access)
+  - [AWS Identity Center (SSO)](#aws-identity-center-sso)
+  - [Route 53 — DNS Service in AWS](#route-53-dns-service-in-aws)
+  - [Hosted Zones — Public vs Private](#hosted-zones-public-vs-private)
+  - [Domain Registration](#domain-registration)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [IAM concepts summary](#iam-concepts-summary)
+  - [Route 53 hosted zone types](#route-53-hosted-zone-types)
+- [💻 Commands & Code](#commands-code)
+- [🏗️ Architecture / Diagrams](#architecture-diagrams)
+- [📝 Tasks](#tasks)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 GitHub](#github)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

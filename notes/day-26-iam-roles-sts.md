@@ -13,6 +13,30 @@
 - Why CLI keys are never stored in EC2 with IAM Roles
 - Lab task: allow EC2 access to user but deny the IAM role's permissions
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [The Problem: Keys Inside EC2](#the-problem-keys-inside-ec2)
+  - [What is an IAM Role?](#what-is-an-iam-role)
+  - [Trust Policy](#trust-policy)
+  - [How to Attach an IAM Role to EC2](#how-to-attach-an-iam-role-to-ec2)
+  - [What Happens in the Background: STS](#what-happens-in-the-background-sts)
+  - [Why This is Secure](#why-this-is-secure)
+  - [Important: IAM Roles vs Local CLI Access](#important-iam-roles-vs-local-cli-access)
+  - [Lab Task (Today's Practice)](#lab-task-todays-practice)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [IAM Role creation steps](#iam-role-creation-steps)
+  - [STS credential properties](#sts-credential-properties)
+  - [Key commands on EC2 with IAM Role](#key-commands-on-ec2-with-iam-role)
+- [🏗️ Architecture / Diagrams](#architecture-diagrams)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 GitHub](#github)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

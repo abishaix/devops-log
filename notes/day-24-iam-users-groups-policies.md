@@ -13,6 +13,30 @@
 - Access keys and AWS CLI setup
 - MFA (Multi-Factor Authentication)
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [What is IAM?](#what-is-iam)
+  - [Why not share root credentials?](#why-not-share-root-credentials)
+  - [IAM Users](#iam-users)
+  - [IAM Groups](#iam-groups)
+  - [IAM Policies (Permissions)](#iam-policies-permissions)
+  - [Console vs CLI Access](#console-vs-cli-access)
+  - [AWS CloudShell](#aws-cloudshell)
+  - [MFA (Multi-Factor Authentication)](#mfa-multi-factor-authentication)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [Policy Type Comparison](#policy-type-comparison)
+  - [IAM Entity Hierarchy](#iam-entity-hierarchy)
+- [💻 Commands & Code](#commands-code)
+- [🏗️ Architecture / Diagrams](#architecture-diagrams)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 GitHub](#github)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

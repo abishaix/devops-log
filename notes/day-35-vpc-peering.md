@@ -14,6 +14,30 @@
 - Auto Scaling implications — why you don't hardcode IPs
 - Peering vs VPC Endpoint vs NAT Gateway — when each applies
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [What VPC peering is](#what-vpc-peering-is)
+  - [CIDR rules](#cidr-rules)
+  - [One-to-one, and non-transitive](#one-to-one-and-non-transitive)
+  - [Supported scopes](#supported-scopes)
+  - [Requester / accepter model](#requester-accepter-model)
+- [🏗️ The Practical — How Many Servers, and Why](#the-practical-how-many-servers-and-why)
+- [🚦 Peering Alone Isn't Enough — Routing](#peering-alone-isnt-enough-routing)
+- [🔒 Securing It — The Security Group Lesson](#securing-it-the-security-group-lesson)
+  - [Why this matters: Auto Scaling](#why-this-matters-auto-scaling)
+- [🌐 Peering vs VPC Endpoint vs NAT — The Distinction That Matters](#peering-vs-vpc-endpoint-vs-nat-the-distinction-that-matters)
+- [📊 Quick Reference](#quick-reference)
+- [✅ What I Practiced](#what-i-practiced)
+- [❌ Mistakes & Fixes](#mistakes-fixes)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

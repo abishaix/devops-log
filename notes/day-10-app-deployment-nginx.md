@@ -16,6 +16,27 @@
 - How EC2 Instance Connect works (keyless SSH, public only)
 - Full deployment flow: create → install → deploy
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [NAT & Bastion — Quick Recap](#nat-bastion-quick-recap)
+  - [Deployment Strategy — Public First, Private Later](#deployment-strategy-public-first-private-later)
+  - [What is a Web Server?](#what-is-a-web-server)
+  - [Linux Users](#linux-users)
+  - [Package Manager — yum](#package-manager-yum)
+  - [EC2 Instance Connect (Keyless SSH)](#ec2-instance-connect-keyless-ssh)
+  - [Full Deployment Flow](#full-deployment-flow)
+  - [Nginx Default Content Path](#nginx-default-content-path)
+  - [Security Group — Port Rules for Web Access](#security-group-port-rules-for-web-access)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [💻 Commands](#commands)
+- [🔬 What to Try](#what-to-try)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

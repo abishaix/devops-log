@@ -11,6 +11,27 @@
 - EC2 Instance Connect Endpoint — reaching private servers without a bastion
 - Transit Gateway preview (VPC peering at scale)
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [The Three-Connection Model](#the-three-connection-model)
+  - [Why S3 Needs an Endpoint (Not Peering)](#why-s3-needs-an-endpoint-not-peering)
+  - [VPC Endpoint — Two Types](#vpc-endpoint-two-types)
+  - [Route Table Rule for Endpoints](#route-table-rule-for-endpoints)
+  - [IAM Role + STS — Connection vs Authentication](#iam-role-sts-connection-vs-authentication)
+  - [EC2 Instance Connect Endpoint](#ec2-instance-connect-endpoint)
+  - [Questions From This Chat — Brought Together](#questions-from-this-chat-brought-together)
+  - [Transit Gateway — Preview](#transit-gateway-preview)
+- [📊 Quick Reference](#quick-reference)
+- [✅ What I Practiced (Lab 15 — from yesterday, documented today)](#what-i-practiced-lab-15-from-yesterday-documented-today)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

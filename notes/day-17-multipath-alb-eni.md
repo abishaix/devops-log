@@ -11,6 +11,26 @@
 - ENI (Elastic Network Interface) — what it is, lifecycle, use cases
 - How to preserve a private IP when replacing a corrupted server
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Single Server, Multiple Paths — Health Check Problem](#single-server-multiple-paths-health-check-problem)
+  - [Solution — One TG Per Path](#solution-one-tg-per-path)
+  - [ENI — Elastic Network Interface](#eni-elastic-network-interface)
+  - [ENI Rules](#eni-rules)
+  - [ENI Use Case — Preserving Private IP After Server Corruption](#eni-use-case-preserving-private-ip-after-server-corruption)
+  - [ENI + Elastic IP = Fully Static Network](#eni-elastic-ip-fully-static-network)
+- [📊 Quick Reference](#quick-reference)
+- [🏗️ Architecture Diagrams](#architecture-diagrams)
+- [✅ Tasks Assigned](#tasks-assigned)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 GitHub](#github)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

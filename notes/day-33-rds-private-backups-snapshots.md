@@ -17,6 +17,32 @@
 - Storage auto-scaling vs instance auto-scaling (reinforced)
 - RDS snapshots — manual vs automated, use case
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [RDS in Private Subnet — Production Pattern](#rds-in-private-subnet-production-pattern)
+  - [Connecting to Private RDS — Bastion Host Pattern](#connecting-to-private-rds-bastion-host-pattern)
+  - [ASCII Flow — Bastion to RDS Connection](#ascii-flow-bastion-to-rds-connection)
+  - [MySQL Client vs MySQL Server](#mysql-client-vs-mysql-server)
+  - [DB on EC2 vs RDS — When to Use Which](#db-on-ec2-vs-rds-when-to-use-which)
+  - [RDS Automated Backups](#rds-automated-backups)
+  - [Maintenance Window](#maintenance-window)
+  - [ASCII Flow — Backup and Maintenance Timeline](#ascii-flow-backup-and-maintenance-timeline)
+  - [Storage Auto-Scaling vs Instance Auto-Scaling (Reinforced)](#storage-auto-scaling-vs-instance-auto-scaling-reinforced)
+  - [RDS Snapshots](#rds-snapshots)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [RDS Key Settings at Creation](#rds-key-settings-at-creation)
+  - [Snapshot vs Backup](#snapshot-vs-backup)
+- [🏗️ Architecture / Diagram](#architecture-diagram)
+- [💻 Commands — Installing MySQL Server on EC2 (Amazon Linux 2023)](#commands-installing-mysql-server-on-ec2-amazon-linux-2023)
+- [✅ What I Practiced](#what-i-practiced)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

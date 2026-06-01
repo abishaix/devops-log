@@ -10,6 +10,29 @@
 - Docker/Kubernetes purpose — isolated environments, not just multiple apps
 - S3 — Simple Storage Service intro, hierarchy, use cases, versioning
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Path-Based Routing Recap](#path-based-routing-recap)
+  - [Common OS Problems — Why Docker/Kubernetes Exists](#common-os-problems-why-dockerkubernetes-exists)
+  - [Docker/Kubernetes — The Real Point](#dockerkubernetes-the-real-point)
+  - [S3 — Simple Storage Service](#s3-simple-storage-service)
+  - [S3 Hierarchy](#s3-hierarchy)
+  - [Bucket Name — Why It Must Be Globally Unique](#bucket-name-why-it-must-be-globally-unique)
+  - [S3 — Key Properties](#s3-key-properties)
+  - [S3 Versioning](#s3-versioning)
+  - [S3 Real-World Use Cases](#s3-real-world-use-cases)
+  - [Recommended S3 Folder Structure](#recommended-s3-folder-structure)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [✅ Tasks From Today](#tasks-from-today)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 GitHub](#github)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

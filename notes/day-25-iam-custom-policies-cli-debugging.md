@@ -13,6 +13,30 @@
 - Why CLI is not for production infra creation
 - Terraform mentioned as the correct IaC approach
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Custom (Customer Managed) Policies](#custom-customer-managed-policies)
+  - [Resource-Level Control (ARN)](#resource-level-control-arn)
+  - [Inline Policies](#inline-policies)
+  - [JSON Policy Structure](#json-policy-structure)
+  - [Allow vs Deny Priority](#allow-vs-deny-priority)
+- [💻 Commands & Code](#commands-code)
+  - [CLI profile management (multi-account)](#cli-profile-management-multi-account)
+  - [Verify which account is currently active](#verify-which-account-is-currently-active)
+  - [Common debugging commands](#common-debugging-commands)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [JSON policy keyword reference](#json-policy-keyword-reference)
+  - [CLI use cases — allowed vs not recommended](#cli-use-cases-allowed-vs-not-recommended)
+- [🏗️ Architecture / Diagrams](#architecture-diagrams)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 GitHub](#github)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

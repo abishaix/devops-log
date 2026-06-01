@@ -11,6 +11,28 @@
 - Private hosted zone — VPC-internal DNS, no public registration needed
 - CNAME for database endpoints — clean internal routing
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Latency Routing — Practical Recap](#latency-routing-practical-recap)
+  - [Health Checks + Latency Routing](#health-checks-latency-routing)
+  - [Failover Routing Policy — Full Setup](#failover-routing-policy-full-setup)
+  - [TTL — Time to Live](#ttl-time-to-live)
+  - [Alias vs CNAME — When to Use Each](#alias-vs-cname-when-to-use-each)
+  - [Private Hosted Zone](#private-hosted-zone)
+  - [Common Use Cases for Private Hosted Zones](#common-use-cases-for-private-hosted-zones)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [Routing policy requirements](#routing-policy-requirements)
+  - [TTL guidelines](#ttl-guidelines)
+- [🏗️ Architecture / Diagrams](#architecture-diagrams)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 GitHub](#github)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

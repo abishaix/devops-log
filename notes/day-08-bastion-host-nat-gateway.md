@@ -16,6 +16,30 @@
 - NAT placement: must live in the public subnet
 - VPC-level vs subnet-level NAT
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Architecture Drawing — Non-Negotiable Skill](#architecture-drawing-non-negotiable-skill)
+  - [Recap: Connection Requirements to a Public EC2](#recap-connection-requirements-to-a-public-ec2)
+  - [Bastion Host / Jump Host](#bastion-host-jump-host)
+  - [Load Balancer vs Bastion Host](#load-balancer-vs-bastion-host)
+  - [Application Deployment — Why Private Servers Need Internet](#application-deployment-why-private-servers-need-internet)
+  - [NAT Gateway](#nat-gateway)
+  - [NAT Gateway vs Internet Gateway](#nat-gateway-vs-internet-gateway)
+  - [NAT Gateway Placement](#nat-gateway-placement)
+  - [VPC-Level vs Subnet-Level NAT](#vpc-level-vs-subnet-level-nat)
+- [📊 Quick Reference — Full Architecture](#quick-reference-full-architecture)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [💻 Commands](#commands)
+- [✅ What I Practiced](#what-i-practiced)
+- [❌ Mistakes & Fixes](#mistakes-fixes)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

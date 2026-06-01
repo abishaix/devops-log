@@ -1,69 +1,54 @@
 # DevOps Log — abishaix
 
-Hands-on DevOps learning log — AWS notes, labs, diagrams, and projects.
+Personal learning log for DevOps Bootcamp 2026. Documenting class notes, hands-on AWS labs, and architecture diagrams as I work through AWS, DevOps tooling, and cloud infrastructure.
 
----
-
-## How to Use This Repo
-
-- Start from the **Progress Tracker** below — each ✅ links directly to the note or lab
-- Read the **day note** first for theory and architecture diagrams
-- Open the **matching lab** to see the hands-on build, commands, and troubleshooting
-
----
-
-## Featured Builds
-
-| Project | What It Is |
-|---------|------------|
-| [Two-Tier Nginx + Flask](practice-logs/lab-08-two-tier-nginx-flask.md) | Public frontend (nginx reverse proxy) + private Flask API on EC2, SG-to-SG security |
-| [VPC Peering](practice-logs/lab-15-vpc-peering.md) | Two isolated VPCs connected via peering, private routing across CIDR boundaries |
-| [RDS Private + Bastion](practice-logs/lab-14-rds-private-bastion.md) | MySQL RDS in private subnet, access via bastion host, snapshots and restore |
-| [IAM Identity Center + SSO](practice-logs/lab-10-identity-center-sso.md) | AWS Organizations, permission sets, SSO login across accounts |
-| [Route 53 Routing Policies](practice-logs/lab-11-route53-routing-policies.md) | Weighted, failover, latency, and geolocation routing with health checks |
+**GitHub:** [abishaix/devops-log](https://github.com/abishaix/devops-log)
+**LinkedIn:** [linkedin.com/in/abishaix](https://linkedin.com/in/abishaix)
 
 ---
 
 ## Progress Tracker
 
-| Day | Topic | Notes | Practice |
-|-----|-------|-------|----------|
-| 1 | DevOps intro, lifecycle, roles | [✅](notes/day-01-devops-intro.md) | ⬜ |
-| 2 | AWS regions, availability zones | [✅](notes/day-02-aws-regions-az.md) | ⬜ |
-| 3 | VPC, subnets, public vs private cloud | [✅](notes/day-03-vpc-subnets.md) | ⬜ |
-| 4 | Security groups, ports, firewall | [✅](notes/day-04-security-groups.md) | ⬜ |
-| 5 | TCP/UDP, CIDR, subnet math | [✅](notes/day-05-networking-vpc-cidr.md) | [✅](practice-logs/lab-01-aws-vpc-ec2-setup.md) |
-| 6 | EC2, IGW, route table, SSH | [✅](notes/day-06-ec2-igw-route-table.md) | [✅](practice-logs/lab-02-custom-vpc-ec2.md) |
-| 7 | Custom VPC networking | [✅](notes/day-07-custom-vpc-networking.md) | [✅](practice-logs/lab-03-alb-target-group-failover.md) |
-| 8 | Bastion host, NAT gateway | [✅](notes/day-08-bastion-host-nat-gateway.md) | [✅](practice-logs/lab-04-asg-alb-private-vpc.md) |
-| 9 | NAT gateway deep dive | [✅](notes/day-09-nat-gateway-deep-dive.md) | [✅](practice-logs/lab-05-nlb-alb-asg.md) |
-| 10 | App deployment, Nginx | [✅](notes/day-10-app-deployment-nginx.md) | [✅](practice-logs/lab-06-path-based-routing-alb.md) |
-| 11 | Load balancer intro | [✅](notes/day-11-load-balancer.md) | [✅](practice-logs/lab-07-nginx-reverse-proxy-flask.md) |
-| 12 | Load balancer deep dive | [✅](notes/day-12-load-balancer-deep-dive.md) | [✅](practice-logs/lab-08-two-tier-nginx-flask.md) |
-| 13 | ALB path-based routing, microservices | [✅](notes/day-13-path-based-routing.md) | ⬜ |
-| 14 | Auto Scaling Group | [✅](notes/day-14-auto-scaling-group.md) | ⬜ |
-| 15 | — | ⬜ | ⬜ |
-| 16 | NLB, ALB, NLB+ALB integration | [✅](notes/day-16-nlb-alb-integration.md) | ⬜ |
-| 17 | Multi-path ALB, target groups, ENI | [✅](notes/day-17-multipath-alb-eni.md) | ⬜ |
-| 18 | OS problems, S3 intro | [✅](notes/day-18-os-problems-s3-intro.md) | ⬜ |
-| 19 | S3 deep dive | [✅](notes/day-19-s3-deep-dive.md) | ⬜ |
-| 20 | — | ⬜ | ⬜ |
-| 21 | Nginx reverse proxy | [✅](notes/day-21-nginx-reverse-proxy.md) | [✅](practice-logs/lab-07-nginx-reverse-proxy-flask.md) |
-| 22 | Three-tier architecture, Python backend, pip | [✅](notes/day-22-three-tier-architecture-pip.md) | [✅](practice-logs/lab-08-two-tier-nginx-flask.md) |
-| 23 | S3 replication, inventory | [✅](notes/day-23-s3-replication-inventory.md) | ⬜ |
-| 24 | IAM users, groups, policies | [✅](notes/day-24-iam-users-groups-policies.md) | [✅](practice-logs/lab-09-route53-iam-groups-ec2.md) |
-| 25 | IAM custom policies, CLI, debugging | [✅](notes/day-25-iam-custom-policies-cli-debugging.md) | [✅](practice-logs/lab-09-route53-iam-groups-ec2.md) |
-| 26 | IAM roles, STS, temporary credentials | [✅](notes/day-26-iam-roles-sts.md) | [✅](practice-logs/lab-09-route53-iam-groups-ec2.md) |
-| 27 | IAM groups, switch role, Route 53 | [✅](notes/day-27-iam-groups-switch-role-route53.md) | [✅](practice-logs/lab-09-route53-iam-groups-ec2.md) |
-| 27b | IAM Identity Center, SSO, AWS Organizations | [✅](notes/day-27b-iam-identity-center-sso.md) | [✅](practice-logs/lab-10-identity-center-sso.md) |
-| 28 | Route 53 records, hosted zones, routing policies | [✅](notes/day-28-route53-records-policies.md) | [✅](practice-logs/lab-11-route53-routing-policies.md) |
-| 29 | Route 53 failover, health checks, TTL, private hosted zones | [✅](notes/day-29-route53-policies-private-zones.md) | [✅](practice-logs/lab-11-route53-routing-policies.md) |
-| 30 | HTTPS, SSL/TLS, ACM | [✅](notes/day-30-https-ssl-tls-acm.md) | ⬜ |
-| 31 | AWS RDS — relational database service | [✅](notes/day-31-rds-relational-database-service.md) | [✅](practice-logs/lab-12-rds-setup.md) |
-| 32 | RDS lab, deployment options | [✅](notes/day-32-rds-lab-deployment-options.md) | [✅](practice-logs/lab-13-rds-replica.md) |
-| 33 | RDS private, backups, snapshots | [✅](notes/day-33-rds-private-backups-snapshots.md) | [✅](practice-logs/lab-14-rds-private-bastion.md) |
-| 34 | EC2 pricing, Secrets Manager | [✅](notes/day-34-ec2-pricing-secrets-manager.md) | ⬜ |
-| 35 | VPC peering | [✅](notes/day-35-vpc-peering.md) | [✅](practice-logs/lab-15-vpc-peering.md) |
+| Day | Topic | Notes | Lab |
+|-----|-------|-------|-----|
+| 1 | DevOps intro, lifecycle, roles | ✅ | — |
+| 2 | AWS regions, availability zones | ✅ | — |
+| 3 | VPC, subnets, public vs private cloud | ✅ | — |
+| 4 | Security groups, ports, firewall | ✅ | — |
+| 5 | TCP/UDP, CIDR, subnet math | ✅ | ✅ lab-01 |
+| 6 | EC2, internet gateway, route table | ✅ | ✅ lab-02 |
+| 7 | Custom VPC networking | ✅ | — |
+| 8 | Bastion host, NAT gateway | ✅ | — |
+| 9 | NAT gateway deep dive | ✅ | — |
+| 10 | App deployment, nginx | ✅ | — |
+| 11 | Load balancer | ✅ | ✅ lab-03 |
+| 12 | Load balancer deep dive | ✅ | ✅ lab-04 |
+| 13 | Path-based routing | ✅ | ✅ lab-05, lab-06 |
+| 14 | Auto scaling group | ✅ | — |
+| 15 | — | — | — |
+| 16 | NLB + ALB integration | ✅ | — |
+| 17 | Multipath ALB, ENI | ✅ | — |
+| 18 | OS problems, S3 intro | ✅ | — |
+| 19 | S3 deep dive | ✅ | — |
+| 20 | — | — | — |
+| 21 | Nginx reverse proxy | ✅ | ✅ lab-07 |
+| 22 | Three-tier architecture | ✅ | ✅ lab-08 |
+| 23 | S3 replication, inventory | ✅ | — |
+| 24 | IAM users, groups, policies | ✅ | ✅ lab-09 |
+| 25 | IAM custom policies, CLI debugging | ✅ | — |
+| 26 | IAM roles, STS | ✅ | — |
+| 27 | IAM groups, switch role, Route 53 | ✅ | ✅ lab-10 |
+| 27b | IAM Identity Center, SSO | ✅ | — |
+| 28 | Route 53 records, policies | ✅ | ✅ lab-11 |
+| 29 | Route 53 policies, private zones | ✅ | — |
+| 30 | HTTPS, SSL/TLS, ACM | ✅ | — |
+| 31 | RDS — relational database service | ✅ | ✅ lab-12 |
+| 32 | RDS lab, deployment options | ✅ | ✅ lab-13 |
+| 33 | RDS private, backups, snapshots | ✅ | ✅ lab-14 |
+| 34 | EC2 pricing, Secrets Manager | ✅ | — |
+| 35 | VPC peering | ✅ | ✅ lab-15 |
+| 36 | VPC endpoint connections | ✅ | ✅ lab-16, lab-17 |
+| 37 | Cloud automation, Boto3, Lambda | ✅ | — |
 
 ---
 
@@ -72,18 +57,85 @@ Hands-on DevOps learning log — AWS notes, labs, diagrams, and projects.
 ```
 devops-log/
 ├── README.md
-├── notes/          # Day-by-day theory notes with architecture diagrams
-├── practice-logs/  # Hands-on lab write-ups with commands and screenshots
-├── diagrams/       # SVG architecture diagrams
-└── screenshots/    # AWS console and terminal screenshots per lab
+├── notes/
+│   ├── day-01-devops-intro.md
+│   ├── day-02-aws-regions-az.md
+│   ├── day-03-vpc-subnets.md
+│   ├── day-04-security-groups.md
+│   ├── day-05-networking-vpc-cidr.md
+│   ├── day-06-ec2-igw-route-table.md
+│   ├── day-07-custom-vpc-networking.md
+│   ├── day-08-bastion-host-nat-gateway.md
+│   ├── day-09-nat-gateway-deep-dive.md
+│   ├── day-10-app-deployment-nginx.md
+│   ├── day-11-load-balancer.md
+│   ├── day-12-load-balancer-deep-dive.md
+│   ├── day-13-path-based-routing.md
+│   ├── day-14-auto-scaling-group.md
+│   ├── day-16-nlb-alb-integration.md
+│   ├── day-17-multipath-alb-eni.md
+│   ├── day-18-os-problems-s3-intro.md
+│   ├── day-19-s3-deep-dive.md
+│   ├── day-21-nginx-reverse-proxy.md
+│   ├── day-22-three-tier-architecture-pip.md
+│   ├── day-23-s3-replication-inventory.md
+│   ├── day-24-iam-users-groups-policies.md
+│   ├── day-25-iam-custom-policies-cli-debugging.md
+│   ├── day-26-iam-roles-sts.md
+│   ├── day-27-iam-groups-switch-role-route53.md
+│   ├── day-27b-iam-identity-center-sso.md
+│   ├── day-28-route53-records-policies.md
+│   ├── day-29-route53-policies-private-zones.md
+│   ├── day-30-https-ssl-tls-acm.md
+│   ├── day-31-rds-relational-database-service.md
+│   ├── day-32-rds-lab-deployment-options.md
+│   ├── day-33-rds-private-backups-snapshots.md
+│   ├── day-34-ec2-pricing-secrets-manager.md
+│   ├── day-35-vpc-peering.md
+│   ├── day-36-vpc-endpoint-connections.md
+│   └── day-37-cloud-automation-boto3-lambda.md
+├── practice-logs/
+│   ├── lab-01-aws-vpc-ec2-setup.md
+│   ├── lab-02-custom-vpc-ec2.md
+│   ├── lab-03-alb-target-group-failover.md
+│   ├── lab-04-asg-alb-private-vpc.md
+│   ├── lab-05-nlb-alb-asg.md
+│   ├── lab-06-path-based-routing-alb.md
+│   ├── lab-07-nginx-reverse-proxy-flask.md
+│   ├── lab-08-two-tier-nginx-flask.md
+│   ├── lab-09-route53-iam-groups-ec2.md
+│   ├── lab-10-identity-center-sso.md
+│   ├── lab-11-route53-routing-policies.md
+│   ├── lab-12-rds-setup.md
+│   ├── lab-13-rds-replica.md
+│   ├── lab-14-rds-private-bastion.md
+│   ├── lab-15-vpc-peering.md
+│   ├── lab-16-s3-nat-gateway.md
+│   └── lab-17-transit-gateway-same-region.md
+├── diagrams/
+├── screenshots/
+└── cheatsheets/
 ```
 
 ---
 
-## Tech Stack
+## Bootcamp Roadmap
 
-![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat&logo=amazonaws&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black)
-![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logo=nginx&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
+```
+AWS Core (Days 1–37) ← currently here
+├── Networking — VPC, subnets, IGW, NAT, peering, endpoints ✅
+├── Compute — EC2, ASG, ALB, NLB ✅
+├── Storage — S3, EBS ✅
+├── Database — RDS ✅
+├── IAM + Security ✅
+├── Route 53 ✅
+├── Cloud Automation — Boto3, Lambda ← Day 37
+└── Coming up — more Lambda, TGW cross-region, ElastiCache
+
+DevOps Tooling (Months 3–6)
+├── Docker
+├── Kubernetes
+├── Terraform
+├── GitHub Actions / GitLab CI/CD
+└── Prometheus + Grafana
+```

@@ -15,6 +15,26 @@
 - How index.html links to ALB paths
 - Intro to microservices and why Docker/Kubernetes matters
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Two Types of Load Balancers](#two-types-of-load-balancers)
+  - [Path-Based Routing — The Core Concept](#path-based-routing-the-core-concept)
+  - [Monolithic vs Dedicated Servers — Why It Matters](#monolithic-vs-dedicated-servers-why-it-matters)
+  - [How Many Target Groups and Servers?](#how-many-target-groups-and-servers)
+  - [Path-Based Routing Rules in ALB](#path-based-routing-rules-in-alb)
+  - [How index.html Connects to the ALB](#how-indexhtml-connects-to-the-alb)
+  - [Server Directory Structure for Path-Based Routing](#server-directory-structure-for-path-based-routing)
+  - [Why Not Put Everything on One Server?](#why-not-put-everything-on-one-server)
+  - [Intro to Microservices & Docker/Kubernetes (Context)](#intro-to-microservices-dockerkubernetes-context)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [💻 Commands](#commands)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

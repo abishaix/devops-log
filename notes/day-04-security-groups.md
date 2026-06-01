@@ -11,6 +11,25 @@
 - Default SG behavior
 - SSH and RDP access
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Security Group (SG)](#security-group-sg)
+  - [Rules — What You Define in a SG](#rules-what-you-define-in-a-sg)
+  - [Inbound vs Outbound](#inbound-vs-outbound)
+  - [Ports — Why They Matter](#ports-why-they-matter)
+  - [Common Ports to Know](#common-ports-to-know)
+  - [SG Rule Examples](#sg-rule-examples)
+  - [Security Best Practice](#security-best-practice)
+- [💻 Commands (Preview)](#commands-preview)
+- [📊 HTTP vs HTTPS](#http-vs-https)
+- [❓ Questions to Follow Up](#questions-to-follow-up)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

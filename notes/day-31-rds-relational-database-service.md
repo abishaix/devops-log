@@ -15,6 +15,32 @@
 - RDS Proxy (connection pool management)
 - Creating an RDS instance (sandbox walkthrough)
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Structured vs Unstructured Data](#structured-vs-unstructured-data)
+  - [Why Databases Exist](#why-databases-exist)
+  - [ASCII Flow — Request Path (Three-Tier)](#ascii-flow-request-path-three-tier)
+  - [Read Replicas — Traffic Split](#read-replicas-traffic-split)
+  - [Why There Is No Load Balancer for the Database](#why-there-is-no-load-balancer-for-the-database)
+  - [Read Replicas](#read-replicas)
+  - [On-Prem DB vs EC2-Hosted DB vs RDS — Responsibility Breakdown](#on-prem-db-vs-ec2-hosted-db-vs-rds-responsibility-breakdown)
+  - [RDS Engines Supported](#rds-engines-supported)
+  - [RDS Storage Auto-Scaling vs Instance Auto-Scaling](#rds-storage-auto-scaling-vs-instance-auto-scaling)
+  - [RDS Proxy](#rds-proxy)
+  - [ASCII Flow — Full Three-Tier with Read Replica + Proxy](#ascii-flow-full-three-tier-with-read-replica-proxy)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [RDS vs DynamoDB](#rds-vs-dynamodb)
+  - [Read vs Write Requests](#read-vs-write-requests)
+- [🏗️ Architecture / Diagram](#architecture-diagram)
+  - [Class Diagram (Hand-drawn)](#class-diagram-hand-drawn)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

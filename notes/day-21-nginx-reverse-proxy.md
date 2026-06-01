@@ -12,6 +12,33 @@
 - Path-based routing via Nginx
 - Two solutions for frontend-backend communication: reverse proxy vs dynamic frameworks
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Where Does Code Execute?](#where-does-code-execute)
+  - [Why Client Can't Reach Internal Load Balancer](#why-client-cant-reach-internal-load-balancer)
+  - [Web Server vs Reverse Proxy](#web-server-vs-reverse-proxy)
+  - [Nginx as Your Own Load Balancer](#nginx-as-your-own-load-balancer)
+  - [Nginx Upstream — Multiple Backend Servers](#nginx-upstream-multiple-backend-servers)
+  - [Path-Based Routing in Nginx](#path-based-routing-in-nginx)
+  - [Two Solutions for Frontend-Backend Access Problem](#two-solutions-for-frontend-backend-access-problem)
+  - [Why Nginx Reverse Proxy ≠ AWS ALB at Scale](#why-nginx-reverse-proxy-aws-alb-at-scale)
+- [💻 Commands & Code](#commands-code)
+  - [Deploy Python Flask App on Private EC2](#deploy-python-flask-app-on-private-ec2)
+  - [Install and Start Nginx](#install-and-start-nginx)
+  - [Edit Nginx Config for Reverse Proxy](#edit-nginx-config-for-reverse-proxy)
+  - [Restart Nginx After Config Change](#restart-nginx-after-config-change)
+  - [Quick Test from CLI](#quick-test-from-cli)
+- [🏗️ Architecture / Diagrams](#architecture-diagrams)
+- [✅ What I Practiced](#what-i-practiced)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [⏭️ Next Steps](#next-steps)
+- [🔗 GitHub](#github)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

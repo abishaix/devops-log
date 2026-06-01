@@ -15,6 +15,29 @@
 - Public route table vs private route table responsibilities
 - "VPC and more" shortcut in AWS console
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [VPC and More (Quick Note)](#vpc-and-more-quick-note)
+  - [NAT Gateway — Why It Exists](#nat-gateway-why-it-exists)
+  - [NAT Placement — VPC Level for High Availability](#nat-placement-vpc-level-for-high-availability)
+  - [Route Table Responsibilities](#route-table-responsibilities)
+  - [How NAT Works — Address Translation](#how-nat-works-address-translation)
+  - [NAT is Stateful](#nat-is-stateful)
+  - [The Port Problem — How One NAT IP Handles Thousands of Connections](#the-port-problem-how-one-nat-ip-handles-thousands-of-connections)
+  - [Egress vs Ingress](#egress-vs-ingress)
+- [📊 Quick Reference — Full NAT Flow](#quick-reference-full-nat-flow)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [💻 Commands](#commands)
+- [✅ What I Practiced](#what-i-practiced)
+- [❌ Mistakes & Fixes](#mistakes-fixes)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

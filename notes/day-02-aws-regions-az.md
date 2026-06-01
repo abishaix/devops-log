@@ -14,6 +14,23 @@
 - High availability — why you spread servers across AZs
 - EC2 introduction
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [AWS Infrastructure Hierarchy](#aws-infrastructure-hierarchy)
+  - [Regions](#regions)
+  - [Availability Zones (AZ)](#availability-zones-az)
+  - [What You Select When Creating a Server](#what-you-select-when-creating-a-server)
+  - [High Availability — Why Spread Across AZs](#high-availability-why-spread-across-azs)
+  - [EC2 — Your Server in AWS](#ec2-your-server-in-aws)
+- [📊 Quick Reference](#quick-reference)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

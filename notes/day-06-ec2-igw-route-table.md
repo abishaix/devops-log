@@ -14,6 +14,33 @@
 - Bastion host pattern
 - EC2 Instance Connect (browser SSH)
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [CIDR — Multi-Series Ranges](#cidr-multi-series-ranges)
+  - [EC2 — Components When Creating a Server](#ec2-components-when-creating-a-server)
+  - [Private IP vs Public IP](#private-ip-vs-public-ip)
+  - [Internet Gateway (IGW)](#internet-gateway-igw)
+  - [Route Table (RT)](#route-table-rt)
+  - [Public vs Private Subnet](#public-vs-private-subnet)
+  - [Steps to Create a Public Subnet](#steps-to-create-a-public-subnet)
+  - [Bastion Host Pattern](#bastion-host-pattern)
+- [🏗️ Architecture](#architecture)
+- [✅ What I Built — Day 6](#what-i-built-day-6)
+- [💻 Terminal Output — Confirmed Working](#terminal-output-confirmed-working)
+- [❌ Mistakes & Fixes](#mistakes-fixes)
+  - [EC2 Instance Connect Failed](#ec2-instance-connect-failed)
+  - [Key Lesson — EC2 Instance Connect vs Direct SSH](#key-lesson-ec2-instance-connect-vs-direct-ssh)
+- [💰 Billing Protection Setup](#billing-protection-setup)
+- [📸 Screenshots](#screenshots)
+- [🗑️ Cleanup — Deletion Order](#cleanup-deletion-order)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

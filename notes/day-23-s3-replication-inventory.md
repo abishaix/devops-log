@@ -14,6 +14,32 @@
 - Multipart upload
 - S3 topics recap
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [S3 Replication — Cross-Region Backup](#s3-replication-cross-region-backup)
+  - [Real-World Use Case — Terraform State Files](#real-world-use-case-terraform-state-files)
+  - [How Replication Works — Step by Step](#how-replication-works-step-by-step)
+  - [Prerequisites for Replication](#prerequisites-for-replication)
+  - [One-Way vs Bidirectional Replication](#one-way-vs-bidirectional-replication)
+  - [Two Levels of High Availability](#two-levels-of-high-availability)
+  - [S3 Inventory Configuration](#s3-inventory-configuration)
+  - [S3 Object Size Limits (2026 Update)](#s3-object-size-limits-2026-update)
+  - [S3 Complete Topic Summary](#s3-complete-topic-summary)
+- [🏗️ Architecture / Diagrams](#architecture-diagrams)
+- [💻 Commands & Code](#commands-code)
+  - [Create replication rule (console steps)](#create-replication-rule-console-steps)
+  - [S3 CLI — copy object (for reference)](#s3-cli-copy-object-for-reference)
+- [📊 Quick Reference Tables](#quick-reference-tables)
+  - [S3 Storage Classes — When to Use What](#s3-storage-classes-when-to-use-what)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 Related Notes](#related-notes)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

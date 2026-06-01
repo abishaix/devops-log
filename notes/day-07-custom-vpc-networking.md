@@ -16,6 +16,34 @@
 - Connecting to EC2 via SSH (MobaXterm, PuTTY, terminal, VS Code, EC2 Instance Connect)
 - Troubleshooting SSH connection failures (network timeout vs wrong key)
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Custom VPC vs Default VPC](#custom-vpc-vs-default-vpc)
+  - [Public vs Private Subnets](#public-vs-private-subnets)
+  - [VPC CIDR and Subnet Ranges](#vpc-cidr-and-subnet-ranges)
+  - [Internet Gateway (IGW)](#internet-gateway-igw)
+  - [Route Table (RT)](#route-table-rt)
+  - [Security Group (SG)](#security-group-sg)
+  - [Public vs Private IP](#public-vs-private-ip)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [💻 Commands & Code](#commands-code)
+  - [Connect via Terminal (Linux/Mac)](#connect-via-terminal-linuxmac)
+  - [Connect via Terminal (Windows)](#connect-via-terminal-windows)
+  - [After connected — verify you're in](#after-connected-verify-youre-in)
+- [🛠️ SSH Tools Comparison](#ssh-tools-comparison)
+- [🐛 Troubleshooting SSH](#troubleshooting-ssh)
+  - [Error: Network timeout / Connection timed out](#error-network-timeout-connection-timed-out)
+  - [Error: Permission denied / Unable to login (auth failure)](#error-permission-denied-unable-to-login-auth-failure)
+- [✅ What I Practiced](#what-i-practiced)
+- [❌ Mistakes & Fixes](#mistakes-fixes)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

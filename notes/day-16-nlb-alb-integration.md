@@ -13,6 +13,25 @@
 - NLB + ALB combination architecture — when and why
 - Self-learning tasks assigned: LB stickiness, scheduled ASG scaling, ASG lifecycle policy
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Network Load Balancer (NLB)](#network-load-balancer-nlb)
+  - [Elastic IPs on NLB — Why It Matters](#elastic-ips-on-nlb-why-it-matters)
+  - [ENI — Elastic Network Interface (Intro)](#eni-elastic-network-interface-intro)
+  - [NLB + ALB Combination Architecture](#nlb-alb-combination-architecture)
+  - [Listeners on NLB](#listeners-on-nlb)
+- [📊 Quick Reference — NLB vs ALB](#quick-reference-nlb-vs-alb)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [✅ Self-Learning Tasks (Assigned Today)](#self-learning-tasks-assigned-today)
+- [❓ Questions I Still Have](#questions-i-still-have)
+- [🔗 GitHub](#github)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

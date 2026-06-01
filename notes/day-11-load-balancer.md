@@ -16,6 +16,26 @@
 - Auto Scaling Group (ASG) introduction — true high availability
 - Internal vs external load balancer
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Why Private Servers Need a Proxy](#why-private-servers-need-a-proxy)
+  - [Multi-AZ Private Subnet Setup](#multi-az-private-subnet-setup)
+  - [Load Balancer — Conditions to Create One](#load-balancer-conditions-to-create-one)
+  - [Target Group (TG)](#target-group-tg)
+  - [Listener](#listener)
+  - [Load Balancer Features](#load-balancer-features)
+  - [Round Robin — How Traffic is Distributed](#round-robin-how-traffic-is-distributed)
+  - [Auto Scaling Group (ASG) — True High Availability](#auto-scaling-group-asg-true-high-availability)
+- [📊 Quick Reference](#quick-reference)
+- [🏗️ Architecture Diagram](#architecture-diagram)
+- [💻 Key Steps — Create LB (Overview)](#key-steps-create-lb-overview)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

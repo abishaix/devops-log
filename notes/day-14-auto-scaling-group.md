@@ -14,6 +14,30 @@
 - The 4 ASG challenges and how to solve each
 - Stress testing to trigger ASG scale-out
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [Why We Need Auto Scaling](#why-we-need-auto-scaling)
+  - [Types of Scaling](#types-of-scaling)
+  - [Auto Scaling Group (ASG)](#auto-scaling-group-asg)
+  - [The 4 ASG Challenges](#the-4-asg-challenges)
+  - [Challenge 1 — Same Application: AMI](#challenge-1-same-application-ami)
+  - [Challenge 2 — Same Configurations: Launch Template](#challenge-2-same-configurations-launch-template)
+  - [Challenge 3 — Same AZs: Subnet Config in ASG](#challenge-3-same-azs-subnet-config-in-asg)
+  - [Challenge 4 — Same Target Group](#challenge-4-same-target-group)
+  - [Full Architecture Flow](#full-architecture-flow)
+  - [Launch Template Versioning](#launch-template-versioning)
+  - [Desired, Min, Max](#desired-min-max)
+  - [Scaling Policy: Target Tracking](#scaling-policy-target-tracking)
+- [💻 Commands & Code](#commands-code)
+- [🏗️ Architecture / Diagrams](#architecture-diagrams)
+- [🔗 GitHub](#github)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes

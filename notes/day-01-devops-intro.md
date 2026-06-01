@@ -11,6 +11,26 @@
 - Course roadmap and tools ahead
 - Cloud market share 2026
 
+
+## Contents
+
+- [📚 Concepts Covered](#concepts-covered)
+- [🧠 Theory Notes](#theory-notes)
+  - [What is DevOps?](#what-is-devops)
+  - [The DevOps Lifecycle](#the-devops-lifecycle)
+  - [Key Roles](#key-roles)
+  - [What DevOps Engineers Own](#what-devops-engineers-own)
+  - [Core DevOps Principle](#core-devops-principle)
+- [📊 Quick Reference — Cloud Market Share 2026](#quick-reference-cloud-market-share-2026)
+- [📊 Course Roadmap](#course-roadmap)
+  - [Career Paths This Covers](#career-paths-this-covers)
+- [🏆 Top Certifications to Target](#top-certifications-to-target)
+- [🔗 Resources](#resources)
+- [❓ Questions to Follow Up](#questions-to-follow-up)
+- [⏭️ Next Steps](#next-steps)
+
+---
+
 ---
 
 ## 🧠 Theory Notes
