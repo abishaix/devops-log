@@ -48,7 +48,8 @@ Personal learning log for DevOps Bootcamp 2026. Documenting class notes, hands-o
 | 34 | EC2 pricing, Secrets Manager | ✅ | — |
 | 35 | VPC peering | ✅ | ✅ lab-15 |
 | 36 | VPC endpoint connections | ✅ | ✅ lab-16, lab-17 |
-| 37 | Cloud automation, Boto3, Lambda | ✅ | — |
+| 37 | Cloud automation, Boto3, Lambda | ✅ | ✅ lab-18 |
+| 38 | Lambda deep dive, EventBridge | ✅ | — |
 
 ---
 
@@ -93,7 +94,8 @@ devops-log/
 │   ├── day-34-ec2-pricing-secrets-manager.md
 │   ├── day-35-vpc-peering.md
 │   ├── day-36-vpc-endpoint-connections.md
-│   └── day-37-cloud-automation-boto3-lambda.md
+│   ├── day-37-cloud-automation-boto3-lambda.md
+│   └── day-38-lambda-eventbridge.md
 ├── practice-logs/
 │   ├── lab-01-aws-vpc-ec2-setup.md
 │   ├── lab-02-custom-vpc-ec2.md
@@ -111,7 +113,8 @@ devops-log/
 │   ├── lab-14-rds-private-bastion.md
 │   ├── lab-15-vpc-peering.md
 │   ├── lab-16-s3-nat-gateway.md
-│   └── lab-17-transit-gateway-same-region.md
+│   ├── lab-17-transit-gateway-same-region.md
+│   └── lab-18-boto3-lambda-ec2.md
 ├── diagrams/
 ├── screenshots/
 └── cheatsheets/
@@ -122,15 +125,15 @@ devops-log/
 ## Bootcamp Roadmap
 
 ```
-AWS Core (Days 1–37) ← currently here
+AWS Core (Days 1–38) ← currently here
 ├── Networking — VPC, subnets, IGW, NAT, peering, endpoints ✅
 ├── Compute — EC2, ASG, ALB, NLB ✅
 ├── Storage — S3, EBS ✅
 ├── Database — RDS ✅
 ├── IAM + Security ✅
 ├── Route 53 ✅
-├── Cloud Automation — Boto3, Lambda ← Day 37
-└── Coming up — more Lambda, TGW cross-region, ElastiCache
+├── Cloud Automation — Boto3, Lambda, EventBridge ← Day 37–38
+└── Coming up — Lambda labs, ElastiCache, more automation
 
 DevOps Tooling (Months 3–6)
 ├── Docker
