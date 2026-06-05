@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="450" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">Day 39 — Lambda Triggers, EventBridge Events, CloudTrail</text>
+
+  <!-- ============================================ -->
+  <!-- SECTION 1: S3 → Lambda → EC2 Deployment -->
+  <!-- ============================================ -->
+  <rect x="20" y="50" width="410" height="290" rx="10" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="1.5"/>
+  <text x="225" y="72" text-anchor="middle" font-size="12" font-weight="bold" fill="#4a6fa5">Use Case: S3 → Lambda → EC2 Deployment</text>
+
+  <!-- Developer -->
+  <rect x="40" y="85" width="100" height="36" rx="6" fill="#4a6fa5" stroke="#3a5a8a" stroke-width="1"/>
+  <text x="90" y="98" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">Developer</text>
+  <text x="90" y="112" text-anchor="middle" font-size="9" fill="#dde4ff">pushes index.html</text>
+
+  <!-- GitHub -->
+  <rect x="40" y="148" width="100" height="36" rx="6" fill="#24292e" stroke="#444" stroke-width="1"/>
+  <text x="90" y="161" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">GitHub</text>
+  <text x="90" y="175" text-anchor="middle" font-size="9" fill="#aaa">code repo</text>
+
+  <!-- Arrow Developer → GitHub -->
+  <line x1="90" y1="121" x2="90" y2="148" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S3 Bucket -->
+  <rect x="165" y="148" width="100" height="36" rx="6" fill="#e67e22" stroke="#c0602a" stroke-width="1"/>
+  <text x="215" y="161" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">S3 Bucket</text>
+  <text x="215" y="175" text-anchor="middle" font-size="9" fill="#fff">index.html upload</text>
+
+  <!-- Arrow GitHub → S3 via pipeline -->
+  <line x1="140" y1="166" x2="165" y2="166" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="152" y="162" text-anchor="middle" font-size="8" fill="#666">pipeline</text>
+
+  <!-- PUT event label -->
+  <rect x="165" y="200" width="100" height="24" rx="4" fill="#fdebd0" stroke="#e67e22" stroke-width="1"/>
+  <text x="215" y="214" text-anchor="middle" font-size="9" fill="#a04000" font-weight="bold">PUT event fired</text>
+  <line x1="215" y1="184" x2="215" y2="200" stroke="#e67e22" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Lambda -->
+  <rect x="165" y="240" width="100" height="36" rx="6" fill="#8e44ad" stroke="#6c3483" stroke-width="1"/>
+  <text x="215" y="253" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">Lambda</text>
+  <text x="215" y="267" text-anchor="middle" font-size="9" fill="#ddd">trigger fires</text>
+  <line x1="215" y1="224" x2="215" y2="240" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- EC2 -->
+  <rect x="310" y="240" width="100" height="36" rx="6" fill="#27ae60" stroke="#1e8449" stroke-width="1"/>
+  <text x="360" y="253" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">EC2 (nginx)</text>
+  <text x="360" y="267" text-anchor="middle" font-size="9" fill="#ddd">/usr/share/nginx/html</text>
+
+  <!-- Arrow Lambda → EC2 -->
+  <line x1="265" y1="258" x2="310" y2="258" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="287" y="252" text-anchor="middle" font-size="8" fill="#555">SSH + copy</text>
+
+  <!-- Lambda actions annotation -->
+  <text x="40" y="310" font-size="9" fill="#555">Lambda code:</text>
+  <text x="40" y="323" font-size="9" fill="#555">1. SSH into EC2 (Paramiko)</text>
+  <text x="40" y="336" font-size="9" fill="#555">2. aws s3 cp ... → nginx path</text>
+
+  <!-- ============================================ -->
+  <!-- SECTION 2: EventBridge Event Rule -->
+  <!-- ============================================ -->
+  <rect x="460" y="50" width="420" height="220" rx="10" fill="#fff8f0" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="670" y="72" text-anchor="middle" font-size="12" font-weight="bold" fill="#e67e22">EventBridge — Event Rule</text>
+
+  <!-- ASG -->
+  <rect x="480" y="85" width="110" height="36" rx="6" fill="#2980b9" stroke="#1a6a9a" stroke-width="1"/>
+  <text x="535" y="98" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">Auto Scaling Group</text>
+  <text x="535" y="112" text-anchor="middle" font-size="9" fill="#dde">terminates EC2</text>
+
+  <!-- EC2 shutting-down -->
+  <rect x="480" y="148" width="110" height="36" rx="6" fill="#c0392b" stroke="#922b21" stroke-width="1"/>
+  <text x="535" y="161" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">EC2</text>
+  <text x="535" y="175" text-anchor="middle" font-size="9" fill="#fff">state: shutting-down</text>
+  <line x1="535" y1="121" x2="535" y2="148" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- EventBridge -->
+  <rect x="630" y="148" width="110" height="36" rx="6" fill="#e67e22" stroke="#c0602a" stroke-width="1"/>
+  <text x="685" y="161" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">EventBridge Rule</text>
+  <text x="685" y="175" text-anchor="middle" font-size="9" fill="#fff">event pattern match</text>
+  <line x1="590" y1="166" x2="630" y2="166" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- EBS Snapshot target -->
+  <rect x="630" y="220" width="110" height="36" rx="6" fill="#16a085" stroke="#0e6655" stroke-width="1"/>
+  <text x="685" y="233" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">EBS Snapshot</text>
+  <text x="685" y="247" text-anchor="middle" font-size="9" fill="#ddd">backup created</text>
+  <line x1="685" y1="184" x2="685" y2="220" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- State note -->
+  <text x="480" y="195" font-size="8" fill="#c0392b">⚠ shutting-down (not terminated)</text>
+  <text x="480" y="207" font-size="8" fill="#555">at terminated: EBS already deleted</text>
+
+  <!-- ============================================ -->
+  <!-- SECTION 3: Lambda vs EventBridge comparison -->
+  <!-- ============================================ -->
+  <rect x="20" y="360" width="410" height="120" rx="10" fill="#f9f9f9" stroke="#aaa" stroke-width="1.5"/>
+  <text x="225" y="380" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Lambda vs EventBridge</text>
+
+  <rect x="35" y="390" width="180" height="75" rx="6" fill="#f0e0ff" stroke="#8e44ad" stroke-width="1"/>
+  <text x="125" y="406" text-anchor="middle" font-size="10" font-weight="bold" fill="#6c3483">Lambda</text>
+  <text x="125" y="420" text-anchor="middle" font-size="9" fill="#555">Custom code — any logic</text>
+  <text x="125" y="433" text-anchor="middle" font-size="9" fill="#555">Filter by tags, names, groups</text>
+  <text x="125" y="446" text-anchor="middle" font-size="9" fill="#555">Unlimited flexibility</text>
+  <text x="125" y="459" text-anchor="middle" font-size="9" fill="#555">Like a custom IAM policy</text>
+
+  <rect x="225" y="390" width="190" height="75" rx="6" fill="#fff3e0" stroke="#e67e22" stroke-width="1"/>
+  <text x="320" y="406" text-anchor="middle" font-size="10" font-weight="bold" fill="#c0602a">EventBridge</text>
+  <text x="320" y="420" text-anchor="middle" font-size="9" fill="#555">Predefined AWS actions</text>
+  <text x="320" y="433" text-anchor="middle" font-size="9" fill="#555">All instances or specific IDs</text>
+  <text x="320" y="446" text-anchor="middle" font-size="9" fill="#555">No custom filtering by tag</text>
+  <text x="320" y="459" text-anchor="middle" font-size="9" fill="#555">Like default IAM policies</text>
+
+  <!-- ============================================ -->
+  <!-- SECTION 4: CloudTrail -->
+  <!-- ============================================ -->
+  <rect x="460" y="290" width="420" height="300" rx="10" fill="#eaf6ff" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="670" y="312" text-anchor="middle" font-size="12" font-weight="bold" fill="#2980b9">CloudTrail — AWS API Audit</text>
+
+  <!-- AWS Actions box -->
+  <rect x="480" y="322" width="180" height="50" rx="6" fill="#d6eaf8" stroke="#2980b9" stroke-width="1"/>
+  <text x="570" y="340" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a5276">Any AWS Action</text>
+  <text x="570" y="355" text-anchor="middle" font-size="9" fill="#555">create / delete / modify / login</text>
+  <text x="570" y="368" text-anchor="middle" font-size="9" fill="#555">who / when / from which IP</text>
+
+  <!-- CloudTrail box -->
+  <rect x="480" y="395" width="180" height="50" rx="6" fill="#2980b9" stroke="#1a6a9a" stroke-width="1"/>
+  <text x="570" y="413" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">CloudTrail</text>
+  <text x="570" y="428" text-anchor="middle" font-size="9" fill="#dde">Event History (90 days, free)</text>
+  <text x="570" y="441" text-anchor="middle" font-size="9" fill="#dde">auto-enabled by default</text>
+  <line x1="570" y1="372" x2="570" y2="395" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S3 box -->
+  <rect x="480" y="468" width="180" height="36" rx="6" fill="#e67e22" stroke="#c0602a" stroke-width="1"/>
+  <text x="570" y="481" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">S3 Bucket</text>
+  <text x="570" y="495" text-anchor="middle" font-size="9" fill="#fff">long-term trail storage</text>
+  <line x1="570" y1="445" x2="570" y2="468" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="600" y="460" font-size="8" fill="#555">Create Trail →</text>
+
+  <!-- Athena box -->
+  <rect x="690" y="468" width="175" height="36" rx="6" fill="#16a085" stroke="#0e6655" stroke-width="1"/>
+  <text x="777" y="481" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">Athena</text>
+  <text x="777" y="495" text-anchor="middle" font-size="9" fill="#ddd">SQL queries on S3 logs</text>
+  <line x1="660" y1="486" x2="690" y2="486" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- CloudWatch vs CloudTrail note -->
+  <rect x="480" y="520" width="380" height="55" rx="6" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="670" y="535" text-anchor="middle" font-size="9" font-weight="bold" fill="#784212">CloudWatch vs CloudTrail</text>
+  <text x="490" y="550" font-size="9" fill="#555">CloudWatch → application logs, metrics, alarms (your app behavior)</text>
+  <text x="490" y="563" font-size="9" fill="#555">CloudTrail → AWS API calls, who modified infra resources</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#666"/>
+    </marker>
+  </defs>
+
+</svg>
