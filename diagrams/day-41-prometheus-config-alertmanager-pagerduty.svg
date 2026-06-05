@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="480" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">Day 41 — Prometheus Config, AlertManager Rules, PagerDuty Integration</text>
+
+  <!-- ========================= -->
+  <!-- TARGET SERVERS            -->
+  <!-- ========================= -->
+  <rect x="20" y="45" width="300" height="160" rx="10" fill="#eaf6ff" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="170" y="64" text-anchor="middle" font-size="11" font-weight="bold" fill="#2980b9">Target Servers (Private)</text>
+  <text x="170" y="78" text-anchor="middle" font-size="9" fill="#555">Tag: Name = node-server</text>
+
+  <!-- Server 1 -->
+  <rect x="35" y="85" width="120" height="55" rx="6" fill="#2980b9" stroke="#1a6a9a" stroke-width="1"/>
+  <text x="95" y="102" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">Target Server 1</text>
+  <text x="95" y="115" text-anchor="middle" font-size="8" fill="#dde">Application running</text>
+  <rect x="42" y="124" width="106" height="12" rx="3" fill="#1a5a8a"/>
+  <text x="95" y="133" text-anchor="middle" font-size="8" fill="#7ec8e3">node_exporter :9100</text>
+
+  <!-- Server 2 -->
+  <rect x="170" y="85" width="120" height="55" rx="6" fill="#2980b9" stroke="#1a6a9a" stroke-width="1"/>
+  <text x="230" y="102" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">Target Server 2</text>
+  <text x="230" y="115" text-anchor="middle" font-size="8" fill="#dde">Application running</text>
+  <rect x="177" y="124" width="106" height="12" rx="3" fill="#1a5a8a"/>
+  <text x="230" y="133" text-anchor="middle" font-size="8" fill="#7ec8e3">node_exporter :9100</text>
+
+  <!-- User data note -->
+  <rect x="35" y="150" width="255" height="45" rx="4" fill="#fff9e6" stroke="#f39c12" stroke-width="1"/>
+  <text x="162" y="164" text-anchor="middle" font-size="9" font-weight="bold" fill="#c0602a">Auto-scaling: node_exporter via user data</text>
+  <text x="162" y="178" text-anchor="middle" font-size="8" fill="#555">New ASG servers auto-install node_exporter</text>
+  <text x="162" y="190" text-anchor="middle" font-size="8" fill="#555">Discovered by Prometheus via EC2 tag</text>
+
+  <!-- ========================= -->
+  <!-- PROMETHEUS CONFIG BOX     -->
+  <!-- ========================= -->
+  <rect x="340" y="45" width="280" height="200" rx="10" fill="#fff3e0" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="480" y="64" text-anchor="middle" font-size="11" font-weight="bold" fill="#e67e22">prometheus.yml</text>
+
+  <rect x="355" y="72" width="250" height="18" rx="3" fill="#fdebd0" stroke="#e67e22" stroke-width="0.5"/>
+  <text x="480" y="84" text-anchor="middle" font-size="9" fill="#a04000" font-weight="bold">scrape_interval: 15s</text>
+
+  <rect x="355" y="96" width="250" height="18" rx="3" fill="#fdebd0" stroke="#e67e22" stroke-width="0.5"/>
+  <text x="480" y="108" text-anchor="middle" font-size="9" fill="#a04000">alertmanagers: localhost:9093</text>
+
+  <rect x="355" y="120" width="250" height="18" rx="3" fill="#fdebd0" stroke="#e67e22" stroke-width="0.5"/>
+  <text x="480" y="132" text-anchor="middle" font-size="9" fill="#a04000">rule_files: [alert_rules.yml]</text>
+
+  <rect x="355" y="144" width="250" height="18" rx="3" fill="#fdebd0" stroke="#e67e22" stroke-width="0.5"/>
+  <text x="480" y="156" text-anchor="middle" font-size="9" fill="#a04000">ec2_sd_configs: tag Name=node-server</text>
+
+  <text x="355" y="178" font-size="8" fill="#555">Prometheus scrapes all EC2 instances</text>
+  <text x="355" y="191" font-size="8" fill="#555">tagged "node-server" → no hardcoded IPs</text>
+  <text x="355" y="204" font-size="8" fill="#555">Relabels metrics with private IP for traceability</text>
+  <text x="355" y="218" font-size="8" fill="#555">Re-scrapes every 15 seconds (pull model)</text>
+  <text x="355" y="232" font-size="8" fill="#555">Reads alert rules → passes breaches to AlertManager</text>
+
+  <!-- ========================= -->
+  <!-- ALERT RULES BOX           -->
+  <!-- ========================= -->
+  <rect x="640" y="45" width="300" height="200" rx="10" fill="#fdf2f8" stroke="#8e44ad" stroke-width="1.5"/>
+  <text x="790" y="64" text-anchor="middle" font-size="11" font-weight="bold" fill="#8e44ad">alert_rules.yml</text>
+
+  <rect x="655" y="72" width="270" height="38" rx="4" fill="#f5eef8" stroke="#8e44ad" stroke-width="0.5"/>
+  <text x="790" y="86" text-anchor="middle" font-size="9" fill="#6c3483" font-weight="bold">Rule 1 — InstanceDown</text>
+  <text x="790" y="101" text-anchor="middle" font-size="8" fill="#555">up == 0 → for: 1m → severity: critical</text>
+
+  <rect x="655" y="116" width="270" height="38" rx="4" fill="#f5eef8" stroke="#8e44ad" stroke-width="0.5"/>
+  <text x="790" y="130" text-anchor="middle" font-size="9" fill="#6c3483" font-weight="bold">Rule 2 — HighCPULoad</text>
+  <text x="790" y="145" text-anchor="middle" font-size="8" fill="#555">CPU load &gt; 40% → for: 2m → critical</text>
+
+  <rect x="655" y="160" width="270" height="38" rx="4" fill="#f5eef8" stroke="#8e44ad" stroke-width="0.5"/>
+  <text x="790" y="174" text-anchor="middle" font-size="9" fill="#6c3483" font-weight="bold">Rule 3 — HighDiskUsage</text>
+  <text x="790" y="189" text-anchor="middle" font-size="8" fill="#555">Disk &gt; 80% → for: 2m → critical</text>
+
+  <text x="655" y="220" font-size="8" fill="#c0392b">for: 2m = sustained load only, not spikes</text>
+  <text x="655" y="232" font-size="8" fill="#555">States: inactive → pending → firing</text>
+
+  <!-- ========================= -->
+  <!-- MONITORING SERVER         -->
+  <!-- ========================= -->
+  <rect x="20" y="230" width="600" height="200" rx="10" fill="#f5f0ff" stroke="#8e44ad" stroke-width="1.5"/>
+  <text x="320" y="250" text-anchor="middle" font-size="11" font-weight="bold" fill="#8e44ad">Monitoring Server (Private — Ubuntu t2.medium)</text>
+
+  <!-- Prometheus -->
+  <rect x="35" y="260" width="130" height="60" rx="6" fill="#e67e22" stroke="#c0602a" stroke-width="1"/>
+  <text x="100" y="278" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">Prometheus</text>
+  <text x="100" y="292" text-anchor="middle" font-size="9" fill="#fff">port 9090</text>
+  <text x="100" y="306" text-anchor="middle" font-size="8" fill="#fde">reads rules, stores TSDB</text>
+
+  <!-- Grafana -->
+  <rect x="180" y="260" width="130" height="60" rx="6" fill="#27ae60" stroke="#1e8449" stroke-width="1"/>
+  <text x="245" y="278" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">Grafana</text>
+  <text x="245" y="292" text-anchor="middle" font-size="9" fill="#fff">port 3000</text>
+  <text x="245" y="306" text-anchor="middle" font-size="8" fill="#dfe">queries Prometheus, visualizes</text>
+
+  <!-- AlertManager -->
+  <rect x="325" y="260" width="130" height="60" rx="6" fill="#c0392b" stroke="#922b21" stroke-width="1"/>
+  <text x="390" y="278" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">AlertManager</text>
+  <text x="390" y="292" text-anchor="middle" font-size="9" fill="#fff">port 9093</text>
+  <text x="390" y="306" text-anchor="middle" font-size="8" fill="#fcd">receives alerts, routes to PagerDuty</text>
+
+  <!-- NodeExporter self -->
+  <rect x="470" y="260" width="130" height="60" rx="6" fill="#2980b9" stroke="#1a6a9a" stroke-width="1"/>
+  <text x="535" y="278" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">Node Exporter</text>
+  <text x="535" y="292" text-anchor="middle" font-size="9" fill="#fff">port 9100</text>
+  <text x="535" y="306" text-anchor="middle" font-size="8" fill="#dde">self-monitoring</text>
+
+  <!-- AlertManager config note -->
+  <rect x="35" y="335" width="565" height="82" rx="6" fill="#feecec" stroke="#c0392b" stroke-width="1"/>
+  <text x="320" y="352" text-anchor="middle" font-size="10" font-weight="bold" fill="#922b21">alertmanager.yml — Two required changes per deployment</text>
+  <text x="45" y="368" font-size="9" fill="#555">1. service_key: &lt;PagerDuty integration key&gt;</text>
+  <text x="45" y="382" font-size="9" fill="#555">2. instance: must match EC2 tag Name used in prometheus.yml</text>
+  <text x="45" y="396" font-size="9" fill="#555">   repeat_interval: 10s — re-alerts every 10s until acknowledged</text>
+  <text x="45" y="409" font-size="9" fill="#555">   Route: Prometheus (9090) → AlertManager (9093) → PagerDuty</text>
+
+  <!-- ========================= -->
+  <!-- PAGERDUTY                 -->
+  <!-- ========================= -->
+  <rect x="640" y="260" width="300" height="170" rx="10" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="790" y="280" text-anchor="middle" font-size="11" font-weight="bold" fill="#c0602a">PagerDuty</text>
+
+  <rect x="655" y="290" width="270" height="40" rx="4" fill="#fdebd0" stroke="#e67e22" stroke-width="1"/>
+  <text x="790" y="307" text-anchor="middle" font-size="9" font-weight="bold" fill="#a04000">Setup: Services → Service Directory</text>
+  <text x="790" y="321" text-anchor="middle" font-size="8" fill="#555">New Service → Integration: Prometheus → copy key</text>
+
+  <rect x="655" y="338" width="125" height="38" rx="4" fill="#e74c3c" stroke="#c0392b" stroke-width="1"/>
+  <text x="717" y="353" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">📱 Phone Call</text>
+  <text x="717" y="366" text-anchor="middle" font-size="8" fill="#fff">rings until acknowledged</text>
+
+  <rect x="790" y="338" width="135" height="38" rx="4" fill="#8e44ad" stroke="#6c3483" stroke-width="1"/>
+  <text x="857" y="353" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">ServiceNow Ticket</text>
+  <text x="857" y="366" text-anchor="middle" font-size="8" fill="#fff">P1 / P2 / P3 priority</text>
+
+  <text x="655" y="397" font-size="9" fill="#555">Incidents tab: shows instance, timestamp, source</text>
+  <text x="655" y="410" font-size="9" fill="#555">Slack integration also available</text>
+  <text x="655" y="423" font-size="9" fill="#555">Auto-resolves when instance recovers</text>
+
+  <!-- ========================= -->
+  <!-- IAM ROLE + SYSTEMD        -->
+  <!-- ========================= -->
+  <rect x="20" y="450" width="600" height="120" rx="10" fill="#f9f9f9" stroke="#95a5a6" stroke-width="1.5"/>
+  <text x="310" y="468" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Supporting Concepts</text>
+
+  <rect x="35" y="478" width="270" height="80" rx="6" fill="#eaf0fb" stroke="#4a6fa5" stroke-width="1"/>
+  <text x="170" y="494" text-anchor="middle" font-size="10" font-weight="bold" fill="#4a6fa5">IAM Role (EC2 → EC2)</text>
+  <text x="45" y="510" font-size="9" fill="#555">Prometheus calls EC2 API for tag discovery</text>
+  <text x="45" y="524" font-size="9" fill="#555">Attach IAM role to monitoring server</text>
+  <text x="45" y="538" font-size="9" fill="#555">Needs: ec2:DescribeInstances, ec2:DescribeTags</text>
+  <text x="45" y="552" font-size="9" fill="#c0392b">Never use access keys on EC2 → use IAM roles</text>
+
+  <rect x="320" y="478" width="285" height="80" rx="6" fill="#eaf6ff" stroke="#2980b9" stroke-width="1"/>
+  <text x="462" y="494" text-anchor="middle" font-size="10" font-weight="bold" fill="#2980b9">SystemD Service File</text>
+  <text x="330" y="510" font-size="9" fill="#555">Manages Prometheus, node_exporter, Grafana</text>
+  <text x="330" y="524" font-size="9" fill="#555">ExecStart = path to binary  |  User = dedicated user</text>
+  <text x="330" y="538" font-size="9" fill="#555">Restart=always → auto-recover on crash</text>
+  <text x="330" y="552" font-size="9" fill="#555">systemctl enable → starts on every server reboot</text>
+
+  <!-- ========================= -->
+  <!-- FLOW ARROWS               -->
+  <!-- ========================= -->
+
+  <!-- Target servers → Prometheus scrape -->
+  <line x1="170" y1="205" x2="170" y2="230" stroke="#2980b9" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowB)"/>
+  <text x="175" y="222" font-size="8" fill="#2980b9">scrape :9100</text>
+
+  <!-- Prometheus → AlertManager -->
+  <line x1="165" y1="290" x2="325" y2="290" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arrowR)"/>
+  <text x="245" y="285" text-anchor="middle" font-size="8" fill="#c0392b">rule breach</text>
+
+  <!-- AlertManager → PagerDuty -->
+  <line x1="620" y1="290" x2="640" y2="310" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arrowR)"/>
+
+  <!-- Grafana ↔ Prometheus -->
+  <line x1="180" y1="280" x2="165" y2="280" stroke="#27ae60" stroke-width="1.5" marker-end="url(#arrowG)"/>
+  <text x="172" y="276" text-anchor="middle" font-size="7" fill="#27ae60">query</text>
+
+  <!-- prometheus.yml refs -->
+  <line x1="480" y1="245" x2="100" y2="260" stroke="#e67e22" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowO)"/>
+
+  <!-- alert rules refs -->
+  <line x1="790" y1="245" x2="390" y2="260" stroke="#8e44ad" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowP)"/>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2980b9"/>
+    </marker>
+    <marker id="arrowR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#c0392b"/>
+    </marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#27ae60"/>
+    </marker>
+    <marker id="arrowO" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#e67e22"/>
+    </marker>
+    <marker id="arrowP" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8e44ad"/>
+    </marker>
+  </defs>
+
+  <!-- Ports legend -->
+  <rect x="640" y="450" width="300" height="110" rx="8" fill="#f4f6f7" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="790" y="468" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">Ports Reference</text>
+  <text x="655" y="484" font-size="9" fill="#2980b9">Node Exporter   :9100  — raw metrics endpoint</text>
+  <text x="655" y="498" font-size="9" fill="#e67e22">Prometheus      :9090  — web UI + PromQL queries</text>
+  <text x="655" y="512" font-size="9" fill="#27ae60">Grafana         :3000  — dashboard UI</text>
+  <text x="655" y="526" font-size="9" fill="#c0392b">AlertManager    :9093  — alert routing</text>
+  <text x="655" y="542" font-size="8" fill="#888">Verify: ss -tuln | grep &lt;port&gt;</text>
+
+</svg>
