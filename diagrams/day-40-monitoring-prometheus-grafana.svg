@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="680" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <!-- Title -->
+  <text x="460" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a2e">Day 40 — Monitoring Stack: Node Exporter → Prometheus → Grafana</text>
+
+  <!-- ===================== -->
+  <!-- APPLICATION SERVERS   -->
+  <!-- ===================== -->
+  <rect x="20" y="50" width="560" height="160" rx="10" fill="#eaf6ff" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="300" y="70" text-anchor="middle" font-size="11" font-weight="bold" fill="#2980b9">Application Servers (Private — 6×)</text>
+
+  <!-- Server boxes -->
+  <rect x="35" y="82" width="80" height="55" rx="6" fill="#2980b9" stroke="#1a6a9a" stroke-width="1"/>
+  <text x="75" y="100" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">Server 1</text>
+  <text x="75" y="113" text-anchor="middle" font-size="8" fill="#dde">App</text>
+  <rect x="42" y="120" width="66" height="13" rx="3" fill="#1a5a8a"/>
+  <text x="75" y="130" text-anchor="middle" font-size="8" fill="#7ec8e3">node_exporter :9100</text>
+
+  <rect x="130" y="82" width="80" height="55" rx="6" fill="#2980b9" stroke="#1a6a9a" stroke-width="1"/>
+  <text x="170" y="100" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">Server 2</text>
+  <text x="170" y="113" text-anchor="middle" font-size="8" fill="#dde">App</text>
+  <rect x="137" y="120" width="66" height="13" rx="3" fill="#1a5a8a"/>
+  <text x="170" y="130" text-anchor="middle" font-size="8" fill="#7ec8e3">node_exporter :9100</text>
+
+  <rect x="225" y="82" width="80" height="55" rx="6" fill="#2980b9" stroke="#1a6a9a" stroke-width="1"/>
+  <text x="265" y="100" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">Server 3</text>
+  <text x="265" y="113" text-anchor="middle" font-size="8" fill="#dde">App</text>
+  <rect x="232" y="120" width="66" height="13" rx="3" fill="#1a5a8a"/>
+  <text x="265" y="130" text-anchor="middle" font-size="8" fill="#7ec8e3">node_exporter :9100</text>
+
+  <rect x="320" y="82" width="80" height="55" rx="6" fill="#2980b9" stroke="#1a6a9a" stroke-width="1"/>
+  <text x="360" y="100" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">Server 4</text>
+  <text x="360" y="113" text-anchor="middle" font-size="8" fill="#dde">App</text>
+  <rect x="327" y="120" width="66" height="13" rx="3" fill="#1a5a8a"/>
+  <text x="360" y="130" text-anchor="middle" font-size="8" fill="#7ec8e3">node_exporter :9100</text>
+
+  <rect x="415" y="82" width="80" height="55" rx="6" fill="#2980b9" stroke="#1a6a9a" stroke-width="1"/>
+  <text x="455" y="100" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">Server 5</text>
+  <text x="455" y="113" text-anchor="middle" font-size="8" fill="#dde">App</text>
+  <rect x="422" y="120" width="66" height="13" rx="3" fill="#1a5a8a"/>
+  <text x="455" y="130" text-anchor="middle" font-size="8" fill="#7ec8e3">node_exporter :9100</text>
+
+  <rect x="510" y="82" width="60" height="55" rx="6" fill="#2980b9" stroke="#1a6a9a" stroke-width="1"/>
+  <text x="540" y="100" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">Server 6</text>
+  <text x="540" y="113" text-anchor="middle" font-size="8" fill="#dde">App</text>
+  <rect x="515" y="120" width="50" height="13" rx="3" fill="#1a5a8a"/>
+  <text x="540" y="130" text-anchor="middle" font-size="8" fill="#7ec8e3">:9100</text>
+
+  <!-- LB 1 for apps -->
+  <rect x="140" y="155" width="280" height="42" rx="6" fill="#f39c12" stroke="#d68910" stroke-width="1"/>
+  <text x="280" y="171" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">Load Balancer 1</text>
+  <text x="280" y="187" text-anchor="middle" font-size="9" fill="#fff">End user application traffic</text>
+
+  <!-- Internet -->
+  <rect x="190" y="210" width="180" height="30" rx="6" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="280" y="230" text-anchor="middle" font-size="10" fill="#555" font-weight="bold">Internet / End Users</text>
+
+  <!-- Arrow LB1 → Internet -->
+  <line x1="280" y1="197" x2="280" y2="210" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ===================== -->
+  <!-- MONITORING SERVER      -->
+  <!-- ===================== -->
+  <rect x="620" y="50" width="280" height="340" rx="10" fill="#f5f0ff" stroke="#8e44ad" stroke-width="1.5"/>
+  <text x="760" y="72" text-anchor="middle" font-size="11" font-weight="bold" fill="#8e44ad">Monitoring Server (Private)</text>
+
+  <!-- Prometheus -->
+  <rect x="640" y="82" width="240" height="60" rx="6" fill="#e67e22" stroke="#c0602a" stroke-width="1"/>
+  <text x="760" y="100" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">Prometheus  :9090</text>
+  <text x="760" y="115" text-anchor="middle" font-size="9" fill="#fff">Scrapes node exporters</text>
+  <text x="760" y="128" text-anchor="middle" font-size="9" fill="#fff">Indexes metrics → stores in TSDB (EBS)</text>
+
+  <!-- Grafana -->
+  <rect x="640" y="158" width="240" height="55" rx="6" fill="#27ae60" stroke="#1e8449" stroke-width="1"/>
+  <text x="760" y="176" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">Grafana  :3000</text>
+  <text x="760" y="191" text-anchor="middle" font-size="9" fill="#fff">Queries Prometheus</text>
+  <text x="760" y="204" text-anchor="middle" font-size="9" fill="#fff">Visualizes dashboards (CPU, RAM, disk…)</text>
+
+  <!-- AlertManager -->
+  <rect x="640" y="228" width="240" height="55" rx="6" fill="#c0392b" stroke="#922b21" stroke-width="1"/>
+  <text x="760" y="246" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">AlertManager</text>
+  <text x="760" y="261" text-anchor="middle" font-size="9" fill="#fff">Rules: CPU &gt; 75%, disk &gt; 80%</text>
+  <text x="760" y="274" text-anchor="middle" font-size="9" fill="#fff">Triggers on breach → routes alerts</text>
+
+  <!-- Node Exporter on monitoring server -->
+  <rect x="640" y="298" width="240" height="30" rx="6" fill="#2980b9" stroke="#1a6a9a" stroke-width="1"/>
+  <text x="760" y="318" text-anchor="middle" font-size="9" fill="#fff">node_exporter :9100  (self-monitoring)</text>
+
+  <!-- LB 2 for Grafana -->
+  <rect x="665" y="340" width="190" height="38" rx="6" fill="#f39c12" stroke="#d68910" stroke-width="1"/>
+  <text x="760" y="356" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">Load Balancer 2</text>
+  <text x="760" y="370" text-anchor="middle" font-size="9" fill="#fff">Ops/DevOps team access</text>
+
+  <!-- Arrows inside monitoring server -->
+  <line x1="760" y1="142" x2="760" y2="158" stroke="#fff" stroke-width="1.5" marker-end="url(#arrowW)"/>
+  <line x1="760" y1="213" x2="760" y2="228" stroke="#fff" stroke-width="1.5" marker-end="url(#arrowW)"/>
+
+  <!-- Scrape arrows from app servers to Prometheus -->
+  <line x1="300" y1="82" x2="620" y2="108" stroke="#e67e22" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowO)"/>
+  <text x="460" y="88" text-anchor="middle" font-size="9" fill="#e67e22" font-weight="bold">scrape :9100 (pull model)</text>
+
+  <!-- ===================== -->
+  <!-- PAGERDUTY             -->
+  <!-- ===================== -->
+  <rect x="620" y="420" width="280" height="110" rx="10" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="760" y="440" text-anchor="middle" font-size="11" font-weight="bold" fill="#c0602a">PagerDuty</text>
+
+  <rect x="635" y="450" width="110" height="35" rx="6" fill="#e74c3c" stroke="#c0392b" stroke-width="1"/>
+  <text x="690" y="464" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">📱 Phone Call</text>
+  <text x="690" y="477" text-anchor="middle" font-size="8" fill="#fff">rings until acknowledged</text>
+
+  <rect x="760" y="450" width="125" height="35" rx="6" fill="#8e44ad" stroke="#6c3483" stroke-width="1"/>
+  <text x="822" y="464" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">ServiceNow Ticket</text>
+  <text x="822" y="477" text-anchor="middle" font-size="8" fill="#fff">assigned to team (P1/P2/P3)</text>
+
+  <text x="760" y="510" text-anchor="middle" font-size="9" fill="#555">P1=critical fix now  P2=investigate  P3=watch</text>
+  <text x="760" y="524" text-anchor="middle" font-size="9" fill="#555">Integrates with Prometheus or Grafana level</text>
+
+  <!-- Arrow AlertManager → PagerDuty -->
+  <line x1="760" y1="395" x2="760" y2="420" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ===================== -->
+  <!-- USER DATA / DYNAMIC   -->
+  <!-- ===================== -->
+  <rect x="20" y="260" width="560" height="140" rx="10" fill="#f9f9f9" stroke="#95a5a6" stroke-width="1.5"/>
+  <text x="300" y="280" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Dynamic Infrastructure — Auto Scaling + User Data</text>
+
+  <rect x="35" y="292" width="240" height="95" rx="6" fill="#eaf0fb" stroke="#4a6fa5" stroke-width="1"/>
+  <text x="155" y="310" text-anchor="middle" font-size="10" font-weight="bold" fill="#4a6fa5">User Data Script (Launch Template)</text>
+  <text x="155" y="326" text-anchor="middle" font-size="9" fill="#555">Runs once at first boot</text>
+  <text x="155" y="340" text-anchor="middle" font-size="9" fill="#333">✓ Use when: package won't change</text>
+  <text x="155" y="354" text-anchor="middle" font-size="9" fill="#c0392b">✗ Can't edit on running instances</text>
+  <text x="155" y="368" text-anchor="middle" font-size="9" fill="#c0392b">✗ Delete + recreate to fix errors</text>
+  <text x="155" y="381" text-anchor="middle" font-size="9" fill="#8e44ad">→ Use Ansible when config may change</text>
+
+  <rect x="305" y="292" width="250" height="95" rx="6" fill="#eaf6ff" stroke="#2980b9" stroke-width="1"/>
+  <text x="430" y="310" text-anchor="middle" font-size="10" font-weight="bold" fill="#2980b9">Non-Root User Security Pattern</text>
+  <text x="315" y="327" font-size="9" fill="#333">Each web process runs as a dedicated user:</text>
+  <text x="315" y="342" font-size="8" fill="#555">useradd --no-create-home</text>
+  <text x="330" y="355" font-size="8" fill="#555">--shell /sbin/nologin node_exporter</text>
+  <text x="315" y="370" font-size="9" fill="#555">No home dir → can't browse other users</text>
+  <text x="315" y="383" font-size="9" fill="#555">No login shell → can't SSH/su into server</text>
+
+  <!-- Arrow defs -->
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#666"/>
+    </marker>
+    <marker id="arrowW" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#ffffff"/>
+    </marker>
+    <marker id="arrowO" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#e67e22"/>
+    </marker>
+  </defs>
+
+  <!-- ASG arrow to new server -->
+  <text x="30" y="252" font-size="9" fill="#555">ASG creates new server → node_exporter auto-installs via user data in Launch Template → Prometheus auto-discovers via EC2 service discovery</text>
+
+</svg>
