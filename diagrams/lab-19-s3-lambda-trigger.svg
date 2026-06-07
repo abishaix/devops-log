@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="380" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <text x="430" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">Lab 19 Part 2 — S3 PUT Event → Lambda Trigger → CloudWatch Logs</text>
+
+  <!-- Step circles -->
+  <circle cx="120" cy="55" r="14" fill="#e67e22"/><text x="120" y="60" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">1</text>
+  <circle cx="360" cy="55" r="14" fill="#8e44ad"/><text x="360" y="60" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">2</text>
+  <circle cx="620" cy="55" r="14" fill="#2980b9"/><text x="620" y="60" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">3</text>
+
+  <!-- S3 Bucket -->
+  <rect x="30" y="75" width="180" height="160" rx="10" fill="#fff3e0" stroke="#e67e22" stroke-width="2"/>
+  <text x="120" y="97" text-anchor="middle" font-size="12" font-weight="bold" fill="#e67e22">S3 Bucket</text>
+  <text x="120" y="112" text-anchor="middle" font-size="9" fill="#888">abi-lambda-trigger-test</text>
+  <rect x="48" y="120" width="144" height="24" rx="4" fill="#fdebd0" stroke="#e67e22" stroke-width="1"/>
+  <text x="120" y="136" text-anchor="middle" font-size="9" fill="#a04000">File uploaded (PUT)</text>
+  <rect x="48" y="150" width="144" height="24" rx="4" fill="#fdebd0" stroke="#e67e22" stroke-width="1"/>
+  <text x="120" y="164" text-anchor="middle" font-size="9" fill="#a04000">S3 PUT event fires</text>
+  <rect x="48" y="180" width="144" height="44" rx="4" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="120" y="196" text-anchor="middle" font-size="9" fill="#c0602a" font-weight="bold">⚠ Leave prefix/suffix</text>
+  <text x="120" y="210" text-anchor="middle" font-size="9" fill="#555">blank — filters silently</text>
+  <text x="120" y="222" text-anchor="middle" font-size="9" fill="#555">block non-matching files</text>
+
+  <!-- Lambda box -->
+  <rect x="280" y="75" width="200" height="160" rx="10" fill="#f5eef8" stroke="#8e44ad" stroke-width="2"/>
+  <text x="380" y="97" text-anchor="middle" font-size="12" font-weight="bold" fill="#8e44ad">Lambda Function</text>
+  <text x="380" y="112" text-anchor="middle" font-size="9" fill="#888">s3-trigger-logger  |  Python 3.12</text>
+  <rect x="295" y="120" width="170" height="20" rx="4" fill="#f0e0ff" stroke="#8e44ad" stroke-width="0.5"/>
+  <text x="380" y="134" text-anchor="middle" font-size="9" fill="#6c3483">Triggered by S3 PUT event</text>
+  <rect x="295" y="144" width="170" height="20" rx="4" fill="#f0e0ff" stroke="#8e44ad" stroke-width="0.5"/>
+  <text x="380" y="158" text-anchor="middle" font-size="9" fill="#6c3483">Reads: bucket name + object key</text>
+  <rect x="295" y="168" width="170" height="20" rx="4" fill="#f0e0ff" stroke="#8e44ad" stroke-width="0.5"/>
+  <text x="380" y="182" text-anchor="middle" font-size="9" fill="#6c3483">Prints: filename + bucket</text>
+  <rect x="295" y="192" width="170" height="34" rx="4" fill="#2c2c2c"/>
+  <text x="380" y="206" text-anchor="middle" font-size="8" fill="#a8d8a8" font-family="Courier New">bucket = event['Records']</text>
+  <text x="380" y="219" text-anchor="middle" font-size="8" fill="#a8d8a8" font-family="Courier New">[0]['s3']['bucket']['name']</text>
+
+  <!-- CloudWatch box -->
+  <rect x="550" y="75" width="280" height="160" rx="10" fill="#eaf6ff" stroke="#2980b9" stroke-width="2"/>
+  <text x="690" y="97" text-anchor="middle" font-size="12" font-weight="bold" fill="#2980b9">CloudWatch Logs</text>
+  <text x="690" y="112" text-anchor="middle" font-size="9" fill="#888">/aws/lambda/s3-trigger-logger</text>
+  <rect x="565" y="120" width="250" height="20" rx="4" fill="#d6eaf8" stroke="#2980b9" stroke-width="0.5"/>
+  <text x="690" y="134" text-anchor="middle" font-size="9" fill="#1a5276">Log group auto-created on first run</text>
+  <rect x="565" y="144" width="250" height="20" rx="4" fill="#d6eaf8" stroke="#2980b9" stroke-width="0.5"/>
+  <text x="690" y="158" text-anchor="middle" font-size="9" fill="#1a5276">Log stream per invocation</text>
+  <rect x="565" y="168" width="250" height="55" rx="4" fill="#2c2c2c"/>
+  <text x="690" y="184" text-anchor="middle" font-size="8" fill="#f39c12" font-family="Courier New">START RequestId: abc123</text>
+  <text x="690" y="198" text-anchor="middle" font-size="8" fill="#a8d8a8" font-family="Courier New">File uploaded: test.txt</text>
+  <text x="690" y="212" text-anchor="middle" font-size="8" fill="#a8d8a8" font-family="Courier New">to bucket: abi-lambda-trigger-test</text>
+
+  <!-- Arrows -->
+  <defs>
+    <marker id="b1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#8e44ad"/></marker>
+    <marker id="b2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2980b9"/></marker>
+  </defs>
+  <line x1="210" y1="155" x2="278" y2="155" stroke="#8e44ad" stroke-width="2" marker-end="url(#b1)"/>
+  <text x="244" y="148" text-anchor="middle" font-size="9" fill="#8e44ad" font-weight="bold">PUT event</text>
+  <line x1="480" y1="155" x2="548" y2="155" stroke="#2980b9" stroke-width="2" marker-end="url(#b2)"/>
+  <text x="514" y="148" text-anchor="middle" font-size="9" fill="#2980b9" font-weight="bold">execution logs</text>
+
+  <!-- Troubleshooting box -->
+  <rect x="30" y="258" width="800" height="100" rx="8" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="430" y="276" text-anchor="middle" font-size="11" font-weight="bold" fill="#c0602a">Troubleshooting — S3 Trigger Not Firing</text>
+  <text x="45" y="295" font-size="10" fill="#c0392b" font-weight="bold">Symptom:</text>
+  <text x="120" y="295" font-size="9" fill="#555">CloudWatch log group not appearing, Lambda Monitor shows zero invocations. No error thrown anywhere.</text>
+  <text x="45" y="313" font-size="10" fill="#c0392b" font-weight="bold">Root cause:</text>
+  <text x="135" y="313" font-size="9" fill="#555">Prefix/suffix filters set during trigger setup. Files that don't match are silently ignored.</text>
+  <text x="45" y="331" font-size="10" fill="#27ae60" font-weight="bold">Fix:</text>
+  <text x="80" y="331" font-size="9" fill="#555">Remove prefix and suffix from the S3 trigger (leave both blank unless intentionally filtering by folder or file type).</text>
+  <text x="45" y="349" font-size="10" fill="#2980b9" font-weight="bold">Lesson:</text>
+  <text x="105" y="349" font-size="9" fill="#555">Always check prefix/suffix filters first when S3 trigger isn't firing. Silent failure = filter mismatch.</text>
+
+</svg>
