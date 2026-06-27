@@ -133,7 +133,8 @@ devops-log/
 │   ├── lab-15-vpc-peering.md
 │   ├── lab-16-s3-nat-gateway.md
 │   ├── lab-17-transit-gateway-same-region.md
-│   └── lab-18-boto3-lambda-ec2.md
+│   ├── lab-18-boto3-lambda-ec2.md
+│   └── lab-19-eventbridge-lambda-triggers.md
 ├── diagrams/
 ├── screenshots/
 └── cheatsheets/

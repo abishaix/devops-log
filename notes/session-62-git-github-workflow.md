@@ -1,7 +1,12 @@
 # Session 62 — Git & GitHub Hands-On Workflow
 
 **Section:** 2 — DevOps Tools (Git, CI/CD, IaC, Containers, Orchestration)
-**Context:** Second Git session — the full local-to-remote workflow in practice: the three-stage lifecycle, the core commands (`clone`, `add`, `commit`, `push`, `pull`, `init`, `remote add`), commit IDs as versions, and first-time identity config.
+
+**Context:** Second Git session — the full local-to-remote workflow in practice:
+- Three-stage local lifecycle (working directory → staging → local repo)
+- Core commands: `clone`, `add`, `commit`, `push`, `pull`, `init`, `remote add`
+- Commit IDs as versions
+- First-time identity config
 
 ![Session 62 — Git lifecycle: working directory to staging to local repo to GitHub](../diagrams/session-62-git-github-workflow.svg)
 
