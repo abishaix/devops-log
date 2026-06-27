@@ -63,6 +63,7 @@ Live AWS training wrapped at Day 41. From here the course moves into the DevOps 
 | Session | Topic | Notes | Lab |
 |---------|-------|-------|-----|
 | 61 | DevOps intro & Git fundamentals | ✅ | — |
+| 62 | Git & GitHub hands-on workflow | ✅ | — |
 
 ---
 
@@ -112,7 +113,8 @@ devops-log/
 │   ├── day-39-lambda-triggers-eventbridge-cloudtrail.md
 │   ├── day-40-monitoring-prometheus-grafana.md
 │   ├── day-41-prometheus-config-alertmanager-pagerduty.md
-│   └── session-61-devops-intro-git-fundamentals.md
+│   ├── session-61-devops-intro-git-fundamentals.md
+│   └── session-62-git-github-workflow.md
 ├── practice-logs/
 │   ├── lab-01-aws-vpc-ec2-setup.md
 │   ├── lab-02-custom-vpc-ec2.md
