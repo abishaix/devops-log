@@ -1,9 +1,9 @@
 # Session 61 — DevOps Intro & Git Fundamentals
 
-**Date:** June 26, 2026
+![Session 61 — DevOps lifecycle and Git tracking-vs-storage flow](../diagrams/session-61-devops-intro-git-fundamentals.svg)
+
 **Section:** 2 — DevOps Tools (Git, CI/CD, IaC, Containers, Orchestration)
-**Instructor:** Mr. Veerababu
-**Context:** AWS phase complete (Section 1, days 1–41). This is the first session of the DevOps tools phase — roadmap overview, then the first Git/GitHub concepts.
+**Context:** AWS phase complete (Section 1, days 1–41). First session of the DevOps tools phase — roadmap overview, then the first Git/GitHub concepts.
 
 ---
 
@@ -22,7 +22,6 @@
   - [Commits as Versions](#commits-as-versions)
   - [Rollback](#rollback)
   - [Local + Remote Setup](#local--remote-setup)
-- [Architecture Diagram](#architecture-diagram)
 
 ---
 
@@ -282,9 +281,3 @@ WORKFLOW (high level):
 ```
 
 That's the foundation. Subsequent sessions build on this: the actual Git commands (`init`, `add`, `commit`, `push`, `pull`, branching) and connecting the local repo to a GitHub remote.
-
----
-
-## Architecture Diagram
-
-![Session 61 — DevOps lifecycle and Git tracking-vs-storage flow](../diagrams/session-61-devops-intro-git-fundamentals.svg)
