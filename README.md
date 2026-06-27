@@ -7,7 +7,7 @@ Personal learning log for DevOps Bootcamp 2026. Documenting class notes, hands-o
 
 ---
 
-## Progress Tracker
+## Section 1 — AWS (Days 1–41)
 
 | Day | Topic | Notes | Lab |
 |-----|-------|-------|-----|
@@ -50,6 +50,19 @@ Personal learning log for DevOps Bootcamp 2026. Documenting class notes, hands-o
 | 36 | VPC endpoint connections | ✅ | ✅ lab-16, lab-17 |
 | 37 | Cloud automation, Boto3, Lambda | ✅ | ✅ lab-18 |
 | 38 | Lambda deep dive, EventBridge | ✅ | — |
+| 39 | Lambda triggers, EventBridge, CloudTrail | ✅ | — |
+| 40 | Monitoring — Prometheus, Grafana | ✅ | — |
+| 41 | Prometheus config, AlertManager, PagerDuty | ✅ | — |
+
+---
+
+## Section 2 — DevOps Tools (Session 61+)
+
+Live AWS training wrapped at Day 41. From here the course moves into the DevOps tooling phase (Git, CI/CD, IaC, containers, orchestration, monitoring). Files in this section use the instructor's session numbering.
+
+| Session | Topic | Notes | Lab |
+|---------|-------|-------|-----|
+| 61 | DevOps intro & Git fundamentals | ✅ | — |
 
 ---
 
@@ -95,7 +108,11 @@ devops-log/
 │   ├── day-35-vpc-peering.md
 │   ├── day-36-vpc-endpoint-connections.md
 │   ├── day-37-cloud-automation-boto3-lambda.md
-│   └── day-38-lambda-eventbridge.md
+│   ├── day-38-lambda-eventbridge.md
+│   ├── day-39-lambda-triggers-eventbridge-cloudtrail.md
+│   ├── day-40-monitoring-prometheus-grafana.md
+│   ├── day-41-prometheus-config-alertmanager-pagerduty.md
+│   └── session-61-devops-intro-git-fundamentals.md
 ├── practice-logs/
 │   ├── lab-01-aws-vpc-ec2-setup.md
 │   ├── lab-02-custom-vpc-ec2.md
@@ -125,20 +142,23 @@ devops-log/
 ## Bootcamp Roadmap
 
 ```
-AWS Core (Days 1–38) ← currently here
+Section 1 — AWS Core (Days 1–41) ✅ complete
 ├── Networking — VPC, subnets, IGW, NAT, peering, endpoints ✅
 ├── Compute — EC2, ASG, ALB, NLB ✅
 ├── Storage — S3, EBS ✅
 ├── Database — RDS ✅
 ├── IAM + Security ✅
 ├── Route 53 ✅
-├── Cloud Automation — Boto3, Lambda, EventBridge ← Day 37–38
-└── Coming up — Lambda labs, ElastiCache, more automation
+├── Cloud Automation — Boto3, Lambda, EventBridge, CloudTrail ✅
+└── Monitoring — Prometheus, Grafana, AlertManager, PagerDuty ✅
 
-DevOps Tooling (Months 3–6)
-├── Docker
-├── Kubernetes
-├── Terraform
-├── GitHub Actions / GitLab CI/CD
-└── Prometheus + Grafana
+Section 2 — DevOps Tools (Session 61+) ← currently here
+├── Git + GitHub ← Session 61
+├── CI/CD — Jenkins, GitHub Actions, GitLab CI/CD
+├── Build + quality — Maven, SonarQube, Trivy
+├── Containers — Docker
+├── Orchestration — Kubernetes, Helm, Argo CD (GitOps)
+├── Config management — Ansible
+├── IaC — Terraform
+└── Monitoring / logging — Prometheus + Grafana, ELK / EFK
 ```
