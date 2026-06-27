@@ -1,9 +1,9 @@
 # Session 61 — DevOps Intro & Git Fundamentals
 
-![Session 61 — DevOps lifecycle and Git tracking-vs-storage flow](../diagrams/session-61-devops-intro-git-fundamentals.svg)
-
 **Section:** 2 — DevOps Tools (Git, CI/CD, IaC, Containers, Orchestration)
 **Context:** AWS phase complete (Section 1, days 1–41). First session of the DevOps tools phase — roadmap overview, then the first Git/GitHub concepts.
+
+![Session 61 — DevOps lifecycle and Git tracking-vs-storage flow](../diagrams/session-61-devops-intro-git-fundamentals.svg)
 
 ---
 
