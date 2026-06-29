@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="640" style="background:#ffffff;font-family:Arial,sans-serif">
+  <style>
+    .title{font-size:20px;font-weight:bold;fill:#1a1a1a}
+    .sub{font-size:13px;fill:#555}
+    .lbl{font-size:13px;font-weight:bold;fill:#1a1a1a}
+    .small{font-size:11px;fill:#444}
+    .commit{font-size:12px;font-weight:bold;fill:#ffffff}
+    .ctag{font-size:10px;fill:#666}
+    .badtxt{font-size:12px;font-weight:bold;fill:#b00020}
+    .oktxt{font-size:12px;font-weight:bold;fill:#0a7d33}
+  </style>
+
+  <text x="30" y="36" class="title">Why push fails, why pull fails, and where the merge commit lands</text>
+  <text x="30" y="58" class="sub">Two developers, same repo, same file — divergent history</text>
+
+  <!-- ============ STAGE 1 ============ -->
+  <text x="30" y="100" class="lbl">1. Both clone. Remote and your local are in sync.</text>
+
+  <!-- remote lane -->
+  <text x="40" y="132" class="small">REMOTE</text>
+  <circle cx="160" cy="150" r="16" fill="#0969da"/><text x="160" y="154" text-anchor="middle" class="commit">A</text>
+  <line x1="176" y1="150" x2="214" y2="150" stroke="#888" stroke-width="2"/>
+  <circle cx="230" cy="150" r="16" fill="#0969da"/><text x="230" y="154" text-anchor="middle" class="commit">B</text>
+  <text x="246" y="146" class="ctag">← origin/main</text>
+
+  <!-- your local lane -->
+  <text x="40" y="200" class="small">YOUR LOCAL</text>
+  <circle cx="160" cy="218" r="16" fill="#1f883d"/><text x="160" y="222" text-anchor="middle" class="commit">A</text>
+  <line x1="176" y1="218" x2="214" y2="218" stroke="#888" stroke-width="2"/>
+  <circle cx="230" cy="218" r="16" fill="#1f883d"/><text x="230" y="222" text-anchor="middle" class="commit">B</text>
+  <text x="246" y="214" class="ctag">← main (matches remote)</text>
+
+  <line x1="30" y1="248" x2="870" y2="248" stroke="#ddd" stroke-width="1"/>
+
+  <!-- ============ STAGE 2 ============ -->
+  <text x="30" y="282" class="lbl">2. Someone else pushes C. You commit D locally — without pulling first.</text>
+
+  <text x="40" y="314" class="small">REMOTE</text>
+  <circle cx="160" cy="332" r="16" fill="#0969da"/><text x="160" y="336" text-anchor="middle" class="commit">A</text>
+  <line x1="176" y1="332" x2="214" y2="332" stroke="#888" stroke-width="2"/>
+  <circle cx="230" cy="332" r="16" fill="#0969da"/><text x="230" y="336" text-anchor="middle" class="commit">B</text>
+  <line x1="246" y1="332" x2="284" y2="332" stroke="#888" stroke-width="2"/>
+  <circle cx="300" cy="332" r="16" fill="#8250df"/><text x="300" y="336" text-anchor="middle" class="commit">C</text>
+  <text x="316" y="328" class="ctag">← other dev pushed this</text>
+
+  <text x="40" y="382" class="small">YOUR LOCAL</text>
+  <circle cx="160" cy="400" r="16" fill="#1f883d"/><text x="160" y="404" text-anchor="middle" class="commit">A</text>
+  <line x1="176" y1="400" x2="214" y2="400" stroke="#888" stroke-width="2"/>
+  <circle cx="230" cy="400" r="16" fill="#1f883d"/><text x="230" y="404" text-anchor="middle" class="commit">B</text>
+  <line x1="246" y1="400" x2="284" y2="400" stroke="#888" stroke-width="2"/>
+  <circle cx="300" cy="400" r="16" fill="#1f883d"/><text x="300" y="404" text-anchor="middle" class="commit">D</text>
+  <text x="316" y="396" class="ctag">← your commit (built on B, not C)</text>
+
+  <text x="430" y="370" class="badtxt">git push  →  REJECTED</text>
+  <text x="430" y="388" class="small">Your D sits on B. Remote tip is C.</text>
+  <text x="430" y="404" class="small">Push would erase C. Git refuses.</text>
+
+  <line x1="30" y1="430" x2="870" y2="430" stroke="#ddd" stroke-width="1"/>
+
+  <!-- ============ STAGE 3 ============ -->
+  <text x="30" y="464" class="lbl">3. git pull can't fast-forward — history has diverged. git merge resolves it.</text>
+
+  <!-- divergence tree -->
+  <circle cx="160" cy="540" r="16" fill="#57606a"/><text x="160" y="544" text-anchor="middle" class="commit">B</text>
+
+  <!-- branch up to C -->
+  <line x1="176" y1="534" x2="248" y2="512" stroke="#8250df" stroke-width="2"/>
+  <circle cx="265" cy="506" r="16" fill="#8250df"/><text x="265" y="510" text-anchor="middle" class="commit">C</text>
+  <text x="240" y="492" class="ctag">other dev</text>
+
+  <!-- branch down to D -->
+  <line x1="176" y1="546" x2="248" y2="568" stroke="#1f883d" stroke-width="2"/>
+  <circle cx="265" cy="574" r="16" fill="#1f883d"/><text x="265" y="578" text-anchor="middle" class="commit">D</text>
+  <text x="240" y="606" class="ctag">you</text>
+
+  <!-- merge commit M -->
+  <line x1="281" y1="506" x2="384" y2="536" stroke="#d1242f" stroke-width="2"/>
+  <line x1="281" y1="574" x2="384" y2="544" stroke="#d1242f" stroke-width="2"/>
+  <circle cx="400" cy="540" r="18" fill="#d1242f"/><text x="400" y="544" text-anchor="middle" class="commit">M</text>
+  <text x="422" y="538" class="lbl">Merge commit</text>
+  <text x="422" y="556" class="small">Has TWO parents: C and D.</text>
+  <text x="422" y="572" class="small">Holds both changes — nothing lost.</text>
+
+  <text x="600" y="500" class="oktxt">Correct order:</text>
+  <text x="600" y="520" class="small">git pull        (fetch + merge)</text>
+  <text x="600" y="538" class="small">resolve conflicts if any</text>
+  <text x="600" y="556" class="small">git push        (now succeeds)</text>
+  <text x="600" y="586" class="small">Each commit carries full prior</text>
+  <text x="600" y="602" class="small">history — that's why M is needed.</text>
+</svg>
