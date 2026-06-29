@@ -1,8 +1,8 @@
 # Session 63 — Git SSH Keys, PAT Tokens & Merge Conflicts
 
-**Section:** 2 (DevOps Tools)
-**Topic:** SSH authentication, Personal Access Tokens, and the push/pull/merge conflict workflow
-**Builds on:** session-61 (Git fundamentals), session-62 (Git/GitHub workflow)
+- **Section:** 2 (DevOps Tools)
+- **Topic:** SSH authentication, Personal Access Tokens, and the push/pull/merge conflict workflow
+- **Builds on:** session-61 (Git fundamentals), session-62 (Git/GitHub workflow)
 
 ![Git divergence and merge commit flow](../diagrams/session-63-git-merge-conflict-flow.svg)
 
