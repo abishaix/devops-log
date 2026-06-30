@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="660" style="background:#ffffff;font-family:Arial,sans-serif">
+  <style>
+    .title{font-size:20px;font-weight:bold;fill:#1a1a1a}
+    .sub{font-size:13px;fill:#555}
+    .lbl{font-size:15px;font-weight:bold;fill:#1a1a1a}
+    .small{font-size:11px;fill:#444}
+    .commit{font-size:12px;font-weight:bold;fill:#ffffff}
+    .ctag{font-size:10px;fill:#666}
+    .note{font-size:11px;fill:#333}
+    .hdr{font-size:14px;font-weight:bold;fill:#ffffff}
+  </style>
+
+  <text x="30" y="34" class="title">git pull --no-rebase (merge)  vs.  git pull --rebase</text>
+  <text x="30" y="56" class="sub">Same starting point: you missed remote commit C, then committed D locally. Histories diverged.</text>
+
+  <!-- shared starting state -->
+  <text x="30" y="92" class="lbl">Starting point (both cases identical)</text>
+  <circle cx="120" cy="120" r="15" fill="#57606a"/><text x="120" y="124" text-anchor="middle" class="commit">A</text>
+  <line x1="135" y1="120" x2="169" y2="120" stroke="#888" stroke-width="2"/>
+  <circle cx="185" cy="120" r="15" fill="#57606a"/><text x="185" y="124" text-anchor="middle" class="commit">B</text>
+  <line x1="200" y1="114" x2="266" y2="96" stroke="#8250df" stroke-width="2"/>
+  <circle cx="283" cy="92" r="15" fill="#8250df"/><text x="283" y="96" text-anchor="middle" class="commit">C</text>
+  <text x="302" y="88" class="ctag">remote (you missed this)</text>
+  <line x1="200" y1="126" x2="266" y2="144" stroke="#1f883d" stroke-width="2"/>
+  <circle cx="283" cy="148" r="15" fill="#1f883d"/><text x="283" y="152" text-anchor="middle" class="commit">D</text>
+  <text x="302" y="152" class="ctag">your local commit</text>
+
+  <line x1="30" y1="185" x2="870" y2="185" stroke="#ddd" stroke-width="1"/>
+
+  <!-- ========= MERGE (left column) ========= -->
+  <rect x="30" y="205" width="400" height="30" rx="4" fill="#0969da"/>
+  <text x="50" y="225" class="hdr">MERGE — git pull --no-rebase</text>
+
+  <circle cx="90" cy="300" r="15" fill="#57606a"/><text x="90" y="304" text-anchor="middle" class="commit">A</text>
+  <line x1="105" y1="300" x2="129" y2="300" stroke="#888" stroke-width="2"/>
+  <circle cx="145" cy="300" r="15" fill="#57606a"/><text x="145" y="304" text-anchor="middle" class="commit">B</text>
+
+  <line x1="160" y1="294" x2="204" y2="270" stroke="#8250df" stroke-width="2"/>
+  <circle cx="220" cy="264" r="15" fill="#8250df"/><text x="220" y="268" text-anchor="middle" class="commit">C</text>
+  <line x1="160" y1="306" x2="204" y2="330" stroke="#1f883d" stroke-width="2"/>
+  <circle cx="220" cy="336" r="15" fill="#1f883d"/><text x="220" y="340" text-anchor="middle" class="commit">D</text>
+
+  <line x1="235" y1="264" x2="324" y2="294" stroke="#d1242f" stroke-width="2"/>
+  <line x1="235" y1="336" x2="324" y2="306" stroke="#d1242f" stroke-width="2"/>
+  <circle cx="340" cy="300" r="17" fill="#d1242f"/><text x="340" y="304" text-anchor="middle" class="commit">M</text>
+
+  <text x="50" y="390" class="note">• Extra MERGE COMMIT (M) is created.</text>
+  <text x="50" y="410" class="note">• M has two parents: C and D.</text>
+  <text x="50" y="430" class="note">• C and D keep their original commit IDs.</text>
+  <text x="50" y="450" class="note">• History shows the branch + rejoin (non-linear).</text>
+  <text x="50" y="470" class="note">• Nothing rewritten — true record of what happened.</text>
+
+  <!-- divider -->
+  <line x1="450" y1="205" x2="450" y2="560" stroke="#ddd" stroke-width="1"/>
+
+  <!-- ========= REBASE (right column) ========= -->
+  <rect x="470" y="205" width="400" height="30" rx="4" fill="#1f883d"/>
+  <text x="490" y="225" class="hdr">REBASE — git pull --rebase</text>
+
+  <circle cx="520" cy="300" r="15" fill="#57606a"/><text x="520" y="304" text-anchor="middle" class="commit">A</text>
+  <line x1="535" y1="300" x2="559" y2="300" stroke="#888" stroke-width="2"/>
+  <circle cx="575" cy="300" r="15" fill="#57606a"/><text x="575" y="304" text-anchor="middle" class="commit">B</text>
+  <line x1="590" y1="300" x2="614" y2="300" stroke="#888" stroke-width="2"/>
+  <circle cx="630" cy="300" r="15" fill="#8250df"/><text x="630" y="304" text-anchor="middle" class="commit">C</text>
+  <line x1="645" y1="300" x2="669" y2="300" stroke="#888" stroke-width="2"/>
+  <circle cx="685" cy="300" r="16" fill="#2da44e"/><text x="685" y="304" text-anchor="middle" class="commit">D'</text>
+  <text x="640" y="340" class="ctag">D replayed on top of C</text>
+
+  <text x="490" y="390" class="note">• NO extra commit. History stays linear.</text>
+  <text x="490" y="410" class="note">• Your D is replayed on top of C as D'.</text>
+  <text x="490" y="430" class="note">• D' is a NEW commit — different commit ID.</text>
+  <text x="490" y="450" class="note">• Cleaner log, but local history was rewritten.</text>
+  <text x="490" y="470" class="note">• Never rebase commits already shared/pushed.</text>
+
+  <line x1="30" y1="560" x2="870" y2="560" stroke="#ddd" stroke-width="1"/>
+
+  <text x="30" y="592" class="lbl">Either way: if C and D touched the SAME line → conflict first. You resolve, then complete.</text>
+  <text x="30" y="616" class="small">Different lines → Git integrates both automatically. Same line → Git can't decide; a human picks the winner.</text>
+  <text x="30" y="640" class="small">Fast-forward (no commit, no merge) only happens when there's NO divergence — your local is strictly behind remote.</text>
+</svg>
