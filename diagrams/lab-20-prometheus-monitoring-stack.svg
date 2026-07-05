@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" style="background:#ffffff;font-family:Arial,sans-serif">
+  <style>
+    .title{font-size:18px;font-weight:bold;fill:#1a1a1a}
+    .box-label{font-size:13px;font-weight:bold;fill:#1a1a1a}
+    .svc{font-size:12px;fill:#1a1a1a}
+    .sub{font-size:11px;fill:#555}
+    .edge{font-size:11px;fill:#333}
+    .sg{font-size:11px;font-weight:bold;fill:#c0392b}
+  </style>
+
+  <text x="24" y="34" class="title">Monitoring Stack — Prometheus + AlertManager + PagerDuty (lab-20)</text>
+
+  <!-- VPC boundary -->
+  <rect x="20" y="52" width="640" height="520" fill="none" stroke="#1f8fbf" stroke-width="2" rx="6"/>
+  <text x="34" y="74" class="box-label" fill="#1f8fbf">AWS VPC — us-east-1 (N. Virginia)</text>
+
+  <!-- Target-Server SG dashed -->
+  <rect x="40" y="92" width="180" height="440" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="6 4" rx="4"/>
+  <!-- Target-Server box -->
+  <rect x="56" y="150" width="150" height="230" fill="#fdf6f0" stroke="#d35400" stroke-width="1.5" rx="4"/>
+  <text x="66" y="172" class="box-label">Target-Server</text>
+  <text x="66" y="190" class="sub">Ubuntu 26.04 · t2.medium</text>
+  <text x="66" y="208" class="sub">node_server</text>
+  <rect x="66" y="284" width="130" height="70" fill="#ffffff" stroke="#d35400" stroke-width="1" rx="3"/>
+  <text x="76" y="308" class="svc">node_exporter</text>
+  <text x="76" y="326" class="svc">:9100</text>
+  <text x="76" y="344" class="sub">host metrics</text>
+
+  <!-- Monitoring-Server SG dashed -->
+  <rect x="248" y="92" width="330" height="440" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="6 4" rx="4"/>
+  <!-- Monitoring-Server box -->
+  <rect x="266" y="150" width="296" height="360" fill="#f0f7fb" stroke="#1f8fbf" stroke-width="1.5" rx="4"/>
+  <text x="278" y="172" class="box-label">Monitoring-Server</text>
+  <text x="278" y="190" class="sub">Ubuntu 26.04 · t2.medium · graf_server</text>
+
+  <rect x="278" y="204" width="130" height="56" fill="#ffffff" stroke="#e67e22" stroke-width="1" rx="3"/>
+  <text x="288" y="226" class="svc">Prometheus</text>
+  <text x="288" y="244" class="svc">:9090</text>
+
+  <rect x="420" y="204" width="130" height="56" fill="#ffffff" stroke="#2980b9" stroke-width="1" rx="3"/>
+  <text x="430" y="226" class="svc">Grafana</text>
+  <text x="430" y="244" class="svc">:3000</text>
+
+  <rect x="278" y="276" width="130" height="56" fill="#ffffff" stroke="#c0392b" stroke-width="1" rx="3"/>
+  <text x="288" y="298" class="svc">AlertManager</text>
+  <text x="288" y="316" class="svc">:9093</text>
+
+  <rect x="420" y="276" width="130" height="56" fill="#ffffff" stroke="#d35400" stroke-width="1" rx="3"/>
+  <text x="430" y="298" class="svc">node_exporter</text>
+  <text x="430" y="316" class="svc">:9100 (self)</text>
+
+  <!-- alert rules block -->
+  <rect x="278" y="352" width="272" height="130" fill="#fbfbfb" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="288" y="372" class="box-label">alert.rules.yml → system-alerts</text>
+  <text x="288" y="392" class="svc">InstanceDown: up == 0 · for 1m</text>
+  <text x="288" y="410" class="svc">HighCPUUsage: idle-based &gt; 40 · for 2m</text>
+  <text x="288" y="428" class="svc">HighDiskUsage: fs used &gt; 80 · for 2m</text>
+  <text x="288" y="450" class="sub">scrape interval 15s · static targets</text>
+  <text x="288" y="468" class="sub">evaluation → AlertManager on firing</text>
+
+  <!-- scrape edge target -> prometheus -->
+  <line x1="206" y1="300" x2="278" y2="232" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="196" y="250" class="edge">scrape :9100</text>
+
+  <!-- alertmanager -> pagerduty edge -->
+  <line x1="408" y1="304" x2="700" y2="304" stroke="#2c7a2c" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="600" y="296" class="edge">Events API v2</text>
+  <text x="600" y="320" class="sub">routing_key</text>
+
+  <!-- SG references -->
+  <text x="60" y="524" class="sg">SG: on target-server</text>
+  <text x="60" y="540" class="sub">inbound 9100 ← monitoring SG</text>
+  <text x="300" y="524" class="sg">SG: graf-pro (monitoring)</text>
+  <text x="300" y="540" class="sub">9090 · 9093 · 3000 · 9100 · 22</text>
+  <line x1="300" y1="548" x2="150" y2="548" stroke="#2c7a2c" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrow)"/>
+  <text x="150" y="566" class="sub">allow :9100 (SG-referencing-SG)</text>
+
+  <!-- PagerDuty -->
+  <rect x="708" y="270" width="220" height="90" fill="#eafaf1" stroke="#25a56a" stroke-width="1.5" rx="4"/>
+  <text x="722" y="298" class="box-label" fill="#1a8c50">PagerDuty</text>
+  <text x="722" y="320" class="svc">service: alert-abnormality</text>
+  <text x="722" y="338" class="svc">Prometheus integration</text>
+  <text x="722" y="356" class="sub">incident + email → on-call</text>
+
+  <!-- notification -->
+  <rect x="708" y="380" width="220" height="60" fill="#ffffff" stroke="#888" stroke-width="1" rx="4"/>
+  <text x="722" y="404" class="svc">phone call / email alert</text>
+  <text x="722" y="424" class="sub">triggered on FIRING · auto-resolve on clear</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#333"/>
+    </marker>
+  </defs>
+</svg>
