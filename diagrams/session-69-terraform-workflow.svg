@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <text x="450" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#1a1a1a">Terraform Core Workflow</text>
+
+  <!-- Local machine box -->
+  <rect x="30" y="70" width="230" height="150" rx="8" fill="#eef4ff" stroke="#3b5bdb" stroke-width="2"/>
+  <text x="145" y="95" font-size="14" font-weight="bold" text-anchor="middle" fill="#1a1a1a">Your Machine</text>
+  <text x="145" y="120" font-size="12" text-anchor="middle" fill="#333">provider.tf</text>
+  <text x="145" y="140" font-size="12" text-anchor="middle" fill="#333">main.tf</text>
+  <text x="145" y="160" font-size="12" text-anchor="middle" fill="#333">variables.tf</text>
+  <text x="145" y="180" font-size="12" text-anchor="middle" fill="#333">outputs.tf</text>
+  <text x="145" y="200" font-size="12" text-anchor="middle" fill="#333">terraform.tfvars</text>
+
+  <!-- Registry box -->
+  <rect x="335" y="70" width="230" height="90" rx="8" fill="#fff4e6" stroke="#e8590c" stroke-width="2"/>
+  <text x="450" y="100" font-size="14" font-weight="bold" text-anchor="middle" fill="#1a1a1a">Terraform Registry</text>
+  <text x="450" y="122" font-size="12" text-anchor="middle" fill="#333">Provider plugins</text>
+  <text x="450" y="140" font-size="12" text-anchor="middle" fill="#333">(AWS / Azure / GCP)</text>
+
+  <!-- Cloud box -->
+  <rect x="640" y="70" width="230" height="150" rx="8" fill="#e6fcf5" stroke="#0ca678" stroke-width="2"/>
+  <text x="755" y="95" font-size="14" font-weight="bold" text-anchor="middle" fill="#1a1a1a">Cloud Account</text>
+  <text x="755" y="120" font-size="12" text-anchor="middle" fill="#333">VPC / Subnet</text>
+  <text x="755" y="140" font-size="12" text-anchor="middle" fill="#333">EC2 / S3 / RDS</text>
+  <text x="755" y="160" font-size="12" text-anchor="middle" fill="#333">(auth via access key</text>
+  <text x="755" y="178" font-size="12" text-anchor="middle" fill="#333">+ secret key)</text>
+
+  <!-- Arrow: local -> registry (init) -->
+  <line x1="260" y1="115" x2="333" y2="115" stroke="#495057" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="297" y="105" font-size="11" text-anchor="middle" fill="#495057">init</text>
+
+  <!-- Arrow: registry -> local (plugin download) -->
+  <line x1="333" y1="145" x2="260" y2="145" stroke="#495057" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="297" y="160" font-size="10" text-anchor="middle" fill="#495057">plugin download</text>
+
+  <!-- Arrow: local -> cloud (plan/apply) -->
+  <path d="M 260 190 Q 450 260 640 145" fill="none" stroke="#495057" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="450" y="255" font-size="11" text-anchor="middle" fill="#495057">plan / apply (via plugin API calls)</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#495057"/>
+    </marker>
+  </defs>
+
+  <!-- Workflow stages -->
+  <text x="450" y="310" font-size="16" font-weight="bold" text-anchor="middle" fill="#1a1a1a">Command Sequence</text>
+
+  <rect x="40" y="335" width="160" height="60" rx="6" fill="#f8f9fa" stroke="#495057" stroke-width="1.5"/>
+  <text x="120" y="360" font-size="13" font-weight="bold" text-anchor="middle" fill="#1a1a1a">terraform init</text>
+  <text x="120" y="378" font-size="10" text-anchor="middle" fill="#666">download plugins</text>
+
+  <rect x="245" y="335" width="160" height="60" rx="6" fill="#f8f9fa" stroke="#495057" stroke-width="1.5"/>
+  <text x="325" y="360" font-size="13" font-weight="bold" text-anchor="middle" fill="#1a1a1a">terraform plan</text>
+  <text x="325" y="378" font-size="10" text-anchor="middle" fill="#666">preview changes</text>
+
+  <rect x="450" y="335" width="160" height="60" rx="6" fill="#f8f9fa" stroke="#495057" stroke-width="1.5"/>
+  <text x="530" y="360" font-size="13" font-weight="bold" text-anchor="middle" fill="#1a1a1a">terraform apply</text>
+  <text x="530" y="378" font-size="10" text-anchor="middle" fill="#666">create resources</text>
+
+  <rect x="655" y="335" width="160" height="60" rx="6" fill="#f8f9fa" stroke="#495057" stroke-width="1.5"/>
+  <text x="735" y="360" font-size="13" font-weight="bold" text-anchor="middle" fill="#1a1a1a">terraform destroy</text>
+  <text x="735" y="378" font-size="10" text-anchor="middle" fill="#666">tear down (reverse order)</text>
+
+  <line x1="200" y1="365" x2="243" y2="365" stroke="#495057" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="405" y1="365" x2="448" y2="365" stroke="#495057" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="610" y1="365" x2="653" y2="365" stroke="#495057" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text x="450" y="440" font-size="16" font-weight="bold" text-anchor="middle" fill="#1a1a1a">state file = terraform.tfstate</text>
+  <rect x="270" y="455" width="360" height="70" rx="6" fill="#fff9db" stroke="#f08c00" stroke-width="1.5"/>
+  <text x="450" y="480" font-size="12" text-anchor="middle" fill="#333">Maps resource names in code (aws_vpc.main)</text>
+  <text x="450" y="500" font-size="12" text-anchor="middle" fill="#333">to real resource IDs (vpc-0a1b2c3d) in the cloud</text>
+
+  <text x="450" y="545" font-size="11" text-anchor="middle" fill="#868e96">Never hand-edit resources Terraform manages once state exists.</text>
+</svg>
