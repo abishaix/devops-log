@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" style="background:#ffffff;font-family:Arial,sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#0f766e"/>
+    </marker>
+    <marker id="arrowBack" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#b45309"/>
+    </marker>
+  </defs>
+
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">SSM Session Manager — connect to a private EC2 (no bastion, no key, no inbound rule)</text>
+
+  <!-- User / client -->
+  <rect x="30" y="220" width="150" height="90" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="105" y="255" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d4ed8">Your laptop</text>
+  <text x="105" y="276" text-anchor="middle" font-size="12" fill="#374151">Console or CLI</text>
+  <text x="105" y="294" text-anchor="middle" font-size="11" fill="#6b7280">session-manager-plugin</text>
+
+  <!-- Session Manager (AWS managed) -->
+  <rect x="280" y="205" width="180" height="120" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="370" y="238" text-anchor="middle" font-size="14" font-weight="bold" fill="#7c3aed">AWS Systems Manager</text>
+  <text x="370" y="258" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c3aed">Session Manager</text>
+  <text x="370" y="282" text-anchor="middle" font-size="11" fill="#374151">AWS-managed service</text>
+  <text x="370" y="300" text-anchor="middle" font-size="11" fill="#374151">(outside your VPC)</text>
+  <text x="370" y="318" text-anchor="middle" font-size="11" fill="#6b7280">brokers login, no SSH</text>
+
+  <!-- VPC boundary -->
+  <rect x="540" y="90" width="330" height="400" rx="10" fill="none" stroke="#0f766e" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="705" y="115" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f766e">Your VPC  (10.0.0.0/16)</text>
+
+  <!-- NAT gateway -->
+  <rect x="565" y="200" width="130" height="70" rx="8" fill="#ecfdf5" stroke="#0f766e" stroke-width="2"/>
+  <text x="630" y="230" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f766e">NAT Gateway</text>
+  <text x="630" y="250" text-anchor="middle" font-size="11" fill="#374151">outbound path</text>
+
+  <!-- Private subnet -->
+  <rect x="565" y="315" width="280" height="150" rx="8" fill="#fff7ed" stroke="#b45309" stroke-width="1.5"/>
+  <text x="705" y="338" text-anchor="middle" font-size="12" font-weight="bold" fill="#b45309">Private subnet — no public IP</text>
+
+  <rect x="600" y="352" width="210" height="95" rx="8" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
+  <text x="705" y="378" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">Private EC2</text>
+  <text x="705" y="398" text-anchor="middle" font-size="11" fill="#374151">IAM role: AmazonSSM-</text>
+  <text x="705" y="413" text-anchor="middle" font-size="11" fill="#374151">ManagedInstanceCore</text>
+  <text x="705" y="432" text-anchor="middle" font-size="11" fill="#6b7280">no key · SG inbound = none</text>
+
+  <!-- Flow arrows: laptop -> SM -->
+  <line x1="182" y1="255" x2="276" y2="255" stroke="#0f766e" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="228" y="245" text-anchor="middle" font-size="10" fill="#0f766e">1. start-session</text>
+
+  <!-- SM -> NAT (outbound initiated FROM server, drawn back) -->
+  <line x1="630" y1="272" x2="630" y2="200" stroke="#b45309" stroke-width="2.5" marker-start="url(#arrowBack)"/>
+  <text x="630" y="180" text-anchor="middle" font-size="10" fill="#b45309">2. EC2 initiates outbound</text>
+
+  <!-- NAT <-> SM -->
+  <line x1="562" y1="240" x2="464" y2="255" stroke="#0f766e" stroke-width="2.5" marker-end="url(#arrow)" marker-start="url(#arrowBack)"/>
+  <text x="512" y="228" text-anchor="middle" font-size="10" fill="#374151">3. via NAT</text>
+
+  <!-- NAT -> EC2 -->
+  <line x1="630" y1="272" x2="675" y2="348" stroke="#b45309" stroke-width="2" stroke-dasharray="4 3"/>
+
+  <!-- Key callouts -->
+  <rect x="30" y="380" width="470" height="150" rx="8" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+  <text x="45" y="405" font-size="12" font-weight="bold" fill="#111827">Why it works</text>
+  <text x="45" y="427" font-size="11" fill="#374151">• Connection is initiated OUTBOUND from the EC2 → only the</text>
+  <text x="45" y="443" font-size="11" fill="#374151">   outbound rule matters. SGs are stateful, so replies return.</text>
+  <text x="45" y="459" font-size="11" fill="#374151">• No inbound rule, no key pair, no public IP needed.</text>
+  <text x="45" y="475" font-size="11" fill="#374151">• No IAM role → SSM agent stays offline. Attach role → online.</text>
+  <text x="45" y="497" font-size="11" fill="#374151">• No-NAT alternative: 3 VPC interface endpoints —</text>
+  <text x="45" y="513" font-size="11" fill="#374151">   ssm · ssmmessages · ec2messages  (traffic stays on AWS net).</text>
+
+  <text x="450" y="552" text-anchor="middle" font-size="10" fill="#9ca3af">Session 70 · 2026-07-08 · devops-log</text>
+</svg>
