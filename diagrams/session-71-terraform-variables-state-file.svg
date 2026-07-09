@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="780" viewBox="0 0 960 780" style="background:#ffffff;font-family:Arial,sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <text x="480" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#0f172a">Terraform Variables to State File Flow</text>
+
+  <!-- Row 1: variable.tf and value source -->
+  <rect x="40" y="60" width="280" height="80" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="180" y="88" text-anchor="middle" font-size="15" font-weight="bold" fill="#0c4a6e">variable.tf</text>
+  <text x="180" y="108" text-anchor="middle" font-size="12" fill="#0c4a6e">declares var.&lt;name&gt;</text>
+  <text x="180" y="124" text-anchor="middle" font-size="12" fill="#0c4a6e">type + optional default</text>
+
+  <rect x="640" y="60" width="280" height="80" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="780" y="88" text-anchor="middle" font-size="15" font-weight="bold" fill="#78350f">Value Source</text>
+  <text x="780" y="108" text-anchor="middle" font-size="12" fill="#78350f">terraform.tfvars / -var-file</text>
+  <text x="780" y="124" text-anchor="middle" font-size="12" fill="#78350f">or -var flag at runtime</text>
+
+  <!-- Row 2: main.tf -->
+  <rect x="340" y="200" width="280" height="70" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="480" y="228" text-anchor="middle" font-size="15" font-weight="bold" fill="#14532d">main.tf</text>
+  <text x="480" y="248" text-anchor="middle" font-size="12" fill="#14532d">resource block references var.&lt;name&gt;</text>
+
+  <path d="M180,140 L440,200" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M780,140 L520,200" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- terraform apply -->
+  <rect x="370" y="310" width="220" height="55" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="480" y="343" text-anchor="middle" font-size="14" font-weight="bold" fill="#4c1d95">terraform apply</text>
+  <path d="M480,270 L480,310" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- state file -->
+  <rect x="330" y="405" width="300" height="70" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="480" y="433" text-anchor="middle" font-size="15" font-weight="bold" fill="#7f1d1d">terraform.tfstate</text>
+  <text x="480" y="452" text-anchor="middle" font-size="12" fill="#7f1d1d">compares local config vs. refreshed state</text>
+  <path d="M480,365 L480,405" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- AWS real resources -->
+  <rect x="700" y="405" width="220" height="70" rx="8" fill="#e2e8f0" stroke="#475569" stroke-width="2"/>
+  <text x="810" y="433" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">AWS</text>
+  <text x="810" y="452" text-anchor="middle" font-size="12" fill="#1e293b">real resources</text>
+  <path d="M630,428 L700,428" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+  <text x="665" y="418" text-anchor="middle" font-size="10" fill="#334155">refresh</text>
+
+  <!-- Drift decision point -->
+  <path d="M400,475 L200,540" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M560,475 L760,540" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="545" width="420" height="130" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="250" y="572" text-anchor="middle" font-size="14" font-weight="bold" fill="#7f1d1d">Case 1 — Tracked attribute drifts</text>
+  <text x="250" y="595" text-anchor="middle" font-size="12" fill="#7f1d1d">Tag IS declared in main.tf.</text>
+  <text x="250" y="614" text-anchor="middle" font-size="12" fill="#7f1d1d">Changed manually in AWS console.</text>
+  <text x="250" y="633" text-anchor="middle" font-size="12" fill="#7f1d1d">Next apply reverts it back to</text>
+  <text x="250" y="652" text-anchor="middle" font-size="12" fill="#7f1d1d">whatever main.tf says.</text>
+
+  <rect x="500" y="545" width="420" height="130" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="710" y="572" text-anchor="middle" font-size="14" font-weight="bold" fill="#14532d">Case 2 — Untracked attribute added</text>
+  <text x="710" y="595" text-anchor="middle" font-size="12" fill="#14532d">Extra security group attached</text>
+  <text x="710" y="614" text-anchor="middle" font-size="12" fill="#14532d">manually, not declared in main.tf.</text>
+  <text x="710" y="633" text-anchor="middle" font-size="12" fill="#14532d">Terraform has nothing to compare</text>
+  <text x="710" y="652" text-anchor="middle" font-size="12" fill="#14532d">it against — left alone.</text>
+
+  <text x="480" y="715" text-anchor="middle" font-size="12" font-style="italic" fill="#475569">Rule: drift correction only applies to attributes explicitly declared in the local config.</text>
+  <text x="480" y="735" text-anchor="middle" font-size="12" font-style="italic" fill="#475569">Anything added out-of-band that the config never mentions is invisible to Terraform.</text>
+</svg>
