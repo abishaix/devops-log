@@ -1,0 +1,94 @@
+<svg width="900" height="760" viewBox="0 0 900 760" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff;font-family:Arial,sans-serif">
+
+  <text x="450" y="30" font-size="18" font-weight="bold" text-anchor="middle" fill="#1a1a1a">Session 72 — Resource Dependencies, Drift Detection &amp; Replacement</text>
+
+  <!-- Panel 1: Implicit dependency order -->
+  <text x="20" y="65" font-size="14" font-weight="bold" fill="#2c3e50">1. Implicit Resource Dependency Order</text>
+
+  <rect x="30" y="80" width="130" height="40" rx="4" fill="#dbe9f6" stroke="#2c3e50"/>
+  <text x="95" y="104" font-size="12" text-anchor="middle">aws_vpc</text>
+
+  <line x1="95" y1="120" x2="95" y2="150" stroke="#2c3e50" marker-end="url(#arrow)"/>
+
+  <rect x="30" y="150" width="130" height="40" rx="4" fill="#dbe9f6" stroke="#2c3e50"/>
+  <text x="95" y="174" font-size="12" text-anchor="middle">aws_subnet</text>
+  <text x="95" y="187" font-size="9" text-anchor="middle" fill="#555">needs vpc.id</text>
+
+  <line x1="95" y1="120" x2="300" y2="150" stroke="#2c3e50" marker-end="url(#arrow)"/>
+
+  <rect x="230" y="150" width="140" height="40" rx="4" fill="#dbe9f6" stroke="#2c3e50"/>
+  <text x="300" y="174" font-size="12" text-anchor="middle">aws_security_group</text>
+  <text x="300" y="187" font-size="9" text-anchor="middle" fill="#555">needs vpc.id</text>
+
+  <line x1="95" y1="190" x2="150" y2="230" stroke="#2c3e50" marker-end="url(#arrow)"/>
+  <line x1="300" y1="190" x2="200" y2="230" stroke="#2c3e50" marker-end="url(#arrow)"/>
+
+  <rect x="80" y="230" width="180" height="40" rx="4" fill="#fdebd0" stroke="#c0392b"/>
+  <text x="170" y="254" font-size="12" text-anchor="middle">aws_instance</text>
+  <text x="170" y="267" font-size="9" text-anchor="middle" fill="#555">needs subnet.id + sg.id</text>
+
+  <text x="420" y="100" font-size="11" fill="#555">No dependency written — Terraform infers</text>
+  <text x="420" y="115" font-size="11" fill="#555">order from resource attribute references</text>
+  <text x="420" y="130" font-size="11" fill="#555">(vpc.id used inside subnet block, etc).</text>
+  <text x="420" y="150" font-size="11" fill="#555">Explicit order only needed when two</text>
+  <text x="420" y="165" font-size="11" fill="#555">resources have NO attribute link but</text>
+  <text x="420" y="180" font-size="11" fill="#555">still must run in sequence:</text>
+  <text x="420" y="200" font-size="11" font-family="monospace" fill="#2c3e50">depends_on = [aws_s3_bucket.x]</text>
+
+  <!-- Panel 2: Drift detection matrix -->
+  <text x="20" y="320" font-size="14" font-weight="bold" fill="#2c3e50">2. Drift Detection — Inline Block vs. Standalone Resource</text>
+
+  <rect x="20" y="335" width="860" height="26" fill="#2c3e50"/>
+  <text x="30" y="353" font-size="11" fill="#ffffff" font-weight="bold">Manual console change</text>
+  <text x="330" y="353" font-size="11" fill="#ffffff" font-weight="bold">Is it inside a Terraform-managed block?</text>
+  <text x="680" y="353" font-size="11" fill="#ffffff" font-weight="bold">terraform plan result</text>
+
+  <rect x="20" y="361" width="860" height="34" fill="#f7f9fb" stroke="#ddd"/>
+  <text x="30" y="382" font-size="11">Edit inline ingress rule (22 → 0.0.0.0/0)</text>
+  <text x="330" y="382" font-size="11">Yes — inline block inside aws_security_group</text>
+  <text x="680" y="382" font-size="11" fill="#c0392b" font-weight="bold">1 change — reverted on apply</text>
+
+  <rect x="20" y="395" width="860" height="34" fill="#ffffff" stroke="#ddd"/>
+  <text x="30" y="416" font-size="11">Create a brand-new SG manually, not in code</text>
+  <text x="330" y="416" font-size="11">No — resource never declared in config</text>
+  <text x="680" y="416" font-size="11" fill="#27ae60" font-weight="bold">0 changes — untracked</text>
+
+  <rect x="20" y="429" width="860" height="34" fill="#f7f9fb" stroke="#ddd"/>
+  <text x="30" y="450" font-size="11">Attach extra EBS volume to the instance</text>
+  <text x="330" y="450" font-size="11">No — not declared inside aws_instance block</text>
+  <text x="680" y="450" font-size="11" fill="#27ae60" font-weight="bold">0 changes — untracked</text>
+
+  <text x="20" y="485" font-size="10.5" fill="#555">Rule: inline sub-blocks (ingress {}, ebs_block_device {}, etc.) are treated as an</text>
+  <text x="20" y="500" font-size="10.5" fill="#555">exhaustive, authoritative list by the parent resource. Anything outside that block —</text>
+  <text x="20" y="515" font-size="10.5" fill="#555">a whole separate resource never written to code — is invisible to Terraform entirely.</text>
+
+  <!-- Panel 3: destroy-then-create -->
+  <text x="20" y="555" font-size="14" font-weight="bold" fill="#2c3e50">3. Forced Replacement — Default Destroy-Then-Create</text>
+
+  <rect x="30" y="570" width="220" height="36" rx="4" fill="#fdebd0" stroke="#c0392b"/>
+  <text x="140" y="592" font-size="11" text-anchor="middle">AMI ID changed in config</text>
+
+  <line x1="140" y1="606" x2="140" y2="630" stroke="#c0392b" marker-end="url(#arrow)"/>
+
+  <rect x="30" y="630" width="220" height="36" rx="4" fill="#f5b7b1" stroke="#c0392b"/>
+  <text x="140" y="652" font-size="11" text-anchor="middle">1. DESTROY old instance</text>
+
+  <line x1="140" y1="666" x2="140" y2="690" stroke="#c0392b" marker-end="url(#arrow)"/>
+
+  <rect x="30" y="690" width="220" height="36" rx="4" fill="#f5b7b1" stroke="#c0392b"/>
+  <text x="140" y="712" font-size="11" text-anchor="middle">2. CREATE new instance</text>
+
+  <text x="290" y="595" font-size="11" fill="#555">Default order is destroy first,</text>
+  <text x="290" y="612" font-size="11" fill="#555">create second — unless the</text>
+  <text x="290" y="629" font-size="11" fill="#555">resource has:</text>
+  <text x="290" y="650" font-size="11" font-family="monospace" fill="#2c3e50">lifecycle { create_before_destroy = true }</text>
+  <text x="290" y="675" font-size="11" fill="#c0392b" font-weight="bold">If create fails (bad AMI ID), the old</text>
+  <text x="290" y="692" font-size="11" fill="#c0392b" font-weight="bold">instance is already gone — no rollback,</text>
+  <text x="290" y="709" font-size="11" fill="#c0392b" font-weight="bold">real downtime.</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#2c3e50"/>
+    </marker>
+  </defs>
+</svg>
