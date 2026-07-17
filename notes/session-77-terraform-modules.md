@@ -145,8 +145,4 @@ Browsing an existing module's source (as done live with the S3 module) is a usef
 
 A student question about Terraform Cloud came up: the licensing changed and both Terraform Cloud and tools like Atlantis are now paid products. The class continues using the Terraform CLI only — no cloud-hosted state/collaboration platform is part of this track.
 
----
 
-## Weekend note
-
-No Saturday class scheduled — replaced with a task list to be completed independently and shared in the group by Monday. Task list not detailed in this session; expected as a follow-up post.
