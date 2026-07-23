@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="680" viewBox="0 0 1000 680" style="background:#ffffff;font-family:Arial,sans-serif">
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333333"/>
+    </marker>
+  </defs>
+
+  <text x="500" y="30" font-size="20" font-weight="bold" text-anchor="middle" fill="#111111">Session 80 — null_resource, Triggers, Drift (RDS example)</text>
+
+  <rect x="30" y="70" width="180" height="60" rx="8" fill="#e8f0fe" stroke="#3367d6" stroke-width="1.5"/>
+  <text x="120" y="95" font-size="13" text-anchor="middle" fill="#111111">Terraform client</text>
+  <text x="120" y="112" font-size="11" text-anchor="middle" fill="#444444">(laptop / runner)</text>
+
+  <rect x="260" y="60" width="330" height="130" rx="8" fill="#eef7ee" stroke="#2e7d32" stroke-width="1.5"/>
+  <text x="425" y="82" font-size="12" font-weight="bold" text-anchor="middle" fill="#2e7d32">null_resource (local-exec path)</text>
+  <text x="425" y="102" font-size="10" text-anchor="middle" fill="#333333">mysql -h &lt;rds-endpoint&gt; -u admin -p ... &lt; init.sql</text>
+  <text x="425" y="118" font-size="10" text-anchor="middle" fill="#333333">runs ON local machine</text>
+  <text x="425" y="136" font-size="10" text-anchor="middle" fill="#c62828">requires mysql client installed locally</text>
+  <text x="425" y="152" font-size="10" text-anchor="middle" fill="#c62828">fails: "command not found" if missing</text>
+  <text x="425" y="170" font-size="10" text-anchor="middle" fill="#333333">only works if RDS has a public endpoint</text>
+
+  <rect x="640" y="60" width="330" height="130" rx="8" fill="#fce4ec" stroke="#ad1457" stroke-width="1.5"/>
+  <text x="805" y="82" font-size="12" font-weight="bold" text-anchor="middle" fill="#ad1457">RDS Instance</text>
+  <text x="805" y="102" font-size="10" text-anchor="middle" fill="#333333">MySQL/MariaDB engine</text>
+  <text x="805" y="118" font-size="10" text-anchor="middle" fill="#333333">runs init.sql (schema/tables)</text>
+  <text x="805" y="136" font-size="10" text-anchor="middle" fill="#333333">public endpoint = reachable from</text>
+  <text x="805" y="150" font-size="10" text-anchor="middle" fill="#333333">local-exec directly</text>
+  <text x="805" y="168" font-size="10" text-anchor="middle" fill="#333333">private endpoint = needs EC2 hop</text>
+
+  <line x1="210" y1="100" x2="260" y2="120" stroke="#333333" stroke-width="1.5" marker-end="url(#arrow2)"/>
+  <line x1="590" y1="125" x2="640" y2="125" stroke="#333333" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+  <rect x="30" y="230" width="940" height="180" rx="10" fill="#f5f5f5" stroke="#555555" stroke-dasharray="4,3"/>
+  <text x="50" y="255" font-size="13" font-weight="bold" fill="#333333">Remote-exec variant (private RDS, via EC2 bastion-style hop)</text>
+
+  <rect x="60" y="275" width="220" height="115" rx="6" fill="#e8f0fe" stroke="#3367d6"/>
+  <text x="170" y="295" font-size="11" font-weight="bold" text-anchor="middle" fill="#3367d6">Terraform client</text>
+  <text x="170" y="313" font-size="10" text-anchor="middle" fill="#333333">1. provisions EC2</text>
+  <text x="170" y="328" font-size="10" text-anchor="middle" fill="#333333">2. file provisioner:</text>
+  <text x="170" y="342" font-size="10" text-anchor="middle" fill="#333333">   copies init.sql</text>
+  <text x="170" y="357" font-size="10" text-anchor="middle" fill="#333333">3. remote-exec:</text>
+  <text x="170" y="372" font-size="10" text-anchor="middle" fill="#333333">   install client, run script</text>
+
+  <rect x="360" y="275" width="220" height="115" rx="6" fill="#e3f2fd" stroke="#0d47a1"/>
+  <text x="470" y="295" font-size="11" font-weight="bold" text-anchor="middle" fill="#0d47a1">EC2 Instance</text>
+  <text x="470" y="315" font-size="10" text-anchor="middle" fill="#333333">sudo apt install</text>
+  <text x="470" y="330" font-size="10" text-anchor="middle" fill="#333333">mariadb-client -y</text>
+  <text x="470" y="350" font-size="10" text-anchor="middle" fill="#c62828">missing sudo &#8594;</text>
+  <text x="470" y="365" font-size="10" text-anchor="middle" fill="#c62828">permission denied</text>
+  <text x="470" y="380" font-size="10" text-anchor="middle" fill="#333333">(lock file error)</text>
+
+  <rect x="660" y="275" width="220" height="115" rx="6" fill="#fce4ec" stroke="#ad1457"/>
+  <text x="770" y="295" font-size="11" font-weight="bold" text-anchor="middle" fill="#ad1457">RDS (private)</text>
+  <text x="770" y="315" font-size="10" text-anchor="middle" fill="#333333">mysql -h &lt;endpoint&gt;</text>
+  <text x="770" y="330" font-size="10" text-anchor="middle" fill="#333333">&lt; /tmp/init.sql</text>
+  <text x="770" y="350" font-size="10" text-anchor="middle" fill="#333333">reachable only from</text>
+  <text x="770" y="365" font-size="10" text-anchor="middle" fill="#333333">inside the VPC (via EC2)</text>
+
+  <line x1="280" y1="333" x2="360" y2="333" stroke="#333333" stroke-width="1.5" marker-end="url(#arrow2)"/>
+  <line x1="580" y1="333" x2="660" y2="333" stroke="#333333" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+  <rect x="30" y="440" width="450" height="220" rx="10" fill="#fff8e1" stroke="#f9a825" stroke-width="1.5"/>
+  <text x="255" y="465" font-size="13" font-weight="bold" text-anchor="middle" fill="#f57f17">Triggers on null_resource</text>
+  <text x="50" y="490" font-size="10" fill="#333333">timestamp() trigger:</text>
+  <text x="60" y="506" font-size="10" fill="#c62828">reruns EVERY apply, regardless of change</text>
+  <text x="60" y="521" font-size="10" fill="#333333">plan always shows 1 add / 1 destroy</text>
+  <text x="50" y="546" font-size="10" fill="#333333">filemd5() / script-hash trigger (preferred):</text>
+  <text x="60" y="562" font-size="10" fill="#2e7d32">only reruns when script content actually changes</text>
+  <text x="60" y="577" font-size="10" fill="#333333">plan shows 0 changes if hash matches state</text>
+  <text x="60" y="592" font-size="10" fill="#333333">plan shows 1 add / 1 destroy if hash differs</text>
+  <text x="60" y="617" font-size="10" fill="#333333">taint (Session 79) still works as manual override,</text>
+  <text x="60" y="632" font-size="10" fill="#333333">independent of any trigger</text>
+
+  <rect x="510" y="440" width="460" height="220" rx="10" fill="#ede7f6" stroke="#4527a0" stroke-width="1.5"/>
+  <text x="740" y="465" font-size="13" font-weight="bold" text-anchor="middle" fill="#4527a0">Drift</text>
+  <text x="530" y="490" font-size="10" fill="#333333">Drift = manual, out-of-band console change</text>
+  <text x="530" y="506" font-size="10" fill="#333333">not reflected in the .tf config.</text>
+  <text x="530" y="530" font-size="10" fill="#2e7d32">Not drift:</text>
+  <text x="540" y="546" font-size="10" fill="#333333">plan output exactly matches your own edits</text>
+  <text x="530" y="570" font-size="10" fill="#c62828">Is drift:</text>
+  <text x="540" y="586" font-size="10" fill="#333333">plan shows changes you didn't author —</text>
+  <text x="540" y="601" font-size="10" fill="#333333">e.g. expected 9 add, saw 1 modify + 1 destroy</text>
+  <text x="530" y="625" font-size="10" fill="#333333">Scope boundary: Terraform provisions ASG /</text>
+  <text x="530" y="640" font-size="10" fill="#333333">Lambda config only — runtime scaling and</text>
+  <text x="530" y="655" font-size="10" fill="#333333">schedule execution are not Terraform's job</text>
+</svg>
